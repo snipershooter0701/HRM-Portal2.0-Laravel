@@ -1,0 +1,250 @@
+body {
+    font-size: 12px !important;
+}
+
+/* =========================== BEGIN NECESSARY STYLES =========================== */
+.display-none {
+    display: none !important;
+}
+
+.mr-10 {
+    margin-right: 10px !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+/* ============================ END NECESSARY STYLES ============================ */
+
+/* ============================= BEGIN COLOR STYLES ============================= */
+.color-primary {
+    color: #3699FF;
+}
+
+/* ============================== END COLOR STYLES ============================== */
+
+/* ========================= BEGIN CUSTOM BUTTON STYLES ========================== */
+.btn-c-primary {
+    color: #FFFFFF;
+    background-color: #3699FF;
+    border-radius: 2px !important;
+}
+
+.btn-c-primary:hover {
+    color: #FFFFFF;
+    background-color: #3288e1;
+}
+
+.btn-c-primary:focus {
+    color: #FFFFFF;
+    background-color: #3288e1;
+}
+
+.btn-c-grey {
+    color: #FFFFFF;
+    background-color: #7E8C9C;
+    border-radius: 2px !important;
+}
+
+.btn-c-no-border-primary {
+    font-size: 24px !important;
+    color: #3699FF;
+}
+
+.chbox-primary {}
+
+/* ========================== END CUSTOM BUTTON STYLES =========================== */
+
+/* ========================= BEGIN CUSTOM BUTTON STYLES ========================== */
+.label-active {
+    color: #FFFFFF;
+    background-color: #3699FF;
+    border-radius: 2px !important;
+    padding: 2px 6px !important;
+}
+
+.label-inactive {
+    color: #FFFFFF;
+    background-color: #7E8C9C;
+    border-radius: 2px !important;
+    padding: 2px 6px !important;
+}
+
+.label-active-noborder {
+    color: black !important;
+    font-weight: 600 !important;
+}
+
+.label-inactive-noborder {
+    color: rgba(11, 11, 11, 0.5) !important;
+    font-weight: 600 !important;
+}
+
+/* ========================== END CUSTOM BUTTON STYLES =========================== */
+
+/* ======================= BEGIN DEFAULT COMPONENT STYLES ======================== */
+body {
+    background-color: #0C243C !important;
+}
+
+.page-logo {
+    background: #C9D1D5;
+}
+
+.page-logo a {
+    color: #0C243C;
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: -2px;
+}
+
+.page-logo>a>h4 {
+    font-size: 16px !important;
+}
+
+.page-header {
+    background-color: white !important;
+}
+
+.page-header.navbar .top-menu .navbar-nav>li.dropdown-user .dropdown-toggle:hover,
+.page-header.navbar .top-menu .navbar-nav>li.dropdown.open .dropdown-toggle {
+    background: #C9D1D5 !important;
+}
+
+.page-content-wrapper,
+.page-sidebar {
+    background-color: #0C243C !important;
+}
+
+.page-sidebar-menu .nav-item span {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.page-sidebar .page-sidebar-menu>li.active>a {
+    background: #C9D1D5 !important;
+    color: #000000 !important;
+}
+
+.page-sidebar .page-sidebar-menu>li>a {
+    border-top: 0px !important;
+}
+
+.page-sidebar .page-sidebar-menu>li:not(.active)>a:hover {
+    background: #3e4b5c !important;
+}
+
+.page-footer {
+    display: flex;
+    background: #0C243c !important;
+    justify-content: center;
+}
+
+.page-content,
+.page-bar {
+    background-color: #C9D1D5 !important;
+}
+
+.page-breadcrumb>li>a {
+    font-weight: 600;
+}
+
+/* ========================= END DEFAULT COMPONENT STYLES ========================== */
+
+/* ============================ BEGIN AJAX TABLE STYLES ============================ */
+.tbl-ajax-tools {
+    float: right;
+    margin-bottom: 7px !important;
+}
+
+.tbl-ajax-tools .btn-tbl-action {
+    color: #7E8C9C;
+    font-size: 15px;
+}
+
+.dataTable .filter-submit,
+.dataTable .filter-cancel {
+    margin-right: 0px !important;
+}
+
+.dataTables_paginate .pagination-panel .prev,
+.dataTables_paginate .pagination-panel .next,
+.dataTables_paginate .pagination-panel .prev:active,
+.dataTables_paginate .pagination-panel .next:active,
+.dataTables_paginate .pagination-panel .prev:hover,
+.dataTables_paginate .pagination-panel .next:hover {
+    background-color: #3797FC;
+    color: white;
+}
+
+.dataTable {
+    width: auto !important;
+}
+
+.dataTable th,
+.dataTable td {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+.dataTable tbody td:last-child {
+    /* display: inline-flex; */
+    /* column-gap: 3px; */
+}
+
+/* ============================= END AJAX TABLE STYLES ============================= */
+
+/* ============================ BEGIN AJAX TABLE STYLES ============================ */
+.form-body .form-group label {
+    /* font-size: 13px !important; */
+    font-weight: 600 !important;
+    color: #7E8C9C;
+}
+
+.form-body .form-group input {
+    border-radius: 2px !important;
+    height: 26px !important;
+    border: 1px solid #C9D1D5 !important;
+    padding: 1px 12px;
+}
+
+.form-body .form-group input[type=file] {
+    margin-top: 4px !important;
+    border: 0px solid !important;
+}
+
+.form-body .form-group select {
+    border-radius: 2px !important;
+    height: 26px !important;
+    border: 1px solid #C9D1D5 !important;
+    padding: 1px 12px;
+}
+
+.form-group .date-picker .input-group-btn .btn.default {
+    padding: 1.9px 8px;
+}
+
+/* ============================= END AJAX TABLE STYLES ============================= */
+
+
+
+
+/* ============================ Begin Tab sytles ==================================*/
+.caption-helper:hover {
+    color: #3699FF !important;
+    font-weight: 700 !important;
+    cursor: pointer;
+}
+
+.active-tab {
+    color: #3699FF !important;
+    font-weight: 700 !important;
+}
+
+.portlet-title {
+    padding: 0px 19px !important;
+    min-height: auto !important;
+}
+
+/* ============================ End Tab sytles ==================================*/
