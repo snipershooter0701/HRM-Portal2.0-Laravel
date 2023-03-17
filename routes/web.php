@@ -20,6 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
+    
     // Dashboard
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::post('/home/gen', [App\Http\Controllers\HomeController::class, 'genEmailPwd']);
@@ -36,6 +37,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/client/get_business_info', [App\Http\Controllers\ClientController::class, 'getBusinessInfo']);
     Route::post('/client/get_contact_info', [App\Http\Controllers\ClientController::class, 'getContactInfo']);
     Route::post('/client/get_add_confidential', [App\Http\Controllers\ClientController::class, 'getAddConfidential']);
-    Route::post('/client/get_placemetns', [App\Http\Controllers\ClientController::class, 'getPlacements']);
+    Route::post('/client/get_placements', [App\Http\Controllers\ClientController::class, 'getPlacements']);
+    Route::post('/client/get_activities', [App\Http\Controllers\ClientController::class, 'getActivities']);
+    Route::post('/client/get_invoices', [App\Http\Controllers\ClientController::class, 'getInvoices']);
     Route::post('/client/get_documents', [App\Http\Controllers\ClientController::class, 'getDocuments']);
 });

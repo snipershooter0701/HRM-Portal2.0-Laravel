@@ -28,11 +28,11 @@
         <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-title">
                 <div class="caption">
-                    <span class="caption-helper mr-10">Business Info</span>
-                    <span class="caption-helper mr-10">Contact Info</span>
-                    <span class="caption-helper mr-10">Add Confidential</span>
-                    <span class="caption-helper mr-10">Placements</span>
-                    <span class="caption-helper">Documents</span>
+                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-business-info">Business Info</span>
+                    <span class="caption-helper mr-10 active-tab btn-move-panel" data-panelname="panel-contact-info">Contact Info</span>
+                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-add-confidential">Add Confidential</span>
+                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-placement">Placements</span>
+                    <span class="caption-helper btn-move-panel" data-panelname="panel-document">Documents</span>
                 </div>
             </div>
             <div class="portlet-body">

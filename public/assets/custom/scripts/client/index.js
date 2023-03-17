@@ -8,7 +8,7 @@ var TableClient = function () {
         });
     }
 
-    var handleRecords = function () {
+    var handleClientList = function () {
 
         var grid = new Datatable();
 
@@ -97,12 +97,12 @@ var TableClient = function () {
         });
     }
 
-    var handleAddPlacementRecords = function () {
+    var handlePlacement = function () {
 
         var grid = new Datatable();
 
         grid.init({
-            src: $("#tbl_add_placements"),
+            src: $("#tbl_placement"),
             onSuccess: function (grid, response) { },
             onError: function (grid) { },
             onDataLoad: function (grid) {
@@ -113,7 +113,7 @@ var TableClient = function () {
                 // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
                 // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
                 // So when dropdowns used the scrollable div should be removed. 
-                "dom": "<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'>>",
+                // "dom": "<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'>>",
 
                 "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
 
@@ -123,7 +123,7 @@ var TableClient = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": BASE_URL + "/employee/get-add-placements", // ajax source
+                    "url": BASE_URL + "/client/get_placements", // ajax source
                 },
                 "order": [
                     [1, "asc"]
@@ -180,18 +180,289 @@ var TableClient = function () {
         // grid.clearAjaxParams();
 
         // handle datatable custom tools
-        $('#tbl_add_placements_tools > a.tool-action').on('click', function () {
+        $('#tbl_placements_tools > a.tool-action').on('click', function () {
             var action = $(this).attr('data-action');
             grid.getDataTable().button(action).trigger();
         });
     }
 
+    var handleActivity = function () {
+
+        var grid = new Datatable();
+
+        grid.init({
+            src: $("#tbl_activity"),
+            onSuccess: function (grid, response) { },
+            onError: function (grid) { },
+            onDataLoad: function (grid) {
+            },
+            loadingMessage: 'Loading...',
+            dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
+
+                // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+                // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
+                // So when dropdowns used the scrollable div should be removed. 
+                // "dom": "<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'>>",
+
+                "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+                "lengthMenu": [
+                    [10, 20, 50, 100, 150, -1],
+                    [10, 20, 50, 100, 150, "All"] // change per page values here
+                ],
+                "pageLength": 10, // default record count per page
+                "ajax": {
+                    "url": BASE_URL + "/client/get_activities", // ajax source
+                },
+                "order": [
+                    [1, "asc"]
+                ],// set first column as a default sort by asc
+                buttons: [
+                    { extend: 'print', className: 'btn default' },
+                    { extend: 'copy', className: 'btn default' },
+                    { extend: 'pdf', className: 'btn default' },
+                    { extend: 'excel', className: 'btn default' },
+                    { extend: 'csv', className: 'btn default' },
+                    {
+                        text: 'Reload',
+                        className: 'btn default',
+                        action: function (e, dt, node, config) {
+                            dt.ajax.reload();
+                            alert('Datatable reloaded!');
+                        }
+                    }
+                ],
+            }
+        });
+
+        // handle group actionsubmit button click
+        grid.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
+            e.preventDefault();
+            var action = $(".table-group-action-input", grid.getTableWrapper());
+            if (action.val() != "" && grid.getSelectedRowsCount() > 0) {
+                grid.setAjaxParam("customActionType", "group_action");
+                grid.setAjaxParam("customActionName", action.val());
+                grid.setAjaxParam("id", grid.getSelectedRows());
+                grid.getDataTable().ajax.reload();
+                grid.clearAjaxParams();
+            } else if (action.val() == "") {
+                App.alert({
+                    type: 'danger',
+                    icon: 'warning',
+                    message: 'Please select an action',
+                    container: grid.getTableWrapper(),
+                    place: 'prepend'
+                });
+            } else if (grid.getSelectedRowsCount() === 0) {
+                App.alert({
+                    type: 'danger',
+                    icon: 'warning',
+                    message: 'No record selected',
+                    container: grid.getTableWrapper(),
+                    place: 'prepend'
+                });
+            }
+        });
+
+        // grid.setAjaxParam("customActionType", "group_action");
+        // grid.getDataTable().ajax.reload();
+        // grid.clearAjaxParams();
+
+        // handle datatable custom tools
+        // $('#tbl_activity_tools > a.tool-action').on('click', function () {
+        //     var action = $(this).attr('data-action');
+        //     grid.getDataTable().button(action).trigger();
+        // });
+    }
+
+    var handleInvoice = function () {
+
+        var grid = new Datatable();
+
+        grid.init({
+            src: $("#tbl_invoice"),
+            onSuccess: function (grid, response) { },
+            onError: function (grid) { },
+            onDataLoad: function (grid) {
+            },
+            loadingMessage: 'Loading...',
+            dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
+
+                // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+                // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
+                // So when dropdowns used the scrollable div should be removed. 
+                // "dom": "<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'>>",
+
+                "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+                "lengthMenu": [
+                    [10, 20, 50, 100, 150, -1],
+                    [10, 20, 50, 100, 150, "All"] // change per page values here
+                ],
+                "pageLength": 10, // default record count per page
+                "ajax": {
+                    "url": BASE_URL + "/client/get_invoices", // ajax source
+                },
+                "order": [
+                    [1, "asc"]
+                ],// set first column as a default sort by asc
+                buttons: [
+                    { extend: 'print', className: 'btn default' },
+                    { extend: 'copy', className: 'btn default' },
+                    { extend: 'pdf', className: 'btn default' },
+                    { extend: 'excel', className: 'btn default' },
+                    { extend: 'csv', className: 'btn default' },
+                    {
+                        text: 'Reload',
+                        className: 'btn default',
+                        action: function (e, dt, node, config) {
+                            dt.ajax.reload();
+                            alert('Datatable reloaded!');
+                        }
+                    }
+                ],
+            }
+        });
+
+        // handle group actionsubmit button click
+        grid.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
+            e.preventDefault();
+            var action = $(".table-group-action-input", grid.getTableWrapper());
+            if (action.val() != "" && grid.getSelectedRowsCount() > 0) {
+                grid.setAjaxParam("customActionType", "group_action");
+                grid.setAjaxParam("customActionName", action.val());
+                grid.setAjaxParam("id", grid.getSelectedRows());
+                grid.getDataTable().ajax.reload();
+                grid.clearAjaxParams();
+            } else if (action.val() == "") {
+                App.alert({
+                    type: 'danger',
+                    icon: 'warning',
+                    message: 'Please select an action',
+                    container: grid.getTableWrapper(),
+                    place: 'prepend'
+                });
+            } else if (grid.getSelectedRowsCount() === 0) {
+                App.alert({
+                    type: 'danger',
+                    icon: 'warning',
+                    message: 'No record selected',
+                    container: grid.getTableWrapper(),
+                    place: 'prepend'
+                });
+            }
+        });
+
+        // grid.setAjaxParam("customActionType", "group_action");
+        // grid.getDataTable().ajax.reload();
+        // grid.clearAjaxParams();
+
+        // handle datatable custom tools
+        // $('#tbl_activity_tools > a.tool-action').on('click', function () {
+        //     var action = $(this).attr('data-action');
+        //     grid.getDataTable().button(action).trigger();
+        // });
+    }
+
+    var handleDocument = function () {
+
+        var grid = new Datatable();
+
+        grid.init({
+            src: $("#tbl_document"),
+            onSuccess: function (grid, response) { },
+            onError: function (grid) { },
+            onDataLoad: function (grid) {
+            },
+            loadingMessage: 'Loading...',
+            dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
+
+                // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+                // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
+                // So when dropdowns used the scrollable div should be removed. 
+                // "dom": "<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'>>",
+
+                "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+                "lengthMenu": [
+                    [10, 20, 50, 100, 150, -1],
+                    [10, 20, 50, 100, 150, "All"] // change per page values here
+                ],
+                "pageLength": 10, // default record count per page
+                "ajax": {
+                    "url": BASE_URL + "/client/get_documents", // ajax source
+                },
+                "order": [
+                    [1, "asc"]
+                ],// set first column as a default sort by asc
+                buttons: [
+                    { extend: 'print', className: 'btn default' },
+                    { extend: 'copy', className: 'btn default' },
+                    { extend: 'pdf', className: 'btn default' },
+                    { extend: 'excel', className: 'btn default' },
+                    { extend: 'csv', className: 'btn default' },
+                    {
+                        text: 'Reload',
+                        className: 'btn default',
+                        action: function (e, dt, node, config) {
+                            dt.ajax.reload();
+                            alert('Datatable reloaded!');
+                        }
+                    }
+                ],
+            }
+        });
+
+        // handle group actionsubmit button click
+        grid.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
+            e.preventDefault();
+            var action = $(".table-group-action-input", grid.getTableWrapper());
+            if (action.val() != "" && grid.getSelectedRowsCount() > 0) {
+                grid.setAjaxParam("customActionType", "group_action");
+                grid.setAjaxParam("customActionName", action.val());
+                grid.setAjaxParam("id", grid.getSelectedRows());
+                grid.getDataTable().ajax.reload();
+                grid.clearAjaxParams();
+            } else if (action.val() == "") {
+                App.alert({
+                    type: 'danger',
+                    icon: 'warning',
+                    message: 'Please select an action',
+                    container: grid.getTableWrapper(),
+                    place: 'prepend'
+                });
+            } else if (grid.getSelectedRowsCount() === 0) {
+                App.alert({
+                    type: 'danger',
+                    icon: 'warning',
+                    message: 'No record selected',
+                    container: grid.getTableWrapper(),
+                    place: 'prepend'
+                });
+            }
+        });
+
+        // grid.setAjaxParam("customActionType", "group_action");
+        // grid.getDataTable().ajax.reload();
+        // grid.clearAjaxParams();
+
+        // handle datatable custom tools
+        // $('#tbl_activity_tools > a.tool-action').on('click', function () {
+        //     var action = $(this).attr('data-action');
+        //     grid.getDataTable().button(action).trigger();
+        // });
+    }
+
+
     return {
         //main function to initiate the module
         init: function () {
             initPickers();
-            handleRecords();
-            handleAddPlacementRecords();
+            handleClientList();
+            handlePlacement();
+            handleActivity();
+            handleInvoice();
+            handleDocument();
         }
     };
 }();
@@ -200,13 +471,12 @@ $(document).ready(function () {
     TableClient.init();
 
     $('.btn-move-panel').click(function () {
+        // if ($(this).hasClass('caption-helper')) {
+        //     $('.caption-helper').removeClass('active-tab');
+        //     $(this).addClass('active-tab');
+        // }
         var panelName = $(this).attr('data-panelname');
         movePanel(panelName);
-    });
-
-    $('.caption-helper').click(function () {
-        $('.caption-helper').removeClass('active-tab');
-        $(this).addClass('active-tab');
     });
 });
 
