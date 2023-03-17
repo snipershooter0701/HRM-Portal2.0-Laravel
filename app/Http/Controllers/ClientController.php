@@ -112,7 +112,7 @@ class ClientController extends Controller
             if ($this->request['filt_active_placements'] != NULL)
                 array_push($whereConds, array("active_placements >=" => $this->request['filt_active_placements']));
         }
-        $filterItems = client::where($whereConds)->get();
+        $filterItems = Client::where($whereConds)->get();
 
         return [
             'totalItems' => $totalItems,

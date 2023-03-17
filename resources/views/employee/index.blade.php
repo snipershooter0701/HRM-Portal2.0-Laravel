@@ -5,14 +5,23 @@
 @endsection
 
 @section('content')
-<div id="panel-employee-list" class="move-panel ">
-    @include('employee.employee_list')
+<div id="panel-employee-list" class="move-panel">
+    @include('employee.employee-list')
 </div>
 <div id="panel-create-employee" class="move-panel display-none">
-    @include('employee.employee_add')
+    @include('employee.employee-add')
 </div>
-<div id="panel-create-details" class="move-panel display-none">
-    <h1>Create Details</h1>
+<div id="panel-request-list" class="move-panel display-none">
+    @include('employee.request-list')
+</div>
+<div id="panel-create-request" class="move-panel display-none">
+    @include('employee.request-add')
+</div>
+<div id="panel-import-employee" class="move-panel display-none">
+    @include('employee.employee-import')
+</div>
+<div id="panel-export-employee" class="move-panel display-none">
+    @include('employee.employee-export')
 </div>
 @endsection
 

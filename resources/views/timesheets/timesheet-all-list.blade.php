@@ -3,21 +3,18 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="{{ url('/employee') }}">Employee List</a>
+            <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel-all-timesheet-list">All Timesheets</a>
+        </li>
+        <li>
+            <a href="javascript:;" class="btn-move-panel" data-panelname="panel-due-timesheet-list">Due Timesheets</a>
+        </li>
+        <li>
+            <a href="javascript:;" class="btn-move-panel" data-panelname="panel-awaiting-invoices-list">Awaiting invoices</a>
         </li>
     </ul>
     <div class="page-toolbar">
         <div class="btn-group pull-right">
-            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-create-employee"><i class="fa fa-plus-circle"></i> Add Employee </button>
-            <button type="button" class="btn btn-sm btn-c-grey dropdown-toggle" data-toggle="dropdown"> More
-                <i class="fa fa-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu pull-right" role="menu">
-                <li>
-                    <a href="#">
-                        <i class="icon-bell"></i> Request Details</a>
-                </li>
-            </ul>
+            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-submit-timesheet"> Submit Timesheet </button>
         </div>
     </div>
 </div>
@@ -25,22 +22,19 @@
 <!-- END PAGE HEADER-->
 <div class="row">
     <div class="col-md-12">
-        <!-- Begin: life time stats -->
         <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-body">
                 <div class="table-container">
-                    <div class="actions">
-                        <div id="tbl_employees_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
-                            <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-copy"></i></a>
-                            <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-upload"></i></a>
-                            <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-download"></i></a>
-                            <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-print"></i></a>
-                            {{-- <a href="javascript:;" data-action="0" class="btn-tbl-action tool-action"><i class="icon-printer"></i></a>
-                            <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="icon-check"></i></a>
-                            <a href="javascript:;" data-action="2" class="btn-tbl-action tool-action"><i class="icon-doc"></i></a>
-                            <a href="javascript:;" data-action="3" class="btn-tbl-action tool-action"><i class="icon-paper-clip"></i></a>
-                            <a href="javascript:;" data-action="4" class="btn-tbl-action tool-action"><i class="icon-cloud-upload"></i></a>
-                            <a href="javascript:;" data-action="5" class="btn-tbl-action tool-action"><i class="icon-refresh"></i></a> --}}
+                    <div class="row">
+                        <div class="col-md-8">
+                        </div>
+                        <div class="col-md-4 actions">
+                            <div id="tbl_all_timesheets_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
+                                <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-copy"></i></a>
+                                <a class="btn-tbl-action btn-move-panel" data-panelname="panel-import-employee"><i class="fa fa-upload"></i></a>
+                                <a class="btn-tbl-action btn-move-panel" data-panelname="panel-export-employee"><i class="fa fa-download"></i></a>
+                                <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-print"></i></a>
+                            </div>
                         </div>
                     </div>
                     <div class="table-actions-wrapper">
@@ -55,43 +49,43 @@
                         <button class="btn btn-sm table-group-action-submit btn-c-primary">
                             <i class="fa fa-check"></i> Submit</button>
                     </div>
-                    <table id="tbl_employees" class="table table-striped table-bordered table-hover table-checkable">
+                    <table id="tbl_all_timesheets" class="table table-striped table-bordered table-hover table-checkable">
                         <thead>
                             <tr role="row" class="heading">
                                 <th width="2%">
                                     <input type="checkbox" class="group-checkable"> </th>
                                 <th width="5%"> No </th>
-                                <th width="15%"> First Name </th>
-                                <th width="15%"> Last Name </th>
-                                <th width="10%"> Phone </th>
-                                <th width="10%"> Category </th>
-                                <th width="15%"> Date of Joining </th>
-                                <th width="10%"> POC </th>
-                                <th width="10%"> Classification </th>
+                                <th width="15%"> Employee </th>
+                                <th width="15%"> Client </th>
+                                <th width="10%"> From </th>
+                                <th width="10%"> To </th>
+                                <th width="10%"> Total Billable Hours </th>
                                 <th width="10%"> Status </th>
-                                <th width="20%"> Action </th>
+                                <th width="10%"> Submitted On </th>
+                                <th width="8%"> Attachment </th>
+                                <th width="15%"> Action </th>
                             </tr>
                             <tr role="row" class="filter">
                                 <td> </td>
                                 <td> </td>
 
-                                {{-- first name --}}
+                                {{-- Employee --}}
                                 <td>
                                     <input type="text" class="form-control form-filter input-sm" name="filt_first_name"> </td>
 
-                                {{-- last name --}}
+                                {{-- Client --}}
                                 <td>
                                     <input type="text" class="form-control form-filter input-sm" name="filt_last_name"> </td>
 
-                                {{-- Phone --}}
+                                {{-- From --}}
                                 <td>
                                     <input type="text" class="form-control form-filter input-sm" name="filt_phone"> </td>
 
-                                {{-- category --}}
+                                {{-- To --}}
                                 <td>
                                     <input type="text" class="form-control form-filter input-sm" name="filt_category"> </td>
 
-                                {{-- date of joining --}}
+                                {{-- Total Billable Hours --}}
                                 <td>
                                     <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
@@ -111,26 +105,21 @@
                                     </div>
                                 </td>
 
-                                {{-- supervisor --}}
+                                {{-- Status --}}
                                 <td>
                                     <input type="text" class="form-control form-filter input-sm" name="filt_poc"> </td>
 
-                                {{-- classification --}}
-                                <td>
-                                    <select name="filt_classification" class="form-control form-filter input-sm">
-                                        <option value="">Select...</option>
-                                        <option value="pending">billable</option>
-                                        <option value="closed">non-billable</option>
-                                    </select>
-                                </td>
-
-                                {{-- status --}}
+                                {{-- Submitted On --}}
                                 <td>
                                     <select name="filt_status" class="form-control form-filter input-sm">
                                         <option value="">Select...</option>
                                         <option value="pending">active</option>
                                         <option value="closed">inactive</option>
                                     </select>
+                                </td>
+
+                                {{-- Attachment --}}
+                                <td>
                                 </td>
                                 <td>
                                     <button class="btn btn-xs btn-c-primary filter-submit"><i class="fa fa-search"></i></button>
@@ -143,6 +132,5 @@
                 </div>
             </div>
         </div>
-        <!-- End: life time stats -->
     </div>
 </div>

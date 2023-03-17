@@ -28,7 +28,9 @@ Route::middleware(['auth'])->group(function () {
     // Employee
     Route::get('/employee', [App\Http\Controllers\EmployeeController::class, 'index']);
     Route::post('/employee/get-employees', [App\Http\Controllers\EmployeeController::class, 'getEmployees']);
+    Route::post('/employee/get-add-histories', [App\Http\Controllers\EmployeeController::class, 'getAddHistories']);
     Route::post('/employee/get-add-placements', [App\Http\Controllers\EmployeeController::class, 'getAddPlacements']);
+    Route::post('/employee/get-request-details', [App\Http\Controllers\EmployeeController::class, 'getRequestDetails']);
 
     // Client
     Route::get('/client', [App\Http\Controllers\ClientController::class, 'index']);
@@ -41,4 +43,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/client/get_activities', [App\Http\Controllers\ClientController::class, 'getActivities']);
     Route::post('/client/get_invoices', [App\Http\Controllers\ClientController::class, 'getInvoices']);
     Route::post('/client/get_documents', [App\Http\Controllers\ClientController::class, 'getDocuments']);
+    
+    // Timesheet
+    Route::get('/timesheets', [App\Http\Controllers\TimesheetsController::class, 'index']);
+    Route::post('/timesheets/all-timesheets/get-timesheets', [App\Http\Controllers\TimesheetsController::class, 'getAllTimesheets']);
+    Route::post('/timesheets/due-timesheets/get-timesheets', [App\Http\Controllers\TimesheetsController::class, 'getDueTimesheets']);
+    Route::post('/timesheets/await-invoices/get-invoices', [App\Http\Controllers\TimesheetsController::class, 'getAwaitInvoices']);
+    Route::post('/timesheets/submit-timesheet/get-timesheets', [App\Http\Controllers\TimesheetsController::class, 'getSubmitTimesheets']);
+    
 });

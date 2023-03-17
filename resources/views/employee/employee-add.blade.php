@@ -3,7 +3,10 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="{{ url('/employee') }}">Add Employee</a>
+            <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel-employee-list">All Employees</a>
+        </li>
+        <li>
+            <a href="javascript:;" class="btn-move-panel" data-panelname="panel-request-list">All Request Details</a>
         </li>
     </ul>
     <div class="page-toolbar">
@@ -45,10 +48,8 @@
                                 <input type="text" class="form-control">
                             </div>
                             <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Job Title</label>
-                                <select class="form-control">
-                                    <option>Select</option>
-                                </select>
+                                <label class="control-label">Title</label>
+                                <input type="text" class="form-control">
                             </div>
                             <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Email Address</label>
@@ -56,10 +57,6 @@
                             </div>
                             <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Phone Number</label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Date of Birth</label>
                                 <input type="text" class="form-control">
                             </div>
                             <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
@@ -72,10 +69,6 @@
                                         </button>
                                     </span>
                                 </div>
-                            </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Employee Title</label>
-                                <input type="text" class="form-control">
                             </div>
                             <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Date of Joining</label>
@@ -123,12 +116,6 @@
                                 </select>
                             </div>
                             <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Department</label>
-                                <select class="form-control">
-                                    <option>Select</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Employee Status Date</label>
                                 <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                     <input type="text" class="form-control" readonly>
@@ -138,6 +125,12 @@
                                         </button>
                                     </span>
                                 </div>
+                            </div>
+                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                <label class="control-label">Department</label>
+                                <select class="form-control">
+                                    <option>Select</option>
+                                </select>
                             </div>
                             <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Role</label>
@@ -178,7 +171,9 @@
                             </div>
                             <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">State</label>
-                                <input type="text" class="form-control">
+                                <select class="form-control">
+                                    <option>Select</option>
+                                </select>
                             </div>
                             <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Zip Code</label>
@@ -293,7 +288,7 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-2">
-                                    <label class="control-label doc-label">1-94</label>
+                                    <label class="control-label doc-label">I-94</label>
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label class="control-label">Document No</label>
@@ -387,15 +382,13 @@
                                 <h4 class="section-head">Pay Classification</h4>
                             </div>
                             <div class="col-md-6 section-action">
-                                <label class="checkbox-inline">
-                                    <label>
-                                        <input type="checkbox" class="icheck"> Add Later
-                                    </label>
+                                <label>
+                                    <input type="checkbox" class="icheck"> Add Later
                                 </label>
                             </div>
                         </div>
                         <hr>
-                        <div class="row">
+                        <div class="row" style="margin-bottom: 13px;">
                             <div class="col-md-2">
                                 <label>
                                     <input type="checkbox" class="icheck"> Standard Time
@@ -437,7 +430,7 @@
                         </div>
                         {{-- END PAY CLASSIFICATION FORM --}}
                         {{-- BEGIN PLACEMENT FORM --}}
-                        <div class="row">
+                        <div class="row display-none">
                             <div class="col-md-6 ">
                                 <h4 class="section-head">Placement List</h4>
                             </div>
@@ -445,8 +438,8 @@
                                 <button type="submit" class="btn btn-sm btn-c-primary">Add Placement</button>
                             </div>
                         </div>
-                        <hr>
-                        <div class="table-container">
+                        <hr class="display-none">
+                        <div class="table-container display-none">
                             <table id="tbl_add_placements" class="table table-striped table-bordered table-hover table-checkable">
                                 <thead>
                                     <tr role="row" class="heading">
@@ -474,6 +467,35 @@
                             </table>
                         </div>
                         {{-- END PLACEMENT FORM --}}
+                        {{-- BEGIN ACTIVITIES FORM --}}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="section-head">Activities</h4>
+                            </div>
+                            <div class="col-md-6 section-action">
+                            </div>
+                        </div>
+                        <hr class="">
+                        <div class="table-container">
+                            <table id="tbl_add_emp_activities" class="table table-striped table-bordered table-hover table-checkable">
+                                <thead>
+                                    <tr role="row" class="heading">
+                                        <th width="10%"> No </th>
+                                        <th width="20%"> Date & Time </th>
+                                        <th width="30%"> Updated By </th>
+                                        <th width="40%"> Description </th>
+                                    </tr>
+                                    <tr role="row" class="filter display-none">
+                                        <td> </td>
+                                        <td> </td>
+                                        <td> </td>
+                                        <td> </td>
+                                    </tr>
+                                </thead>
+                                <tbody> </tbody>
+                            </table>
+                        </div>
+                        {{-- END ACTIVITIES FORM --}}
                     </div>
                     <div class="form-actions text-right">
                         <button type="submit" class="btn btn-sm btn-c-primary">Register</button>

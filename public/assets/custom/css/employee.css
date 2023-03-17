@@ -1,37 +1,81 @@
-.btn-tbl-action {
+/* =========================== BEGIN ADD EMPLOYEE STYLES =========================== */
+#panel-create-employee .section-head {
+    font-weight: 600 !important;
+    /* color: #7E8C9C; */
+}
+
+#panel-create-employee .section-action {
+    margin-top: 15px;
+    text-align: right;
+}
+
+#panel-create-employee .btn-tbl-action {
     text-decoration: none;
     font-size: 16px;
     margin-left: 3px;
 }
 
-.section-head {
-    font-weight: 600 !important;
-    /* color: #7E8C9C; */
-}
-
-.doc-label {
+#panel-create-employee .doc-label {
     color: black !important;
     margin-top: 17px;
     margin-left: 17px;
     font-weight: bold !important;
 }
 
-#btn-no-border {
-    font-size: 24px !important;
-    margin-top: 19px !important;
+/* ============================ END ADD EMPLOYEE STYLES ============================ */
+
+/* =========================== BEGIN ADD REQUEST STYLES =========================== */
+#panel-create-request .req-add-section-header {
+    background: #EEECEC;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
 }
 
-.section-action {
-    margin-top: 15px;
-    text-align: right;
+#panel-create-request .req-add-section-header label {
+    margin-bottom: 0px;
 }
 
-#chbox-pay-classy {
-    float: right;
+#panel-create-request .req-add-section-header .req-header-icon {
+    font-size: 20px;
+    color: #D1CECE;
 }
 
-.chbox-primary .checker span {
-    background: #3699FF !important;
-    border: 1px solid #C9D1D5 !important;
-    border-radius: 1px !important;
+#panel-create-request .req-add-section-header .req-header-title {
+    font-weight: bold;
 }
+
+#panel-create-request .req-add-section-body {
+    padding-left: 86px;
+    margin-top: 10px;
+}
+
+/* =========================== BEGIN ADD REQUEST STYLES =========================== */
+
+/* ============================== BEGIN IMPORT STYLES ============================== */
+#panel-import-employee .import-info {
+    background: #EEECEC;
+    padding: 29px;
+}
+
+#panel-import-employee .import-info .import-info-section span {
+    color: #3699FF;
+    font-weight: 600;
+}
+
+#panel-import-employee .import-info .import-info-section ul {
+    padding-left: 20px !important;
+}
+
+/* =============================== END IMPORT STYLES =============================== */
+
+/* ============================== BEGIN IMPORT STYLES ============================== */
+#panel-export-employee .export-label-title {
+    text-align: center;
+    color: #9B8A8A;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+/* =============================== END IMPORT STYLES =============================== */
