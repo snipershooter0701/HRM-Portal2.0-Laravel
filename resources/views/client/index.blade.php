@@ -25,11 +25,11 @@
 </div>
 
 <div id="panel-create-placement" class="move-panel display-none">
-    @include('client.client_list')
+    @include('client.add_placement')
 </div>
 
 <div id="panel-create-document" class="move-panel display-none">
-    @include('client.client_list')
+    @include('client.add_document')
 </div>
 @endsection
 

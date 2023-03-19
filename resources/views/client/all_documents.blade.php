@@ -3,7 +3,7 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="{{ url('/') }}">Client List</a>
+            <a href="{{ url('/') }}">All Documents</a>
         </li>
     </ul>
     <div class="page-toolbar">
@@ -26,19 +26,10 @@
     <div class="col-md-12">
         <!-- Begin: life time stats -->
         <div class="portlet light portlet-fit portlet-datatable bordered">
-            <div class="portlet-title">
-                <div class="caption">
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-business-info">Business Info</span>
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-contact-info">Contact Info</span>
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-add-confidential">Add Confidential</span>
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-placement">Placements</span>
-                    <span class="caption-helper active-tab btn-move-panel" data-panelname="panel-document">Documents</span>
-                </div>
-            </div>
             <div class="portlet-body">
                 <div class="table-container">
                     <div class="actions">
-                        <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-create-document"><i class="fa fa-plus-circle"></i> Add Document </button>
+                        <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-create-client"><i class="fa fa-plus-circle"></i> Add Document </button>
                         <div id="tbl_placements_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-copy"></i></a>
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-upload"></i></a>
@@ -57,18 +48,19 @@
                     </div>
 
                     {{-- document list table --}}
-                    <table id="tbl_document" class="table table-striped table-bordered table-hover table-checkable">
+                    <table id="tbl_all_document" class="table table-striped table-bordered table-hover table-checkable">
                         <thead>
                             <tr role="row" class="heading">
                                 <th width="2%">
                                     <input type="checkbox" class="group-checkable"> </th>
                                 <th width="5%"> No </th>
                                 <th width="20%"> Title</th>
-                                <th width="15%"> Documents type </th>
+                                <th width="10%"> Documents type </th>
+                                <th width="15%"> Client Name </th>
                                 <th width="15%"> Employee </th>
                                 <th width="10%"> status </th>
                                 <th width="10%"> Except Date</th>
-                                <th width="10%"> Action </th>
+                                <th width="13%"> Action </th>
                             </tr>
                             <tr role="row" class="filter">
                                 <td> </td>
@@ -81,6 +73,10 @@
                                 {{-- Document type--}}
                                 <td>
                                     <input type="text" class="form-control form-filter input-sm" name="filt_document_type"> </td>
+
+                                {{-- Client Name --}}
+                                <td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_client_name"> </td>
 
                                 {{-- employee--}}
                                 <td>

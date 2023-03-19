@@ -1,8 +1,5 @@
 /* =========================== BEGIN ADD EMPLOYEE STYLES =========================== */
-#panel-create-employee .section-head {
-    font-weight: 600 !important;
-    /* color: #7E8C9C; */
-}
+
 
 #panel-create-employee .section-action {
     margin-top: 15px;
@@ -11,8 +8,11 @@
 
 #panel-create-employee .btn-tbl-action {
     text-decoration: none;
-    font-size: 16px;
     margin-left: 3px;
+}
+
+#panel-create-employee .btn-tbl-action i {
+    font-size: 16px !important;
 }
 
 #panel-create-employee .doc-label {

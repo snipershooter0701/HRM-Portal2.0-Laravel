@@ -3,8 +3,16 @@
     display: none !important;
 }
 
+.display-flex {
+    display: flex !important;
+}
+
 .mr-10 {
     margin-right: 10px !important;
+}
+
+.mt-10 {
+    margin-top: 10px !important;
 }
 
 .mt-20 {
@@ -13,6 +21,14 @@
 
 .text-right {
     text-align: right !important;
+}
+
+.mt-30 {
+    margin-top: 30px !important;
+}
+
+.mb-10 {
+    margin-bottom: 10px !important;
 }
 
 /* ============================ END NECESSARY STYLES ============================ */
@@ -37,12 +53,12 @@
 
 .btn-c-primary:hover {
     color: #FFFFFF;
-    background-color: #3288e1;
+    background-color: #2282e5;
 }
 
 .btn-c-primary:focus {
     color: #FFFFFF;
-    background-color: #3288e1;
+    background-color: #2282e5;
 }
 
 .btn-c-info {
@@ -63,6 +79,11 @@
     border-radius: 5px !important;
 }
 
+.btn-c-grey:hover {
+    color: #FFFFFF;
+    background-color: #596068;
+}
+
 .btn-c-no-border-primary {
     font-size: 24px !important;
     color: #3699FF;
@@ -72,7 +93,7 @@
 
 /* ========================== END CUSTOM BUTTON STYLES =========================== */
 
-/* ========================= BEGIN CUSTOM BUTTON STYLES ========================== */
+/* ========================= BEGIN CUSTOM LABEL STYLES ========================== */
 .label-active {
     color: #FFFFFF;
     background-color: #3797FC;
@@ -104,7 +125,13 @@
     font-weight: 600 !important;
 }
 
-/* ========================== END CUSTOM BUTTON STYLES =========================== */
+h4.section-head {
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    margin-top: 50px !important;
+}
+
+/* ========================== END CUSTOM LABEL STYLES =========================== */
 
 /* ============================== BEGIN SIDEBAR STYLES ============================= */
 .page-sidebar-menu .nav-item .title {
@@ -112,6 +139,44 @@
 }
 
 /* =============================== END SIDEBAR STYLES ============================== */
+
+/* ============================== BEGIN FILEINPUT STYLES ============================= */
+.fileinput .uneditable-input {
+    height: 24px !important;
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+    min-width: 0px !important;
+    border-right: 0px !important;
+}
+
+.fileinput .btn-file {
+    padding: 0px !important;
+    border-bottom-width: 0px;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-left-width: 0px;
+    border-radius: 0px !important;
+    background: transparent !important;
+}
+
+.fileinput .input-group .input-group-btn .fileinput-exists {
+    margin-top: -4px;
+    margin-left: 0px;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+
+.fileinput .input-group .fileinput-exists.red {
+    border-bottom-left-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+    height: 24px !important;
+    margin-top: -17px;
+    padding: 2px 16px 6px 8px;
+    border-color: #c2cad8;
+    background-color: #c2cad8;
+}
+
+/* =============================== END FILEINPUT STYLES ============================== */
 
 /* ======================= BEGIN DEFAULT COMPONENT STYLES ======================== */
 body {
@@ -127,18 +192,22 @@ select,
 div,
 i,
 label,
+textarea,
 a {
-    font-size: 10px !important;
-    font-weight: 600 !important;
+    font-size: 12px !important;
 }
 
 i {
-    font-size: 8px !important;
+    font-size: 10px !important;
 }
 
-.col-md-12 {
-    padding-left: 5px;
-    padding-right: 5px;
+hr {
+    margin-top: 0px !important;
+    border-color: #666 !important;
+}
+
+.top-menu .nav .icon-bell {
+    font-size: 17px !important;
 }
 
 .page-logo {
@@ -199,6 +268,15 @@ i {
     background-color: #C9D1D5 !important;
 }
 
+.page-bar .page-toolbar {
+    padding: 8px 0 6px !important;
+}
+
+
+.portlet.light.portlet-fit>.portlet-body {
+    padding: 20px 20px 20px 25px !important;
+}
+
 /* ========================= END DEFAULT COMPONENT STYLES ========================== */
 
 /* ============================ BEGIN BREADCRUMB STYLES ============================ */
@@ -234,6 +312,18 @@ i {
     font-size: 15px;
 }
 
+.tbl-ajax-tools .btn-tbl-action:hover {
+    color: #3699FF;
+}
+
+.tbl-ajax-tools .btn-tbl-action {
+    margin-left: 10px !important;
+}
+
+.tbl-ajax-tools .btn-tbl-action i {
+    font-size: 16px !important;
+}
+
 .dataTable .filter-submit,
 .dataTable .filter-cancel {
     margin-right: 0px !important;
@@ -264,7 +354,7 @@ i {
     background-color: #3797FC;
     border-radius: 5px !important;
     padding: 4px 6px !important;
-    width: 60px !important;
+    width: 70px !important;
     display: inline-table !important;
 }
 
@@ -273,7 +363,7 @@ i {
     background-color: #32C5D2;
     border-radius: 5px !important;
     padding: 4px 6px !important;
-    width: 60px !important;
+    width: 70px !important;
     display: inline-table !important;
 }
 
@@ -282,7 +372,7 @@ i {
     background-color: #7E8C9C;
     border-radius: 5px !important;
     padding: 4px 6px !important;
-    width: 60px !important;
+    width: 70px !important;
     display: inline-table !important;
 }
 
@@ -308,6 +398,27 @@ i {
     padding: 1px 12px;
 }
 
+.form-group.has-notifier input {
+    border: none !important;
+    border-bottom: 1px solid #c2cad8 !important;
+    border-radius: unset !important;
+}
+
+.form-group.has-notifier .input-group-addon {
+    padding: 0 12px !important;
+    font-size: 14px !important;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #c2cad8 !important;
+}
+
+.form-group.has-notifier textarea {
+    border: none;
+    resize: none;
+    height: 250px;
+}
+
+
 .form-body .form-group input[type=file] {
     margin-top: 4px !important;
     border: 0px solid !important;
@@ -315,7 +426,7 @@ i {
 
 .form-body .form-group select {
     border-radius: 5px !important;
-    height: 26px !important;
+    height: 24px !important;
     border: 1px solid #C9D1D5 !important;
     padding: 1px 12px;
 }
@@ -339,15 +450,26 @@ i {
 .input-group .input-group-btn .btn {
     border-top-left-radius: 0px !important;
     border-bottom-left-radius: 0px !important;
+    height: 24px !important;
+    /* display: flex !important; */
+    justify-content: center !important;
+    align-items: center !important;
 }
 
 .input-sm {
-    height: 24px;
+    height: 24px !important;
+    padding: 1px 10px !important;
+}
+
+.btn-sm {
+    height: 24px !important;
+    padding: 2px 10px !important;
 }
 
 /* ============================= END AJAX TABLE STYLES ============================= */
 
 /* ============================ Begin Tab sytles ==================================*/
+
 .caption-helper:hover {
     color: #3699FF !important;
     font-weight: 700 !important;

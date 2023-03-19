@@ -86,7 +86,7 @@
                                 <input type="text" class="form-control">
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mt-30">
                             <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Cancelled Check</label>
                                 <input type="file" class="form-control">

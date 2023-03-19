@@ -33,6 +33,16 @@ class ClientController extends Controller
         return view('client.index')->with('randNum', rand());
     }
 
+    public function index_all_placements()
+    {
+        return view('client.index_all_placements')->with('randNum', rand());
+    }
+
+    public function index_all_documents()
+    {
+        return view('client.index_all_documents')->with('randNum', rand());
+    }
+
     // ========================== BEGIN PUBLIC FUNCTIONS ==========================
     /**
      * Get clients
@@ -83,6 +93,26 @@ class ClientController extends Controller
     {
         $ajaxData = $this->getDocumentTblData();
         $result = $this->makeClientTblItems($ajaxData['totalItems'], $ajaxData['filterItems'], 'displayDocuments');
+        return $result;
+    }
+
+    /**
+     * Get Documents info
+     */
+    public function getAllPlacements()
+    {
+        $ajaxData = $this->getAllPlacementTblData();
+        $result = $this->makeClientTblItems($ajaxData['totalItems'], $ajaxData['filterItems'], 'displayAllPlacements');
+        return $result;
+    }
+
+    /**
+     * Get Documents info
+     */
+    public function getAllDocuments()
+    {
+        $ajaxData = $this->getAllDocumentTblData();
+        $result = $this->makeClientTblItems($ajaxData['totalItems'], $ajaxData['filterItems'], 'displayAllDocuments');
         return $result;
     }
     // ========================== END PUBLIC FUNCTIONS ==========================
@@ -236,7 +266,73 @@ class ClientController extends Controller
         ];
     }
 
+    /**
+     * Generate 
+     */
+    private function getAllPlacementTblData()
+    {
+        // Get total placements
+        $totalItems = Placement::all();
 
+        // Get Filtered placements
+        $whereConds = array();
+        if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
+            if ($this->request['filt_employee_name'] != NULL)
+                array_push($whereConds, array("employee_name" => $this->request['filt_employee_name']));
+            if ($this->request['filt_client'] != NULL)
+                array_push($whereConds, array("client" => $this->request['filt_client']));
+            if ($this->request['filt_job_tire'] != NULL)
+                array_push($whereConds, array("job_tire" => $this->request['filt_job_tire']));
+            if ($this->request['filt_project_type'] != NULL)
+                array_push($whereConds, array("project_type" => $this->request['filt_project_type']));
+            if ($this->request['filt_job_status'] != NULL)
+                array_push($whereConds, array("job_status" => $this->request['filt_job_status']));
+            if ($this->request['filt_start_date'] != NULL)
+                array_push($whereConds, array("start_date" => $this->request['filt_start_date']));
+            if ($this->request['filt_end_date'] != NULL)
+                array_push($whereConds, array("end_date" => $this->request['filt_end_date']));
+            if ($this->request['filt_po_attachment'] != NULL)
+                array_push($whereConds, array("po_attachment >=" => $this->request['filt_po_attachment']));
+        }
+        $filterItems = placement::where($whereConds)->get();
+
+        return [
+            'totalItems' => $totalItems,
+            'filterItems' => $filterItems
+        ];
+    }
+
+    /**
+     * Generate 
+     */
+    private function getAllDocumentTblData()
+    {
+        // Get total Activity
+        $totalItems = Document::all();
+
+        // Get Filtered activities
+        $whereConds = array();
+        if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
+            if ($this->request['filt_title'] != NULL)
+                array_push($whereConds, array("title" => $this->request['filt_title']));
+            if ($this->request['filt_document_type'] != NULL)
+                array_push($whereConds, array("document_type" => $this->request['filt_document_type']));
+            if ($this->request['filt_Client_name'] != NULL)
+                array_push($whereConds, array("Client_name" => $this->request['filt_Client_name']));
+            if ($this->request['filt_employee'] != NULL)
+                array_push($whereConds, array("employee" => $this->request['filt_employee']));
+            if ($this->request['filt_status'] != NULL)
+                array_push($whereConds, array("status" => $this->request['filt_status']));
+            if ($this->request['filt_except_date'] != NULL)
+                array_push($whereConds, array("except_date" => $this->request['filt_except_date']));
+        }
+
+        $filterItems = Document::where($whereConds)->get();
+        return [
+            'totalItems' => $totalItems,
+            'filterItems' => $filterItems
+        ];
+    }
 
 
     /**
@@ -277,7 +373,7 @@ class ClientController extends Controller
                     $filterItems[$idx]->email,
                     $filterItems[$idx]->contact_num,
                     $filterItems[$idx]->net_terms,
-                    $filterItems[$idx]->status ? '<span class="label label-sm label-active">Active</span>' : '<span class="label label-sm label-inactive">InActive</span>',
+                    $filterItems[$idx]->status ? '<span class="label label-sm label-primary">Active</span>' : '<span class="label label-sm label-grey">Inactive</span>',
                     $filterItems[$idx]->active_placements,
                     '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-eye"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil"></i></a>
@@ -294,7 +390,7 @@ class ClientController extends Controller
                     $id,
                     $filterItems[$idx]->employee_name,
                     $filterItems[$idx]->job_tire,
-                    $filterItems[$idx]->job_status ? '<span class="label label-sm label-active">Active</span>' : '<span class="label label-sm label-inactive">InActive</span>',
+                    $filterItems[$idx]->job_status ? '<span class="label label-sm label-primary">Active</span>' : '<span class="label label-sm label-grey">Inactive</span>',
                     $filterItems[$idx]->start_date,
                     $filterItems[$idx]->end_date,
                     $filterItems[$idx]->po_attachment,
@@ -311,7 +407,7 @@ class ClientController extends Controller
                 $records["data"][] = array(
                     $filterItems[$idx]->date_time,
                     $filterItems[$idx]->updated_by,
-                    $filterItems[$idx]->descrition,
+                    $filterItems[$idx]->description,
                 );
                 $idx++;
             }
@@ -325,7 +421,7 @@ class ClientController extends Controller
                     $filterItems[$idx]->employee_name,
                     $filterItems[$idx]->invoice_date,
                     $filterItems[$idx]->invoice_due_date,
-                    $filterItems[$idx]->status ? '<span class="label label-sm label-active">Invoiced</span>' : '<span class="label label-sm label-inactive">Rejected</span>',
+                    $filterItems[$idx]->status ? '<span class="label label-sm label-primary">Invoiced</span>' : '<span class="label label-sm label-grey">Rejected</span>',
                     '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-eye"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-c-grey"><i class="fa fa-trash"></i></a>'
@@ -342,7 +438,54 @@ class ClientController extends Controller
                     $filterItems[$idx]->title,
                     $filterItems[$idx]->document_type,
                     $filterItems[$idx]->employee,
-                    $filterItems[$idx]->status ? '<span class="label label-sm label-active">Invoiced</span>' : '<span class="label label-sm label-inactive">Rejected</span>',
+                    $filterItems[$idx]->status ? '<span class="label label-sm label-primary">Invoiced</span>' : '<span class="label label-sm label-grey">Rejected</span>',
+                    $filterItems[$idx]->except_date,
+                    '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-eye"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-c-grey"><i class="fa fa-trash"></i></a>'
+                );
+                $idx++;
+            }
+        } else if($pageID == 'displayAllPlacements') {
+            for ($i = $iDisplayStart; $i < $end; $i++) {
+                $status = $status_list[rand(0, 2)];
+                $id = ($i + 1);
+                if($filterItems[$idx]->project_type == '0') {
+                    $project_type = 'W2';
+                } else if($filterItems[$idx]->project_type == '1') {
+                    $project_type = 'C2C';
+                } else {
+                    $project_type = '1099';
+                }
+                
+                $records["data"][] = array(
+                    '<input type="checkbox" name="id[]" value="' . $id . '">',
+                    $id,
+                    $filterItems[$idx]->employee_name,
+                    $filterItems[$idx]->client,
+                    $filterItems[$idx]->job_tire,
+                    $project_type,
+                    $filterItems[$idx]->job_status ? '<span class="label label-sm label-primary">Active</span>' : '<span class="label label-sm label-grey">Inactive</span>',
+                    $filterItems[$idx]->start_date,
+                    $filterItems[$idx]->end_date,
+                    '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-eye"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-c-grey"><i class="fa fa-trash"></i></a>'
+                );
+                $idx++;
+            }
+        } else if($pageID == 'displayAllDocuments') {
+            for ($i = $iDisplayStart; $i < $end; $i++) {
+                $status = $status_list[rand(0, 2)];
+                $id = ($i + 1);
+                $records["data"][] = array(
+                    '<input type="checkbox" name="id[]" value="' . $id . '">',
+                    $id,
+                    $filterItems[$idx]->title,
+                    $filterItems[$idx]->document_type,
+                    $filterItems[$idx]->client_name,
+                    $filterItems[$idx]->employee,
+                    $filterItems[$idx]->status ? '<span class="label label-sm label-primary">Invoiced</span>' : '<span class="label label-sm label-grey">Rejected</span>',
                     $filterItems[$idx]->except_date,
                     '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-eye"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil"></i></a>

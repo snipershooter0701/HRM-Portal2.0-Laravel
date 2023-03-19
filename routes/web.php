@@ -41,8 +41,15 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/client/get_add_confidential', [App\Http\Controllers\ClientController::class, 'getAddConfidential']);
     Route::post('/client/get_placements', [App\Http\Controllers\ClientController::class, 'getPlacements']);
     Route::post('/client/get_activities', [App\Http\Controllers\ClientController::class, 'getActivities']);
+    Route::post('/client/get_addplacement_activities', [App\Http\Controllers\ClientController::class, 'getActivities']);
     Route::post('/client/get_invoices', [App\Http\Controllers\ClientController::class, 'getInvoices']);
     Route::post('/client/get_documents', [App\Http\Controllers\ClientController::class, 'getDocuments']);
+    // All Placements
+    Route::get('/client/all_placements', [App\Http\Controllers\ClientController::class, 'index_all_placements']);
+    Route::post('/client/get_all_placement', [App\Http\Controllers\ClientController::class, 'getAllPlacements']);
+    // All Documents
+    Route::get('/client/all_documents', [App\Http\Controllers\ClientController::class, 'index_all_documents']);
+    Route::post('/client/get_all_document', [App\Http\Controllers\ClientController::class, 'getAllDocuments']);
     
     // Timesheet
     Route::get('/timesheets', [App\Http\Controllers\TimesheetsController::class, 'index']);

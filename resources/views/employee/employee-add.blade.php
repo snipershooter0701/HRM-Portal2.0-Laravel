@@ -157,7 +157,7 @@
                         <h4 class="section-head">Address</h4>
                         <hr>
                         <div class="row">
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-lg-3 col-md-4 col-sm-6 col-xs-6">
                                 <label class="control-label">Street</label>
                                 <input type="text" class="form-control">
                             </div>
@@ -195,8 +195,27 @@
                                     <input type="text" class="form-control">
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label class="control-label"></label>
-                                    <input type="file" class="form-control">
+                                    <label class="control-label"> </label>
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div class="input-group">
+                                            <div class="form-control uneditable-input" data-trigger="fileinput">
+                                                <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                <span class="fileinput-filename"> </span>
+                                            </div>
+                                            <span class="input-group-btn input-group-addon btn default btn-file">
+                                                <button class="btn default fileinput-new" type="button">
+                                                    <i class="fa fa-upload"></i>
+                                                </button>
+                                                <button class="btn default fileinput-exists" type="button">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <input type="file" name="...">
+                                            </span>
+                                            <button class="btn red input-group-btn fileinput-exists" data-dismiss="fileinput" type="button">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">

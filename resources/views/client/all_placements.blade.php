@@ -3,7 +3,7 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="{{ url('/') }}">Client List</a>
+            <a href="{{ url('/') }}">All Placements</a>
         </li>
     </ul>
     <div class="page-toolbar">
@@ -26,19 +26,10 @@
     <div class="col-md-12">
         <!-- Begin: life time stats -->
         <div class="portlet light portlet-fit portlet-datatable bordered">
-            <div class="portlet-title">
-                <div class="caption">
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-business-info">Business Info</span>
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-contact-info">Contact Info</span>
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-add-confidential">Add Confidential</span>
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-placement">Placements</span>
-                    <span class="caption-helper active-tab btn-move-panel" data-panelname="panel-document">Documents</span>
-                </div>
-            </div>
             <div class="portlet-body">
                 <div class="table-container">
                     <div class="actions">
-                        <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-create-document"><i class="fa fa-plus-circle"></i> Add Document </button>
+                        <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-create-placement"><i class="fa fa-plus-circle"></i> Add Placement </button>
                         <div id="tbl_placements_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-copy"></i></a>
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-upload"></i></a>
@@ -56,48 +47,58 @@
                             <i class="fa fa-check"></i> Submit</button>
                     </div>
 
-                    {{-- document list table --}}
-                    <table id="tbl_document" class="table table-striped table-bordered table-hover table-checkable">
+                    {{-- placement list table --}}
+                    <table id="tbl_all_placement" class="table table-striped table-bordered table-hover table-checkable">
                         <thead>
                             <tr role="row" class="heading">
                                 <th width="2%">
                                     <input type="checkbox" class="group-checkable"> </th>
                                 <th width="5%"> No </th>
-                                <th width="20%"> Title</th>
-                                <th width="15%"> Documents type </th>
-                                <th width="15%"> Employee </th>
-                                <th width="10%"> status </th>
-                                <th width="10%"> Except Date</th>
-                                <th width="10%"> Action </th>
+                                <th width="15%"> Employee Name </th>
+                                <th width="15%"> Client </th>
+                                <th width="10%"> Job Tire </th>
+                                <th width="10%"> Project Type </th>
+                                <th width="10%"> Status </th>
+                                <th width="10%"> Start Date </th>
+                                <th width="10%"> End Date</th>
+                                <th width="13%"> Action </th>
                             </tr>
                             <tr role="row" class="filter">
                                 <td> </td>
                                 <td> </td>
 
-                                {{-- Title --}}
+                                {{-- Employee name --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_title"> </td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_employee_name"> </td>
 
-                                {{-- Document type--}}
+                                {{-- Client --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_document_type"> </td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_client"> </td>
 
-                                {{-- employee--}}
+                                {{-- Job Tire --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_employee"> </td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_job_tire"> </td>
 
-                                {{-- status --}}
+                                {{-- Project Type --}}
                                 <td>
-                                    <select name="filt_status" class="form-control form-filter input-sm">
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_project_type"> </td>
+
+                                {{-- Job Status --}}
+                                <td>
+                                    <select name="filt_job_status" class="form-control form-filter input-sm">
                                         <option value="">Select...</option>
                                         <option value="pending">active</option>
                                         <option value="closed">inactive</option>
                                     </select>
                                 </td>
 
-                                {{-- except Date --}}
+                                {{-- Start Date --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_except_date"> </td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_start_date"> </td>
+
+                                {{-- End Date --}}
+                                <td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_end_date"> </td>
 
                                 {{-- Action --}}
                                 <td>
@@ -108,7 +109,37 @@
                         </thead>
                         <tbody> </tbody>
                     </table>
+
+                    {{-- activities table --}}
+                    <h4 class="section-head">Activities</h4>
+                    <hr>
                     
+                    <table id="tbl_activity" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr role="row" class="heading">
+                                <th width="20%"> Date & Time </th>
+                                <th width="15%"> Updated By </th>
+                                <th width="15%"> Description </th>
+                            </tr>
+                            <tr role="row" class="filter">
+                               
+                                {{-- time_date --}}
+                                <td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_time_date"> </td>
+
+                                {{-- updated by --}}
+                                <td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_updated_by"> </td>
+
+                                {{-- description --}}
+                                <td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_description"> </td>
+
+                            </tr>
+                        </thead>
+                        <tbody> </tbody>
+                    </table>
+
                 </div>
             </div>
         </div>

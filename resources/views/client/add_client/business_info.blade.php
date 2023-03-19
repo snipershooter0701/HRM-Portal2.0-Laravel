@@ -3,15 +3,7 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="{{ url('/') }}">Client List</a>
-            <i class="fa fa-circle"></i>
-        </li>
-        <li>
             <a href="{{ url('/') }}">Add Client</a>
-            <i class="fa fa-circle"></i>
-        </li>
-        <li>
-            <a href="{{ url('/') }}">Business Infomation</a>
         </li>
     </ul>
     <div class="page-toolbar">
@@ -94,7 +86,10 @@
                             </div>
                             <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">State</label>
-                                <input type="text" class="form-control">
+                                <select class="form-control">
+                                    <option>Alabama</option>
+                                    <option>Alaska</option>
+                                </select>
                             </div>
                             <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Zip Code</label>

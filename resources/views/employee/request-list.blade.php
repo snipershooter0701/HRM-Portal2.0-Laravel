@@ -66,9 +66,9 @@
                                 <th width="5%"> No </th>
                                 <th width="15%"> Request ID </th>
                                 <th width="15%"> Employee Name </th>
-                                <th width="10%"> Requested On </th>
-                                <th width="10%"> Responsed On </th>
-                                <th width="15%"> Requested By </th>
+                                <th width="20%"> Requested On </th>
+                                <th width="20%"> Responsed On </th>
+                                <th width="10%"> Requested By </th>
                                 <th width="10%"> Approver </th>
                                 <th width="10%"> Template Name </th>
                                 <th width="10%"> Request Status </th>

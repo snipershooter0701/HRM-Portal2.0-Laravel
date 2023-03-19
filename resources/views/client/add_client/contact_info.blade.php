@@ -3,7 +3,7 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="{{ url('/') }}">Client List</a>
+            <a href="{{ url('/') }}">Add Client</a>
         </li>
     </ul>
     <div class="page-toolbar">
@@ -41,6 +41,9 @@
                     <div class="form-body">
                         {{-- business info --}}
                         <div class="row">
+                            <div class="form-group col-lg-12 col-md-3 col-sm-4 col-xs-6">
+                                <button type="button" class="btn btn-sm btn-c-primary btn-move-panel pull-right" data-panelname="panel-add-contact-info"><i class="fa fa-plus-circle"></i> Add Contact </button>
+                            </div>
                             <div class="form-group col-lg-6 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">First Name</label>
                                 <input type="text" class="form-control">
@@ -57,15 +60,15 @@
                                 <label class="control-label">Phone</label>
                                 <input type="text" class="form-control">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-lg-6 col-md-3 col-sm-4 col-xs-6">
                                 <div class="input-group">
                                     <div class="icheck-inline">
                                         <label>
-                                            <input type="checkbox" class="icheck"> Checkbox 1 </label>
+                                            <input type="checkbox" class="icheck"> Add email to CC list </label>
                                         <label>
-                                            <input type="checkbox" checked class="icheck"> Checkbox 2 </label>
+                                            <input type="checkbox" checked class="icheck"> Primary Contact </label>
                                         <label>
-                                            <input type="checkbox" class="icheck"> Checkbox 3 </label>
+                                            <input type="checkbox" class="icheck"> Primary accounts email </label>
                                     </div>
                                 </div>
                             </div>
@@ -75,10 +78,43 @@
                         {{-- CC List --}}
                         <h4 class="section-head">Notifiers</h4>
                         <hr>
-                        <h4 class="section-head">To:</h4>
-                        <hr>
-                        <h4 class="section-head">CC:</h4>
-                        <hr>
+                        {{-- <div class="row"> --}}
+                            
+                            <div class="form-group has-notifier">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        To:
+                                    </span>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group has-notifier">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        CC:
+                                    </span>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group has-notifier">
+                                <textarea class="form-control" row="15"></textarea>
+                            </div>
+
+                            {{-- <div class="form-group col-lg-6 col-md-3 col-sm-4 col-xs-6">
+                            </div>
+                            <div class="form-group col-lg-8 col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="section-head">To:</h4>
+                                <hr>
+                            </div>
+                            
+                            <div class="form-group col-lg-2 col-md-4 col-sm-4 col-xs-4">
+                            </div>
+                            <div class="form-group col-lg-8 col-md-3 col-sm-4 col-xs-6">
+                                <h4 class="section-head">CC:</h4>
+                                <hr>
+                            </div> --}}
+                            
+                        {{-- </div> --}}
                     </div>
                 </form>
                 <!-- END FORM-->
