@@ -57,5 +57,21 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/timesheets/due-timesheets/get-timesheets', [App\Http\Controllers\TimesheetsController::class, 'getDueTimesheets']);
     Route::post('/timesheets/await-invoices/get-invoices', [App\Http\Controllers\TimesheetsController::class, 'getAwaitInvoices']);
     Route::post('/timesheets/submit-timesheet/get-timesheets', [App\Http\Controllers\TimesheetsController::class, 'getSubmitTimesheets']);
+
+    // Settings
+    Route::get('/settings', [App\Http\Controllers\SettingController::class, 'index']);
+    Route::get('/settings/role_permission', [App\Http\Controllers\SettingController::class, 'index_role_permission']);
+    Route::get('/settings/module_security', [App\Http\Controllers\SettingController::class, 'index_module_security']);
+    Route::get('/settings/create_new_company', [App\Http\Controllers\SettingController::class, 'index_create_new_company']);
+    Route::get('/settings/application_setting', [App\Http\Controllers\SettingController::class, 'index_application_setting']);
+    Route::get('/settings/backup_download', [App\Http\Controllers\SettingController::class, 'index_backup_download']);
+
+    Route::post('/settings/get_level_list', [App\Http\Controllers\SettingController::class, 'getLevelList']);
+    Route::post('/settings/get_role_permission', [App\Http\Controllers\SettingController::class, 'getRolePermission']);
+    Route::post('/settings/get_module_security', [App\Http\Controllers\SettingController::class, 'getModuleSecurity']);
+    Route::post('/settings/get_create_new_company', [App\Http\Controllers\SettingController::class, 'getCreateNewCompany']);
+    Route::post('/settings/get_application_setting', [App\Http\Controllers\SettingController::class, 'getApplicationSetting']);
+    Route::post('/settings/get_backup_download', [App\Http\Controllers\SettingController::class, 'getBackupDownload']);
+    Route::post('/settings/level_list/get_activities', [App\Http\Controllers\SettingController::class, 'getActivity']);
     
 });

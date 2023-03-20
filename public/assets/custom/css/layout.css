@@ -340,7 +340,7 @@ hr {
 }
 
 .dataTable {
-    width: auto !important;
+    width: -webkit-fill-available !important;
 }
 
 .dataTable th,
