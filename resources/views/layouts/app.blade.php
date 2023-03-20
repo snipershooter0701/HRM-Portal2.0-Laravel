@@ -197,23 +197,23 @@
                         </a>
                     </li>
                     <li id="page-client" class="nav-item">
-                        <a href="{{ url('/client') }}" class="nav-link">
+                        <a class="nav-link nav-toggle">
                             <i class="fa fa-user-secret"></i>
                             <span class="title">Client</span>
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
-                            <li class="nav-item">
+                            <li class="nav-item" id="page-client-list-inv">
                                 <a href="{{ url('/client') }}" class="nav-link ">
                                     <span class="title">Client List</span>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" id="page-client-all-placements-inv">
                                 <a href="{{ url('/client/all_placements') }}" class="nav-link ">
                                     <span class="title">All Placements</span>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" id="page-client-all-documents-inv">
                                 <a href="{{ url('/client/all_documents') }}" class="nav-link ">
                                     <span class="title">All Documents</span>
                                 </a>

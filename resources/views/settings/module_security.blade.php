@@ -1,5 +1,19 @@
 @extends('layouts.app')
 
+@section('page_template_css')
+<link href="{{ url('assets/global/plugins/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ url('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ url('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ url('assets/global/plugins/icheck/skins/all.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ url('assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ url('assets/global/plugins/jquery-multi-select/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{ url('assets/global/plugins/select2/css/select2.min.css" rel="stylesheet') }}" type="text/css" />
+<link href="{{ url('assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />
+<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />
+@endsection
+
 @section('page_css')
 <link href="{{ url('assets/custom/css/settings.css?v=' . $randNum) }}" rel="stylesheet" type="text/css" />
 @endsection
@@ -96,7 +110,6 @@
                                     {{-- description --}}
                                     <td>
                                         <input type="text" class="form-control form-filter input-sm" name="filt_description"> </td>
-
                                 </tr>
                             </thead>
                             <tbody> </tbody>
@@ -108,9 +121,168 @@
             <!-- End: life time stats -->
         </div>
     </div>
+
+    {{-- modal --}}
+    <div id="modal_edit_permission" class="modal fade" tabindex="-1" data-width="1200">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title">Edit Permission</h4>
+        </div>
+        <div class="modal-body">
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr role="row" class="heading">
+                            <th width="15%"> Role </th>
+                            <th width="15%"> View </th>
+                            <th width="15%"> Add </th>
+                            <th width="15%"> Edit </th>
+                            <th width="15%"> Delete </th>
+                            <th width="25%"> Module Access </th>
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    HR
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="icheck-list">
+                                            <label>
+                                                <input type="radio" name="radio1" class="icheck"> None </label>
+                                            <label>
+                                                <input type="radio" name="radio1" checked class="icheck"> Own</label>
+                                            <label>
+                                                <input type="radio" name="radio1" class="icheck"> Subbordinates </label>
+                                            <label>
+                                                <input type="radio" name="radio1" class="icheck"> Own & Subbordinates </label>
+                                            <label>
+                                                <input type="radio" name="radio1" class="icheck"> All Records </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="icheck-list">
+                                            <label>
+                                                <input type="radio" name="radio2" class="icheck"> Restircted </label>
+                                            <label>
+                                                <input type="radio" name="radio2" checked class="icheck"> Allowed to Add </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="icheck-list">
+                                            <label>
+                                                <input type="radio" name="radio3" class="icheck"> None </label>
+                                            <label>
+                                                <input type="radio" name="radio3" checked class="icheck"> Own</label>
+                                            <label>
+                                                <input type="radio" name="radio3" class="icheck"> Subbordinates </label>
+                                            <label>
+                                                <input type="radio" name="radio3" class="icheck"> Own & Subbordinates </label>
+                                            <label>
+                                                <input type="radio" name="radio3" class="icheck"> All Records </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="icheck-list">
+                                            <label>
+                                                <input type="radio" name="radio4" class="icheck"> None </label>
+                                            <label>
+                                                <input type="radio" name="radio4" checked class="icheck"> Own</label>
+                                            <label>
+                                                <input type="radio" name="radio4" class="icheck"> Subbordinates </label>
+                                            <label>
+                                                <input type="radio" name="radio4" class="icheck"> Own & Subbordinates </label>
+                                            <label>
+                                                <input type="radio" name="radio4" class="icheck"> All Records </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="icheck-list">
+                                            <label>
+                                                <input type="checkbox" class="icheck"> All </label>
+                                            <label>
+                                                <input type="checkbox" checked class="icheck"> Dashboard </label>
+                                            <label>
+                                                <input type="checkbox" class="icheck"> Timesheets </label>
+                                            <label class="ml-30">
+                                                <input type="checkbox" class="icheck"> All Timesheets </label>
+                                            <label class="ml-30">
+                                                <input type="checkbox" class="icheck"> Due Timesheets </label>
+                                            <label class="ml-30">
+                                                <input type="checkbox" class="icheck"> Awaiting Invoice </label>
+                                            <label class="ml-30">
+                                                <input type="checkbox" class="icheck"> Timesheet Dashboard </label>
+                                            <label>
+                                                <input type="checkbox" class="icheck"> Expenses </label>
+                                            <label>
+                                                <input type="checkbox" class="icheck"> Client </label>
+                                            <label>
+                                                <input type="checkbox" class="icheck"> Vendor </label>
+                                            <label>
+                                                <input type="checkbox" class="icheck"> Invoices </label>
+                                            <label class="ml-30">
+                                                <input type="checkbox" class="icheck"> All Invoices </label>
+                                            <label class="ml-30">
+                                                <input type="checkbox" class="icheck"> Due Invoices </label>
+                                            <label class="ml-30">
+                                                <input type="checkbox" class="icheck"> Awaiting Invoice </label>
+                                            <label class="ml-30">
+                                                <input type="checkbox" class="icheck"> Client Payments </label>
+                                            <label class="ml-30">
+                                                <input type="checkbox" class="icheck"> Employee Payments </label>
+                                            <label>
+                                                <input type="checkbox" class="icheck"> Work Authorization </label>
+                                            <label>
+                                                <input type="checkbox" class="icheck"> Asset Management </label>
+                                            <label>
+                                                <input type="checkbox" class="icheck"> Tickets </label>
+                                            <label>
+                                                <input type="checkbox" class="icheck"> Settings </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 @endsection
 
-
+@section('page_template_js')
+<script src="{{ url('assets/global/scripts/datatable.js') }}" type="text/javascript"></script>
+<script src="{{ url('assets/global/plugins/datatables/datatables.min.js') }}" type="text/javascript"></script>
+<script src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}" type="text/javascript"></script>
+<script src="{{ url('assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
+<script src="{{ url('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}" type="text/javascript"></script>
+<script src="{{ url('assets/global/plugins/icheck/icheck.min.js') }}" type="text/javascript"></script>
+<script src="{{ url('assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js') }}" type="text/javascript"></script>
+<script src="{{ url('assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js') }}" type="text/javascript"></script>
+<script src="{{ url('assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+@endsection
 
 @section('page_js')
 <script type="text/javascript">

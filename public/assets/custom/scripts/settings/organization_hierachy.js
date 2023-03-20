@@ -192,11 +192,14 @@ var TableClient = function () {
             initPickers();
             handleLevelList();
             handleActivity();
-
         }
     };
 }();
 
 $(document).ready(function () {
     TableClient.init();
+
+    $('#add_level').click(function() {
+        $('#modal_add_level').modal();
+    });
 });

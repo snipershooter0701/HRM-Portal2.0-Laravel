@@ -307,7 +307,7 @@ class SettingController extends Controller
                 'None',
                 'None',
                 'Access to 19 Actions',
-                '<a href="javascript:;" class="btn btn-xs btn-c-primary" panel-name="panel-edit-permission"><i class="fa fa-pencil"></i></a>'
+                '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil edit-permission" ></i></a>'
             );
             $idx++;
         }

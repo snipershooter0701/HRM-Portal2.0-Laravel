@@ -14,9 +14,13 @@ var TableClient = function () {
 
         grid.init({
             src: $("#tbl_module_security"),
-            onSuccess: function (grid, response) { },
+            onSuccess: function (grid, response) {
+            },
             onError: function (grid) { },
             onDataLoad: function (grid) {
+                $('.edit-permission').click(function () {
+                    $('#modal_edit_permission').modal();
+                });
             },
             loadingMessage: 'Loading...',
             dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
@@ -199,4 +203,6 @@ var TableClient = function () {
 
 $(document).ready(function () {
     TableClient.init();
+
+
 });

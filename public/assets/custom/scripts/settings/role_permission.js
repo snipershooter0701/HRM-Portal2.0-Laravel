@@ -199,4 +199,8 @@ var TableClient = function () {
 
 $(document).ready(function () {
     TableClient.init();
+
+    $('#add_role').click(function () {
+        $('#modal_add_role').modal();
+    });
 });
