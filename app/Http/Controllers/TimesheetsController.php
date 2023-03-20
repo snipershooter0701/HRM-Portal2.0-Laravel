@@ -247,8 +247,8 @@ class TimesheetsController extends Controller
             }
 
             $records["data"][] = array(
-                'Apirl - Week 1',
                 $id,
+                'Apirl - Week 1',
                 "12345",
                 "Job" . $id,
                 "Anthony",

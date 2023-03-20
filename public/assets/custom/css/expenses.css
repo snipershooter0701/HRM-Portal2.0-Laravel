@@ -1,0 +1,25 @@
+/* =========================== BEGIN ADD EMPLOYEE STYLES =========================== */
+#panel-expense-add .border-right {
+    border-right: 1px solid #C9D1D5;
+}
+
+#panel-expense-add .border-left {
+    border-left: 1px solid #C9D1D5;
+}
+
+#panel-expense-add .left-panel .form-group {
+    margin-bottom: 20px !important;
+}
+
+#panel-expense-add .right-panel #tbl_add_expenses .form-group {
+    margin-bottom: 0px;
+}
+
+#panel-expense-add #tbl_add_expenses tbody tr:last-child {
+    background-color: #DEDEDE;
+}
+
+#panel-expense-add #tbl_add_expenses tbody tr:last-child .sorting_1 {
+    background-color: #DEDEDE !important;
+}
+/* ============================ END ADD EMPLOYEE STYLES ============================ */

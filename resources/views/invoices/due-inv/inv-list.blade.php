@@ -3,18 +3,27 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel-all-timesheet-list">All Timesheets</a>
-        </li>
-        <li>
-            <a href="javascript:;" class="btn-move-panel" data-panelname="panel-due-timesheet-list">Due Timesheets</a>
-        </li>
-        <li>
-            <a href="javascript:;" class="btn-move-panel" data-panelname="panel-awaiting-invoices-list">Awaiting invoices</a>
+            <a href="javascript:;" class="bread-active">Due Invoices</a>
         </li>
     </ul>
     <div class="page-toolbar">
         <div class="btn-group pull-right">
-            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-submit-timesheet"> Submit Timesheet </button>
+            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-invoice-add"><i class="fa fa-plus-circle"></i> Add Invoice </button>
+            <button type="button" class="btn btn-sm btn-c-grey dropdown-toggle" data-toggle="dropdown"> More
+                <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="javascript:;">
+                        <i class="icon-bell"></i> Create Due payments invoice
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="icon-bell"></i> Client invoice settings
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
@@ -22,6 +31,7 @@
 <!-- END PAGE HEADER-->
 <div class="row">
     <div class="col-md-12">
+        <!-- Begin: life time stats -->
         <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-body">
                 <div class="table-container">
@@ -29,7 +39,7 @@
                         <div class="col-md-8">
                         </div>
                         <div class="col-md-4 actions">
-                            <div id="tbl_all_timesheets_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
+                            <div id="tbl_invoices_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
                                 <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-copy"></i></a>
                                 <a class="btn-tbl-action btn-move-panel" data-panelname="panel-import-employee"><i class="fa fa-upload"></i></a>
                                 <a class="btn-tbl-action btn-move-panel" data-panelname="panel-export-employee"><i class="fa fa-download"></i></a>
@@ -49,35 +59,39 @@
                         <button class="btn btn-sm table-group-action-submit btn-c-primary">
                             <i class="fa fa-check"></i> Submit</button>
                     </div>
-                    <table id="tbl_all_timesheets" class="table table-striped table-bordered table-hover table-checkable">
+                    <table id="tbl_invoices" class="table table-striped table-bordered table-hover table-checkable">
                         <thead>
                             <tr role="row" class="heading">
                                 <th width="2%">
-                                    <input type="checkbox" class="group-checkable"> </th>
-                                <th width="3%"> No </th>
-                                <th width="10%"> Employee </th>
-                                <th width="10%"> Client </th>
-                                <th width="12%"> From </th>
-                                <th width="12%"> To </th>
-                                <th width="9%"> Total Billable Hours </th>
-                                <th width="9%"> Status </th>
-                                <th width="12%"> Submitted On </th>
-                                <th width="5%"> Attachment </th>
-                                <th width="16%"> Action </th>
+                                    <input type="checkbox" class="group-checkable">
+                                </th>
+                                <th width="5%"> Invoice Number </th>
+                                <th width="15%"> Employee Name </th>
+                                <th width="15%"> Client </th>
+                                <th width="10%"> Invoice Date </th>
+                                <th width="10%"> Invoice Due Date </th>
+                                <th width="10%"> Invoiced Amount </th>
+                                <th width="10%"> Received Amount </th>
+                                <th width="10%"> Past Due in days </th>
+                                <th width="25%"> Action </th>
                             </tr>
                             <tr role="row" class="filter">
                                 <td> </td>
+
+                                {{-- Invoice Number --}}
                                 <td> </td>
 
-                                {{-- Employee --}}
+                                {{-- Employee Name --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_first_name"> </td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_emp_name">
+                                </td>
 
                                 {{-- Client --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_last_name"> </td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_last_name">
+                                </td>
 
-                                {{-- From --}}
+                                {{-- Invoice Date --}}
                                 <td>
                                     <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
@@ -97,7 +111,7 @@
                                     </div>
                                 </td>
 
-                                {{-- To --}}
+                                {{-- Invoice Due Date --}}
                                 <td>
                                     <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
@@ -117,44 +131,25 @@
                                     </div>
                                 </td>
 
-                                {{-- Total Billable Hours --}}
+                                {{-- Invoiced Amount --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_category">
+                                    <input type="text" class="form-control form-filter input-sm margin-bottom-5" name="filt_last_name" placeholder="From">
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_last_name" placeholder="To">
                                 </td>
 
-                                {{-- Status --}}
+                                {{-- Received Amount --}}
                                 <td>
-                                    <select name="filt_status" class="form-control form-filter input-sm">
-                                        <option value="">Select...</option>
-                                        <option value="closed">Request</option>
-                                        <option value="pending">Approved</option>
-                                        <option value="pending">Rejected</option>
-                                    </select>
+                                    <input type="text" class="form-control form-filter input-sm margin-bottom-5" name="filt_last_name" placeholder="From">
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_last_name" placeholder="To">
                                 </td>
 
-                                {{-- Submitted On --}}
+                                {{-- Past Due in days --}}
                                 <td>
-                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-sm default" type="button">
-                                                <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_to" placeholder="To">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-sm default" type="button">
-                                                <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
-                                    </div>
+                                    <input type="text" class="form-control form-filter input-sm margin-bottom-5" name="filt_last_name" placeholder="From">
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_last_name" placeholder="To">
                                 </td>
 
-                                {{-- Attachment --}}
-                                <td>
-                                </td>
+                                {{-- Action --}}
                                 <td>
                                     <button class="btn btn-xs btn-c-primary filter-submit"><i class="fa fa-search"></i></button>
                                     <button class="btn btn-xs btn-c-grey filter-cancel"><i class="fa fa-times"></i></button>
@@ -164,7 +159,29 @@
                         <tbody> </tbody>
                     </table>
                 </div>
+                <h4 class="section-head">Activities</h4>
+                <hr>
+                <div class="table-container">
+                    <table id="tbl_ivc_activities" class="table table-striped table-bordered table-hover table-checkable">
+                        <thead>
+                            <tr role="row" class="heading">
+                                <th width="5%"> No </th>
+                                <th width="25%"> Date & Time </th>
+                                <th width="25%"> Updated By </th>
+                                <th width="45%"> Description </th>
+                            </tr>
+                            <tr role="row" class="filter display-none">
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                            </tr>
+                        </thead>
+                        <tbody> </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+        <!-- End: life time stats -->
     </div>
 </div>

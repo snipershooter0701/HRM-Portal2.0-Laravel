@@ -11,6 +11,10 @@
     margin-right: 10px !important;
 }
 
+.mt-0 {
+    margin-top: 0px !important;
+}
+
 .mt-10 {
     margin-top: 10px !important;
 }
@@ -19,16 +23,20 @@
     margin-top: 20px !important;
 }
 
-.text-right {
-    text-align: right !important;
-}
-
 .mt-30 {
     margin-top: 30px !important;
 }
 
 .mb-10 {
     margin-bottom: 10px !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.float-right {
+    float: right !important;
 }
 
 /* ============================ END NECESSARY STYLES ============================ */
@@ -134,8 +142,28 @@ h4.section-head {
 /* ========================== END CUSTOM LABEL STYLES =========================== */
 
 /* ============================== BEGIN SIDEBAR STYLES ============================= */
-.page-sidebar-menu .nav-item .title {
+.page-sidebar .page-sidebar-menu .nav-item .title {
     font-size: 12px !important;
+}
+
+.page-sidebar .page-sidebar-menu .nav-item i {
+    font-size: 14px !important;
+}
+
+.page-sidebar .page-sidebar-menu .sub-menu>li.active>a,
+.page-sidebar .page-sidebar-menu .sub-menu>li.open>a {
+    background: #3e4b5c !important;
+    /* color: #000000 !important; */
+}
+
+.page-sidebar .page-sidebar-menu .sub-menu>li.active>a,
+.page-sidebar .page-sidebar-menu .sub-menu>li>a:hover {
+    background: #3e4b5c !important;
+    /* color: #000000 !important; */
+}
+
+.page-sidebar .page-sidebar-menu>li.open>a {
+    background: #3e4b5c !important;
 }
 
 /* =============================== END SIDEBAR STYLES ============================== */
@@ -277,6 +305,10 @@ hr {
     padding: 20px 20px 20px 25px !important;
 }
 
+.scroll-to-top i {
+    font-size: 30px !important;
+}
+
 /* ========================= END DEFAULT COMPONENT STYLES ========================== */
 
 /* ============================ BEGIN BREADCRUMB STYLES ============================ */
@@ -324,10 +356,10 @@ hr {
     font-size: 16px !important;
 }
 
-.dataTable .filter-submit,
+/* .dataTable .filter-submit,
 .dataTable .filter-cancel {
     margin-right: 0px !important;
-}
+} */
 
 .dataTables_paginate .pagination-panel .prev,
 .dataTables_paginate .pagination-panel .next,
@@ -343,8 +375,8 @@ hr {
     width: -webkit-fill-available !important;
 }
 
-.dataTable th,
-.dataTable td {
+.table-striped th,
+.table-striped td {
     text-align: center !important;
     vertical-align: middle !important;
 }
@@ -468,7 +500,7 @@ hr {
 
 /* ============================= END AJAX TABLE STYLES ============================= */
 
-/* ============================ Begin Tab sytles ==================================*/
+/* =============================== BEGIN TAB STYLES ==================================*/
 
 .caption-helper:hover {
     color: #3699FF !important;
@@ -486,4 +518,17 @@ hr {
     min-height: auto !important;
 }
 
-/* ============================ End Tab sytles ==================================*/
+/* ================================ END TAB STYLES ===================================*/
+
+/* =============================== BEGIN MODAL STYLES ==================================*/
+.modal-header {
+    border-bottom-color: #666666 !important;
+}
+
+.modal-header .modal-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #3699FF;
+}
+
+/* ================================ END MODAL STYLES ===================================*/

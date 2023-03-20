@@ -1,0 +1,8 @@
+/* =========================== BEGIN ADD INVOICES STYLES =========================== */
+
+#panel-invoice-add .note-total p {
+    font-size: 14px !important;
+    font-weight: bold !important;
+}
+
+/* =========================== END ADD INVOICES STYLES =========================== */

@@ -10,24 +10,23 @@
 <link href="{{ url('assets/global/plugins/jquery-multi-select/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{ url('assets/global/plugins/select2/css/select2.min.css" rel="stylesheet') }}" type="text/css" />
 <link href="{{ url('assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />
+<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('page_css')
-<link href="{{ url('assets/custom/css/timesheet.css?v=' . $randNum) }}" rel="stylesheet" type="text/css" />
+<link href="{{ url('assets/custom/css/tickets.css?v=' . $randNum) }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
-<div id="panel-all-timesheet-list" class="move-panel">
-    @include('timesheets.timesheet-all-list')
+<div id="panel-ticket-list" class="move-panel">
+    @include('tickets.ticket-list')
 </div>
-<div id="panel-due-timesheet-list" class="move-panel display-none">
-    @include('timesheets.timesheet-due-list')
+<div id="panel-ticket-create" class="move-panel display-none">
+    @include('tickets.ticket-create')
 </div>
-<div id="panel-awaiting-invoices-list" class="move-panel display-none">
-    @include('timesheets.timesheet-await-invoice')
-</div>
-<div id="panel-submit-timesheet" class="move-panel display-none">
-    @include('timesheets.timesheet-submit')
+<div id="panel-ticket-user" class="move-panel display-none">
+    @include('tickets.ticket-user')
 </div>
 @endsection
 
@@ -41,11 +40,14 @@
 <script src="{{ url('assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js') }}" type="text/javascript"></script>
 <script src="{{ url('assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js') }}" type="text/javascript"></script>
 <script src="{{ url('assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
 @endsection
 
 @section('page_js')
 <script type="text/javascript">
-    var PAGE_ID = "page-timesheets";
+    var PAGE_ID = "page-tickets";
+
 </script>
-<script src="{{ url('assets/custom/scripts/timesheets/index.js?v=' . $randNum) }}" type="text/javascript"></script>
+<script src="{{ url('assets/custom/scripts/tickets/index.js?v=' . $randNum) }}" type="text/javascript"></script>
 @endsection

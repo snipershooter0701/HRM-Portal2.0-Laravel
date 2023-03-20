@@ -21,15 +21,7 @@
     <link href="{{ url('assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
-    <link href="{{ url('assets/global/plugins/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ url('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ url('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ url('assets/global/plugins/icheck/skins/all.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ url('assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ url('assets/global/plugins/jquery-multi-select/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{ url('assets/global/plugins/select2/css/select2.min.css" rel="stylesheet') }}" type="text/css" />
-    <link href="{{ url('assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    @yield('page_template_css')
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL STYLES -->
     <link href="{{ url('assets/global/css/components.min.css') }}" rel="stylesheet" id="style_components" type="text/css" />
@@ -211,17 +203,17 @@
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
-                            <li class="nav-item  ">
+                            <li class="nav-item">
                                 <a href="{{ url('/client') }}" class="nav-link ">
                                     <span class="title">Client List</span>
                                 </a>
                             </li>
-                            <li class="nav-item  ">
+                            <li class="nav-item">
                                 <a href="{{ url('/client/all_placements') }}" class="nav-link ">
                                     <span class="title">All Placements</span>
                                 </a>
                             </li>
-                            <li class="nav-item  ">
+                            <li class="nav-item">
                                 <a href="{{ url('/client/all_documents') }}" class="nav-link ">
                                     <span class="title">All Documents</span>
                                 </a>
@@ -253,10 +245,38 @@
                         </ul>
                     </li>
                     <li id="page-invoices" class="nav-item">
-                        <a href="{{ url('/invoices') }}" class="nav-link">
+                        <a class="nav-link nav-toggle">
                             <i class="fa fa-sticky-note"></i>
                             <span class="title">Invoices</span>
+                            <span class="arrow"></span>
                         </a>
+                        <ul class="sub-menu">
+                            <li id="page-invoices-all-inv" class="nav-item">
+                                <a href="{{ url('/invoices/all-inv') }}" class="nav-link ">
+                                    <span class="title">All Invoices</span>
+                                </a>
+                            </li>
+                            <li id="page-invoices-due-inv" class="nav-item">
+                                <a href="{{ url('/invoices/due-inv') }}" class="nav-link ">
+                                    <span class="title">Due Invoices</span>
+                                </a>
+                            </li>
+                            <li id="page-invoices-await-inv" class="nav-item">
+                                <a href="{{ url('/invoices/await-inv') }}" class="nav-link ">
+                                    <span class="title">Awaiting Invoices</span>
+                                </a>
+                            </li>
+                            <li id="page-invoices-client-pay" class="nav-item">
+                                <a href="{{ url('/invoices/client-pay') }}" class="nav-link ">
+                                    <span class="title">Client Payments</span>
+                                </a>
+                            </li>
+                            <li id="page-invoices-employee-pay" class="nav-item">
+                                <a href="{{ url('/invoices/employee-pay') }}" class="nav-link ">
+                                    <span class="title">Employee Payments</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li id="page-expenses" class="nav-item">
                         <a href="{{ url('/expenses') }}" class="nav-link">
@@ -899,15 +919,7 @@
     <script src="{{ url('assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}" type="text/javascript"></script>
     <!-- END CORE PLUGINS -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
-    <script src="{{ url('assets/global/scripts/datatable.js') }}" type="text/javascript"></script>
-    <script src="{{ url('assets/global/plugins/datatables/datatables.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}" type="text/javascript"></script>
-    <script src="{{ url('assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}" type="text/javascript"></script>
-    <script src="{{ url('assets/global/plugins/icheck/icheck.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url('assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url('assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js') }}" type="text/javascript"></script>
-    <script src="{{ url('assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
+    @yield('page_template_js')
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL SCRIPTS -->
     <script src="{{ url('assets/global/scripts/app.min.js') }}" type="text/javascript"></script>
@@ -938,6 +950,11 @@
         $('.nav-item').find(".selected").remove();
         $('#' + PAGE_ID).addClass('active');
         $('#' + PAGE_ID).addClass('open');
+        if (typeof PAGE_SUB_ID !== 'undefined') {
+            $('#' + PAGE_ID).find('a span.arrow').addClass('open');
+            $('#' + PAGE_SUB_ID).addClass('active');
+            $('#' + PAGE_SUB_ID).addClass('open');
+        }
         // $('#' + PAGE_ID).find('a').append('<span class="selected"></span>');
 
     </script>
