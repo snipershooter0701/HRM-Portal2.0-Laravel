@@ -44,9 +44,7 @@
 <!-- END PAGE HEADER-->
 <div class="row">
     <div class="col-md-12">
-        <input id="enc_key" type="text" placeholder="EncKey" />
-        <input id="email" type="text" readonly placeholder="Email" />
-        <input id="btn_generate" type="button" value="Generate" />
+        <h1>Welcome!</h1>
     </div>
 </div>
 @endsection

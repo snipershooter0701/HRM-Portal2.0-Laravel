@@ -11,16 +11,7 @@
     </ul>
     <div class="page-toolbar">
         <div class="btn-group pull-right">
-            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-create-request"><i class="fa fa-plus-circle"></i> Create Request </button>
-            <button type="button" class="btn btn-sm btn-c-grey dropdown-toggle" data-toggle="dropdown"> More
-                <i class="fa fa-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu pull-right" role="menu">
-                <li>
-                    <a href="#">
-                        <i class="icon-bell"></i> Request Details</a>
-                </li>
-            </ul>
+            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel" data-panelname="panel-create-request"><i class="fa fa-plus-circle"></i> Create Request </button>
         </div>
     </div>
 </div>
@@ -50,10 +41,7 @@
                         <span> </span>
                         <select class="table-group-action-input form-control input-inline input-small input-sm">
                             <option value="">Select...</option>
-                            <option value="Cancel">Cancel</option>
-                            <option value="Cancel">Hold</option>
-                            <option value="Cancel">On Hold</option>
-                            <option value="Close">Close</option>
+                            <option value="Delete">Delete</option>
                         </select>
                         <button class="btn btn-sm table-group-action-submit btn-c-primary">
                             <i class="fa fa-check"></i> Submit</button>
@@ -64,15 +52,15 @@
                                 <th width="2%">
                                     <input type="checkbox" class="group-checkable"> </th>
                                 <th width="5%"> No </th>
-                                <th width="15%"> Request ID </th>
-                                <th width="15%"> Employee Name </th>
-                                <th width="20%"> Requested On </th>
-                                <th width="20%"> Responsed On </th>
+                                <th width="10%"> Request ID </th>
+                                <th width="13%"> Employee Name </th>
+                                <th width="10%"> Requested On </th>
+                                <th width="10%"> Responsed On </th>
                                 <th width="10%"> Requested By </th>
                                 <th width="10%"> Approver </th>
                                 <th width="10%"> Template Name </th>
                                 <th width="10%"> Request Status </th>
-                                <th width="20%"> Action </th>
+                                <th width="10%"> Action </th>
                             </tr>
                             <tr role="row" class="filter">
                                 <td> </td>

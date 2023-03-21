@@ -3,15 +3,12 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="javascript:;" class="btn-move-panel" data-panelname="panel-expense-list">Expense List</a>
+            <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel-expense-list">Expense List</a>
         </li>
     </ul>
     <div class="page-toolbar">
         <div class="btn-group pull-right">
-            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-expense-add"><i class="fa fa-plus-circle"></i> Add Expense </button>
-            <button type="button" class="btn btn-sm btn-c-grey dropdown-toggle" data-toggle="dropdown"> More
-                <i class="fa fa-angle-down"></i>
-            </button>
+            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel" data-panelname="panel-expense-add"><i class="fa fa-plus-circle"></i> Add Expense </button>
         </div>
     </div>
 </div>
@@ -63,10 +60,10 @@
                                 <th width="5%"> No </th>
                                 <th width="15%"> Expenses Category </th>
                                 <th width="15%"> Expense Type </th>
-                                <th width="14%"> Employee </th>
-                                <th width="14%"> Amount </th>
+                                <th width="20%"> Employee </th>
+                                <th width="15%"> Amount </th>
                                 <th width="15%"> Balance Amount </th>
-                                <th width="20%"> Action </th>
+                                <th width="13%"> Action </th>
                             </tr>
                             <tr role="row" class="filter">
                                 <td> </td>

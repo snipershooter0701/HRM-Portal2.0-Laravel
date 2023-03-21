@@ -20,6 +20,9 @@
 <div id="panel-client-pay-list" class="move-panel">
     @include('invoices.client-pay.pay-list')
 </div>
+<div id="panel-client-pay-add" class="move-panel display-none">
+    @include('invoices.client-pay.pay-add')
+</div>
 @endsection
 
 @section('page_template_js')

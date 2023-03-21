@@ -3,22 +3,9 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="{{ url('/') }}">Add Placement</a>
+            <a href="{{ url('/') }}" class="bread-active">Add Placement</a>
         </li>
     </ul>
-    <div class="page-toolbar">
-        <div class="btn-group pull-right">
-            <button type="button" class="btn btn-sm btn-c-grey dropdown-toggle" data-toggle="dropdown"> More
-                <i class="fa fa-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu pull-right" role="menu">
-                <li>
-                    <a href="#">
-                        <i class="icon-bell"></i> Request Details</a>
-                </li>
-            </ul>
-        </div>
-    </div>
 </div>
 <!-- END PAGE BAR -->
 <!-- END PAGE HEADER-->
@@ -42,7 +29,7 @@
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Placement ID</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" disabled>
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Project Type</label>
@@ -70,7 +57,7 @@
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Client PO ID</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" disabled>
                             </div>
                         </div>
                         {{-- add placement info --}}
@@ -97,7 +84,7 @@
                         <div class="row">
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Select Vendor/Contractor</label>
-                                <select class="form-control">
+                                <select class="form-control" disabled>
                                     <option>vendor1</option>
                                     <option>vendor2</option>
                                     <option>vendor3</option>
@@ -110,7 +97,7 @@
                         <div class="row">
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Vendor / Contractor net Terms</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" disabled>
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Vendor / Contractor PO Attachment</label>
@@ -118,7 +105,7 @@
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Vendor / Contractor PO ID</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" disabled>
                             </div>
                         </div>
                         {{-- Vendor info --}}
@@ -129,15 +116,15 @@
                         <div class="row">
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Bill Rate/hr</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" disabled>
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">OT Bill Rate/hr</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" disabled>
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">DT Bill Rate/hr</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" disabled>
                             </div>
                         </div>
                         {{-- Vendor/Contractor Bill Rate --}}
@@ -150,7 +137,7 @@
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Job Status</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" disabled>
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Job Start Date</label>
@@ -243,7 +230,7 @@
                     {{-- Vendor/Contractor Bill Rate --}}
                     <div class="form-actions text-right">
                         <button type="submit" class="btn btn-sm btn-c-primary">Create</button>
-                        <button type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-client-list">Cancel</button>
+                        <button type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-placement">Cancel</button>
                     </div>
                 </form>
                 <!-- END FORM-->

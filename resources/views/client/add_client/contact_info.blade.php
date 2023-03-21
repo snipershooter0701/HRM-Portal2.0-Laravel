@@ -3,22 +3,10 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="{{ url('/') }}">Add Client</a>
+            <a href="{{ url('/') }}" class="bread-active">Add Client</a>
         </li>
     </ul>
-    <div class="page-toolbar">
-        <div class="btn-group pull-right">
-            <button type="button" class="btn btn-sm btn-c-grey dropdown-toggle" data-toggle="dropdown"> More
-                <i class="fa fa-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu pull-right" role="menu">
-                <li>
-                    <a href="#">
-                        <i class="icon-bell"></i> Request Details</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    
 </div>
 <!-- END PAGE BAR -->
 <!-- END PAGE HEADER-->
@@ -41,26 +29,37 @@
                     <div class="form-body">
                         {{-- business info --}}
                         <div class="row">
-                            <div class="form-group col-lg-12 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-lg-8 col-md-3 col-sm-4 col-xs-6">
                                 <button type="button" class="btn btn-sm btn-c-primary btn-move-panel pull-right" data-panelname="panel-add-contact-info"><i class="fa fa-plus-circle"></i> Add Contact </button>
                             </div>
-                            <div class="form-group col-lg-6 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">First Name</label>
                                 <input type="text" class="form-control">
                             </div>
-                            <div class="form-group col-lg-6 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Last Name</label>
                                 <input type="text" class="form-control">
                             </div>
-                            <div class="form-group col-lg-6 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                               
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Email</label>
                                 <input type="text" class="form-control">
                             </div>
-                            <div class="form-group col-lg-6 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Phone</label>
                                 <input type="text" class="form-control">
                             </div>
-                            <div class="form-group col-lg-6 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                            </div>
+                            <div class="form-group col-lg-8 col-md-3 col-sm-4 col-xs-6">
                                 <div class="input-group">
                                     <div class="icheck-inline">
                                         <label>

@@ -14,7 +14,7 @@
     </ul>
     <div class="page-toolbar">
         <div class="btn-group pull-right">
-            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-submit-timesheet"> Submit Timesheet </button>
+            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel" data-panelname="panel-submit-timesheet"> Submit Timesheet </button>
         </div>
     </div>
 </div>

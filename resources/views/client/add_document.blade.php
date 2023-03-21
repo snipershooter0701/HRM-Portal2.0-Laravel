@@ -3,22 +3,9 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="{{ url('/') }}">Add Document</a>
+            <a href="{{ url('/') }}" class="bread-active">Add Document</a>
         </li>
     </ul>
-    <div class="page-toolbar">
-        <div class="btn-group pull-right">
-            <button type="button" class="btn btn-sm btn-c-grey dropdown-toggle" data-toggle="dropdown"> More
-                <i class="fa fa-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu pull-right" role="menu">
-                <li>
-                    <a href="#">
-                        <i class="icon-bell"></i> Request Details</a>
-                </li>
-            </ul>
-        </div>
-    </div>
 </div>
 <!-- END PAGE BAR -->
 <!-- END PAGE HEADER-->
@@ -34,7 +21,7 @@
                         <div class="row">
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-3">
                                 <label class="control-label">Employee Name</label>
-                                <select class="form-control">
+                                <select class="form-control" disabled>
                                     <option>Makarov</option>
                                     <option>Makarov</option>
                                     <option>Makarov</option>
@@ -46,7 +33,7 @@
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-3">
                                 <label class="control-label">Client Name</label>
-                                <select class="form-control">
+                                <select class="form-control" disabled>
                                     <option>snipershooter</option>
                                     <option>snipershooter</option>
                                     <option>snipershooter</option>
@@ -54,7 +41,7 @@
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-3">
                                 <label class="control-label">Job Tire</label>
-                                <select class="form-control">
+                                <select class="form-control" disabled>
                                     <option>snipershooter</option>
                                     <option>snipershooter</option>
                                     <option>snipershooter</option>
@@ -64,10 +51,13 @@
                         <div class="row">
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-3">
                                 <label class="control-label">Placement ID</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" disabled>
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-3">
-                                <label class="control-label">Document Type</label>
+                                <label class="control-label pull-left">Document Type</label>
+                                <div class="pull-right">
+                                    <a href="javascript:;" class="btn-plus-primary"><i class="fa fa-plus-circle"></i></a>
+                                </div>
                                 <select class="form-control">
                                     <option>W2</option>
                                     <option>C2C</option>
@@ -112,7 +102,7 @@
                     {{-- Vendor/Contractor Bill Rate --}}
                     <div class="form-actions text-right">
                         <button type="submit" class="btn btn-sm btn-c-primary">Create</button>
-                        <button type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-client-list">Cancel</button>
+                        <button type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-document">Cancel</button>
                     </div>
                 </form>
                 <!-- END FORM-->

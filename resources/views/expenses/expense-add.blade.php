@@ -3,7 +3,7 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="javascript:;">Add Expense(s)</a>
+            <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel-expense-list">add Expense(s)</a>
         </li>
     </ul>
 </div>
@@ -86,7 +86,7 @@
                                 <div class="row">
                                     <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
                                         <label class="control-label">Deduct Amount</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" value="1">
                                     </div>
                                 </div>
                                 {{-- END EXPENSE FORM --}}

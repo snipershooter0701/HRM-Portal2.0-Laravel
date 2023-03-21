@@ -24,6 +24,9 @@
 <div id="panel-invoice-add" class="move-panel display-none">
     @include('invoices.all-inv.inv-add')
 </div>
+<div id="panel-invoice-client-setting" class="move-panel display-none">
+    @include('invoices.all-inv.client-invoice-settings')
+</div>
 @endsection
 
 @section('page_template_js')

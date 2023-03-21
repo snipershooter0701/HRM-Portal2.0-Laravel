@@ -9,4 +9,130 @@
 #modal-view-ticket .form-group input {
     padding-left: 0px;
 }
+
 /* ============================ END VIEW TICKET STYLES ============================ */
+
+/* =========================== BEGIN DISCUSSION STYLES =========================== */
+.discussion-chat {
+    border: 1px solid #c9c9c9;
+    border-radius: 5px !important;
+}
+
+.discussion-chat .chat-message .post.out {
+    transition: display .3s;
+    padding: 5px 0;
+    margin: 10px auto;
+}
+
+.discussion-chat .chat-message .post.out img {
+    float: right;
+    margin-left: 10px;
+    width: 45.71px;
+    border-radius: 50% !important;
+    vertical-align: middle;
+}
+
+.discussion-chat .chat-message .post.out .message {
+    margin-right: 55px;
+    text-align: right;
+    display: block;
+    padding: 5px;
+    position: relative;
+    color: #90a1af;
+    background: #f3f3f3;
+}
+
+.discussion-chat .chat-message .post.out .arrow {
+    display: block;
+    position: absolute;
+    top: 9px;
+    right: -6px;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left-width: 6px;
+    border-left-style: solid;
+    border-left-color: #f3f3f3;
+}
+
+.discussion-chat .chat-message .post.out .name {
+    text-align: right;
+}
+
+.discussion-chat .chat-message .post.out .datetime {
+    font-size: 12px;
+    font-weight: 300;
+    color: #8496a7;
+    text-align: right;
+}
+
+.discussion-chat .chat-message .post.out .body {
+    color: #818181;
+    display: block;
+}
+
+.discussion-chat .chat-message .post.in {
+    transition: display .3s;
+    padding: 5px 0;
+    margin: 10px auto;
+    font-size: 13px;
+}
+
+.discussion-chat .chat-message .post.in img {
+    float: left;
+    margin-right: 10px;
+    width: 45.71px;
+    border-radius: 50% !important;
+    vertical-align: middle;
+}
+
+.discussion-chat .chat-message .post.in .message {
+    text-align: left;
+    margin-left: 55px;
+    display: block;
+    padding: 5px;
+    position: relative;
+    color: #90a1af;
+    background: #f3f3f3;
+}
+
+.discussion-chat .chat-message .post.in .arrow {
+    display: block;
+    position: absolute;
+    top: 9px;
+    left: -6px;
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right-width: 6px;
+    border-right-style: solid;
+    border-right-color: #f3f3f3;
+}
+
+.discussion-chat .chat-message .post.in .name {
+    font-size: 12px;
+    font-weight: 300;
+    color: #8496a7;
+}
+
+.discussion-chat .chat-message .post.in .datetime {
+    font-size: 12px;
+    font-weight: 300;
+    color: #8496a7;
+}
+
+.discussion-chat .chat-message .post.in .body {
+    color: #818181;
+    display: block;
+}
+
+.discussion-chat .chat-form input.form-control {
+    height: 24px !important;
+}
+
+.discussion-chat .chat-form button {
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+}
+
+/* =========================== BEGIN DISCUSSION STYLES =========================== */

@@ -14,7 +14,7 @@
     </ul>
     <div class="page-toolbar">
         <div class="btn-group pull-right">
-            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-submit-timesheet"> Submit Timesheet </button>
+            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel" data-panelname="panel-submit-timesheet"> Submit Timesheet </button>
         </div>
     </div>
 </div>
@@ -41,10 +41,7 @@
                         <span> </span>
                         <select class="table-group-action-input form-control input-inline input-small input-sm">
                             <option value="">Select...</option>
-                            <option value="Cancel">Cancel</option>
-                            <option value="Cancel">Hold</option>
-                            <option value="Cancel">On Hold</option>
-                            <option value="Close">Close</option>
+                            <option value="Delete">Delete</option>
                         </select>
                         <button class="btn btn-sm table-group-action-submit btn-c-primary">
                             <i class="fa fa-check"></i> Submit</button>

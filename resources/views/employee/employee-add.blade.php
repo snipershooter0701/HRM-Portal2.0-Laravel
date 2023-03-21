@@ -3,25 +3,9 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel-employee-list">All Employees</a>
-        </li>
-        <li>
-            <a href="javascript:;" class="btn-move-panel" data-panelname="panel-request-list">All Request Details</a>
+            <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel-employee-list">Add Employees</a>
         </li>
     </ul>
-    <div class="page-toolbar">
-        <div class="btn-group pull-right">
-            <button type="button" class="btn btn-sm btn-c-grey dropdown-toggle" data-toggle="dropdown"> More
-                <i class="fa fa-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu pull-right" role="menu">
-                <li>
-                    <a href="#">
-                        <i class="icon-bell"></i> Request Details</a>
-                </li>
-            </ul>
-        </div>
-    </div>
 </div>
 <!-- END PAGE BAR -->
 <!-- END PAGE HEADER-->

@@ -8,7 +8,7 @@
     </ul>
     <div class="page-toolbar">
         <div class="btn-group pull-right">
-            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-invoice-add"><i class="fa fa-plus-circle"></i> Add Client Payment </button>
+            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-client-pay-add"><i class="fa fa-plus-circle"></i> Add Client Payment </button>
             <button type="button" class="btn btn-sm btn-c-grey dropdown-toggle" data-toggle="dropdown"> More
                 <i class="fa fa-angle-down"></i>
             </button>

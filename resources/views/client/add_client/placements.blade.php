@@ -3,22 +3,9 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="{{ url('/') }}">Client List</a>
+            <a href="{{ url('/') }}" class="bread-active">Add Client</a>
         </li>
     </ul>
-    <div class="page-toolbar">
-        <div class="btn-group pull-right">
-            <button type="button" class="btn btn-sm btn-c-grey dropdown-toggle" data-toggle="dropdown"> More
-                <i class="fa fa-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu pull-right" role="menu">
-                <li>
-                    <a href="#">
-                        <i class="icon-bell"></i> Request Details</a>
-                </li>
-            </ul>
-        </div>
-    </div>
 </div>
 <!-- END PAGE BAR -->
 <!-- END PAGE HEADER-->
@@ -56,8 +43,7 @@
                             <i class="fa fa-check"></i> Submit</button>
                     </div>
 
-                    {{-- placement list table --}}
-                    <table id="tbl_placement" class="table table-striped table-bordered table-hover table-checkable">
+                    <table id="tbl_placements" class="table table-striped table-bordered table-hover table-checkable">
                         <thead>
                             <tr role="row" class="heading">
                                 <th width="2%">
@@ -113,7 +99,7 @@
                         </thead>
                         <tbody> </tbody>
                     </table>
-
+                    
                     {{-- activities table --}}
                     <h4 class="section-head">Activities</h4>
                     <hr>
@@ -149,7 +135,7 @@
                     <hr>
                     <div class="actions">
                         <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-create-client"><i class="fa fa-plus-circle"></i> Add Invoice </button>
-                        <div id="tbl_placements_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
+                        <div id="tbl_invoice_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-copy"></i></a>
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-upload"></i></a>
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-download"></i></a>

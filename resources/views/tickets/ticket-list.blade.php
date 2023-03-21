@@ -209,6 +209,59 @@
                 </div>
                 <div class="col-md-8">
                     <p>Discussion:</p>
+                    <div class="discussion-chat">
+                        <div class="chat-message">
+                            <div class="post out">
+                                <img class="avatar" alt="" src="../assets/layouts/layout/img/avatar3.jpg" />
+                                <div class="message">
+                                    <span class="arrow"></span>
+                                    <a href="javascript:;" class="name">Bob Nilson</a>
+                                    <span class="datetime">20:15</span>
+                                    <span class="body"> When could you send me the report ? </span>
+                                </div>
+                            </div>
+                            <div class="post in">
+                                <img class="avatar" alt="" src="../assets/layouts/layout/img/avatar2.jpg" />
+                                <div class="message">
+                                    <span class="arrow"></span>
+                                    <a href="javascript:;" class="name">Ella Wong</a>
+                                    <span class="datetime">20:15</span>
+                                    <span class="body"> Its almost done. I will be sending it shortly </span>
+                                </div>
+                            </div>
+                            <div class="post out">
+                                <img class="avatar" alt="" src="../assets/layouts/layout/img/avatar3.jpg" />
+                                <div class="message">
+                                    <span class="arrow"></span>
+                                    <a href="javascript:;" class="name">Bob Nilson</a>
+                                    <span class="datetime">20:15</span>
+                                    <span class="body"> When could you send me the report ? </span>
+                                </div>
+                            </div>
+                            <div class="post in">
+                                <img class="avatar" alt="" src="../assets/layouts/layout/img/avatar2.jpg" />
+                                <div class="message">
+                                    <span class="arrow"></span>
+                                    <a href="javascript:;" class="name">Ella Wong</a>
+                                    <span class="datetime">20:15</span>
+                                    <span class="body"> Its almost done. I will be sending it shortly </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-form">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Type a message here...">
+                                <div class="input-group-btn">
+                                    {{-- <button type="button" class="btn green">
+                                        <i class="icon-paper-clip"></i>
+                                    </button> --}}
+                                    <button type="button" class="btn green">
+                                        <i class="icon-paper-clip"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-2">
                 </div>

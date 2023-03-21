@@ -3,7 +3,7 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="{{ url('/client') }}">Client List</a>
+            <a href="{{ url('/client') }}" class="bread-active">Client List</a>
         </li>
     </ul>
     <div class="page-toolbar">
@@ -11,15 +11,6 @@
             <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-business-info"><i class="fa fa-plus-circle"></i> Add Client </button>
             <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-create-placement"><i class="fa fa-plus-circle"></i> Add Placement </button>
             <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-create-document"><i class="fa fa-plus-circle"></i> Add Document </button>
-            <button type="button" class="btn btn-sm btn-c-grey dropdown-toggle" data-toggle="dropdown"> More
-                <i class="fa fa-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu pull-right" role="menu">
-                <li>
-                    <a href="#">
-                        <i class="icon-bell"></i> Request Details</a>
-                </li>
-            </ul>
         </div>
     </div>
 </div>
@@ -32,7 +23,7 @@
             <div class="portlet-body">
                 <div class="table-container">
                     <div class="actions">
-                        <div id="tbl_employees_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
+                        <div id="tbl_clients_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-copy"></i></a>
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-upload"></i></a>
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-download"></i></a>
@@ -48,7 +39,8 @@
                         <button class="btn btn-sm table-group-action-submit btn-c-primary">
                             <i class="fa fa-check"></i> Submit</button>
                     </div>
-                    <table id="tbl_Clients" class="table table-striped table-bordered table-hover table-checkable">
+
+                    <table id="tbl_clients" class="table table-striped table-bordered table-hover table-checkable">
                         <thead>
                             <tr role="row" class="heading">
                                 <th width="2%">

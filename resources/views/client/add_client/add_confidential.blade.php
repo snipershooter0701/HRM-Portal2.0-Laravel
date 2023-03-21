@@ -3,22 +3,9 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="{{ url('/') }}">Client List</a>
+            <a href="{{ url('/') }}" class="bread-active">Add Client</a>
         </li>
     </ul>
-    <div class="page-toolbar">
-        <div class="btn-group pull-right">
-            <button type="button" class="btn btn-sm btn-c-grey dropdown-toggle" data-toggle="dropdown"> More
-                <i class="fa fa-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu pull-right" role="menu">
-                <li>
-                    <a href="#">
-                        <i class="icon-bell"></i> Request Details</a>
-                </li>
-            </ul>
-        </div>
-    </div>
 </div>
 <!-- END PAGE BAR -->
 <!-- END PAGE HEADER-->
@@ -51,11 +38,11 @@
                             </div>
                             <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Account Number</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" disabled>
                             </div>
                             <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Routing Number</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" disabled>
                             </div>
                         </div>
                         <h4 class="section-head">Address</h4>

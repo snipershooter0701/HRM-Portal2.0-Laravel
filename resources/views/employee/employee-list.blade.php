@@ -11,16 +11,7 @@
     </ul>
     <div class="page-toolbar">
         <div class="btn-group pull-right">
-            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-create-employee"><i class="fa fa-plus-circle"></i> Add Employee </button>
-            <button type="button" class="btn btn-sm btn-c-grey dropdown-toggle" data-toggle="dropdown"> More
-                <i class="fa fa-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu pull-right" role="menu">
-                <li>
-                    <a href="#">
-                        <i class="icon-bell"></i> Request Details</a>
-                </li>
-            </ul>
+            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel" data-panelname="panel-create-employee"><i class="fa fa-plus-circle"></i> Add Employee </button>
         </div>
     </div>
 </div>
@@ -60,10 +51,7 @@
                         <span> </span>
                         <select class="table-group-action-input form-control input-inline input-small input-sm">
                             <option value="">Select...</option>
-                            <option value="Cancel">Cancel</option>
-                            <option value="Cancel">Hold</option>
-                            <option value="Cancel">On Hold</option>
-                            <option value="Close">Close</option>
+                            <option value="Delete">Delete</option>
                         </select>
                         <button class="btn btn-sm table-group-action-submit btn-c-primary">
                             <i class="fa fa-check"></i> Submit</button>

@@ -10,6 +10,8 @@
 <link href="{{ url('assets/global/plugins/jquery-multi-select/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{ url('assets/global/plugins/select2/css/select2.min.css" rel="stylesheet') }}" type="text/css" />
 <link href="{{ url('assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />
+<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('page_css')
@@ -18,7 +20,7 @@
 @endsection
 
 @section('content')
-<div class="move-panel ">
+<div class="move-panel" id="panel-client">
     @include('client.client_list')
 </div>
 <div id="panel-business-info" class="move-panel display-none">
@@ -43,6 +45,37 @@
 
 <div id="panel-create-document" class="move-panel display-none">
     @include('client.add_document')
+</div>
+{{-- modal --}}
+<div id="modal_client_page" class="modal fade" tabindex="-1" data-width="760">
+    <div class="modal-header">
+        <button type="button" class="close btn-move-panel" panel-name="panel-client" aria-hidden="true"></button>
+        <h4 class="modal-title"></h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-body">
+            <div class="row">
+                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                    
+                </div>
+                <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                    <label class="control-label"></label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="form-group col-lg-5 col-md-3 col-sm-4 col-xs-6">
+                    <label class="control-label"></label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-c-primary">Create</button>
+        <button type="button" class="btn btn-c-grey btn-move-panel" panel-name="panel-client">Cancel</button>
+    </div>
 </div>
 @endsection
 

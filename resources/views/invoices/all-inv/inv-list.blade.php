@@ -13,14 +13,14 @@
                 <i class="fa fa-angle-down"></i>
             </button>
             <ul class="dropdown-menu pull-right" role="menu">
-                <li>
+                {{-- <li>
                     <a href="javascript:;">
                         <i class="icon-bell"></i> Create Due payments invoice
                     </a>
-                </li>
+                </li> --}}
                 <li>
-                    <a href="javascript:;">
-                        <i class="icon-bell"></i> Client invoice settings
+                    <a href="javascript:;" class="btn-move-panel" data-panelname="panel-invoice-client-setting">
+                        <i class="icon-settings"></i> Client invoice settings
                     </a>
                 </li>
             </ul>

@@ -14,7 +14,7 @@
     </ul>
     <div class="page-toolbar">
         <div class="btn-group pull-right">
-            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-submit-timesheet"> Submit Timesheet </button>
+            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel" data-panelname="panel-submit-timesheet"> Submit Timesheet </button>
         </div>
     </div>
 </div>
@@ -41,10 +41,7 @@
                         <span> </span>
                         <select class="table-group-action-input form-control input-inline input-small input-sm">
                             <option value="">Select...</option>
-                            <option value="Cancel">Cancel</option>
-                            <option value="Cancel">Hold</option>
-                            <option value="Cancel">On Hold</option>
-                            <option value="Close">Close</option>
+                            <option value="Delete">Cancel</option>
                         </select>
                         <button class="btn btn-sm table-group-action-submit btn-c-primary">
                             <i class="fa fa-check"></i> Submit</button>
@@ -55,12 +52,12 @@
                                 <th width="2%">
                                     <input type="checkbox" class="group-checkable"> </th>
                                 <th width="5%"> No </th>
-                                <th width="15%"> Employee </th>
-                                <th width="15%"> Client </th>
-                                <th width="10%"> Invoice Frequency </th>
-                                <th width="10%"> Invoice Period </th>
+                                <th width="20%"> Employee </th>
+                                <th width="20%"> Client </th>
+                                <th width="15%"> Invoice Frequency </th>
+                                <th width="15%"> Invoice Period </th>
                                 <th width="10%"> Total Hours </th>
-                                <th width="15%"> Action </th>
+                                <th width="13%"> Action </th>
                             </tr>
                             <tr role="row" class="filter">
                                 <td> </td>
@@ -80,7 +77,22 @@
 
                                 {{-- Invoice Period --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_category">
+                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm default" type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_to" placeholder="To">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm default" type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
                                 </td>
 
                                 {{-- Total Hours --}}
