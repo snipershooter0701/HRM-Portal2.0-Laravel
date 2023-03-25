@@ -36,6 +36,12 @@ var TableClient = function () {
                 "ajax": {
                     "url": BASE_URL + "/client/get_all_placement", // ajax source
                 },
+                "columnDefs": [
+                    {  // set default column settings
+                        'orderable': false,
+                        'targets': [0, 1, 9]
+                    }
+                ],
                 "order": [
                     [1, "asc"]
                 ],// set first column as a default sort by asc
@@ -125,6 +131,12 @@ var TableClient = function () {
                 "ajax": {
                     "url": BASE_URL + "/client/get_activities", // ajax source
                 },
+                "columnDefs": [
+                    {  // set default column settings
+                        'orderable': true,
+                        'targets': [0]
+                    }
+                ],
                 "order": [
                     [1, "asc"]
                 ],// set first column as a default sort by asc

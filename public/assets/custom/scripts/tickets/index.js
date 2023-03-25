@@ -17,11 +17,11 @@ var TableTicket = function () {
             onSuccess: function (grid, response) { },
             onError: function (grid) { },
             onDataLoad: function (grid) {
-                $('.btn-user-tickets').click(function() {
+                $('.btn-user-tickets').click(function () {
                     $('#btn_show_user_tickets').trigger('click');
                 })
 
-                $('.btn-view').click(function() {
+                $('.btn-view').click(function () {
                     $('#btn_show_ticket').trigger('click');
                 });
             },
@@ -43,6 +43,12 @@ var TableTicket = function () {
                 "ajax": {
                     "url": BASE_URL + "/tickets/get-all-tickets", // ajax source
                 },
+                "columnDefs": [
+                    {  // set default column settings
+                        'orderable': false,
+                        'targets': [0, 1, 9]
+                    }
+                ],
                 "order": [
                     [1, "asc"]
                 ],// set first column as a default sort by asc
@@ -148,7 +154,7 @@ var TableTicket = function () {
             onSuccess: function (grid, response) { },
             onError: function (grid) { },
             onDataLoad: function (grid) {
-                $('.btn-emp-ticket-view').click(function() {
+                $('.btn-emp-ticket-view').click(function () {
                     $('#btn_show_ticket').trigger('click');
                 });
             },

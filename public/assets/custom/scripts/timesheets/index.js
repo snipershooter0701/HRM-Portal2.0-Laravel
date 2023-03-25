@@ -32,6 +32,13 @@ var TableAjax = function () {
                 "ajax": {
                     "url": BASE_URL + "/timesheets/all-timesheets/get-timesheets", // ajax source
                 },
+                "columnDefs": [
+                    {  // set default column settings
+                        'orderable': false,
+                        'targets': [0, 1, 9, 10]
+                    }
+                ],
+
                 "order": [
                     [1, "asc"]
                 ],// set first column as a default sort by asc
@@ -116,6 +123,12 @@ var TableAjax = function () {
                 "ajax": {
                     "url": BASE_URL + "/timesheets/due-timesheets/get-timesheets", // ajax source
                 },
+                "columnDefs": [
+                    {  // set default column settings
+                        'orderable': false,
+                        'targets': [0]
+                    }
+                ],
                 "order": [
                     [1, "asc"]
                 ],// set first column as a default sort by asc
@@ -197,6 +210,12 @@ var TableAjax = function () {
                 "ajax": {
                     "url": BASE_URL + "/timesheets/await-invoices/get-invoices", // ajax source
                 },
+                "columnDefs": [
+                    {  // set default column settings
+                        'orderable': false,
+                        'targets': [0, 1, 7]
+                    }
+                ],
                 "order": [
                     [1, "asc"]
                 ],// set first column as a default sort by asc
@@ -278,6 +297,12 @@ var TableAjax = function () {
                 "ajax": {
                     "url": BASE_URL + "/timesheets/submit-timesheet/get-timesheets", // ajax source
                 },
+                "columnDefs": [
+                    {  // set default column settings
+                        'orderable': false,
+                        'targets': [0, 8]
+                    }
+                ],
                 "order": [
                     [1, "asc"]
                 ],// set first column as a default sort by asc

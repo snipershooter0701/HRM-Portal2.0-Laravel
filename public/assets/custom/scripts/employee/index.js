@@ -17,6 +17,9 @@ var TableEmployee = function () {
             onSuccess: function (grid, response) { },
             onError: function (grid) { },
             onDataLoad: function (grid) {
+                $('.employee-delete-btn').click(function () {
+                    displayConfirmModal('Do you want to delete?', 'Employee Delete');
+                });
             },
             loadingMessage: 'Loading...',
             dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
@@ -36,6 +39,12 @@ var TableEmployee = function () {
                 "ajax": {
                     "url": BASE_URL + "/employee/get-employees", // ajax source
                 },
+                "columnDefs": [
+                    {  // set default column settings
+                        'orderable': false,
+                        'targets': [0, 1, 9]
+                    }
+                ],
                 "order": [
                     [1, "asc"]
                 ],// set first column as a default sort by asc
@@ -303,6 +312,13 @@ var TableEmployee = function () {
                 "ajax": {
                     "url": BASE_URL + "/employee/get-request-details", // ajax source
                 },
+                "columnDefs": [
+                    {  // set default column settings
+                        'orderable': false,
+                        'targets': [0, 1, 10]
+                    }
+                ],
+
                 "order": [
                     [1, "asc"]
                 ],// set first column as a default sort by asc
@@ -385,4 +401,6 @@ var TableEmployee = function () {
 
 $(document).ready(function () {
     TableEmployee.init();
+
+
 });

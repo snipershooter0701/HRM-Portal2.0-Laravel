@@ -38,6 +38,12 @@ var TableExpense = function () {
                 "ajax": {
                     "url": BASE_URL + "/expenses/get-expenses", // ajax source
                 },
+                "columnDefs": [
+                    {  // set default column settings
+                        'orderable': false,
+                        'targets': [0, 1, 7]
+                    }
+                ],
                 "order": [
                     [1, "asc"]
                 ],// set first column as a default sort by asc
@@ -125,6 +131,7 @@ var TableExpense = function () {
                 "ajax": {
                     "url": BASE_URL + "/expenses/get-expenses-activities", // ajax source
                 },
+
                 "order": [
                     [1, "asc"]
                 ],// set first column as a default sort by asc
@@ -183,6 +190,12 @@ var TableExpense = function () {
                 "ajax": {
                     "url": BASE_URL + "/expenses/get-add-expenses", // ajax source
                 },
+                "columnDefs": [
+                    {  // set default column settings
+                        'orderable': false,
+                        'targets': [0, 2, 4, 5]
+                    }
+                ],
                 "order": [
                     [1, "asc"]
                 ],// set first column as a default sort by asc

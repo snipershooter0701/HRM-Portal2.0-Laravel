@@ -169,7 +169,7 @@
 
 @section('page_js')
 <script type="text/javascript">
-    var PAGE_ID = "page-settings-organization_hierarchy";
+    var PAGE_ID = "page-settings";
 </script>
 <script src="{{ url('assets/custom/scripts/settings/organization_hierachy.js?v=' . $randNum) }}" type="text/javascript"></script>
 @endsection

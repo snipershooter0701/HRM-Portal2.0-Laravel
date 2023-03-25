@@ -356,10 +356,10 @@ hr {
 }
 
 
-#panel-employee-list .dataTable tbody td:last-child {
+/* #panel-employee-list .dataTable tbody td:last-child {
     display: inline-flex;
     column-gap: 3px;
-}
+} */
 
 /* ============================= END BREADCRUMB STYLES ============================= */
 

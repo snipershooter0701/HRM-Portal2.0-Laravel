@@ -149,7 +149,136 @@
                         <tbody> </tbody>
                     </table>
                 </div>
-                <h4 class="section-head">Activities</h4>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="portlet box green">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-gift"></i>Basic Dropdowns </div>
+                                <div class="tools">
+                                    <a href="javascript:;" class="collapse"> </a>
+                                    <a href="#portlet-config" data-toggle="modal" class="config"> </a>
+                                    <a href="javascript:;" class="reload"> </a>
+                                    <a href="javascript:;" class="remove"> </a>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <h4>Basic multiselect</h4>
+                                <select class="mt-multiselect btn btn-default" multiple="multiple" data-width="100%">
+                                    <option value="cheese">Cheese</option>
+                                    <option value="tomatoes">Tomatoes</option>
+                                    <option value="mozarella">Mozzarella</option>
+                                    <option value="mushrooms">Mushrooms</option>
+                                    <option value="pepperoni">Pepperoni</option>
+                                    <option value="onions">Onions</option>
+                                </select>
+                                <h4>Pre-select</h4>
+                                <select class="mt-multiselect btn btn-default" multiple="multiple" data-width="100%">
+                                    <option value="1">Option 1</option>
+                                    <option value="2" selected="selected">Option 2</option>
+                                    <!-- Option 3 will be selected in advance ... -->
+                                    <option value="3" selected="selected">Option 3</option>
+                                    <option value="4">Option 4</option>
+                                    <option value="5">Option 5</option>
+                                    <option value="6">Option 6</option>
+                                </select>
+                                <h4>No icon</h4>
+                                <select class="mt-multiselect btn btn-default mt-noicon" multiple="multiple" data-clickable-groups="true" data-collapse-groups="true" data-width="100%">
+                                    <optgroup label="Group 1" class="group-1">
+                                        <option value="1-1">Option 1.1</option>
+                                        <option value="1-2" selected="selected">Option 1.2</option>
+                                        <option value="1-3" selected="selected">Option 1.3</option>
+                                    </optgroup>
+                                    <optgroup label="Group 2" class="group-2">
+                                        <option value="2-1">Option 2.1</option>
+                                        <option value="2-2">Option 2.2</option>
+                                        <option value="2-3">Option 2.3</option>
+                                    </optgroup>
+                                </select>
+                                <h4>Dropdown with Filter</h4>
+                                <select class="mt-multiselect btn btn-default" multiple="multiple" data-label="left" data-width="100%" data-filter="true">
+                                    <option value="1">Option 1</option>
+                                    <option value="2" selected="selected">Option 2</option>
+                                    <!-- Option 3 will be selected in advance ... -->
+                                    <option value="3" selected="selected">Option 3</option>
+                                    <option value="4">Option 4</option>
+                                    <option value="5">Option 5</option>
+                                    <option value="6">Option 6</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="portlet box green">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-gift"></i>Grouped Dropdowns </div>
+                                <div class="tools">
+                                    <a href="javascript:;" class="collapse"> </a>
+                                    <a href="#portlet-config" data-toggle="modal" class="config"> </a>
+                                    <a href="javascript:;" class="reload"> </a>
+                                    <a href="javascript:;" class="remove"> </a>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <h4>Grouped Single Select</h4>
+                                <select class="mt-multiselect btn btn-default" data-width="100%">
+                                    <optgroup label="Group 1">
+                                        <option value="1-1">Option 1.1</option>
+                                        <option value="1-2" selected="selected">Option 1.2</option>
+                                        <option value="1-3" selected="selected">Option 1.3</option>
+                                    </optgroup>
+                                    <optgroup label="Group 2">
+                                        <option value="2-1">Option 2.1</option>
+                                        <option value="2-2">Option 2.2</option>
+                                        <option value="2-3">Option 2.3</option>
+                                    </optgroup>
+                                </select>
+                                <h4>Grouped Multi Select</h4>
+                                <select class="mt-multiselect btn btn-default" multiple="multiple" data-width="100%">
+                                    <optgroup label="Group 1" class="group-1">
+                                        <option value="1-1">Option 1.1</option>
+                                        <option value="1-2" selected="selected">Option 1.2</option>
+                                        <option value="1-3" selected="selected">Option 1.3</option>
+                                    </optgroup>
+                                    <optgroup label="Group 2" class="group-2">
+                                        <option value="2-1">Option 2.1</option>
+                                        <option value="2-2">Option 2.2</option>
+                                        <option value="2-3">Option 2.3</option>
+                                    </optgroup>
+                                </select>
+                                <h4>Clickable Grouped Multi Select</h4>
+                                <select class="mt-multiselect btn btn-default" multiple="multiple" data-clickable-groups="true" data-width="100%">
+                                    <optgroup label="Group 1" class="group-1">
+                                        <option value="1-1">Option 1.1</option>
+                                        <option value="1-2" selected="selected">Option 1.2</option>
+                                        <option value="1-3" selected="selected">Option 1.3</option>
+                                    </optgroup>
+                                    <optgroup label="Group 2" class="group-2">
+                                        <option value="2-1">Option 2.1</option>
+                                        <option value="2-2">Option 2.2</option>
+                                        <option value="2-3">Option 2.3</option>
+                                    </optgroup>
+                                </select>
+                                <h4>Collapsible Grouped Multi Select</h4>
+                                <select class="mt-multiselect btn btn-default" multiple="multiple" data-clickable-groups="true" data-collapse-groups="true" data-width="100%">
+                                    <optgroup label="Group 1" class="group-1">
+                                        <option value="1-1">Option 1.1</option>
+                                        <option value="1-2" selected="selected">Option 1.2</option>
+                                        <option value="1-3" selected="selected">Option 1.3</option>
+                                    </optgroup>
+                                    <optgroup label="Group 2" class="group-2">
+                                        <option value="2-1">Option 2.1</option>
+                                        <option value="2-2">Option 2.2</option>
+                                        <option value="2-3">Option 2.3</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- <h4 class="section-head">Activities</h4>
                 <hr>
                 <div class="table-container">
                     <table id="tbl_pay_activities" class="table table-striped table-bordered table-hover table-checkable">
@@ -170,7 +299,7 @@
                         <tbody> </tbody>
                     </table>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <!-- End: life time stats -->
     </div>

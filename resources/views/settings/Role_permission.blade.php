@@ -169,7 +169,7 @@
 
 @section('page_js')
 <script type="text/javascript">
-    var PAGE_ID = "page-settings-role_permission";
+    var PAGE_ID = "page-settings";
 
 </script>
 <script src="{{ url('assets/custom/scripts/settings/Role_permission.js?v=' . $randNum) }}" type="text/javascript"></script>

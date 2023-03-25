@@ -901,6 +901,21 @@
                 </div>
     </div>
     <!-- END FOOTER -->
+
+    {{-- modal --}}
+    <div id="confirm_modal" class="modal fade" tabindex="-1" data-width="760">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">         
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-c-primary">Create</button>
+            <button type="button" data-dismiss="modal" class="btn btn-c-grey">Cancel</button>
+        </div>
+    </div>
+
     <!-- BEGIN JS CONSTANTS -->
     <script type="text/javascript">
         const BASE_URL = "{{ url('') }}";

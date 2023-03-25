@@ -3,7 +3,7 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel-expense-list">add Expense(s)</a>
+            <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel-expense-list">Add Expense(s)</a>
         </li>
     </ul>
 </div>

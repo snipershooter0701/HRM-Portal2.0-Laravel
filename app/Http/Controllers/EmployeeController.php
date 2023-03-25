@@ -158,7 +158,7 @@ class EmployeeController extends Controller
                 $filterItems[$idx]->employee_status ? '<span class="label label-sm label-primary">Active</span>' : '<span class="label label-sm label-grey">Inactive</span>',
                 '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-eye"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-c-grey"><i class="fa fa-trash"></i></a>'
+                <a href="javascript:;" class="btn btn-xs btn-c-grey employee-delete-btn"><i class="fa fa-trash"></i></a>'
             );
             $idx++;
         }
