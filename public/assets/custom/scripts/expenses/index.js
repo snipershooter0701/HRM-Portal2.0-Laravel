@@ -41,7 +41,7 @@ var TableExpense = function () {
                 "columnDefs": [
                     {  // set default column settings
                         'orderable': false,
-                        'targets': [0, 1, 7]
+                        'targets': [0, 1, 6]
                     }
                 ],
                 "order": [

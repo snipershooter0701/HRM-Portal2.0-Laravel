@@ -35,7 +35,7 @@ var TableAjax = function () {
                 "columnDefs": [
                     {  // set default column settings
                         'orderable': false,
-                        'targets': [0, 1, 9, 10]
+                        'targets': [0, 1, 8, 9]
                     }
                 ],
 

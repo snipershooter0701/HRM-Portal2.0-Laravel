@@ -17,11 +17,11 @@ var TableEmployee = function () {
             onSuccess: function (grid, response) { },
             onError: function (grid) { },
             onDataLoad: function (grid) {
-                $('.btn-view').click(function () {
+                $('.btn-view').click(function() {
                     $('#btn_show_emp_view_panel').trigger('click');
                 });
 
-                $('.btn-edit').click(function () {
+                $('.btn-edit').click(function() {
                     $('#btn_show_edit_view_panel').trigger('click');
                 });
 
@@ -497,6 +497,4 @@ var TableEmployee = function () {
 
 $(document).ready(function () {
     TableEmployee.init();
-
-
 });
