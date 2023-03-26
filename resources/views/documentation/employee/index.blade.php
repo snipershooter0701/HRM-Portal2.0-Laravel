@@ -3,18 +3,21 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="javascript:;" class="btn-move-panel" data-panelname="panel-all-timesheet-list">All Timesheets</a>
+            <a href="javascript:;" class="btn-move-panel" data-panelname="panel-org-doc-list">Organization Document</a>
         </li>
         <li>
-            <a href="javascript:;" class="btn-move-panel" data-panelname="panel-due-timesheet-list">Due Timesheets</a>
+            <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel-emp-doc-list">Employee Documents</a>
         </li>
         <li>
-            <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel-awaiting-invoices-list">Awaiting invoices</a>
+            <a href="javascript:;" class="btn-move-panel" data-panelname="panel-exp-doc-list">Expiring Documents</a>
+        </li>
+        <li>
+            <a href="javascript:;" class="btn-move-panel" data-panelname="panel-group-doc-list">Group Documents</a>
         </li>
     </ul>
     <div class="page-toolbar">
         <div class="btn-group pull-right">
-            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel" data-panelname="panel-submit-timesheet"> Submit Timesheet </button>
+            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel" data-panelname="panel-org-doc-create"><i class="fa fa-plus-circle"></i> Add Document </button>
         </div>
     </div>
 </div>
@@ -22,15 +25,15 @@
 <!-- END PAGE HEADER-->
 <div class="row">
     <div class="col-md-12">
+        <!-- Begin: life time stats -->
         <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-body">
                 <div class="table-container">
                     <div class="row">
                         <div class="col-md-8">
-                            <button type="button" class="btn btn-sm btn-c-primary"><i class="fa fa-plus-circle"></i> Create Invoice </button>
                         </div>
                         <div class="col-md-4 actions">
-                            <div id="time_await_invoices_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
+                            <div id="tbl_emp_docs_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
                                 <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-copy"></i></a>
                                 <a class="btn-tbl-action btn-move-panel" data-panelname="panel-import-employee"><i class="fa fa-upload"></i></a>
                                 <a class="btn-tbl-action btn-move-panel" data-panelname="panel-export-employee"><i class="fa fa-download"></i></a>
@@ -42,41 +45,46 @@
                         <span> </span>
                         <select class="table-group-action-input form-control input-inline input-small input-sm">
                             <option value="">Select...</option>
-                            <option value="Delete">Cancel</option>
+                            <option value="Delete">Delete</option>
                         </select>
                         <button class="btn btn-sm table-group-action-submit btn-c-primary">
                             <i class="fa fa-check"></i> Submit</button>
                     </div>
-                    <table id="time_await_invoices" class="table table-striped table-bordered table-hover table-checkable">
+                    <table id="tbl_emp_docs" class="table table-striped table-bordered table-hover table-checkable">
                         <thead>
                             <tr role="row" class="heading">
                                 <th width="2%">
                                     <input type="checkbox" class="group-checkable"> </th>
                                 <th width="5%"> No </th>
-                                <th width="20%"> Employee </th>
-                                <th width="20%"> Client </th>
-                                <th width="15%"> Invoice Frequency </th>
-                                <th width="15%"> Invoice Period </th>
-                                <th width="10%"> Total Hours </th>
-                                <th width="13%"> Action </th>
+                                <th width="15%"> Employee Name </th>
+                                <th width="10%"> Title </th>
+                                <th width="13%"> Comment </th>
+                                <th width="10%"> Exp Date </th>
+                                <th width="10%"> Modified By </th>
+                                <th width="10%"> Modified On </th>
+                                <th width="10%"> Attachment </th>
+                                <th width="15%"> Action </th>
                             </tr>
                             <tr role="row" class="filter">
                                 <td> </td>
                                 <td> </td>
 
-                                {{-- Employee --}}
+                                {{-- Employee Name --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_first_name"> </td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_last_name">
+                                </td>
 
-                                {{-- Client --}}
+                                {{-- Title --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_last_name"> </td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_first_name">
+                                </td>
 
-                                {{-- Invoice Frequency --}}
+                                {{-- Comment --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_phone"> </td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_last_name">
+                                </td>
 
-                                {{-- Invoice Period --}}
+                                {{-- Exp Date --}}
                                 <td>
                                     <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
@@ -96,10 +104,35 @@
                                     </div>
                                 </td>
 
-                                {{-- Total Hours --}}
+                                {{-- Modified By --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_poc">
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_last_name">
                                 </td>
+
+                                {{-- Modified On --}}
+                                <td>
+                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm default" type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_to" placeholder="To">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm default" type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </td>
+
+                                {{-- Attachment --}}
+                                <td></td>
+
+                                {{-- Action --}}
                                 <td>
                                     <button class="btn btn-xs btn-c-primary filter-submit"><i class="fa fa-search"></i></button>
                                     <button class="btn btn-xs btn-c-grey filter-cancel"><i class="fa fa-times"></i></button>
@@ -111,5 +144,6 @@
                 </div>
             </div>
         </div>
+        <!-- End: life time stats -->
     </div>
 </div>

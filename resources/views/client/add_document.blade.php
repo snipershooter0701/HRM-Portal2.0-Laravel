@@ -28,7 +28,7 @@
                                 </select>
                                 <div class="icheck-inline mt-10">
                                     <label>
-                                        <input type="checkbox" class="icheck"> General Document </label>
+                                        <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> General Document </label>
                                 </div>
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-3">
@@ -42,9 +42,9 @@
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-3">
                                 <label class="control-label">Job Tire</label>
                                 <select class="form-control" disabled>
-                                    <option>snipershooter</option>
-                                    <option>snipershooter</option>
-                                    <option>snipershooter</option>
+                                    <option>Regular</option>
+                                    <option>2nd</option>
+                                    <option>3rd</option>
                                 </select>
                             </div>
                         </div>
@@ -86,9 +86,9 @@
                                 </div>
                                 <div class="icheck-list mt-10">
                                     <label>
-                                        <input type="checkbox" class="icheck"> Same as placement Expire date </label>
+                                        <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Same as placement Expire date </label>
                                     <label>
-                                        <input type="checkbox" checked class="icheck"> No Expiration date </label>
+                                        <input type="checkbox" checked class="icheck" data-checkbox="icheckbox_square-blue"> No Expiration date </label>
                                 </div>
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
@@ -101,7 +101,7 @@
 
                     {{-- Vendor/Contractor Bill Rate --}}
                     <div class="form-actions text-right">
-                        <button type="submit" class="btn btn-sm btn-c-primary">Create</button>
+                        <button type="submit" class="btn btn-sm btn-c-primary">Save</button>
                         <button type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-document">Cancel</button>
                     </div>
                 </form>

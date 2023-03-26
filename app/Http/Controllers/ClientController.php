@@ -115,6 +115,16 @@ class ClientController extends Controller
         $result = $this->makeClientTblItems($ajaxData['totalItems'], $ajaxData['filterItems'], 'displayAllDocuments');
         return $result;
     }
+
+    /**
+     * Get Documents info
+     */
+    public function getOldConfidentials()
+    {
+        $ajaxData = $this->getAllDocumentTblData();
+        $result = $this->makeOldConfidentialTblItems($ajaxData['totalItems'], $ajaxData['filterItems'], 'displayAllDocuments');
+        return $result;
+    }
     // ========================== END PUBLIC FUNCTIONS ==========================
 
     // ========================== BEGIN PRIVATE FUNCTIONS ==========================
@@ -393,10 +403,9 @@ class ClientController extends Controller
                     $filterItems[$idx]->job_status ? '<span class="label label-sm label-primary">Active</span>' : '<span class="label label-sm label-grey">Inactive</span>',
                     $filterItems[$idx]->start_date,
                     $filterItems[$idx]->end_date,
-                    $filterItems[$idx]->po_attachment,
+                    '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-download"></i></a>',
                     '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-eye"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-c-grey"><i class="fa fa-trash"></i></a>'
+                    <a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil"></i></a>'
                 );
                 $idx++;
             }
@@ -438,7 +447,8 @@ class ClientController extends Controller
                     $filterItems[$idx]->title,
                     $filterItems[$idx]->document_type,
                     $filterItems[$idx]->employee,
-                    $filterItems[$idx]->status ? '<span class="label label-sm label-primary">Invoiced</span>' : '<span class="label label-sm label-grey">Rejected</span>',
+                    $filterItems[$idx]->employee,
+                    $filterItems[$idx]->status ? '<span class="label label-sm label-primary">Active</span>' : '<span class="label label-sm label-grey">Inactive</span>',
                     $filterItems[$idx]->except_date,
                     '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-eye"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil"></i></a>
@@ -547,6 +557,51 @@ class ClientController extends Controller
                 $filterItems[$idx]->poc,
                 $filterItems[$idx]->classification ? '<span class="label-active-noborder">Billable</span>' : '<span class="label-inactive-noborder">Non-Billable</span>',
                 "AFAAAFAF"
+            );
+            $idx++;
+        }
+
+        if (isset($this->request['customActionType']) && $this->request['customActionType'] == "group_action") {
+            $records["customActionStatus"] = "OK"; // pass custom message(useful for getting status of group actions)
+            $records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
+        }
+
+        $records["draw"] = $sEcho;
+        $records["recordsTotal"] = $iTotalRecords;
+        $records["recordsFiltered"] = $iTotalRecords;
+
+        // echo json_encode($records);
+        return response()->json($records);
+    }
+
+    /**
+     * Generate employee placement items
+     * 
+     * @return $Employee List
+     */
+    private function makeOldConfidentialTblItems($totalItems, $filterItems)
+    {
+        $iTotalRecords = count($totalItems);
+        $iDisplayLength = intval($this->request['length']);
+        $iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
+        $iDisplayStart = intval($this->request['start']);
+        $sEcho = intval($this->request['draw']);
+
+        $records = array();
+        $records["data"] = array();
+
+        $end = $iDisplayStart + $iDisplayLength;
+        $end = $end > $iTotalRecords ? $iTotalRecords : $end;
+
+        $idx = 0;
+        for ($i = $iDisplayStart; $i < $end; $i++) {
+            $records["data"][] = array(
+                $idx,
+                "Paypal",
+                "Employee",
+                "5456654",
+                "Makarov",
+                "03/02/2023",
             );
             $idx++;
         }

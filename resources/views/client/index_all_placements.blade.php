@@ -64,7 +64,7 @@
                                     <th width="15%"> Employee Name </th>
                                     <th width="15%"> Client </th>
                                     <th width="10%"> Job Tire </th>
-                                    <th width="10%"> Project Type </th>
+                                    <th width="10%"> Category </th>
                                     <th width="10%"> Status </th>
                                     <th width="10%"> Start Date </th>
                                     <th width="10%"> End Date</th>
@@ -84,28 +84,72 @@
 
                                     {{-- Job Tire --}}
                                     <td>
-                                        <input type="text" class="form-control form-filter input-sm" name="filt_job_tire"> </td>
+                                        <select name="filt_job_status" class="form-control form-filter input-sm">
+                                            <option value="">Select...</option>
+                                            <option value="pending">Regular</option>
+                                            <option value="closed">2nd</option>
+                                            <option value="closed">3rd</option>
+                                        </select>
+                                    </td>
 
-                                    {{-- Project Type --}}
+                                    {{-- Category --}}
                                     <td>
-                                        <input type="text" class="form-control form-filter input-sm" name="filt_project_type"> </td>
+                                        <select name="filt_job_status" class="form-control form-filter input-sm">
+                                            <option value="">Select...</option>
+                                            <option value="">W2</option>
+                                            <option value="">C2C</option>
+                                            <option value="">1099</option>
+                                        </select>
+                                    </td>
 
                                     {{-- Job Status --}}
                                     <td>
                                         <select name="filt_job_status" class="form-control form-filter input-sm">
                                             <option value="">Select...</option>
-                                            <option value="pending">active</option>
-                                            <option value="closed">inactive</option>
+                                            <option value="pending">Active</option>
+                                            <option value="closed">Inactive</option>
                                         </select>
                                     </td>
 
                                     {{-- Start Date --}}
                                     <td>
-                                        <input type="text" class="form-control form-filter input-sm" name="filt_start_date"> </td>
+                                        <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                            <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-sm default" type="button">
+                                                    <i class="fa fa-calendar"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                        <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                            <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_to" placeholder="To">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-sm default" type="button">
+                                                    <i class="fa fa-calendar"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </td>
 
                                     {{-- End Date --}}
                                     <td>
-                                        <input type="text" class="form-control form-filter input-sm" name="filt_end_date"> </td>
+                                        <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                            <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-sm default" type="button">
+                                                    <i class="fa fa-calendar"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                        <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                            <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_to" placeholder="To">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-sm default" type="button">
+                                                    <i class="fa fa-calendar"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </td>
 
                                     {{-- Action --}}
                                     <td>
@@ -120,7 +164,7 @@
                         {{-- activities table --}}
                         <h4 class="section-head">Activities</h4>
                         <hr>
-                        
+
                         <table id="tbl_activity" class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr role="row" class="heading">
@@ -129,7 +173,7 @@
                                     <th width="15%"> Description </th>
                                 </tr>
                                 <tr role="row" class="filter">
-                                
+
                                     {{-- time_date --}}
                                     <td>
                                         <input type="text" class="form-control form-filter input-sm" name="filt_time_date"> </td>
@@ -177,6 +221,7 @@
 <script type="text/javascript">
     var PAGE_ID = "page-client";
     var PAGE_SUB_ID = "page-client-all-placements-inv";
+
 </script>
 <script src="{{ url('assets/custom/scripts/client/all_placement.js?v=' . $randNum) }}" type="text/javascript"></script>
 @endsection

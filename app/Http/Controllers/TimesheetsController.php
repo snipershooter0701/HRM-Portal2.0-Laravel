@@ -149,7 +149,6 @@ class TimesheetsController extends Controller
                 "Makarov",
                 "Anthony",
                 "03/02/2023",
-                "03/09/2023",
                 "32:00",
                 $reqstatus,
                 "03/09/2023",
@@ -340,7 +339,8 @@ class TimesheetsController extends Controller
                 "Monthly",
                 "03/02/2023 - 03/09/2023",
                 "145",
-                '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil"></i></a>
+                '<a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-eye"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-c-grey"><i class="fa fa-times"></i></a>'
             );
             $idx++;

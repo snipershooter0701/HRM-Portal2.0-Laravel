@@ -50,6 +50,7 @@ Route::middleware(['auth'])->group(function () {
     // Client - (All Documents)
     Route::get('/client/all_documents', [App\Http\Controllers\ClientController::class, 'index_all_documents']);
     Route::post('/client/get_all_document', [App\Http\Controllers\ClientController::class, 'getAllDocuments']);
+    Route::post('/client/get_old_confidentials', [App\Http\Controllers\ClientController::class, 'getOldConfidentials']);
 
     // Timesheet
     Route::get('/timesheets', [App\Http\Controllers\TimesheetsController::class, 'index']);
@@ -107,4 +108,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/settings/get_backup_download', [App\Http\Controllers\SettingController::class, 'getBackupDownload']);
     Route::post('/settings/level_list/get_activities', [App\Http\Controllers\SettingController::class, 'getActivity']);
    
+    // Documentation
+    Route::get('/documentation', [App\Http\Controllers\DocumentationController::class, 'index']);
+    Route::post('/documentation/get-org-docs', [App\Http\Controllers\DocumentationController::class, 'getOrgDocs']);
+    Route::post('/documentation/get-emp-docs', [App\Http\Controllers\DocumentationController::class, 'getEmpDocs']);
+    Route::post('/documentation/get-exp-docs', [App\Http\Controllers\DocumentationController::class, 'getExpDocs']);
+    Route::post('/documentation/get-group-docs', [App\Http\Controllers\DocumentationController::class, 'getGroupDocs']);
 });

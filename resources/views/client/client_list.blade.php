@@ -97,6 +97,36 @@
                         <tbody> </tbody>
                     </table>
                 </div>
+
+                {{-- activities table --}}
+                <h4 class="section-head">Activities</h4>
+                <hr>
+
+                <table id="tbl_activity" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr role="row" class="heading">
+                            <th width="20%"> Date & Time </th>
+                            <th width="15%"> Updated By </th>
+                            <th width="15%"> Description </th>
+                        </tr>
+                        <tr role="row" class="filter">
+
+                            {{-- time_date --}}
+                            <td>
+                                <input type="text" class="form-control form-filter input-sm" name="filt_time_date"> </td>
+
+                            {{-- updated by --}}
+                            <td>
+                                <input type="text" class="form-control form-filter input-sm" name="filt_updated_by"> </td>
+
+                            {{-- description --}}
+                            <td>
+                                <input type="text" class="form-control form-filter input-sm" name="filt_description"> </td>
+
+                        </tr>
+                    </thead>
+                    <tbody> </tbody>
+                </table>
             </div>
         </div>
         <!-- End: life time stats -->

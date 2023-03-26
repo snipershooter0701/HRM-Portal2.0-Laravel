@@ -19,23 +19,28 @@
                         {{-- BEGIN BASE FORM --}}
                         <div class="row">
                             <div class="form-group col-lg-3 col-md-4 col-sm-6 col-xs-6">
-                                <label class="control-label">Employee Name</label>
+                                <label class="control-label">Employee Name<span class="required" aria-required="true">*</span></label>
                                 <select class="form-control">
                                     <option>Select</option>
                                 </select>
                             </div>
                             <div class="form-group col-lg-3 col-md-4 col-sm-6 col-xs-6">
-                                <label class="control-label">Job Title</label>
+                                <label class="control-label">Job Title<span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control">
                             </div>
                             <div class="form-group col-lg-3 col-md-4 col-sm-6 col-xs-6">
-                                <label class="control-label">Work Range</label>
-                                <select class="form-control">
-                                    <option>Select</option>
-                                </select>
+                                <label class="control-label">Work Range<span class="required" aria-required="true">*</span></label>
+                                <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                    <input type="text" class="form-control">
+                                    <span class="input-group-btn">
+                                        <button class="btn default" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
                             </div>
                             <div class="form-group col-lg-3 col-md-4 col-sm-6 col-xs-6">
-                                <label class="control-label">Attachment</label>
+                                <label class="control-label">Attachment<span class="required" aria-required="true">*</span></label>
                                 <input type="file" class="form-control">
                             </div>
                         </div>
@@ -46,15 +51,25 @@
                             <table id="tbl_submit_timesheets" class="table table-striped table-bordered table-hover table-checkable">
                                 <thead>
                                     <tr role="row" class="heading">
-                                        <th width="15%"> Month-Week No </th>
+                                        <th width="15%" class="backcolor-light-grey"> Month-Week No </th>
                                         <th width="10%"> Mon </th>
                                         <th width="10%"> Tue </th>
                                         <th width="10%"> Wed </th>
                                         <th width="10%"> Thu </th>
                                         <th width="10%"> Fri </th>
-                                        <th width="10%"> Sat </th>
-                                        <th width="10%"> Sun </th>
-                                        <th width="15%"> Add Item </th>
+                                        <th width="10%" class="backcolor-light-grey"> Sat </th>
+                                        <th width="10%" class="backcolor-light-grey"> Sun </th>
+                                        <th width="15%" class="backcolor-light-grey" rowspan="2"> <button type="button" class="btn btn-sm btn-c-primary">Add Item</button> </th>
+                                    </tr>
+                                    <tr role="row">
+                                        <th width="15%" class="backcolor-light-grey"> Pay Classification </th>
+                                        <th width="10%"> 20-Feb </th>
+                                        <th width="10%"> 21-Feb </th>
+                                        <th width="10%"> 22-Feb </th>
+                                        <th width="10%"> 23-Feb </th>
+                                        <th width="10%"> 24-Feb </th>
+                                        <th width="10%" class="backcolor-light-grey"> 25-Feb </th>
+                                        <th width="10%" class="backcolor-light-grey"> 26-Feb </th>
                                     </tr>
                                     <tr role="row" class="filter display-none">
                                         <td> </td>
@@ -68,7 +83,30 @@
                                         <td> </td>
                                     </tr>
                                 </thead>
-                                <tbody> </tbody>
+                                <tbody>
+                                    <tr role="row">
+                                        <td class="backcolor-light-grey"> Standard Time </td>
+                                        <td> 08:00 </td>
+                                        <td> 08:00 </td>
+                                        <td> 08:00 </td>
+                                        <td> 08:00 </td>
+                                        <td> 08:00 </td>
+                                        <td class="backcolor-light-grey"> 00:00 </td>
+                                        <td class="backcolor-light-grey"> 00:00 </td>
+                                        <td class="backcolor-light-grey"> 40:00 </td>
+                                    </tr>
+                                    <tr role="row">
+                                        <td class="backcolor-light-grey"> Total Billable Hours </td>
+                                        <td> 08:00 </td>
+                                        <td> 08:00 </td>
+                                        <td> 08:00 </td>
+                                        <td> 08:00 </td>
+                                        <td> 08:00 </td>
+                                        <td class="backcolor-light-grey"> 00:00 </td>
+                                        <td class="backcolor-light-grey"> 00:00 </td>
+                                        <td class="backcolor-light-grey"> 40:00 </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                         <hr>

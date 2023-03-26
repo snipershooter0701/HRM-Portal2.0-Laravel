@@ -75,32 +75,54 @@
 
                                     {{-- Title --}}
                                     <td>
-                                        <input type="text" class="form-control form-filter input-sm" name="filt_title"> </td>
+                                        <input type="text" class="form-control form-filter input-sm" name="filt_title">
+                                    </td>
 
                                     {{-- Document type--}}
                                     <td>
-                                        <input type="text" class="form-control form-filter input-sm" name="filt_document_type"> </td>
+                                        <select name="filt_status" class="form-control form-filter input-sm">
+                                            <option value="">Select...</option>
+                                        </select>
+                                    </td>
 
                                     {{-- Client Name --}}
                                     <td>
-                                        <input type="text" class="form-control form-filter input-sm" name="filt_client_name"> </td>
+                                        <input type="text" class="form-control form-filter input-sm" name="filt_client_name">
+                                    </td>
 
                                     {{-- employee--}}
                                     <td>
-                                        <input type="text" class="form-control form-filter input-sm" name="filt_employee"> </td>
+                                        <input type="text" class="form-control form-filter input-sm" name="filt_employee">
+                                    </td>
 
                                     {{-- status --}}
                                     <td>
                                         <select name="filt_status" class="form-control form-filter input-sm">
                                             <option value="">Select...</option>
-                                            <option value="pending">active</option>
-                                            <option value="closed">inactive</option>
+                                            <option value="pending">Active</option>
+                                            <option value="closed">Inactive</option>
                                         </select>
                                     </td>
 
                                     {{-- except Date --}}
                                     <td>
-                                        <input type="text" class="form-control form-filter input-sm" name="filt_except_date"> </td>
+                                        <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                            <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-sm default" type="button">
+                                                    <i class="fa fa-calendar"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                        <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                            <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_to" placeholder="To">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-sm default" type="button">
+                                                    <i class="fa fa-calendar"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </td>
 
                                     {{-- Action --}}
                                     <td>
@@ -111,7 +133,7 @@
                             </thead>
                             <tbody> </tbody>
                         </table>
-                        
+
                     </div>
                 </div>
             </div>
@@ -141,6 +163,7 @@
 <script type="text/javascript">
     var PAGE_ID = "page-client";
     var PAGE_SUB_ID = "page-client-all-documents-inv";
+
 </script>
 <script src="{{ url('assets/custom/scripts/client/all_document.js?v=' . $randNum) }}" type="text/javascript"></script>
 @endsection

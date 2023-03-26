@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 
-class ExpensesController extends Controller
+class DocumentationController extends Controller
 {
     private $request;
 
@@ -20,54 +20,70 @@ class ExpensesController extends Controller
     }
 
     /**
-     * Show the employee page.
+     * Show the documentation page.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        return view('expenses.index')->with('randNum', rand());
+        return view('documentation.index')->with('randNum', rand());
     }
 
     // ========================== BEGIN PUBLIC FUNCTIONS ==========================
     /**
-     * Get expenses
+     * Get organization documentations
      * 
-     * @return $expenses
+     * @return $documentations
      */
-    public function getExpenses()
+    public function getOrgDocs()
     {
-        $ajaxData = $this->getExpenseTblData();
-        $result = $this->makeExpenseTblItems($ajaxData['totalItems'], $ajaxData['filterItems']);
+        $ajaxData = $this->getEmployeeTblData();
+        $result = $this->makeOrgDocTblItems($ajaxData['totalItems'], $ajaxData['filterItems']);
         return $result;
     }
 
     /**
-     * Get expense activities
+     * Get employee documentations
+     * 
+     * @return $documentations
      */
-    public function getExpenseActvities()
+    public function getEmpDocs()
     {
-        $ajaxData = $this->getExpenseTblData();
-        $result = $this->makeExpenseActivityTblItems($ajaxData['totalItems'], $ajaxData['filterItems']);
+        $ajaxData = $this->getEmployeeTblData();
+        $result = $this->makeEmpDocTblItems($ajaxData['totalItems'], $ajaxData['filterItems']);
         return $result;
     }
 
     /**
-     * Get add expenses
+     * Get expiring documentations
+     * 
+     * @return $documentations
      */
-    public function getAddExpenses()
+    public function getExpDocs()
     {
-        $ajaxData = $this->getExpenseTblData();
-        $result = $this->makeAddExpenseTblItems($ajaxData['totalItems'], $ajaxData['filterItems']);
+        $ajaxData = $this->getEmployeeTblData();
+        $result = $this->makeExpDocTblItems($ajaxData['totalItems'], $ajaxData['filterItems']);
         return $result;
     }
-    // =========================== END PUBLIC FUNCTIONS ===========================
+
+    /**
+     * Get expiring documentations
+     * 
+     * @return $documentations
+     */
+    public function getGroupDocs()
+    {
+        $ajaxData = $this->getEmployeeTblData();
+        $result = $this->makeGroupDocTblItems($ajaxData['totalItems'], $ajaxData['filterItems']);
+        return $result;
+    }
+    // ========================== END PUBLIC FUNCTIONS ==========================
 
     // ========================== BEGIN PRIVATE FUNCTIONS ==========================
     /**
      * Generate 
      */
-    private function getExpenseTblData()
+    private function getEmployeeTblData()
     {
         // Get total employees
         $totalEmployees = Employee::all();
@@ -105,9 +121,9 @@ class ExpensesController extends Controller
     }
 
     /**
-     * Generate expense table items
+     * Generate organization document table items
      */
-    private function makeExpenseTblItems($totalItems, $filterItems)
+    private function makeOrgDocTblItems($totalItems, $filterItems)
     {
         $iTotalRecords = count($totalItems);
         $iDisplayLength = intval($this->request['length']);
@@ -121,16 +137,27 @@ class ExpensesController extends Controller
         $end = $iDisplayStart + $iDisplayLength;
         $end = $end > $iTotalRecords ? $iTotalRecords : $end;
 
+        $status_list = array(
+            array("success" => "Pending"),
+            array("info" => "Closed"),
+            array("danger" => "On Hold"),
+            array("warning" => "Fraud")
+        );
+
         $idx = 0;
         for ($i = $iDisplayStart; $i < $end; $i++) {
+            $status = $status_list[rand(0, 2)];
             $id = ($i + 1);
             $records["data"][] = array(
                 '<input type="checkbox" name="id[]" value="' . $id . '">',
                 $id,
-                (rand() % 2) ? '<span class="label label-sm label-primary">Employee Expense</span>' : '<span class="label label-sm label-grey">Company Expense</span>',
-                "Makarov",
-                "$4500",
-                (rand() % 2) ? '<span class="color-primary">$2000</span>' : '<span class="color-light-green">$1500</span>',
+                "Other document",
+                "Old - SSN1",
+                "2022-03-02",
+                "Anthony",
+                "2022-03-01",
+                (rand() % 2 == 0) ? '<span class="label label-sm label-primary">active</span>' : '<span class="label label-sm label-grey">inactive</span>',
+                '<a href="javascript:;"><i class="fa fa-download icon-md color-primary"></i></a>',
                 '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-eye"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-c-grey"><i class="fa fa-trash"></i></a>'
@@ -152,9 +179,9 @@ class ExpensesController extends Controller
     }
 
     /**
-     * Generate expense activity table items
+     * Generate employee document table items
      */
-    private function makeExpenseActivityTblItems($totalItems, $filterItems)
+    private function makeEmpDocTblItems($totalItems, $filterItems)
     {
         $iTotalRecords = count($totalItems);
         $iDisplayLength = intval($this->request['length']);
@@ -168,14 +195,30 @@ class ExpensesController extends Controller
         $end = $iDisplayStart + $iDisplayLength;
         $end = $end > $iTotalRecords ? $iTotalRecords : $end;
 
+        $status_list = array(
+            array("success" => "Pending"),
+            array("info" => "Closed"),
+            array("danger" => "On Hold"),
+            array("warning" => "Fraud")
+        );
+
         $idx = 0;
         for ($i = $iDisplayStart; $i < $end; $i++) {
+            $status = $status_list[rand(0, 2)];
             $id = ($i + 1);
             $records["data"][] = array(
+                '<input type="checkbox" name="id[]" value="' . $id . '">',
                 $id,
-                "03/01/2023 16:05:02",
-                "test@test.com",
-                "The quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox. "
+                "Anthony",
+                "Other Documents",
+                "OLD SSN-1",
+                "2023-03-21",
+                "Anthony",
+                "2023-03-21",
+                '<a href="javascript:;"><i class="fa fa-download icon-md color-primary"></i></a>',
+                '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-eye"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-c-grey"><i class="fa fa-trash"></i></a>'
             );
             $idx++;
         }
@@ -194,9 +237,9 @@ class ExpensesController extends Controller
     }
 
     /**
-     * Generate add expenses table items
+     * Generate expiring document table items
      */
-    private function makeAddExpenseTblItems($totalItems, $filterItems)
+    private function makeExpDocTblItems($totalItems, $filterItems)
     {
         $iTotalRecords = count($totalItems);
         $iDisplayLength = intval($this->request['length']);
@@ -210,51 +253,84 @@ class ExpensesController extends Controller
         $end = $iDisplayStart + $iDisplayLength;
         $end = $end > $iTotalRecords ? $iTotalRecords : $end;
 
+        $status_list = array(
+            array("success" => "Pending"),
+            array("info" => "Closed"),
+            array("danger" => "On Hold"),
+            array("warning" => "Fraud")
+        );
+
         $idx = 0;
-        $id = 0;
         for ($i = $iDisplayStart; $i < $end; $i++) {
+            $status = $status_list[rand(0, 2)];
             $id = ($i + 1);
             $records["data"][] = array(
+                '<input type="checkbox" name="id[]" value="' . $id . '">',
                 $id,
-                '<div class="form-body">
-                    <div class="form-group">
-                        <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                            <input type="text" class="form-control">
-                            <span class="input-group-btn">
-                                <button class="btn default" type="button">
-                                    <i class="fa fa-calendar"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                </div>',
-                '<div class="form-body">
-                    <div class="form-group">
-                        <input type="text" class="form-control">
-                    </div>
-                </div>',
-                '<div class="form-body">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="0.00">
-                    </div>
-                </div>',
-                '<div class="form-body">
-                    <div class="form-group">
-                        <input type="file" class="form-control">
-                    </div>
-                </div>',
-                '<a href="javascript:;" class="btn btn-xs btn-c-grey"><i class="fa fa-trash"></i></a>'
+                "Comment1",
+                "Tareq",
+                "Title1",
+                "2023-03-02",
+                '<a href="javascript:;"><i class="fa fa-download icon-md color-primary"></i></a>',
+                '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-eye"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-c-grey"><i class="fa fa-trash"></i></a>'
             );
             $idx++;
         }
-        $records["data"][] = array(
-            '',
-            '<b>Total</b>',
-            '',
-            '<b>$0.00</b>',
-            '',
-            ''
+
+        if (isset($this->request['customActionType']) && $this->request['customActionType'] == "group_action") {
+            $records["customActionStatus"] = "OK"; // pass custom message(useful for getting status of group actions)
+            $records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
+        }
+
+        $records["draw"] = $sEcho;
+        $records["recordsTotal"] = $iTotalRecords;
+        $records["recordsFiltered"] = $iTotalRecords;
+
+        // echo json_encode($records);
+        return response()->json($records);
+    }
+
+    /**
+     * Generate group document table items
+     */
+    private function makeGroupDocTblItems($totalItems, $filterItems)
+    {
+        $iTotalRecords = count($totalItems);
+        $iDisplayLength = intval($this->request['length']);
+        $iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
+        $iDisplayStart = intval($this->request['start']);
+        $sEcho = intval($this->request['draw']);
+
+        $records = array();
+        $records["data"] = array();
+
+        $end = $iDisplayStart + $iDisplayLength;
+        $end = $end > $iTotalRecords ? $iTotalRecords : $end;
+
+        $status_list = array(
+            array("success" => "Pending"),
+            array("info" => "Closed"),
+            array("danger" => "On Hold"),
+            array("warning" => "Fraud")
         );
+
+        $idx = 0;
+        for ($i = $iDisplayStart; $i < $end; $i++) {
+            $status = $status_list[rand(0, 2)];
+            $id = ($i + 1);
+            $records["data"][] = array(
+                '<input type="checkbox" name="id[]" value="' . $id . '">',
+                $id,
+                "Tareq",
+                '<a href="javascript:;"><i class="fa fa-eye icon-md color-primary"></i></a>',
+                '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-eye"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-c-grey"><i class="fa fa-trash"></i></a>'
+            );
+            $idx++;
+        }
 
         if (isset($this->request['customActionType']) && $this->request['customActionType'] == "group_action") {
             $records["customActionStatus"] = "OK"; // pass custom message(useful for getting status of group actions)

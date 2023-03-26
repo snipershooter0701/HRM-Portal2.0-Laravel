@@ -135,8 +135,9 @@
                                 <td>
                                     <select name="filt_status" class="form-control form-filter input-sm">
                                         <option value="">Select...</option>
-                                        <option value="pending">active</option>
-                                        <option value="closed">inactive</option>
+                                        <option value="">Request</option>
+                                        <option value="">Rejected</option>
+                                        <option value="">Apporoved</option>
                                     </select>
                                 </td>
 

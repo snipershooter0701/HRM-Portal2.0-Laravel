@@ -25,6 +25,12 @@
 <div id="panel-create-employee" class="move-panel display-none">
     @include('employee.employee-add')
 </div>
+<div id="panel-edit-employee" class="move-panel display-none">
+    @include('employee.employee-edit')
+</div>
+<div id="panel-view-employee" class="move-panel display-none">
+    @include('employee.employee-view')
+</div>
 <div id="panel-request-list" class="move-panel display-none">
     @include('employee.request-list')
 </div>
@@ -38,7 +44,6 @@
     @include('employee.employee-export')
 </div>
 @endsection
-
 @section('page_template_js')
 <script src="{{ url('assets/global/scripts/datatable.js') }}" type="text/javascript"></script>
 <script src="{{ url('assets/global/plugins/datatables/datatables.min.js') }}" type="text/javascript"></script>

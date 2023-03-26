@@ -292,6 +292,7 @@ var TableClient = function () {
         //     grid_addplacements_activity.getDataTable().button(action).trigger();
         // });
     }
+
     var handleActivity = function () {
 
         var grid_activity = new Datatable();
@@ -570,6 +571,184 @@ var TableClient = function () {
         //     grid_docuements.getDataTable().button(action).trigger();
         // });
     }
+    
+    var handleConfidentials = function () {
+
+        let grid_old_records = new Datatable();
+
+        grid_old_records.init({
+            src: $("#tbl_confidential_old_records"),
+            onSuccess: function (grid_old_records, response) { },
+            onError: function (grid_old_records) { },
+            onDataLoad: function (grid_old_records) {
+            },
+            loadingMessage: 'Loading...',
+            dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
+
+                // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+                // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
+                // So when dropdowns used the scrollable div should be removed. 
+                // "dom": "<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'>>",
+
+                "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+                "lengthMenu": [
+                    [10, 20, 50, 100, 150, -1],
+                    [10, 20, 50, 100, 150, "All"] // change per page values here
+                ],
+                "pageLength": 10, // default record count per page
+                "ajax": {
+                    "url": BASE_URL + "/client/get_old_confidentials", // ajax source
+                },
+                "order": [
+                    [1, "asc"]
+                ],// set first column as a default sort by asc
+                buttons: [
+                    { extend: 'print', className: 'btn default' },
+                    { extend: 'copy', className: 'btn default' },
+                    { extend: 'pdf', className: 'btn default' },
+                    { extend: 'excel', className: 'btn default' },
+                    { extend: 'csv', className: 'btn default' },
+                    {
+                        text: 'Reload',
+                        className: 'btn default',
+                        action: function (e, dt, node, config) {
+                            dt.ajax.reload();
+                            alert('Datatable reloaded!');
+                        }
+                    }
+                ],
+            }
+        });
+
+        // handle group actionsubmit button click
+        grid_old_records.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
+            e.preventDefault();
+            var action = $(".table-group-action-input", grid_old_records.getTableWrapper());
+            if (action.val() != "" && grid_old_records.getSelectedRowsCount() > 0) {
+                grid_old_records.setAjaxParam("customActionType", "group_action");
+                grid_old_records.setAjaxParam("customActionName", action.val());
+                grid_old_records.setAjaxParam("id", grid_old_records.getSelectedRows());
+                grid_old_records.getDataTable().ajax.reload();
+                grid_old_records.clearAjaxParams();
+            } else if (action.val() == "") {
+                App.alert({
+                    type: 'danger',
+                    icon: 'warning',
+                    message: 'Please select an action',
+                    container: grid_old_records.getTableWrapper(),
+                    place: 'prepend'
+                });
+            } else if (grid_old_records.getSelectedRowsCount() === 0) {
+                App.alert({
+                    type: 'danger',
+                    icon: 'warning',
+                    message: 'No record selected',
+                    container: grid_old_records.getTableWrapper(),
+                    place: 'prepend'
+                });
+            }
+        });
+
+        // grid_old_records.setAjaxParam("customActionType", "group_action");
+        // grid_old_records.getDataTable().ajax.reload();
+        // grid_old_records.clearAjaxParams();
+
+        // handle datatable custom tools
+        // $('#tbl_activity_tools > a.tool-action').on('click', function () {
+        //     var action = $(this).attr('data-action');
+        //     grid_old_records.getDataTable().button(action).trigger();
+        // });
+    }
+
+    var handlePlacmentActivities = function () {
+
+        var grid_activity = new Datatable();
+
+        grid_activity.init({
+            src: $("#tbl_placement_activities"),
+            onSuccess: function (grid_activity, response) { },
+            onError: function (grid_activity) { },
+            onDataLoad: function (grid_activity) {
+            },
+            loadingMessage: 'Loading...',
+            dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
+
+                // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+                // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
+                // So when dropdowns used the scrollable div should be removed. 
+                // "dom": "<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'>>",
+
+                "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+                "lengthMenu": [
+                    [10, 20, 50, 100, 150, -1],
+                    [10, 20, 50, 100, 150, "All"] // change per page values here
+                ],
+                "pageLength": 10, // default record count per page
+                "ajax": {
+                    "url": BASE_URL + "/client/get_activities", // ajax source
+                },
+                "order": [
+                    [1, "asc"]
+                ],// set first column as a default sort by asc
+                buttons: [
+                    { extend: 'print', className: 'btn default' },
+                    { extend: 'copy', className: 'btn default' },
+                    { extend: 'pdf', className: 'btn default' },
+                    { extend: 'excel', className: 'btn default' },
+                    { extend: 'csv', className: 'btn default' },
+                    {
+                        text: 'Reload',
+                        className: 'btn default',
+                        action: function (e, dt, node, config) {
+                            dt.ajax.reload();
+                            alert('Datatable reloaded!');
+                        }
+                    }
+                ],
+            }
+        });
+
+        // handle group actionsubmit button click
+        grid_activity.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
+            e.preventDefault();
+            var action = $(".table-group-action-input", grid_activity.getTableWrapper());
+            if (action.val() != "" && grid_activity.getSelectedRowsCount() > 0) {
+                grid_activity.setAjaxParam("customActionType", "group_action");
+                grid_activity.setAjaxParam("customActionName", action.val());
+                grid_activity.setAjaxParam("id", grid_activity.getSelectedRows());
+                grid_activity.getDataTable().ajax.reload();
+                grid_activity.clearAjaxParams();
+            } else if (action.val() == "") {
+                App.alert({
+                    type: 'danger',
+                    icon: 'warning',
+                    message: 'Please select an action',
+                    container: grid_activity.getTableWrapper(),
+                    place: 'prepend'
+                });
+            } else if (grid_activity.getSelectedRowsCount() === 0) {
+                App.alert({
+                    type: 'danger',
+                    icon: 'warning',
+                    message: 'No record selected',
+                    container: grid_activity.getTableWrapper(),
+                    place: 'prepend'
+                });
+            }
+        });
+
+        // grid_activity.setAjaxParam("customActionType", "group_action");
+        // grid_activity.getDataTable().ajax.reload();
+        // grid_activity.clearAjaxParams();
+
+        // handle datatable custom tools
+        // $('#tbl_placement_activities_tools > a.tool-action').on('click', function () {
+        //     var action = $(this).attr('data-action');
+        //     grid_activity.getDataTable().button(action).trigger();
+        // });
+    }
 
 
     return {
@@ -582,12 +761,12 @@ var TableClient = function () {
             handleAddPlacementActivity();
             handleInvoice();
             handleDocument();
+            handleConfidentials();
+            handlePlacmentActivities();
         }
     };
 }();
 
 $(document).ready(function () {
     TableClient.init();
-
-
 });

@@ -51,8 +51,9 @@
                                 <th width="2%">
                                     <input type="checkbox" class="group-checkable"> </th>
                                 <th width="5%"> No </th>
-                                <th width="20%"> Title</th>
-                                <th width="15%"> Documents type </th>
+                                <th width="15%"> Title</th>
+                                <th width="13%"> Documents type </th>
+                                <th width="15%"> Client </th>
                                 <th width="15%"> Employee </th>
                                 <th width="10%"> status </th>
                                 <th width="10%"> Except Date</th>
@@ -69,6 +70,10 @@
                                 {{-- Document type--}}
                                 <td>
                                     <input type="text" class="form-control form-filter input-sm" name="filt_document_type"> </td>
+
+                                {{-- Client --}}
+                                <td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_employee"> </td>
 
                                 {{-- employee--}}
                                 <td>

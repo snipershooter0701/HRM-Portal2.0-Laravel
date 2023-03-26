@@ -22,9 +22,6 @@
                 <div class="table-container">
                     <div class="row">
                         <div class="col-md-8">
-                            <label>
-                                <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Total of the above shown Expense(s)
-                            </label>
                         </div>
                         <div class="col-md-4 actions">
                             <div id="tbl_expenses_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
@@ -32,12 +29,6 @@
                                 <a class="btn-tbl-action btn-move-panel" data-panelname="panel-import-employee"><i class="fa fa-upload"></i></a>
                                 <a class="btn-tbl-action btn-move-panel" data-panelname="panel-export-employee"><i class="fa fa-download"></i></a>
                                 <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-print"></i></a>
-                                {{-- <a href="javascript:;" data-action="0" class="btn-tbl-action tool-action"><i class="icon-printer"></i></a>
-                            <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="icon-check"></i></a>
-                            <a href="javascript:;" data-action="2" class="btn-tbl-action tool-action"><i class="icon-doc"></i></a>
-                            <a href="javascript:;" data-action="3" class="btn-tbl-action tool-action"><i class="icon-paper-clip"></i></a>
-                            <a href="javascript:;" data-action="4" class="btn-tbl-action tool-action"><i class="icon-cloud-upload"></i></a>
-                            <a href="javascript:;" data-action="5" class="btn-tbl-action tool-action"><i class="icon-refresh"></i></a> --}}
                             </div>
                         </div>
                     </div>
@@ -58,12 +49,11 @@
                                     <input type="checkbox" class="group-checkable">
                                 </th>
                                 <th width="5%"> No </th>
-                                <th width="15%"> Expenses Category </th>
-                                <th width="15%"> Expense Type </th>
+                                <th width="20%"> Expenses Category </th>
                                 <th width="20%"> Employee </th>
                                 <th width="15%"> Amount </th>
-                                <th width="15%"> Balance Amount </th>
-                                <th width="13%"> Action </th>
+                                <th width="20%"> Expense Type </th>
+                                <th width="18%"> Action </th>
                             </tr>
                             <tr role="row" class="filter">
                                 <td> </td>
@@ -78,15 +68,6 @@
                                     </select>
                                 </td>
 
-                                {{-- Expense Type --}}
-                                <td>
-                                    <select name="filt_expense_type" class="form-control form-filter input-sm">
-                                        <option value="">Select...</option>
-                                        <option value="pending">Advance</option>
-                                        <option value="closed">Service(s)</option>
-                                    </select>
-                                </td>
-
                                 {{-- Employee --}}
                                 <td>
                                     <input type="text" class="form-control form-filter input-sm" name="filt_employee">
@@ -98,10 +79,13 @@
                                     <input type="text" class="form-control form-filter input-sm" name="filt_amount" placeholder="To">
                                 </td>
 
-                                {{-- Balance Amount --}}
+                                {{-- Expense Type --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm margin-bottom-5" name="filt_bal_amount" placeholder="From">
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_bal_amount" placeholder="To">
+                                    <select name="filt_expense_type" class="form-control form-filter input-sm">
+                                        <option value="">Select...</option>
+                                        <option value="pending">Advance</option>
+                                        <option value="closed">Service(s)</option>
+                                    </select>
                                 </td>
 
                                 {{-- Action --}}
@@ -113,6 +97,13 @@
                         </thead>
                         <tbody> </tbody>
                     </table>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>
+                                <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Total of the above shown Expense(s)
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <h4 class="section-head">Activities</h4>
                 <hr>

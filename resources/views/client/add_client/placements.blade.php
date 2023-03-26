@@ -80,15 +80,47 @@
 
                                 {{-- Start Date --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_start_date"> </td>
+                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm default" type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_to" placeholder="To">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm default" type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </td>
 
                                 {{-- End Date --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_end_date"> </td>
+                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm default" type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_to" placeholder="To">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm default" type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </td>
 
                                 {{-- PO Attachment --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_po_attachment"> </td>
+                                </td>
 
                                 {{-- Action --}}
                                 <td>
@@ -99,12 +131,12 @@
                         </thead>
                         <tbody> </tbody>
                     </table>
-                    
+
                     {{-- activities table --}}
                     <h4 class="section-head">Activities</h4>
                     <hr>
-                    
-                    <table id="tbl_activity" class="table table-striped table-bordered table-hover">
+
+                    <table id="tbl_placement_activities" class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr role="row" class="heading">
                                 <th width="20%"> Date & Time </th>
@@ -112,7 +144,7 @@
                                 <th width="15%"> Description </th>
                             </tr>
                             <tr role="row" class="filter">
-                               
+
                                 {{-- time_date --}}
                                 <td>
                                     <input type="text" class="form-control form-filter input-sm" name="filt_time_date"> </td>
@@ -164,8 +196,8 @@
                                 <th width="15%"> Action </th>
                             </tr>
                             <tr role="row" class="filter">
-                               <td></td>
-                               <td></td>
+                                <td></td>
+                                <td></td>
                                 {{-- Employee Name --}}
                                 <td>
                                     <input type="text" class="form-control form-filter input-sm" name="filt_employee_name"> </td>
@@ -182,8 +214,8 @@
                                 <td>
                                     <select name="filt_job_status" class="form-control form-filter input-sm">
                                         <option value="">Select...</option>
-                                        <option value="pending">active</option>
-                                        <option value="closed">inactive</option>
+                                        <option value="pending">Active</option>
+                                        <option value="closed">Inactive</option>
                                     </select>
                                 </td>
 

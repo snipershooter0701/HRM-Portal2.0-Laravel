@@ -7,20 +7,16 @@
     display: flex !important;
 }
 
-.mr-10 {
-    margin-right: 10px !important;
-}
-
-.mr-30 {
-    margin-right: 30px !important;
-}
-
-.ml-30 {
-    margin-left: 30px !important;
+.display-webkit-inline-box {
+    display: -webkit-inline-box !important;
 }
 
 .mt-0 {
     margin-top: 0px !important;
+}
+
+.mt-5 {
+    margin-top: 5px !important;
 }
 
 .mt-10 {
@@ -35,12 +31,40 @@
     margin-top: 30px !important;
 }
 
+.mt-50 {
+    margin-top: 50px !important;
+}
+
+.mr-10 {
+    margin-right: 10px !important;
+}
+
+.mr-30 {
+    margin-right: 30px !important;
+}
+
 .mb-10 {
     margin-bottom: 10px !important;
 }
 
+.mb-20 {
+    margin-bottom: 20px !important;
+}
+
 .ml-10 {
     margin-left: 10px !important;
+}
+
+.ml-20 {
+    margin-left: 20px !important;
+}
+
+.ml-30 {
+    margin-left: 30px !important;
+}
+
+.icon-16 {
+    font-size: 16px !important;
 }
 
 .text-right {
@@ -61,11 +85,27 @@
     align-items: center;
 }
 
+.icon-md {
+    font-size: 14px !important;
+}
+
 /* ============================ END NECESSARY STYLES ============================ */
 
 /* ============================= BEGIN COLOR STYLES ============================= */
 .color-primary {
     color: #3699FF;
+}
+
+.color-grey {
+    color: #7E8C9C;
+}
+
+.color-light-green {
+    color: #11D100;
+}
+
+.backcolor-light-grey {
+    background-color: #E6E6E6 !important;
 }
 
 /* ============================== END COLOR STYLES ============================== */
@@ -159,6 +199,30 @@ h4.section-head {
     font-weight: 600 !important;
     font-size: 16px !important;
     margin-top: 50px !important;
+}
+
+.accordion .panel .panel-title .accordion-toggle.accordion-toggle-styled {
+    background: url(../img/portlet-collapse-icon.png) right 9px no-repeat !important;
+    margin-right: 15px;
+}
+
+.accordion .panel .panel-title .accordion-toggle.accordion-toggle-styled.collapsed {
+    background: url(../img/portlet-expand-icon.png) right 9px no-repeat !important;
+    margin-right: 15px;
+}
+
+.panel-heading {
+    background: #ffffff !important;
+    /* border-bottom: 1px solid #e7ecf1 !important; */
+}
+
+.panel-title {
+    border-bottom: 1px solid !important;
+}
+
+.panel-title a {
+    font-size: 16px !important;
+    font-weight: bold;
 }
 
 /* ========================== END CUSTOM LABEL STYLES =========================== */
@@ -411,6 +475,10 @@ hr {
     vertical-align: middle !important;
 }
 
+.table-striped td {
+    padding: 4px 8px !important;
+}
+
 .dataTable .label-primary {
     color: #FFFFFF;
     background-color: #3797FC;
@@ -436,11 +504,6 @@ hr {
     padding: 4px 6px !important;
     width: 70px !important;
     display: inline-table !important;
-}
-
-.dataTable td {
-    padding-top: 4px !important;
-    padding-bottom: 4px !important;
 }
 
 /* ============================= END AJAX TABLE STYLES ============================= */

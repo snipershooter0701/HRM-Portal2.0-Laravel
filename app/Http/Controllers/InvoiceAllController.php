@@ -185,7 +185,7 @@ class InvoiceAllController extends Controller
                 '5',
                 '90',
                 '$1900',
-                '',
+                '<a href="javascript:;"><i class="fa fa-download icon-md color-primary"></i></a>',
                 '<a href="javascript:;" class="btn btn-xs btn-c-grey"><i class="fa fa-trash"></i></a>'
             );
             $idx++;

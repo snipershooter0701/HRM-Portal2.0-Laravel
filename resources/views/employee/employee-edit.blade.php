@@ -3,7 +3,7 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel-employee-list">Add Employee</a>
+            <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel-employee-list">Edit Employee</a>
         </li>
     </ul>
 </div>
@@ -69,33 +69,24 @@
                                 <label class="control-label">Gender <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control">
                                     <option>Select</option>
-                                    <option>Male</option>
-                                    <option>Female</option>
                                 </select>
                             </div>
                             <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Employment Type <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control">
                                     <option>Select</option>
-                                    <option>Employee</option>
-                                    <option>Contractor</option>
                                 </select>
                             </div>
                             <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Category <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control">
                                     <option>Select</option>
-                                    <option>W2</option>
-                                    <option>C2C</option>
-                                    <option>1099</option>
                                 </select>
                             </div>
                             <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Employee Type <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control">
                                     <option>Select</option>
-                                    <option>Employee/Contractor</option>
-                                    <option>Back-office Staff</option>
                                 </select>
                             </div>
                             <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
@@ -106,8 +97,6 @@
                                 <label class="control-label">Employee Status <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control">
                                     <option>Select</option>
-                                    <option>Active</option>
-                                    <option>Inactive</option>
                                 </select>
                             </div>
                             <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
@@ -125,35 +114,24 @@
                                 <label class="control-label">Department</label>
                                 <select class="form-control">
                                     <option>Select</option>
-                                    <option>HR</option>
                                 </select>
                             </div>
                             <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Role <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control">
                                     <option>Select</option>
-                                    <option>Employee</option>
-                                    <option>Admin</option>
-                                    <option>CEO</option>
-                                    <option>CTO</option>
-                                    <option>Partner</option>
-                                    <option>Timesheets Approver</option>
-                                    <option>Immigration</option>
                                 </select>
                             </div>
                             <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Point of Contact (POC) <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control">
                                     <option>Select</option>
-                                    <option>Lead Names</option>
                                 </select>
                             </div>
                             <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Classification <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control">
                                     <option>Select</option>
-                                    <option>Billable</option>
-                                    <option>Non-Billable</option>
                                 </select>
                             </div>
                         </div>
@@ -201,21 +179,21 @@
                             </div>
                             <div class="col-md-6 section-action mt-50 text-right">
                                 <label>
-                                    <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Allow Employee to add Later
+                                    <input type="checkbox" class="icheck"> Allow Employee to add Later
                                 </label>
                             </div>
                         </div>
                         <hr>
                         <div class="row">
                             <div class="row">
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label doc-label">SSN</label>
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label">Document No</label>
                                     <input type="text" class="form-control">
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label"> </label>
                                     <div class="fileinput fileinput-new" data-provides="fileinput">
                                         <div class="input-group">
@@ -240,18 +218,18 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label doc-label">Work Authorization</label>
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label">Work Auth List</label>
                                     <input type="text" class="form-control">
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label">Document No</label>
                                     <input type="text" class="form-control">
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label">Start Date</label>
                                     <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                         <input type="text" class="form-control">
@@ -262,7 +240,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label">End Date</label>
                                     <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                         <input type="text" class="form-control">
@@ -273,20 +251,20 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label"></label>
                                     <input type="file" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label doc-label">State ID/Drive License</label>
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label">Document No</label>
                                     <input type="text" class="form-control">
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label">Exp Date</label>
                                     <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                         <input type="text" class="form-control">
@@ -297,20 +275,20 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label"></label>
                                     <input type="file" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label doc-label">Passport</label>
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label">Document No</label>
                                     <input type="text" class="form-control">
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label">Exp Date</label>
                                     <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                         <input type="text" class="form-control">
@@ -321,20 +299,20 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label"></label>
                                     <input type="file" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label doc-label">I-94</label>
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label">Document No</label>
                                     <input type="text" class="form-control">
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label">Admit Until date</label>
                                     <div class="radio-list">
                                         <label class="radio-inline">
@@ -345,20 +323,20 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label"></label>
                                     <input type="file" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label doc-label">Visa</label>
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label">Document No</label>
                                     <input type="text" class="form-control">
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label">Exp Date</label>
                                     <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                         <input type="text" class="form-control">
@@ -369,32 +347,32 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label"></label>
                                     <input type="file" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label doc-label">Other Docummment</label>
                                 </div>
                                 <div class="form-group col-md-10" style="padding-top: 6px;">
-                                    <a id="btn-add-other-doc" href="javascript:;" class="btn-c-no-border-primary"><i class="fa fa-plus-circle icon-16"></i></a>
+                                    <a id="btn-add-other-doc" href="javascript:;" class="btn-tbl-action btn-c-no-border-primary"><i class="fa fa-plus-circle icon-16"></i></a>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label doc-label"></label>
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label">Title</label>
                                     <input type="text" class="form-control">
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label">Document No</label>
                                     <input type="text" class="form-control">
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label">Exp Date</label>
                                     <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                         <input type="text" class="form-control">
@@ -405,12 +383,12 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label"></label>
                                     <input type="file" class="form-control">
                                 </div>
-                                <div class="form-group col-md-2" style="padding-top: 15px;">
-                                    <a id="btn-remove-other-doc" href="javascript:;" class="btn-c-no-border-primary"><i class="fa fa-minus-circle icon-16"></i></a>
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6" style="padding-top: 15px;">
+                                    <a id="btn-remove-other-doc" href="javascript:;" class="btn-tbl-action btn-c-no-border-primary"><i class="fa fa-minus-circle icon-16"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -423,30 +401,30 @@
                             </div>
                             <div class="col-md-6 section-action mt-50 text-right">
                                 <label>
-                                    <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Add Later
+                                    <input type="checkbox" class="icheck"> Add Later
                                 </label>
                             </div>
                         </div>
                         <hr>
                         <div class="row" style="margin-bottom: 13px;">
-                            <div class="col-md-2">
+                            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <label>
-                                    <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Standard Time
+                                    <input type="checkbox" class="icheck"> Standard Time
                                 </label>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <label>
-                                    <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Over Time
+                                    <input type="checkbox" class="icheck"> Over Time
                                 </label>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <label>
-                                    <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Double Time
+                                    <input type="checkbox" class="icheck"> Double Time
                                 </label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Pay Scale</label>
                                 <select class="form-control">
                                     <option>Pay % Scale</option>
@@ -455,40 +433,40 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Pay % <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control" value="75">
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Change After Hrs <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control">
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Change Pay % to <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control">
                             </div>
                         </div>
                         {{-- END PAY CLASSIFICATION FORM --}}
                         {{-- BEGIN PLACEMENT FORM --}}
-                        <div class="row display-none">
-                            <div class="col-md-6 ">
+                        <div class="row">
+                            <div class="col-xs-6 ">
                                 <h4 class="section-head">Placement List</h4>
                             </div>
-                            <div class="col-md-6 section-action">
+                            <div class="col-xs-6 section-action mt-50 text-right">
                                 <button type="submit" class="btn btn-sm btn-c-primary">Add Placement</button>
                             </div>
                         </div>
-                        <hr class="display-none">
-                        <div class="table-container display-none">
-                            <table id="tbl_add_placements" class="table table-striped table-bordered table-hover table-checkable">
+                        <hr>
+                        <div class="table-container">
+                            <table id="tbl_view_placements" class="table table-striped table-bordered table-hover table-checkable">
                                 <thead>
                                     <tr role="row" class="heading">
                                         <th width="10%"> Placement ID </th>
                                         <th width="15%"> Client </th>
-                                        <th width="15%"> Status </th>
-                                        <th width="10%"> Start Date </th>
-                                        <th width="10%"> End Date </th>
-                                        <th width="15%"> Total hours </th>
+                                        <th width="10%"> Status </th>
+                                        <th width="15%"> Start Date </th>
+                                        <th width="15%"> End Date </th>
+                                        <th width="10%"> Total hours </th>
                                         <th width="10%"> Pay Rate/hr </th>
                                         <th width="10%"> Jo Tire </th>
                                     </tr>
@@ -517,7 +495,7 @@
                         </div>
                         <hr class="">
                         <div class="table-container">
-                            <table id="tbl_add_emp_activities" class="table table-striped table-bordered table-hover table-checkable">
+                            <table id="tbl_view_emp_activities" class="table table-striped table-bordered table-hover table-checkable">
                                 <thead>
                                     <tr role="row" class="heading">
                                         <th width="10%"> No </th>
@@ -538,7 +516,6 @@
                         {{-- END ACTIVITIES FORM --}}
                     </div>
                     <div class="form-actions text-right">
-                        <button type="submit" class="btn btn-sm btn-c-primary">Register</button>
                         <button type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-employee-list">Cancel</button>
                     </div>
                 </form>

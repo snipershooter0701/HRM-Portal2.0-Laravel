@@ -118,7 +118,7 @@ class InvoiceEmpPayController extends Controller
                 '$1400',
                 $filterItems[$idx]->employee_status ? '<span class="label label-sm label-primary">Active</span>' : '<span class="label label-sm label-grey">Inactive</span>',
                 '<a href="javascript:;" class="btn btn-xs btn-c-primary btn-show-emp-pay"><i class="fa fa-eye"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-money"></i></a>'
+                <a href="javascript:;" class="btn btn-xs btn-c-primary btn-pay-emp-pay"><i class="fa fa-money"></i></a>'
             );
             $idx++;
         }

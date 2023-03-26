@@ -79,6 +79,13 @@
                                 </select>
                             </div>
                             <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                                <label class="control-label">Country</label>
+                                <select class="form-control">
+                                    <option>United State</option>
+                                    <option>Alaska</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Zip Code</label>
                                 <input type="text" class="form-control">
                             </div>
@@ -86,32 +93,51 @@
                         {{-- Invoice Location --}}
 
                         {{-- Client Address --}}
-                        <h4 class="section-head">Client Address</h4>
+                        <div class="row">
+                            <div class="col-md-6 ">
+                                <h4 class="section-head">Client Address</h4>
+                            </div>
+                            <div class="col-md-6 section-action mt-50 text-right">
+                                <label>
+                                    <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Same as invoice address
+                                </label>
+                            </div>
+                        </div>
                         <hr>
                         <div class="row">
                             <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Street</label>
-                                <input type="text" class="form-control" disabled>
+                                <input type="text" class="form-control" readonly>
                             </div>
                             <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Suite/Apt No</label>
-                                <input type="text" class="form-control" disabled>
+                                <input type="text" class="form-control" readonly>
                             </div>
                             <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">City/Town</label>
-                                <input type="text" class="form-control" disabled>
+                                <input type="text" class="form-control" readonly>
                             </div>
                             <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">State</label>
-                                <input type="text" class="form-control" disabled>
+                                <select class="form-control" readonly>
+                                    <option>Alabama</option>
+                                    <option>Alaska</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                                <label class="control-label">Country</label>
+                                <select class="form-control" readonly>
+                                    <option>United State</option>
+                                    <option>Alaska</option>
+                                </select>
                             </div>
                             <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Zip Code</label>
-                                <input type="text" class="form-control" disabled>
+                                <input type="text" class="form-control" readonly>
                             </div>
                         </div>
                         {{-- Client Address --}}
-                       
+
                     </div>
                     <div class="form-actions text-right">
                         <button type="submit" class="btn btn-sm btn-c-primary">Create</button>

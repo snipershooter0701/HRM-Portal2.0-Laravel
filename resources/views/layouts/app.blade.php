@@ -278,40 +278,22 @@
                             </li>
                         </ul>
                     </li>
-                    <li id="page-expenses" class="nav-item">
-                        <a href="{{ url('/expenses') }}" class="nav-link">
-                            <i class="fa fa-hand-paper-o"></i>
-                            <span class="title">Work Authorization</span>
-                        </a>
-                    </li>
-                    <li id="page-immigration" class="nav-item">
-                        <a href="{{ url('/immigration') }}" class="nav-link">
-                            <i class="fa fa-bicycle"></i>
-                            <span class="title">Immigration</span>
-                        </a>
-                    </li>
-                    <li id="page-asset-manage" class="nav-item">
-                        <a href="{{ url('/asset-manage') }}" class="nav-link">
-                            <i class="fa fa-cubes"></i>
-                            <span class="title">Asset Management</span>
-                        </a>
-                    </li>
                     <li id="page-tickets" class="nav-item">
                         <a href="{{ url('/tickets') }}" class="nav-link">
                             <i class="fa fa-bookmark"></i>
                             <span class="title">Tickets</span>
                         </a>
                     </li>
-                    <li id="page-messages" class="nav-item">
-                        <a href="{{ url('/messages') }}" class="nav-link">
-                            <i class="fa fa-envelope"></i>
-                            <span class="title">Messages</span>
-                        </a>
-                    </li>
                     <li id="page-settings" class="nav-item">
                         <a href="{{ url('/settings') }}" class="nav-link">
                             <i class="fa fa-cog"></i>
                             <span class="title">Settings</span>
+                        </a>
+                    </li>
+                    <li id="page-documentation" class="nav-item">
+                        <a href="{{ url('/documentation') }}" class="nav-link">
+                            <i class="fa fa-cog"></i>
+                            <span class="title">Documentation</span>
                         </a>
                     </li>
                 </ul>
@@ -906,15 +888,17 @@
     <div id="confirm_modal" class="modal fade" tabindex="-1" data-width="760">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-            <h4 class="modal-title"></h4>
+            <h4 class="modal-title">Add Level</h4>
         </div>
-        <div class="modal-body">         
+        <div class="modal-body">
+           
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-c-primary">Create</button>
+            <button type="button" data-dismiss="modal" class="btn btn-c-primary" id="ok_btn">Ok</button>
             <button type="button" data-dismiss="modal" class="btn btn-c-grey">Cancel</button>
         </div>
     </div>
+
 
     <!-- BEGIN JS CONSTANTS -->
     <script type="text/javascript">

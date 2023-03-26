@@ -20,6 +20,10 @@ var TableAllInvoice = function () {
                 $('.btn-show-emp-pay').click(function() {
                     $('#btn_show_emp_payment').trigger('click');
                 });
+
+                $('.btn-pay-emp-pay').click(function() {
+                    $('#btn_pay_emp_payment').trigger('click');
+                });
             },
             loadingMessage: 'Loading...',
             dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 

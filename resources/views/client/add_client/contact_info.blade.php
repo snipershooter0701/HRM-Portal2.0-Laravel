@@ -6,7 +6,7 @@
             <a href="{{ url('/') }}" class="bread-active">Add Client</a>
         </li>
     </ul>
-    
+
 </div>
 <!-- END PAGE BAR -->
 <!-- END PAGE HEADER-->
@@ -29,26 +29,25 @@
                     <div class="form-body">
                         {{-- business info --}}
                         <div class="row">
-                            <div class="form-group col-lg-8 col-md-3 col-sm-4 col-xs-6">
+                            <div class="col-lg-12 text-right">
                                 <button type="button" class="btn btn-sm btn-c-primary btn-move-panel pull-right" data-panelname="panel-add-contact-info"><i class="fa fa-plus-circle"></i> Add Contact </button>
-                            </div>
-                            <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-lg-2 col-sm-2 col-xs-3">
+                            </div>
+                            <div class="form-group col-lg-4 col-sm-4 col-xs-6">
                                 <label class="control-label">First Name</label>
                                 <input type="text" class="form-control">
                             </div>
-                            <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-lg-4 col-sm-4 col-xs-6">
                                 <label class="control-label">Last Name</label>
                                 <input type="text" class="form-control">
                             </div>
-                            <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
-                               
-                            </div>
                         </div>
                         <div class="row">
+                            <div class="form-group col-lg-2 col-sm-3 col-xs-12">
+                            </div>
                             <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Email</label>
                                 <input type="text" class="form-control">
@@ -57,7 +56,11 @@
                                 <label class="control-label">Phone</label>
                                 <input type="text" class="form-control">
                             </div>
-                            <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-lg-2 col-sm-3 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-2 col-sm-3 col-xs-12">
                             </div>
                             <div class="form-group col-lg-8 col-md-3 col-sm-4 col-xs-6">
                                 <div class="input-group">
@@ -75,45 +78,33 @@
                         {{-- business info --}}
 
                         {{-- CC List --}}
-                        <h4 class="section-head">Notifiers</h4>
+                        <h4 class="section-head color-primary">Notifiers</h4>
                         <hr>
                         {{-- <div class="row"> --}}
-                            
-                            <div class="form-group has-notifier">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        To:
-                                    </span>
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group has-notifier">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        CC:
-                                    </span>
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group has-notifier">
-                                <textarea class="form-control" row="15"></textarea>
-                            </div>
 
-                            {{-- <div class="form-group col-lg-6 col-md-3 col-sm-4 col-xs-6">
+                        <div class="form-group has-notifier">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    To:
+                                </span>
+                                <input type="text" class="form-control">
                             </div>
-                            <div class="form-group col-lg-8 col-md-6 col-sm-6 col-xs-6">
-                                <h4 class="section-head">To:</h4>
-                                <hr>
+                        </div>
+                        <div class="form-group has-notifier">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    CC:
+                                </span>
+                                <input type="text" class="form-control">
                             </div>
-                            
-                            <div class="form-group col-lg-2 col-md-4 col-sm-4 col-xs-4">
-                            </div>
-                            <div class="form-group col-lg-8 col-md-3 col-sm-4 col-xs-6">
-                                <h4 class="section-head">CC:</h4>
-                                <hr>
-                            </div> --}}
-                            
-                        {{-- </div> --}}
+                        </div>
+                        <div class="form-group has-notifier">
+                            <textarea class="form-control" row="15"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-actions text-right">
+                        <button type="submit" class="btn btn-sm btn-c-primary">Save</button>
+                        <button type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-client">Cancel</button>
                     </div>
                 </form>
                 <!-- END FORM-->

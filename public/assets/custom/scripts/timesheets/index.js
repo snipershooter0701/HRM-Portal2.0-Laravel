@@ -368,7 +368,7 @@ var TableAjax = function () {
             handleAllTimesheetsTable();
             handleDueTimesheetsTable();
             handleAwaitInvoiceTable();
-            handleSubmitTimesheetTable();
+            // handleSubmitTimesheetTable();
         }
     };
 }();

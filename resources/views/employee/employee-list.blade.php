@@ -12,6 +12,8 @@
     <div class="page-toolbar">
         <div class="btn-group pull-right">
             <button type="button" class="btn btn-sm btn-c-primary btn-move-panel" data-panelname="panel-create-employee"><i class="fa fa-plus-circle"></i> Add Employee </button>
+            <button id="btn_show_emp_view_panel" type="button" class="btn-move-panel display-none" data-panelname="panel-view-employee"></button>
+            <button id="btn_show_edit_view_panel" type="button" class="btn-move-panel display-none" data-panelname="panel-edit-employee"></button>
         </div>
     </div>
 </div>
@@ -36,7 +38,7 @@
                             <div id="tbl_employees_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
                                 <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-copy"></i></a>
                                 <a class="btn-tbl-action btn-move-panel" data-panelname="panel-import-employee"><i class="fa fa-upload"></i></a>
-                                <a class="btn-tbl-action btn-move-panel" data-panelname="panel-export-employee"><i class="fa fa-download"></i></a>
+                                <a class="btn-tbl-action" data-target="#modal-export" data-toggle="modal"><i class="fa fa-download"></i></a>
                                 <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-print"></i></a>
                                 {{-- <a href="javascript:;" data-action="0" class="btn-tbl-action tool-action"><i class="icon-printer"></i></a>
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="icon-check"></i></a>
@@ -135,5 +137,66 @@
             </div>
         </div>
         <!-- End: life time stats -->
+    </div>
+</div>
+
+<div id="modal-export" class="modal fade" tabindex="-1" data-width="760">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">Export</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form action="javascript:;" class="form-horizontal form-row-seperated">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4" style="text-align: center;">
+                            </div>
+                            <div class="col-md-4 export-label-title">
+                                <span>Export List</span>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8" style="display:flex; justify-content: center;">
+                                <select multiple="multiple" class="multi-select" id="my_multi_select1" name="my_multi_select1[]">
+                                    <option>Dallas Cowboys</option>
+                                    <option>New York Giants</option>
+                                    <option selected>Philadelphia Eagles</option>
+                                    <option selected>Washington Redskins</option>
+                                    <option>Chicago Bears</option>
+                                    <option>Detroit Lions</option>
+                                    <option>Green Bay Packers</option>
+                                    <option>Minnesota Vikings</option>
+                                    <option selected>Atlanta Falcons</option>
+                                    <option>Carolina Panthers</option>
+                                    <option>New Orleans Saints</option>
+                                    <option>Tampa Bay Buccaneers</option>
+                                    <option>Arizona Cardinals</option>
+                                    <option>St. Louis Rams</option>
+                                    <option>San Francisco 49ers</option>
+                                    <option>Seattle Seahawks</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8" style="text-align: center;">
+                                <hr>
+                                <button type="submit" class="btn btn-sm btn-c-primary">Export</button>
+                                <button type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-employee-list">Cancel</button></div>
+                            <div class="col-md-2"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-c-grey">Close</button>
     </div>
 </div>

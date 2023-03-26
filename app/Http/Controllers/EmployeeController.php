@@ -155,10 +155,10 @@ class EmployeeController extends Controller
                 $filterItems[$idx]->category,
                 $filterItems[$idx]->date_of_joining,
                 $filterItems[$idx]->poc,
-                $filterItems[$idx]->employee_status ? '<span class="label label-sm label-primary">Active</span>' : '<span class="label label-sm label-grey">Inactive</span>',
-                '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-eye"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-c-grey employee-delete-btn"><i class="fa fa-trash"></i></a>'
+                $filterItems[$idx]->employee_status ? '<span class="label label-sm label-primary">active</span>' : '<span class="label label-sm label-grey">inactive</span>',
+                '<a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-eye"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-c-primary btn-edit"><i class="fa fa-pencil"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-c-grey btn-delete"><i class="fa fa-trash"></i></a>'
             );
             $idx++;
         }
@@ -205,17 +205,28 @@ class EmployeeController extends Controller
             $status = $status_list[rand(0, 2)];
             $id = ($i + 1);
             $records["data"][] = array(
+                $id,
                 $filterItems[$idx]->first_name,
-                $filterItems[$idx]->last_name,
-                $filterItems[$idx]->phone_number,
-                $filterItems[$idx]->category,
-                $filterItems[$idx]->date_of_joining,
-                $filterItems[$idx]->poc,
+                'acstive',
+                '2023-01-01',
+                '2023-03-23',
+                '1',
                 $filterItems[$idx]->classification ? '<span class="label-active-noborder">Billable</span>' : '<span class="label-inactive-noborder">Non-Billable</span>',
-                "AFAAAFAF"
+                "Jo Tire" . $idx
             );
             $idx++;
         }
+
+        $records["data"][] = array(
+            '',
+            '',
+            '',
+            '',
+            'Total Billable Hours',
+            '48',
+            '',
+            ''
+        );
 
         if (isset($this->request['customActionType']) && $this->request['customActionType'] == "group_action") {
             $records["customActionStatus"] = "OK"; // pass custom message(useful for getting status of group actions)
@@ -262,7 +273,7 @@ class EmployeeController extends Controller
                 $idx,
                 "03/01/2023 16:05:02",
                 "test@test.com",
-                "ABCDEFGHIJKLMN ABCDEFGHIJKLMN ABCDEFGHIJKLMN ABCDEFGHIJKLMN ABCDEFGHIJKLMN ABCDEFGHIJKLMN ABCDEFGHIJKLMN ABCDEFGHIJKLMN"
+                "Description" . $idx
             );
             $idx++;
         }

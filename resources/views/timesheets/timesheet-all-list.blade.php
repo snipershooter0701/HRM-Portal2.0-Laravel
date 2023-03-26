@@ -52,14 +52,13 @@
                                 <th width="2%">
                                     <input type="checkbox" class="group-checkable"> </th>
                                 <th width="3%"> No </th>
-                                <th width="10%"> Employee </th>
-                                <th width="10%"> Client </th>
-                                <th width="12%"> From </th>
-                                <th width="12%"> To </th>
-                                <th width="9%"> Total Billable Hours </th>
-                                <th width="9%"> Status </th>
+                                <th width="12%"> Employee </th>
+                                <th width="12%"> Client </th>
+                                <th width="15%"> Date Range </th>
+                                <th width="10%"> Total Billable Hours </th>
+                                <th width="10%"> Status </th>
                                 <th width="12%"> Submitted On </th>
-                                <th width="5%"> Attachment </th>
+                                <th width="8%"> Attachment </th>
                                 <th width="16%"> Action </th>
                             </tr>
                             <tr role="row" class="filter">
@@ -74,9 +73,20 @@
                                 <td>
                                     <input type="text" class="form-control form-filter input-sm" name="filt_last_name"> </td>
 
-                                {{-- From --}}
+                                {{-- Data Range --}}
                                 <td>
-                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                    <select name="filt_status" class="form-control form-filter input-sm">
+                                        <option value="">Select...</option>
+                                        <option value="">All</option>
+                                        <option value="">Current Week</option>
+                                        <option value="">Last Week</option>
+                                        <option value="">Current Month</option>
+                                        <option value="">Last Month</option>
+                                        <option value="">Last 3 Month</option>
+                                        <option value="">Last 6 Months</option>
+                                        <option value="">Custom</option>
+                                    </select>
+                                    <div class="input-group date date-picker margin-bottom-5 display-none" data-date-format="dd/mm/yyyy">
                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
@@ -84,27 +94,7 @@
                                             </button>
                                         </span>
                                     </div>
-                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_to" placeholder="To">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-sm default" type="button">
-                                                <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </td>
-
-                                {{-- To --}}
-                                <td>
-                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-sm default" type="button">
-                                                <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                    <div class="input-group date date-picker display-none" data-date-format="dd/mm/yyyy">
                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_to" placeholder="To">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
@@ -123,9 +113,9 @@
                                 <td>
                                     <select name="filt_status" class="form-control form-filter input-sm">
                                         <option value="">Select...</option>
-                                        <option value="closed">Request</option>
-                                        <option value="pending">Approved</option>
-                                        <option value="pending">Rejected</option>
+                                        <option value="">Request</option>
+                                        <option value="">Approved</option>
+                                        <option value="">Rejected</option>
                                     </select>
                                 </td>
 

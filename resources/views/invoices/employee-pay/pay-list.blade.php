@@ -10,6 +10,7 @@
         <div class="btn-group pull-right">
             <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-invoice-add"><i class="fa fa-plus-circle"></i> Add Employee Payment </button>
             <a id="btn_show_emp_payment" class="btn display-none" data-target="#modal-view-emp-payment" data-toggle="modal"></a>
+            <a id="btn_pay_emp_payment" class="btn display-none" data-target="#modal-pay-emp-payment" data-toggle="modal"></a>
             <button type="button" class="btn btn-sm btn-c-grey dropdown-toggle" data-toggle="dropdown"> More
                 <i class="fa fa-angle-down"></i>
             </button>
@@ -38,6 +39,34 @@
                 <div class="table-container">
                     <div class="row">
                         <div class="col-md-8">
+
+                            <div class="form-body">
+                                <div class="form-group col-md-3 col-sm-4 col-xs-6">
+                                    <label class="control-label">Date Range</label>
+                                    <select class="form-control">
+                                        <option>Select</option>
+                                        <option>All</option>
+                                        <option>Current Week</option>
+                                        <option>Last Week</option>
+                                        <option>Current Month</option>
+                                        <option>Last Month</option>
+                                        <option>last 3 Months</option>
+                                        <option>Last 6 Months</option>
+                                        <option>Custom</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3 col-sm-4 col-xs-6">
+                                    <label class="control-label">Frequency</label>
+                                    <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                        <input type="text" class="form-control">
+                                        <span class="input-group-btn">
+                                            <button class="btn default" type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-4 actions">
                             <div id="tbl_employee_pays_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
@@ -205,33 +234,14 @@
         <div class="form-body">
             <div class="row">
                 <div class="form-group col-md-3">
-                    <label class="control-label">Employee Name</label>
+                    <label class="control-label">Pay[Employee Name]</label>
                     <input type="text" class="form-control">
                 </div>
                 <div class="form-group col-md-3">
-                    <label class="control-label">Paid On</label>
-                    <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                        <input type="text" class="form-control">
-                        <span class="input-group-btn">
-                            <button class="btn default" type="button">
-                                <i class="fa fa-calendar"></i>
-                            </button>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-3"></div>
-                <div class="form-group col-md-9">
-                    <label class="mr-10">
-                        <input type="checkbox" class="icheck"> Last Month End
-                    </label>
-                    <label class="mr-10">
-                        <input type="checkbox" class="icheck"> This Month Start
-                    </label>
-                    <label>
-                        <input type="checkbox" class="icheck"> This Month Mid
-                    </label>
+                    <label class="control-label">Data Range</label>
+                    <select class="form-control">
+                        <option>Select</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -299,8 +309,85 @@
                 </tbody>
             </table>
         </div>
+        <div class="form-body">
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label class="control-label">Pay</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="control-label">Paid on</label>
+                    <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                            <button class="btn default" type="button">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="mr-10">
+                        <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Last Month End
+                    </label>
+                    <label class="mr-10">
+                        <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> This Month Start
+                    </label>
+                    <label>
+                        <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> This Month Mid
+                    </label>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn btn-c-grey">Close</button>
+        <button type="button" data-dismiss="modal" class="btn btn-sm btn-c-grey">Close</button>
+    </div>
+</div>
+
+<div id="modal-pay-emp-payment" class="modal fade" tabindex="-1" data-width="760">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">Employee Pay</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-body">
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label class="control-label">Pay</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="control-label">Paid on</label>
+                    <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                            <button class="btn default" type="button">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="mr-10">
+                        <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Last Month End
+                    </label>
+                    <label class="mr-10">
+                        <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> This Month Start
+                    </label>
+                    <label>
+                        <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> This Month Mid
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-c-primary">Pay</button>
+        <button type="button" data-dismiss="modal" class="btn btn-sm btn-c-grey">Close</button>
     </div>
 </div>

@@ -20,19 +20,19 @@
                         {{-- add placement info --}}
                         <div class="row">
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Client Name</label>
+                                <label class="control-label">Client Name <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control">
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Employee Number</label>
+                                <label class="control-label">Employee Number <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control">
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Placement ID</label>
+                                <label class="control-label">Placement ID <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control" disabled>
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Project Type</label>
+                                <label class="control-label">Category</label>
                                 <select class="form-control">
                                     <option>W2</option>
                                     <option>C2C</option>
@@ -40,7 +40,7 @@
                                 </select>
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Job Tire</label>
+                                <label class="control-label">Job Tire <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control">
                                     <option>Regular</option>
                                     <option>2nd</option>
@@ -48,15 +48,15 @@
                                 </select>
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Client Net Terms(Days)</label>
+                                <label class="control-label">Client Net Terms(Days) <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control">
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Client PO Attachment</label>
+                                <label class="control-label">Client PO Attachment <span class="required" aria-required="true">*</span></label>
                                 <input type="file" class="form-control">
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Client PO ID</label>
+                                <label class="control-label">Client PO ID <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control" disabled>
                             </div>
                         </div>
@@ -67,11 +67,11 @@
                         <hr>
                         <div class="row">
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Bill Rate/hr</label>
+                                <label class="control-label">Bill Rate/hr <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control">
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">OT Bill Rate/hr</label>
+                                <label class="control-label">OT Bill Rate/hr z</label>
                                 <input type="text" class="form-control">
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
@@ -96,15 +96,15 @@
                         {{-- Vendor info --}}
                         <div class="row">
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Vendor / Contractor net Terms</label>
+                                <label class="control-label">Vendor / Contractor net Terms <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control" disabled>
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Vendor / Contractor PO Attachment</label>
+                                <label class="control-label">Vendor / Contractor PO Attachment <span class="required" aria-required="true">*</span></label>
                                 <input type="file" class="form-control">
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Vendor / Contractor PO ID</label>
+                                <label class="control-label">Vendor / Contractor PO ID <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control" disabled>
                             </div>
                         </div>
@@ -115,7 +115,7 @@
                         <hr>
                         <div class="row">
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Bill Rate/hr</label>
+                                <label class="control-label">Bill Rate/hr <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control" disabled>
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
@@ -132,7 +132,7 @@
                         {{-- add placements info --}}
                         <div class="row">
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Job Title</label>
+                                <label class="control-label">Job Title <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control">
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
@@ -140,7 +140,7 @@
                                 <input type="text" class="form-control" disabled>
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Job Start Date</label>
+                                <label class="control-label">Job Start Date <span class="required" aria-required="true">*</span></label>
                                 <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                     <input type="text" class="form-control">
                                     <span class="input-group-btn">
@@ -151,7 +151,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Job Estimated End Date</label>
+                                <label class="control-label">Job Estimated End Date <span class="required" aria-required="true">*</span></label>
                                 <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                     <input type="text" class="form-control">
                                     <span class="input-group-btn">
@@ -162,7 +162,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Invoice Frequency</label>
+                                <label class="control-label">Invoice Frequency <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control">
                                     <option>vendor1</option>
                                     <option>vendor2</option>
@@ -170,7 +170,7 @@
                                 </select>
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Payments Effective Date</label>
+                                <label class="control-label">Payments Effective Date <span class="required" aria-required="true">*</span></label>
                                 <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                     <input type="text" class="form-control">
                                     <span class="input-group-btn">
@@ -188,7 +188,7 @@
                         <hr>
                         <div class="row">
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Document Type</label>
+                                <label class="control-label">Document Type <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control">
                                     <option>doc1</option>
                                     <option>doc2</option>
@@ -200,11 +200,11 @@
                                 <input type="text" class="form-control">
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Title</label>
+                                <label class="control-label">Title <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control">
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Expire Date</label>
+                                <label class="control-label">Expire Date <span class="required" aria-required="true">*</span></label>
                                 <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                     <input type="text" class="form-control">
                                     <span class="input-group-btn">
@@ -215,13 +215,13 @@
                                 </div>
                                 <div class="icheck-list mt-10">
                                     <label>
-                                        <input type="checkbox" class="icheck"> Same as placement Expire date </label>
+                                        <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Same as placement Expire date </label>
                                     <label>
-                                        <input type="checkbox" checked class="icheck"> No Expiration date </label>
+                                        <input type="checkbox" checked class="icheck" data-checkbox="icheckbox_square-blue"> No Expiration date </label>
                                 </div>
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Attachment</label>
+                                <label class="control-label">Attachment <span class="required" aria-required="true">*</span></label>
                                 <input type="file" class="form-control">
                             </div>
                         </div>
@@ -229,6 +229,7 @@
 
                     {{-- Vendor/Contractor Bill Rate --}}
                     <div class="form-actions text-right">
+                        <button type="button" class="btn btn-sm btn-c-primary pull-left">End Placement</button>
                         <button type="submit" class="btn btn-sm btn-c-primary">Create</button>
                         <button type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-placement">Cancel</button>
                     </div>

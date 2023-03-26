@@ -10,24 +10,27 @@
 <link href="{{ url('assets/global/plugins/jquery-multi-select/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{ url('assets/global/plugins/select2/css/select2.min.css" rel="stylesheet') }}" type="text/css" />
 <link href="{{ url('assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />
-<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />
-{{-- <link href="{{ url('assets/global/plugins/bootstrap-multiselect/css/bootstrap-multiselect.css') }}" rel="stylesheet" type="text/css" /> --}}
 @endsection
 
 @section('page_css')
-<link href="{{ url('assets/custom/css/tickets.css?v=' . $randNum) }}" rel="stylesheet" type="text/css" />
+<link href="{{ url('assets/custom/css/documentation.css?v=' . $randNum) }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
-<div id="panel-ticket-list" class="move-panel">
-    @include('tickets.ticket-list')
+<div id="panel-org-doc-list" class="move-panel">
+    @include('documentation.organization.index')
 </div>
-<div id="panel-ticket-create" class="move-panel display-none">
-    @include('tickets.ticket-create')
+<div id="panel-org-doc-create" class="move-panel display-none">
+    @include('documentation.organization.create')
 </div>
-<div id="panel-ticket-user" class="move-panel display-none">
-    @include('tickets.ticket-user')
+<div id="panel-emp-doc-list" class="move-panel display-none">
+    @include('documentation.employee.index')
+</div>
+<div id="panel-exp-doc-list" class="move-panel display-none">
+    @include('documentation.expiring.index')
+</div>
+<div id="panel-group-doc-list" class="move-panel display-none">
+    @include('documentation.group.index')
 </div>
 @endsection
 
@@ -41,16 +44,12 @@
 <script src="{{ url('assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js') }}" type="text/javascript"></script>
 <script src="{{ url('assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js') }}" type="text/javascript"></script>
 <script src="{{ url('assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
-<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
-{{-- <script src="{{ url('assets/pages/scripts/components-bootstrap-multiselect.min.js') }}" type="text/javascript"></script> --}}
 @endsection
 
 @section('page_js')
 <script type="text/javascript">
-    var PAGE_ID = "page-tickets";
+    var PAGE_ID = "page-documentation";
 
 </script>
-<script src="{{ url('assets/custom/scripts/tickets/index.js?v=' . $randNum) }}" type="text/javascript"></script>
+<script src="{{ url('assets/custom/scripts/documentation/index.js?v=' . $randNum) }}" type="text/javascript"></script>
 @endsection

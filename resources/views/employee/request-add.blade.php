@@ -20,7 +20,7 @@
                         {{-- BEGIN BASE FORM --}}
                         <div class="row">
                             <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Employee Name</label>
+                                <label class="control-label">Employee Name <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control">
                                     <option>Select</option>
                                 </select>
@@ -32,9 +32,9 @@
                             <div class="col-md-12">
                                 <div class="req-add-section-header">
                                     <label>
-                                        <input type="checkbox" class="icheck">
+                                        <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue">
                                     </label>
-                                    <span class="req-header-icon">
+                                    <span class="req-header-icon icon-16">
                                         <i class="fa fa-star"></i>
                                     </span>
                                     <span class="req-header-title">SSN</span>
@@ -64,10 +64,10 @@
                             <div class="col-md-12">
                                 <div class="req-add-section-header">
                                     <label>
-                                        <input type="checkbox" class="icheck">
+                                        <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue">
                                     </label>
                                     <span class="req-header-icon">
-                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star icon-16"></i>
                                     </span>
                                     <span class="req-header-title">Work Authorization</span>
                                 </div>
@@ -121,10 +121,10 @@
                             <div class="col-md-12">
                                 <div class="req-add-section-header">
                                     <label>
-                                        <input type="checkbox" class="icheck">
+                                        <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue">
                                     </label>
                                     <span class="req-header-icon">
-                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star icon-16"></i>
                                     </span>
                                     <span class="req-header-title">State ID/Drive License</span>
                                 </div>
@@ -159,7 +159,7 @@
                             <div class="col-md-12">
                                 <div class="req-add-section-header">
                                     <label>
-                                        <input type="checkbox" class="icheck">
+                                        <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue">
                                     </label>
                                     <span class="req-header-icon">
                                         <i class="fa fa-star"></i>
@@ -197,10 +197,10 @@
                             <div class="col-md-12">
                                 <div class="req-add-section-header">
                                     <label>
-                                        <input type="checkbox" class="icheck">
+                                        <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue">
                                     </label>
                                     <span class="req-header-icon">
-                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star icon-16"></i>
                                     </span>
                                     <span class="req-header-title">I-94</span>
                                 </div>
@@ -246,10 +246,10 @@
                             <div class="col-md-12">
                                 <div class="req-add-section-header">
                                     <label>
-                                        <input type="checkbox" class="icheck">
+                                        <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue">
                                     </label>
                                     <span class="req-header-icon">
-                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star icon-16"></i>
                                     </span>
                                     <span class="req-header-title">Visa</span>
                                 </div>
@@ -284,12 +284,13 @@
                             <div class="col-md-12">
                                 <div class="req-add-section-header">
                                     <label>
-                                        <input type="checkbox" class="icheck">
+                                        <input type="checkbox" class="icheck"  data-checkbox="icheckbox_square-blue">
                                     </label>
                                     <span class="req-header-icon">
-                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star icon-16"></i>
                                     </span>
                                     <span class="req-header-title">Other Document</span>
+                                    <a id="btn-add-other-doc" href="javascript:;" class="btn-c-no-border-primary text-right"><i class="fa fa-plus-circle icon-16"></i></a>
                                 </div>
                             </div>
                         </div>
