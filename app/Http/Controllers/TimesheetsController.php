@@ -247,12 +247,12 @@ class TimesheetsController extends Controller
 
             $records["data"][] = array(
                 $id,
-                'Apirl - Week 1',
-                "12345",
-                "Job" . $id,
-                "Anthony",
-                "48:00",
-                "2"
+                'Makarov',
+                "Mar-13-19",
+                "Pl-2358",
+                "Regular",
+                "client Name",
+                '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-send-o"></i></a>',
             );
             $idx++;
         }

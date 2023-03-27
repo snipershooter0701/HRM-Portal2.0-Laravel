@@ -38,10 +38,10 @@
                                         <label class="control-label">Duplicate Records</label>
                                         <div class="radio-list">
                                             <label class="radio-inline">
-                                                <input type="radio" name="optionsRadios" id="optionsRadios25" value="option1" checked=""> Skip
+                                                <input type="radio" name="optionsRadios" id="options_skip" value="option1" checked=""> Skip
                                             </label>
                                             <label class="radio-inline">
-                                                <input type="radio" name="optionsRadios" id="optionsRadios26" value="option2" checked=""> Overwrite
+                                                <input type="radio" name="optionsRadios" id="options_overwrite" value="option2"> Overwrite
                                             </label>
                                         </div>
                                     </div>

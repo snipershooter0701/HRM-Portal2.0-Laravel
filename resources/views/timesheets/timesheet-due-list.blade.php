@@ -53,73 +53,46 @@
                         <thead>
                             <tr role="row" class="heading">
                                 <th width="5%"> No </th>
+                                <th width="15%"> Employee Name </th>
                                 <th width="15%"> Month/Week </th>
-                                <th width="15%"> Job code </th>
+                                <th width="15%"> Placement ID </th>
                                 <th width="20%"> Job TItle </th>
-                                <th width="15%"> End Client Name </th>
-                                <th width="15%"> Total Hours Missing </th>
-                                <th width="15%"> Missing Dates </th>
+                                <th width="15%"> Client Name </th>
+                                <th width="15%"> Action </th>
                             </tr>
-                            <tr role="row" class="filter display-none">
-                                {{-- Week --}}
-                                <td> </td>
+                            <tr role="row" class="filter">
 
                                 {{-- No --}}
                                 <td> </td>
 
-                                {{-- Job Code --}}
+                                {{-- Employee--}}
                                 <td>
                                     <input type="text" class="form-control form-filter input-sm" name="filt_last_name">
                                 </td>
 
+                                {{-- Month/week--}}
+                                <td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_last_name">
+                                </td>
+
+                                {{-- Placement ID --}}
+                                <td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_last_name">
+                                </td>
+                                
                                 {{-- Job Title --}}
                                 <td>
                                     <input type="text" class="form-control form-filter input-sm" name="filt_phone">
                                 </td>
 
-                                {{-- End Client Name --}}
+                                {{-- Client Name --}}
                                 <td>
                                     <input type="text" class="form-control form-filter input-sm" name="filt_category"> </td>
-
-                                {{-- Total Hours Missing --}}
                                 <td>
-                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-sm default" type="button">
-                                                <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_to" placeholder="To">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-sm default" type="button">
-                                                <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
-                                    </div>
+                                    <button class="btn btn-xs btn-c-primary filter-submit"><i class="fa fa-search"></i></button>
+                                    <button class="btn btn-xs btn-c-grey filter-cancel"><i class="fa fa-times"></i></button>
                                 </td>
-                                {{-- Missing Dates --}}
-                                {{-- Total Hours Missing --}}
-                                <td>
-                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-sm default" type="button">
-                                                <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_to" placeholder="To">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-sm default" type="button">
-                                                <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </td>
+                               
                             </tr>
                         </thead>
                         <tbody> </tbody>

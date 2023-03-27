@@ -51,15 +51,15 @@
                             <tr role="row" class="heading">
                                 <th width="2%">
                                     <input type="checkbox" class="group-checkable"> </th>
-                                <th width="3%"> No </th>
-                                <th width="12%"> Employee </th>
-                                <th width="12%"> Client </th>
-                                <th width="15%"> Date Range </th>
+                                <th width="5%"> No </th>
+                                <th width="13%"> Employee </th>
+                                <th width="13%"> Client </th>
+                                <th width="13%"> Date Range </th>
                                 <th width="10%"> Total Billable Hours </th>
                                 <th width="10%"> Status </th>
                                 <th width="12%"> Submitted On </th>
                                 <th width="8%"> Attachment </th>
-                                <th width="16%"> Action </th>
+                                <th width="14%"> Action </th>
                             </tr>
                             <tr role="row" class="filter">
                                 <td> </td>

@@ -885,17 +885,17 @@
     <!-- END FOOTER -->
 
     {{-- modal --}}
-    <div id="confirm_modal" class="modal fade" tabindex="-1" data-width="760">
+    <div id="confirm_modal" class="modal fade" tabindex="-1" data-width="600">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
             <h4 class="modal-title">Add Level</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body text-center">
            
         </div>
         <div class="modal-footer">
-            <button type="button" data-dismiss="modal" class="btn btn-c-primary" id="ok_btn">Ok</button>
-            <button type="button" data-dismiss="modal" class="btn btn-c-grey">Cancel</button>
+            <button type="button" data-dismiss="modal" class="btn btn-c-primary" data-name="ok" id="ok_btn">Ok</button>
+            <button type="button" data-dismiss="modal" class="btn btn-c-grey" data-name="cancel" id="cancel_btn">Cancel</button>
         </div>
     </div>
 

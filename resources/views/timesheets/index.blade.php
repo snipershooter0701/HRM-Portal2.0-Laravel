@@ -13,7 +13,7 @@
 @endsection
 
 @section('page_css')
-<link href="{{ url('assets/custom/css/timesheet.css?v=' . $randNum) }}" rel="stylesheet" type="text/css" />
+<link href="{{ url('assets/custom/css/timesheets.css?v=' . $randNum) }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')

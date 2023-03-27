@@ -78,8 +78,8 @@
                                 <td>
                                     <select name="filt_status" class="form-control form-filter input-sm">
                                         <option value="">Select...</option>
-                                        <option value="pending">active</option>
-                                        <option value="closed">inactive</option>
+                                        <option value="pending">Active</option>
+                                        <option value="closed">Inactive</option>
                                     </select>
                                 </td>
 

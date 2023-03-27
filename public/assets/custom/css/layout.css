@@ -11,6 +11,10 @@
     display: -webkit-inline-box !important;
 }
 
+.pt-7 {
+    padding-top: 7px !important;
+}
+
 .mt-0 {
     margin-top: 0px !important;
 }
@@ -19,12 +23,20 @@
     margin-top: 5px !important;
 }
 
+.mt-7 {
+    margin-top: 7px !important;
+}
+
 .mt-10 {
     margin-top: 10px !important;
 }
 
 .mt-20 {
     margin-top: 20px !important;
+}
+
+.mt-25 {
+    margin-top: 25px !important;
 }
 
 .mt-30 {
@@ -90,6 +102,9 @@
 }
 
 /* ============================ END NECESSARY STYLES ============================ */
+
+
+
 
 /* ============================= BEGIN COLOR STYLES ============================= */
 .color-primary {
@@ -159,7 +174,6 @@
     color: #3699FF;
 }
 
-.chbox-primary {}
 
 /* ========================== END CUSTOM BUTTON STYLES =========================== */
 
@@ -198,7 +212,7 @@
 h4.section-head {
     font-weight: 600 !important;
     font-size: 16px !important;
-    margin-top: 50px !important;
+    margin-top: 25px !important;
 }
 
 .accordion .panel .panel-title .accordion-toggle.accordion-toggle-styled {
@@ -223,6 +237,10 @@ h4.section-head {
 .panel-title a {
     font-size: 16px !important;
     font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 30px !important;
 }
 
 /* ========================== END CUSTOM LABEL STYLES =========================== */
@@ -614,14 +632,19 @@ hr {
 /* ================================ END TAB STYLES ===================================*/
 
 /* =============================== BEGIN MODAL STYLES ==================================*/
-.modal-header {
-    border-bottom-color: #666666 !important;
+.modal {
+    border-radius: 10px !important;
+    margin-top: -270px !important;
 }
 
 .modal-header .modal-title {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     color: #3699FF;
+}
+
+#confirm_modal .modal-body {
+    font-size: 16px !important;
 }
 
 /* ================================ END MODAL STYLES ===================================*/

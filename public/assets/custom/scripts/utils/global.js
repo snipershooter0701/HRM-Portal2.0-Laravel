@@ -21,4 +21,7 @@ function displayConfirmModal(content, title, callback) {
     $('#ok_btn').unbind('click').bind('click', function () {
         callback('ok');
     });
+    $('#cancel_btn').unbind('click').bind('click', function () {
+        callback('cancel');
+    });
 }

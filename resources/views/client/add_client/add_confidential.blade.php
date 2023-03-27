@@ -33,19 +33,19 @@
                         </div>
                         {{-- business info --}}
                         <div class="row">
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Bank Name</label>
                                 <input type="text" class="form-control">
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Account Type</label>
                                 <input type="text" class="form-control">
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Account Number</label>
                                 <input type="text" class="form-control" disabled>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Routing Number</label>
                                 <input type="text" class="form-control" disabled>
                             </div>
@@ -85,7 +85,7 @@
                                 <input type="text" class="form-control">
                             </div>
                         </div>
-                        <div class="row mt-30">
+                        <div class="row">
                             <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Cancelled Check</label>
                                 <input type="file" class="form-control">

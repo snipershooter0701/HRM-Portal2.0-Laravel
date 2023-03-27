@@ -34,34 +34,25 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-lg-2 col-sm-2 col-xs-3">
-                            </div>
-                            <div class="form-group col-lg-4 col-sm-4 col-xs-6">
+                            <div class="form-group col-lg-3 col-sm-4 col-xs-6">
                                 <label class="control-label">First Name</label>
                                 <input type="text" class="form-control">
                             </div>
-                            <div class="form-group col-lg-4 col-sm-4 col-xs-6">
+                            <div class="form-group col-lg-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Last Name</label>
                                 <input type="text" class="form-control">
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-lg-2 col-sm-3 col-xs-12">
-                            </div>
-                            <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Email</label>
                                 <input type="text" class="form-control">
                             </div>
-                            <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Phone</label>
                                 <input type="text" class="form-control">
                             </div>
-                            <div class="form-group col-lg-2 col-sm-3 col-xs-12">
-                            </div>
                         </div>
+
                         <div class="row">
-                            <div class="form-group col-lg-2 col-sm-3 col-xs-12">
-                            </div>
                             <div class="form-group col-lg-8 col-md-3 col-sm-4 col-xs-6">
                                 <div class="input-group">
                                     <div class="icheck-inline">

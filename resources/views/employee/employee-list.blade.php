@@ -68,10 +68,10 @@
                                 <th width="15%"> Last Name </th>
                                 <th width="10%"> Phone </th>
                                 <th width="10%"> Category </th>
-                                <th width="15%"> Date of Joining </th>
+                                <th width="12%"> Date of Joining </th>
                                 <th width="10%"> POC </th>
                                 <th width="10%"> Status </th>
-                                <th width="20%"> Action </th>
+                                <th width="11%"> Action </th>
                             </tr>
                             <tr role="row" class="filter">
                                 <td> </td>

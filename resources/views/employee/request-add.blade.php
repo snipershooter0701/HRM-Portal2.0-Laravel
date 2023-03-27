@@ -225,12 +225,12 @@
                                 </div>
                                 <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <label class="control-label"></label>
-                                    <div class="radio-list">
+                                    <div class="radio-list mt-7">
                                         <label class="radio-inline">
-                                            <input type="radio" name="optionsRadios" id="optionsRadios25" value="option1" checked=""> D/S
+                                            <input type="radio" name="optionsRadios1" id="optionsRadios25" value="option1" checked=""> D/S
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="optionsRadios" id="optionsRadios26" value="option2" checked=""> Other
+                                            <input type="radio" name="optionsRadios1" id="optionsRadios26" value="option2" > Other
                                         </label>
                                     </div>
                                 </div>
@@ -313,6 +313,14 @@
                                                 <i class="fa fa-calendar"></i>
                                             </button>
                                         </span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <label class="control-label"></label>
+                                    <div class="radio-list mt-7">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="optionsRadios2" id="optionsRadios25" value="option1" checked=""> N/A
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">

@@ -212,12 +212,12 @@ class ExpensesController extends Controller
 
         $idx = 0;
         $id = 0;
-        for ($i = $iDisplayStart; $i < $end; $i++) {
+        for ($i = $iDisplayStart; $i < 2; $i++) {
             $id = ($i + 1);
             $records["data"][] = array(
                 $id,
                 '<div class="form-body">
-                    <div class="form-group">
+                    <div class="form-group margin-bottom-cancel">
                         <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                             <input type="text" class="form-control">
                             <span class="input-group-btn">
@@ -229,17 +229,17 @@ class ExpensesController extends Controller
                     </div>
                 </div>',
                 '<div class="form-body">
-                    <div class="form-group">
+                    <div class="form-group margin-bottom-cancel">
                         <input type="text" class="form-control">
                     </div>
                 </div>',
                 '<div class="form-body">
-                    <div class="form-group">
+                    <div class="form-group margin-bottom-cancel">
                         <input type="text" class="form-control" placeholder="0.00">
                     </div>
                 </div>',
                 '<div class="form-body">
-                    <div class="form-group">
+                    <div class="form-group margin-bottom-cancel">
                         <input type="file" class="form-control">
                     </div>
                 </div>',
@@ -247,6 +247,7 @@ class ExpensesController extends Controller
             );
             $idx++;
         }
+        
         $records["data"][] = array(
             '',
             '<b>Total</b>',

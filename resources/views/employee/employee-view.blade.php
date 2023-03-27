@@ -177,7 +177,7 @@
                             <div class="col-md-6 ">
                                 <h4 class="section-head">Documentation</h4>
                             </div>
-                            <div class="col-md-6 section-action mt-50 text-right">
+                            <div class="col-md-6 section-action mt-25 text-right">
                                 <label>
                                     <input type="checkbox" class="icheck"> Allow Employee to add Later
                                 </label>
@@ -399,7 +399,7 @@
                             <div class="col-md-6 ">
                                 <h4 class="section-head">Pay Classification</h4>
                             </div>
-                            <div class="col-md-6 section-action mt-50 text-right">
+                            <div class="col-md-6 section-action mt-25 text-right">
                                 <label>
                                     <input type="checkbox" class="icheck"> Add Later
                                 </label>
@@ -448,32 +448,37 @@
                         </div>
                         {{-- END PAY CLASSIFICATION FORM --}}
                         {{-- BEGIN ACTIVITIES FORM --}}
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h4 class="section-head">Activities</h4>
+                        <div class="panel-group accordion mt-30" id="accordion1">
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapse_1_1" aria-expanded="false"> Activities </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse_1_1" class="panel-collapse collapse" aria-expanded="false">
+                                    <div class="panel-body">
+                                        <div class="table-container">
+                                            <table id="tbl_view_emp_activities" class="table table-striped table-bordered table-hover table-checkable">
+                                                <thead>
+                                                    <tr role="row" class="heading">
+                                                        <th width="10%"> No </th>
+                                                        <th width="20%"> Date & Time </th>
+                                                        <th width="30%"> Updated By </th>
+                                                        <th width="40%"> Description </th>
+                                                    </tr>
+                                                    <tr role="row" class="filter display-none">
+                                                        <td> </td>
+                                                        <td> </td>
+                                                        <td> </td>
+                                                        <td> </td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody> </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-6 section-action">
-                            </div>
-                        </div>
-                        <hr class="">
-                        <div class="table-container">
-                            <table id="tbl_view_emp_activities" class="table table-striped table-bordered table-hover table-checkable">
-                                <thead>
-                                    <tr role="row" class="heading">
-                                        <th width="10%"> No </th>
-                                        <th width="20%"> Date & Time </th>
-                                        <th width="30%"> Updated By </th>
-                                        <th width="40%"> Description </th>
-                                    </tr>
-                                    <tr role="row" class="filter display-none">
-                                        <td> </td>
-                                        <td> </td>
-                                        <td> </td>
-                                        <td> </td>
-                                    </tr>
-                                </thead>
-                                <tbody> </tbody>
-                            </table>
                         </div>
                         {{-- END ACTIVITIES FORM --}}
                     </div>

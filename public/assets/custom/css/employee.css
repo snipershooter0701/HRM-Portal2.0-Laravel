@@ -15,7 +15,8 @@
 /* ============================ END ADD EMPLOYEE STYLES ============================ */
 
 /* =========================== BEGIN VIEW EMPLOYEE STYLES =========================== */
-#panel-view-employee .doc-label {
+#panel-view-employee .doc-label,
+#panel-edit-employee .doc-label {
     color: black !important;
     margin-top: 17px;
     margin-left: 17px;

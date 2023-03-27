@@ -22,4 +22,18 @@
 #panel-expense-add #tbl_add_expenses tbody tr:last-child .sorting_1 {
     background-color: #DEDEDE !important;
 }
+
+.auto-width {
+    width: auto !important;
+    display: inline;
+}
+
+.expenses-total {
+    margin: 0 15px 0 35px;
+}
+
+.margin-bottom-cancel {
+    margin-bottom: unset !important;
+}
+
 /* ============================ END ADD EMPLOYEE STYLES ============================ */

@@ -42,7 +42,7 @@
                             </div>
                             <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Federal ID</label>
-                                <input type="text" class="form-control" disabled>
+                                <input type="text" class="form-control">
                             </div>
                             <div class="form-group col-lg-4 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Email</label>
@@ -97,7 +97,7 @@
                             <div class="col-md-6 ">
                                 <h4 class="section-head">Client Address</h4>
                             </div>
-                            <div class="col-md-6 section-action mt-50 text-right">
+                            <div class="col-md-6 section-action mt-25 text-right">
                                 <label>
                                     <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Same as invoice address
                                 </label>

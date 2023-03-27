@@ -17,11 +17,11 @@ var TableEmployee = function () {
             onSuccess: function (grid, response) { },
             onError: function (grid) { },
             onDataLoad: function (grid) {
-                $('.btn-view').click(function() {
+                $('.btn-view').click(function () {
                     $('#btn_show_emp_view_panel').trigger('click');
                 });
 
-                $('.btn-edit').click(function() {
+                $('.btn-edit').click(function () {
                     $('#btn_show_edit_view_panel').trigger('click');
                 });
 
@@ -51,6 +51,12 @@ var TableEmployee = function () {
                 "ajax": {
                     "url": BASE_URL + "/employee/get-employees", // ajax source
                 },
+                "columnDefs": [
+                    {  // set default column settings
+                        'orderable': false,
+                        'targets': [0, 1, 9]
+                    }
+                ],
                 "order": [
                     [1, "asc"]
                 ],// set first column as a default sort by asc
@@ -217,7 +223,7 @@ var TableEmployee = function () {
                 // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
                 // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
                 // So when dropdowns used the scrollable div should be removed. 
-                "dom": "<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'>>",
+                // "dom": "<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'>>",
 
                 "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
 
@@ -497,4 +503,13 @@ var TableEmployee = function () {
 
 $(document).ready(function () {
     TableEmployee.init();
+
+    $('#uniform-options_overwrite').click(function () {
+        displayConfirmModal('Do you want to Overwrite?', "Overwrite Option", function (res) {
+            if (res != 'ok') {
+                $('#uniform-options_overwrite span').removeClass('checked');
+                $('#uniform-options_skip span').addClass('checked');
+            }
+        });
+    });
 });
