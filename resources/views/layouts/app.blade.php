@@ -292,7 +292,7 @@
                     </li>
                     <li id="page-documentation" class="nav-item">
                         <a href="{{ url('/documentation') }}" class="nav-link">
-                            <i class="fa fa-cog"></i>
+                            <i class="fa fa-file-text"></i>
                             <span class="title">Documentation</span>
                         </a>
                     </li>
@@ -882,6 +882,7 @@
                     <i class="icon-arrow-up"></i>
                 </div>
     </div>
+    @yield('modal')
     <!-- END FOOTER -->
 
     {{-- modal --}}

@@ -19,17 +19,20 @@
                     <div class="form-body">
                         {{-- BEGIN BASE FORM --}}
                         <div class="row">
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Title</label>
+                            <div class="form-group col-md-3 col-sm-4 col-xs-6">
+                                <div>
+                                    <label class="control-label">Title</label>
+                                    <a href="javascript:;" class="btn-c-no-border-primary pull-right line-height-none"><i class="fa fa-plus-circle icon-16"></i></a>
+                                </div>
                                 <select class="form-control">
                                     <option>Select</option>
                                 </select>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Comment</label>
                                 <input type="text" class="form-control">
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Start Date</label>
                                 <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                     <input type="text" class="form-control">
@@ -39,8 +42,9 @@
                                         </button>
                                     </span>
                                 </div>
+                                <label class="mt-10 pull-right"> <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> No Start Date</label>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Exp Date</label>
                                 <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                     <input type="text" class="form-control">
@@ -50,12 +54,15 @@
                                         </button>
                                     </span>
                                 </div>
+                                <label class="mt-10 pull-right"> <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> No Exp Date</label>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Modified By</label>
                                 <input type="text" class="form-control">
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Modified On</label>
                                 <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                     <input type="text" class="form-control">
@@ -66,9 +73,15 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Attachment</label>
                                 <input type="text" class="form-control">
+                            </div>
+                            <div class="form-group col-md-3 col-sm-4 col-xs-6">
+                                <label class="control-label">Status</label>
+                                <select class="form-control" readonly>
+                                    <option>Select</option>
+                                </select>
                             </div>
                         </div>
                         {{--END BASE FORM --}}

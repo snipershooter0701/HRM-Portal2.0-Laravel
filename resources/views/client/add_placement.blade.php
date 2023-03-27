@@ -24,8 +24,10 @@
                                 <input type="text" class="form-control">
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Employee Number <span class="required" aria-required="true">*</span></label>
-                                <input type="text" class="form-control">
+                                <label class="control-label">Employee Name <span class="required" aria-required="true">*</span></label>
+                                <select class="form-control">
+                                    <option>Select</option>
+                                </select>
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Placement ID <span class="required" aria-required="true">*</span></label>
@@ -181,29 +183,39 @@
                                 </div>
                             </div>
                         </div>
-                        {{--  add placements info --}}
+                        {{-- add placements info --}}
 
                         {{-- Vendor/Contractor Bill Rate --}}
-                        <h4 class="section-head">Documents</h4>
+                        <div class="row">
+                            <div class="col-md-6 ">
+                                <h4 class="section-head">Documents</h4>
+                            </div>
+                            <div class="col-md-6 section-action mt-10">
+                                <a href="javascript:;" class="btn-c-no-border-primary pull-right"><i class="fa fa-plus-circle icon-16"></i></a>
+                            </div>
+                        </div>
                         <hr>
                         <div class="row">
-                            <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Document Type <span class="required" aria-required="true">*</span></label>
+                            <div class="form-group col-md-3 col-sm-4 col-xs-6">
+                                <div>
+                                    <label class="control-label">Document Type <span class="required" aria-required="true">*</span></label>
+                                    <a href="javascript:;" class="btn-c-no-border-primary pull-right line-height-none"><i class="fa fa-plus-circle icon-16"></i></a>
+                                </div>
                                 <select class="form-control">
                                     <option>doc1</option>
                                     <option>doc2</option>
                                     <option>doc3</option>
                                 </select>
                             </div>
-                            <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Comments</label>
                                 <input type="text" class="form-control">
                             </div>
-                            <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Title <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control">
                             </div>
-                            <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Expire Date <span class="required" aria-required="true">*</span></label>
                                 <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                     <input type="text" class="form-control">
@@ -220,7 +232,7 @@
                                         <input type="checkbox" checked class="icheck" data-checkbox="icheckbox_square-blue"> No Expiration date </label>
                                 </div>
                             </div>
-                            <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-md-3 col-sm-4 col-xs-6">
                                 <label class="control-label">Attachment <span class="required" aria-required="true">*</span></label>
                                 <input type="file" class="form-control">
                             </div>
@@ -230,14 +242,14 @@
                     {{-- Vendor/Contractor Bill Rate --}}
                     <div class="form-actions text-right">
                         <button type="button" class="btn btn-sm btn-c-primary pull-left">End Placement</button>
-                        <button type="submit" class="btn btn-sm btn-c-primary">Create</button>
+                        <button type="submit" class="btn btn-sm btn-c-primary">Save</button>
                         <button type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-placement">Cancel</button>
                     </div>
                 </form>
                 <!-- END FORM-->
 
                 <div class="table-container">
-                        {{-- activities table --}}
+                    {{-- activities table --}}
                     <h4 class="section-head">Activities</h4>
                     <hr>
                     <table id="tbl_addplacement_activity" class="table table-striped table-bordered table-hover">
@@ -248,7 +260,7 @@
                                 <th width="15%"> Description </th>
                             </tr>
                             <tr role="row" class="filter">
-                            
+
                                 {{-- time_date --}}
                                 <td>
                                     <input type="text" class="form-control form-filter input-sm" name="filt_time_date"> </td>
@@ -266,7 +278,7 @@
                         <tbody> </tbody>
                     </table>
                 </div>
-                
+
             </div>
         </div>
         <!-- End: life time stats -->

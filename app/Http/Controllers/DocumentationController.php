@@ -156,7 +156,7 @@ class DocumentationController extends Controller
                 "2022-03-02",
                 "Anthony",
                 "2022-03-01",
-                (rand() % 2 == 0) ? '<span class="label label-sm label-primary">active</span>' : '<span class="label label-sm label-grey">inactive</span>',
+                (rand() % 2 == 0) ? '<span class="label label-sm label-primary">Active</span>' : '<span class="label label-sm label-grey">Inactive</span>',
                 '<a href="javascript:;"><i class="fa fa-download icon-md color-primary"></i></a>',
                 '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-eye"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil"></i></a>
@@ -267,9 +267,9 @@ class DocumentationController extends Controller
             $records["data"][] = array(
                 '<input type="checkbox" name="id[]" value="' . $id . '">',
                 $id,
-                "Comment1",
                 "Tareq",
-                "Title1",
+                "Other",
+                "Old Visa1",
                 "2023-03-02",
                 '<a href="javascript:;"><i class="fa fa-download icon-md color-primary"></i></a>',
                 '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-eye"></i></a>

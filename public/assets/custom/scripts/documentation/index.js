@@ -8,6 +8,13 @@ var TableDocumentation = function () {
         });
     }
 
+    var handleBootstrapSelect = function() {
+        $('.bs-select').selectpicker({
+            iconBase: 'fa',
+            tickIcon: 'fa-check'
+        });
+    }
+
     var handleTblOrgDocs = function () {
 
         let grid = new Datatable();
@@ -368,6 +375,7 @@ var TableDocumentation = function () {
         //main function to initiate the module
         init: function () {
             initPickers();
+            handleBootstrapSelect();
             handleTblOrgDocs();
             handleTblEmpDocs();
             handleTblExpDocs();
@@ -378,4 +386,10 @@ var TableDocumentation = function () {
 
 $(document).ready(function () {
     TableDocumentation.init();
+
+    $('#select_group').change(function () {
+        if ($(this).val() == 'create-group') {
+            $('#btn_toogle_create_group_modal').trigger('click');
+        }
+    });
 });

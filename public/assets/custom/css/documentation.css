@@ -1,0 +1,8 @@
+.bs-select button {
+    height: 24px !important;
+    padding: 1px 10px !important;
+}
+
+.bs-select .dropdown-menu li a {
+    padding: 4px 8px !important;
+}

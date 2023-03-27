@@ -44,7 +44,6 @@
                                 <input type="file" class="form-control">
                             </div>
                         </div>
-                        <hr>
                         {{--END BASE FORM --}}
                         {{-- BEGIN PLACEMENT FORM --}}
                         <div class="table-container">
@@ -109,7 +108,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        <hr>
                         {{-- END PLACEMENT FORM --}}
                         {{-- BEGIN REPORT FORM --}}
                         <div class="row">

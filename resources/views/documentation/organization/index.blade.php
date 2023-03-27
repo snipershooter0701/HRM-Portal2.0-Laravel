@@ -28,6 +28,125 @@
         <!-- Begin: life time stats -->
         <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-sm btn-c-primary pull-right"><i class="fa fa-plus-circle"></i> Create Folder </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="section-head">My Documents</h4>
+                        <hr>
+                        <div class="table-container">
+                            <table id="tbl_org_my_docs" class="table table-striped table-bordered table-hover table-checkable">
+                                <thead>
+                                    <tr role="row" class="heading">
+                                        <th width="10%"> No </th>
+                                        <th width="60%"> Folder Name </th>
+                                        <th width="30%"> Action </th>
+                                    </tr>
+                                    <tr role="row" class="filter">
+                                        <td> </td>
+
+                                        {{-- Folder Name --}}
+                                        <td>
+                                            <input type="text" class="form-control form-filter input-sm" name="filt_first_name">
+                                        </td>
+
+                                        {{-- Action --}}
+                                        <td>
+                                            <button class="btn btn-xs btn-c-primary filter-submit"><i class="fa fa-search"></i></button>
+                                            <button class="btn btn-xs btn-c-grey filter-cancel"><i class="fa fa-times"></i></button>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Folder1</td>
+                                        <td><a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-share-alt"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Folder2</td>
+                                        <td><a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-share-alt"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Folder3</td>
+                                        <td><a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-share-alt"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Folder4</td>
+                                        <td><a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-share-alt"></i></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="section-head">Shared Documents</h4>
+                        <hr>
+                        <div class="table-container">
+                            <table id="tbl_org_shared_docs" class="table table-striped table-bordered table-hover table-checkable">
+                                <thead>
+                                    <tr role="row" class="heading">
+                                        <th width="10%"> No </th>
+                                        <th width="20%"> Folder Name </th>
+                                        <th width="50%"> Shared To </th>
+                                        <th width="20%"> Action </th>
+                                    </tr>
+                                    <tr role="row" class="filter">
+                                        <td> </td>
+
+                                        {{-- Folder Name --}}
+                                        <td>
+                                            <input type="text" class="form-control form-filter input-sm" name="filt_first_name">
+                                        </td>
+
+                                        {{-- Shared To --}}
+                                        <td>
+                                            <input type="text" class="form-control form-filter input-sm" name="filt_first_name">
+                                        </td>
+
+                                        {{-- Action --}}
+                                        <td>
+                                            <button class="btn btn-xs btn-c-primary filter-submit"><i class="fa fa-search"></i></button>
+                                            <button class="btn btn-xs btn-c-grey filter-cancel"><i class="fa fa-times"></i></button>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Folder1</td>
+                                        <td>a@a.com, b@b.com</td>
+                                        <td><a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-pencil"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Folder2</td>
+                                        <td>a@a.com, b@b.com</td>
+                                        <td><a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-pencil"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Folder3</td>
+                                        <td>a@a.com, c@c.com</td>
+                                        <td><a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-pencil"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Folder4</td>
+                                        <td>a@a.com, d@d.com</td>
+                                        <td><a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-pencil"></i></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
                 <div class="table-container">
                     <div class="row">
                         <div class="col-md-8">
@@ -135,7 +254,7 @@
 
                                 {{-- Attachment --}}
                                 <td></td>
-                                
+
                                 {{-- Action --}}
                                 <td>
                                     <button class="btn btn-xs btn-c-primary filter-submit"><i class="fa fa-search"></i></button>

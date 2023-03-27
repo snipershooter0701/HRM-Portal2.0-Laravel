@@ -47,6 +47,10 @@
     margin-top: 50px !important;
 }
 
+.mr-0 {
+    margin-right: 0px !important;
+}
+
 .mr-10 {
     margin-right: 10px !important;
 }
@@ -61,6 +65,10 @@
 
 .mb-20 {
     margin-bottom: 20px !important;
+}
+
+.ml-0 {
+    margin-left: 0px !important;
 }
 
 .ml-10 {
@@ -101,6 +109,9 @@
     font-size: 14px !important;
 }
 
+.line-height-none {
+    line-height: 0;
+}
 /* ============================ END NECESSARY STYLES ============================ */
 
 

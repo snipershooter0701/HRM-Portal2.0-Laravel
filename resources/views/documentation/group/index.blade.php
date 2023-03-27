@@ -25,9 +25,20 @@
 <!-- END PAGE HEADER-->
 <div class="row">
     <div class="col-md-12">
+        <button id="btn_toogle_create_group_modal" class="display-none" data-target="#modal-create-group" data-toggle="modal"></button>
         <!-- Begin: life time stats -->
         <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <select id="select_group" class="bs-select form-control input-small input-sm" data-style="blue">
+                            <option value="">View Group(s)</option>
+                            <option value="">Group 1</option>
+                            <option value="">Group 2</option>
+                            <option value="create-group">Create Group</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="table-container">
                     <div class="row">
                         <div class="col-md-8">
@@ -56,17 +67,22 @@
                                 <th width="3%">
                                     <input type="checkbox" class="group-checkable"> </th>
                                 <th width="7%"> No </th>
-                                <th width="30%"> Employee Name </th>
-                                <th width="30%"> Attachment </th>
-                                <th width="30%"> Action </th>
+                                <th width="50%"> Employee Name </th>
+                                <th width="20%"> Attachment </th>
+                                <th width="15%"> Action </th>
                             </tr>
                             <tr role="row" class="filter">
                                 <td> </td>
                                 <td> </td>
 
                                 {{-- Employee Name --}}
-                                <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_last_name">
+                                <td class="display-flex">
+                                    <select name="filt_status" class="form-control form-filter input-sm">
+                                        <option value="">Select...</option>
+                                        <option value="pending">Makarov</option>
+                                        <option value="closed">Tareq</option>
+                                    </select>
+                                    <button type="button" class="btn btn-sm btn-c-primary ml-10"><i class="fa fa-plus-circle"></i> Add Button </button>
                                 </td>
 
                                 {{-- Attachment --}}

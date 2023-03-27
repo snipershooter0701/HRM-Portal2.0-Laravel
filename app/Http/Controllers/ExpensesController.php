@@ -212,7 +212,7 @@ class ExpensesController extends Controller
 
         $idx = 0;
         $id = 0;
-        for ($i = $iDisplayStart; $i < 2; $i++) {
+        for ($i = $iDisplayStart; $i < 1; $i++) {
             $id = ($i + 1);
             $records["data"][] = array(
                 $id,

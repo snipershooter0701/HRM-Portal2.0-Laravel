@@ -7,9 +7,8 @@
 <link href="{{ url('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ url('assets/global/plugins/icheck/skins/all.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ url('assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('assets/global/plugins/jquery-multi-select/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
-<link href="{{ url('assets/global/plugins/select2/css/select2.min.css" rel="stylesheet') }}" type="text/css" />
-<link href="{{ url('assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ url('assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ url('assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('page_css')
@@ -34,6 +33,39 @@
 </div>
 @endsection
 
+@section('modal')
+<div id="modal-create-group" class="modal fade" tabindex="-1" data-width="760" style="padding-right: 0px !important;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">Create Group</h4>
+    </div>
+    <div class="modal-body">
+        <form action="javascript:;" class="form-horizontal form-row-seperated">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group mr-0 ml-0 ">
+                            <label class="control-label">Group Name <span class="required" aria-required="true">*</span></label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group mr-0 ml-0">
+                            <label class="control-label">Add Document Titles <span class="required" aria-required="true">*</span></label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-c-primary">Save</button>
+        <button type="button" data-dismiss="modal" class="btn btn-c-grey">Close</button>
+    </div>
+</div>
+@endsection
+
 @section('page_template_js')
 <script src="{{ url('assets/global/scripts/datatable.js') }}" type="text/javascript"></script>
 <script src="{{ url('assets/global/plugins/datatables/datatables.min.js') }}" type="text/javascript"></script>
@@ -43,7 +75,6 @@
 <script src="{{ url('assets/global/plugins/icheck/icheck.min.js') }}" type="text/javascript"></script>
 <script src="{{ url('assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js') }}" type="text/javascript"></script>
 <script src="{{ url('assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js') }}" type="text/javascript"></script>
-<script src="{{ url('assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
 @endsection
 
 @section('page_js')
