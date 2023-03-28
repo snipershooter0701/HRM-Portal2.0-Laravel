@@ -10,8 +10,8 @@
 <link href="{{ url('assets/global/plugins/jquery-multi-select/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{ url('assets/global/plugins/select2/css/select2.min.css" rel="stylesheet') }}" type="text/css" />
 <link href="{{ url('assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />
-<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />
+<link href="{{ url('assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ url('assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('page_css')
@@ -46,35 +46,55 @@
 <div id="panel-create-document" class="move-panel display-none">
     @include('client.add_document')
 </div>
-{{-- modal --}}
-<div id="modal_client_page" class="modal fade" tabindex="-1" data-width="760">
+@endsection
+
+@section('modal')
+<div id="contact_modal" class="modal fade" tabindex="-1" data-width="760">
     <div class="modal-header">
-        <button type="button" class="close btn-move-panel" panel-name="panel-client" aria-hidden="true"></button>
-        <h4 class="modal-title"></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">Add Contact</h4>
     </div>
     <div class="modal-body">
         <div class="form-body">
             <div class="row">
-                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                    
-                </div>
-                <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                    <label class="control-label"></label>
+                <div class="form-group col-lg-6 col-sm-4 col-xs-6">
+                    <label class="control-label">First Name</label>
                     <input type="text" class="form-control">
                 </div>
-                <div class="form-group col-lg-5 col-md-3 col-sm-4 col-xs-6">
-                    <label class="control-label"></label>
+                <div class="form-group col-lg-6 col-sm-4 col-xs-6">
+                    <label class="control-label">Last Name</label>
                     <input type="text" class="form-control">
                 </div>
-                <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                    
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-6 col-md-3 col-sm-4 col-xs-6">
+                    <label class="control-label">Email</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="form-group col-lg-6 col-md-3 col-sm-4 col-xs-6">
+                    <label class="control-label">Phone</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-8 col-md-3 col-sm-4 col-xs-6">
+                    <div class="input-group">
+                        <div class="icheck-inline">
+                            <label>
+                                <input type="checkbox" class="icheck"> Add email to CC list </label>
+                            <label>
+                                <input type="checkbox" checked class="icheck"> Primary Contact </label>
+                            <label>
+                                <input type="checkbox" class="icheck"> Primary accounts email </label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-c-primary">Create</button>
-        <button type="button" class="btn btn-c-grey btn-move-panel" panel-name="panel-client">Cancel</button>
+        <button type="button" class="btn btn-c-primary" data-dismiss="modal">Create</button>
+        <button type="button" class="btn btn-c-grey" data-dismiss="modal">Cancel</button>
     </div>
 </div>
 @endsection
@@ -89,6 +109,8 @@
 <script src="{{ url('assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js') }}" type="text/javascript"></script>
 <script src="{{ url('assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js') }}" type="text/javascript"></script>
 <script src="{{ url('assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
+<script src="{{ url('assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js') }}" type="text/javascript"></script>
+<script src="{{ url('assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js') }}" type="text/javascript"></script>
 @endsection
 
 @section('page_js')

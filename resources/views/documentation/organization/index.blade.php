@@ -64,22 +64,34 @@
                                     <tr>
                                         <td>1</td>
                                         <td>Folder1</td>
-                                        <td><a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-share-alt"></i></a></td>
+                                        <td>
+                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-share-alt"></i></a>
+                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-plus"></i></a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
                                         <td>Folder2</td>
-                                        <td><a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-share-alt"></i></a></td>
+                                        <td>
+                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-share-alt"></i></a>
+                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-plus"></i></a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
                                         <td>Folder3</td>
-                                        <td><a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-share-alt"></i></a></td>
+                                        <td>
+                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-share-alt"></i></a>
+                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-plus"></i></a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
                                         <td>Folder4</td>
-                                        <td><a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-share-alt"></i></a></td>
+                                        <td>
+                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-share-alt"></i></a>
+                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-plus"></i></a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -122,25 +134,37 @@
                                         <td>1</td>
                                         <td>Folder1</td>
                                         <td>a@a.com, b@b.com</td>
-                                        <td><a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-pencil"></i></a></td>
+                                        <td>
+                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-pencil"></i></a>
+                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-trash"></i></a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
                                         <td>Folder2</td>
                                         <td>a@a.com, b@b.com</td>
-                                        <td><a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-pencil"></i></a></td>
+                                        <td>
+                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-pencil"></i></a>
+                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-trash"></i></a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
                                         <td>Folder3</td>
                                         <td>a@a.com, c@c.com</td>
-                                        <td><a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-pencil"></i></a></td>
+                                        <td>
+                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-pencil"></i></a>
+                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-trash"></i></a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
                                         <td>Folder4</td>
                                         <td>a@a.com, d@d.com</td>
-                                        <td><a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-pencil"></i></a></td>
+                                        <td>
+                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-pencil"></i></a>
+                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-trash"></i></a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -265,6 +289,41 @@
                         <tbody> </tbody>
                     </table>
                 </div>
+
+                {{-- BEGIN ACTIVITIES FORM --}}
+                <div class="panel-group accordion mt-30" id="accordion4">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#accordion4" href="#collapse_4_1" aria-expanded="false"> Activities </a>
+                            </h4>
+                        </div>
+                        <div id="collapse_4_1" class="panel-collapse collapse" aria-expanded="false">
+                            <div class="panel-body">
+                                <div class="table-container">
+                                    <table id="tbl_org_doc_act" class="table table-striped table-bordered table-hover table-checkable">
+                                        <thead>
+                                            <tr role="row" class="heading">
+                                                <th width="10%"> No </th>
+                                                <th width="20%"> Date & Time </th>
+                                                <th width="30%"> Updated By </th>
+                                                <th width="40%"> Description </th>
+                                            </tr>
+                                            <tr role="row" class="filter display-none">
+                                                <td> </td>
+                                                <td> </td>
+                                                <td> </td>
+                                                <td> </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody> </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- END ACTIVITIES FORM --}}
             </div>
         </div>
         <!-- End: life time stats -->

@@ -111,7 +111,9 @@ Route::middleware(['auth'])->group(function () {
     // Documentation
     Route::get('/documentation', [App\Http\Controllers\DocumentationController::class, 'index']);
     Route::post('/documentation/get-org-docs', [App\Http\Controllers\DocumentationController::class, 'getOrgDocs']);
+    Route::post('/documentation/get-org-docs-activity', [App\Http\Controllers\DocumentationController::class, 'getOrgDocsAct']);
     Route::post('/documentation/get-emp-docs', [App\Http\Controllers\DocumentationController::class, 'getEmpDocs']);
+    Route::post('/documentation/get-emp-docs-activity', [App\Http\Controllers\DocumentationController::class, 'getOrgDocsAct']);
     Route::post('/documentation/get-exp-docs', [App\Http\Controllers\DocumentationController::class, 'getExpDocs']);
     Route::post('/documentation/get-group-docs', [App\Http\Controllers\DocumentationController::class, 'getGroupDocs']);
 });

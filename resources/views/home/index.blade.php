@@ -46,6 +46,11 @@
     <div class="col-md-12">
         <h1>Welcome!</h1>
     </div>
+    <div class="col-md-12">
+        <input id="enc_key" type="text" style="width: 300px">
+        <input id="email" type="text" style="width: 300px">
+        <button id="btn_generate" class="btn btn-sm">Generate</button>
+    </div>
 </div>
 @endsection
 

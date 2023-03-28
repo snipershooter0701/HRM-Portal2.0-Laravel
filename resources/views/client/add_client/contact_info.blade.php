@@ -24,50 +24,67 @@
                 </div>
             </div>
             <div class="portlet-body">
+                <div class="table-container">
+                    <div class="actions">
+                        <button type="button" class="btn btn-sm btn-c-primary" id="add_contact"><i class="fa fa-plus-circle"></i> Add Contact </button>
+                    </div>
+                    <div class="table-actions-wrapper">
+                        <span> </span>
+                        <select class="table-group-action-input form-control input-inline input-small input-sm">
+                            <option value="">Select...</option>
+                            <option value="Cancel">Delete</option>
+                        </select>
+                        <button class="btn btn-sm table-group-action-submit btn-c-primary">
+                            <i class="fa fa-check"></i> Submit</button>
+                    </div>
+
+                    <table id="tbl_contact" class="table table-striped table-bordered table-hover table-checkable">
+                        <thead>
+                            <tr role="row" class="heading">
+                                <th width="2%">
+                                    <input type="checkbox" class="group-checkable"> </th>
+                                <th width="5%"> No </th>
+                                <th width="20%"> First Name </th>
+                                <th width="20%"> Last Name </th>
+                                <th width="20%"> Email </th>
+                                <th width="15%"> Phone </th>
+                                <th width="18%"> Action </th>
+                            </tr>
+                            <tr role="row" class="filter">
+                                <td> </td>
+                                <td> </td>
+
+                                {{-- First name --}}
+                                <td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_employee_name"> </td>
+
+                                {{-- Last Name --}}
+                                <td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_job_tire"> </td>
+
+                                {{-- Email --}}
+                                <td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_job_tire"> </td>
+
+                                {{-- Phone --}}
+                                <td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_job_tire"> </td>
+
+                                {{-- Action --}}
+                                <td>
+                                    <button class="btn btn-xs btn-c-primary filter-submit"><i class="fa fa-search"></i></button>
+                                    <button class="btn btn-xs btn-c-grey filter-cancel"><i class="fa fa-times"></i></button>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody> </tbody>
+                    </table>
+              
+                </div>
+
                 <!-- BEGIN FORM-->
                 <form action="#">
                     <div class="form-body">
-                        {{-- business info --}}
-                        <div class="row">
-                            <div class="col-lg-12 text-right">
-                                <button type="button" class="btn btn-sm btn-c-primary btn-move-panel pull-right" data-panelname="panel-add-contact-info"><i class="fa fa-plus-circle"></i> Add Contact </button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-lg-3 col-sm-4 col-xs-6">
-                                <label class="control-label">First Name</label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="form-group col-lg-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Last Name</label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Email</label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                <label class="control-label">Phone</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-lg-8 col-md-3 col-sm-4 col-xs-6">
-                                <div class="input-group">
-                                    <div class="icheck-inline">
-                                        <label>
-                                            <input type="checkbox" class="icheck"> Add email to CC list </label>
-                                        <label>
-                                            <input type="checkbox" checked class="icheck"> Primary Contact </label>
-                                        <label>
-                                            <input type="checkbox" class="icheck"> Primary accounts email </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- business info --}}
-
                         {{-- CC List --}}
                         <h4 class="section-head color-primary">Notifiers</h4>
                         <hr>
