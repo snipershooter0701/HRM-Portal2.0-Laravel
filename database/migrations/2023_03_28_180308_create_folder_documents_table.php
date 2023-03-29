@@ -13,17 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('placements', function (Blueprint $table) {
+        Schema::create('folder_documents', function (Blueprint $table) {
             $table->id();
-            $table->string("employee_name");
-            $table->string("client");
-            $table->string("job_tire");
-            $table->string("project_type");
-            $table->string("job_status");
-            $table->string("start_date");
-            $table->string("end_date");
-            $table->string("po_attachment");
+            $table->integer('folder_id');
+            $table->integer('document_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -34,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('placements');
+        Schema::dropIfExists('folder_documents');
     }
 };
