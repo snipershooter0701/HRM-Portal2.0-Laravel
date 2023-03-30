@@ -13,9 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('client_placement_doctypes', function (Blueprint $table) {
+        Schema::create('awaiting_invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->integer('employee_id');
+            $table->integer('client_id');
+            $table->integer('invoice_frequency')->default(0)->comment('0:weekly, 1:by-weekly, 2:monthly, 3:quarterly');
+            $table->date('invoice_from');
+            $table->date('invoice_to');
+            $table->string('total_hours');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('client_placement_doctypes');
+        Schema::dropIfExists('awaiting_invoices');
     }
 };

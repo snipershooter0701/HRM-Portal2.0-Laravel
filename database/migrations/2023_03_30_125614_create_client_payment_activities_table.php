@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('client_placement_doctypes', function (Blueprint $table) {
+        Schema::create('client_payment_activities', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->integer('client_payment_id');
+            $table->string('updated_by');
+            $table->string('description');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('client_placement_doctypes');
+        Schema::dropIfExists('client_payment_activities');
     }
 };

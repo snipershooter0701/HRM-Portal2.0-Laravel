@@ -13,9 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('client_placement_doctypes', function (Blueprint $table) {
+        Schema::create('employee_payments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->integer('employee_id');
+            $table->integer('date_range_id');
+            $table->integer('pay');
+            $table->date('paid_on');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('client_placement_doctypes');
+        Schema::dropIfExists('employee_payments');
     }
 };
