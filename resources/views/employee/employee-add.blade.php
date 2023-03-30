@@ -19,31 +19,39 @@
                     <div class="form-body">
                         {{-- BEGIN BASE FORM --}}
                         <div class="row">
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-sm-2">
                                 <label class="control-label">First Name <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control">
+                                <span class="help-block help-block-error"></span>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-sm-2">
                                 <label class="control-label">Middle Name</label>
                                 <input type="text" class="form-control">
+                                <span class="help-block help-block-error"></span>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-sm-2">
                                 <label class="control-label">Last Name <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control">
+                                <span class="help-block help-block-error"></span>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-sm-2">
                                 <label class="control-label">Title <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control">
+                                <span class="help-block help-block-error"></span>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-sm-2">
                                 <label class="control-label">Email Address <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control">
+                                <span class="help-block help-block-error"></span>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-sm-2">
                                 <label class="control-label">Phone Number <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control">
+                                <span class="help-block help-block-error"></span>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-2">
                                 <label class="control-label">Date of Birth <span class="required" aria-required="true">*</span></label>
                                 <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                     <input type="text" class="form-control">
@@ -53,8 +61,9 @@
                                         </button>
                                     </span>
                                 </div>
+                                <span class="help-block help-block-error"></span>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-sm-2">
                                 <label class="control-label">Date of Joining <span class="required" aria-required="true">*</span></label>
                                 <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                     <input type="text" class="form-control">
@@ -64,24 +73,28 @@
                                         </button>
                                     </span>
                                 </div>
+                                <span class="help-block help-block-error"></span>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-sm-2">
                                 <label class="control-label">Gender <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control">
                                     <option>Select</option>
                                     <option>Male</option>
                                     <option>Female</option>
                                 </select>
+                                <span class="help-block help-block-error"></span>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-sm-2">
                                 <label class="control-label">Employment Type <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control">
                                     <option>Select</option>
                                     <option>Employee</option>
                                     <option>Contractor</option>
                                 </select>
+                                <span class="help-block help-block-error"></span>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                        
+                            <div class="form-group col-sm-2">
                                 <label class="control-label">Category <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control">
                                     <option>Select</option>
@@ -89,28 +102,34 @@
                                     <option>C2C</option>
                                     <option>1099</option>
                                 </select>
+                                <span class="help-block help-block-error"></span>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-sm-2">
                                 <label class="control-label">Employee Type <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control">
                                     <option>Select</option>
                                     <option>Employee/Contractor</option>
                                     <option>Back-office Staff</option>
                                 </select>
+                                <span class="help-block help-block-error"></span>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-2">
                                 <label class="control-label">Employee ID <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control" readonly>
+                                <span class="help-block help-block-error"></span>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-sm-2">
                                 <label class="control-label">Employee Status <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control">
                                     <option>Select</option>
                                     <option>Active</option>
                                     <option>Inactive</option>
                                 </select>
+                                <span class="help-block help-block-error"></span>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-sm-2">
                                 <label class="control-label">Employee Status Date</label>
                                 <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                     <input type="text" class="form-control" readonly>
@@ -120,15 +139,16 @@
                                         </button>
                                     </span>
                                 </div>
+                                <span class="help-block help-block-error"></span>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-sm-2">
                                 <label class="control-label">Department</label>
                                 <select class="form-control">
                                     <option>Select</option>
                                     <option>HR</option>
                                 </select>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-sm-2">
                                 <label class="control-label">Role <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control">
                                     <option>Select</option>
@@ -140,21 +160,26 @@
                                     <option>Timesheets Approver</option>
                                     <option>Immigration</option>
                                 </select>
+                                <span class="help-block help-block-error"></span>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="form-group col-sm-2">
                                 <label class="control-label">Point of Contact (POC) <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control">
                                     <option>Select</option>
                                     <option>Lead Names</option>
                                 </select>
+                                <span class="help-block help-block-error"></span>
                             </div>
-                            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-2">
                                 <label class="control-label">Classification <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control">
                                     <option>Select</option>
                                     <option>Billable</option>
                                     <option>Non-Billable</option>
                                 </select>
+                                <span class="help-block help-block-error"></span>
                             </div>
                         </div>
                         {{--END BASE FORM --}}
@@ -458,14 +483,17 @@
                             <div class="form-group col-md-2">
                                 <label class="control-label">Pay % <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control" value="75">
+                                <span class="help-block help-block-error"></span>
                             </div>
                             <div class="form-group col-md-2">
                                 <label class="control-label">Change After Hrs <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control">
+                                <span class="help-block help-block-error"></span>
                             </div>
                             <div class="form-group col-md-2">
                                 <label class="control-label">Change Pay % to <span class="required" aria-required="true">*</span></label>
                                 <input type="text" class="form-control">
+                                <span class="help-block help-block-error"></span>
                             </div>
                         </div>
                         {{-- END PAY CLASSIFICATION FORM --}}
