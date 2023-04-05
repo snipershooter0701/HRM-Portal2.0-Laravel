@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer('work_auth_id')->nullable();
             $table->date('start_date')->nullable();
             $table->date('expire_date')->nullable();
-            $table->integer('i-94-type')->default(0)->comment('0: D/S, 1: Other');
+            $table->integer('i94_type')->default(0)->comment('0: D/S, 1: Other');
             $table->integer('other_type')->default(0)->comment('0: None, 1: D/A');
             $table->integer('employee_id');
             $table->integer('status')->default(0)->comment('0: Inactive, 1; Active');

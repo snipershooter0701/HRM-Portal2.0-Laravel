@@ -3,7 +3,7 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="javascript:;" class="btn-move-panel" data-panelname="panel-employee-list">Import Employees</a>
+            <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel-employee-list">Import Employees</a>
         </li>
     </ul>
     <div class="page-toolbar">

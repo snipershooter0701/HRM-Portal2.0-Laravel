@@ -27,30 +27,48 @@ Route::middleware(['auth'])->group(function () {
 
     // Employee
     Route::get('/employee', [App\Http\Controllers\EmployeeController::class, 'index']);
-    Route::post('/employee/get-employees', [App\Http\Controllers\EmployeeController::class, 'getEmployees']);
-    Route::post('/employee/get-add-histories', [App\Http\Controllers\EmployeeController::class, 'getAddHistories']);
+    Route::post('/employee/get_employee_list', [App\Http\Controllers\EmployeeController::class, 'getEmployeeList']);
+    Route::post('/employee/get_employee', [App\Http\Controllers\EmployeeController::class, 'getEmployeeById']);
+    Route::post('/employee/add_employee', [App\Http\Controllers\EmployeeController::class, 'addEmployee']);
+    Route::post('/employee/view_employee_info', [App\Http\Controllers\EmployeeController::class, 'viewEmployeeInfo']);
+    Route::post('/employee/update_employee_info', [App\Http\Controllers\EmployeeController::class, 'updateEmployeeInfo']);
+    Route::post('/employee/delete_employee_info', [App\Http\Controllers\EmployeeController::class, 'deleteEmployeeInfo']);
+    Route::post('/employee/get_emp_act', [App\Http\Controllers\EmployeeController::class, 'getEmpAct']);
     Route::post('/employee/get-add-placements', [App\Http\Controllers\EmployeeController::class, 'getAddPlacements']);
-    Route::post('/employee/get-request-details', [App\Http\Controllers\EmployeeController::class, 'getRequestDetails']);
+    // Employee - All Request Details
+    Route::post('/employee/get_request_details_list', [App\Http\Controllers\EmployeeController::class, 'getRequestDetailsList']);
+    Route::post('/employee/get_request_details', [App\Http\Controllers\EmployeeController::class, 'getRequestDetailsById']);
+    Route::post('/employee/add_request_details', [App\Http\Controllers\EmployeeController::class, 'addRequestDetails']);
+    Route::post('/employee/update_request_details', [App\Http\Controllers\EmployeeController::class, 'updateRequestDetails']);
+    Route::post('/employee/delete_request_details', [App\Http\Controllers\EmployeeController::class, 'deleteRequestDetails']);
+    Route::post('/employee/get_req_act', [App\Http\Controllers\EmployeeController::class, 'getReqAct']);
 
     // Client
-    Route::get('/client', [App\Http\Controllers\ClientController::class, 'index']);
-    Route::post('/client/get_clients', [App\Http\Controllers\ClientController::class, 'getClients']);
-    // Client - (Add client)
-    Route::post('/client/get_business_info', [App\Http\Controllers\ClientController::class, 'getBusinessInfo']);
-    Route::post('/client/get_contact_info', [App\Http\Controllers\ClientController::class, 'getContactInfo']);
-    Route::post('/client/get_add_confidential', [App\Http\Controllers\ClientController::class, 'getAddConfidential']);
-    Route::post('/client/get_placements', [App\Http\Controllers\ClientController::class, 'getPlacements']);
-    Route::post('/client/get_activities', [App\Http\Controllers\ClientController::class, 'getActivities']);
-    Route::post('/client/get_addplacement_activities', [App\Http\Controllers\ClientController::class, 'getActivities']);
-    Route::post('/client/get_invoices', [App\Http\Controllers\ClientController::class, 'getInvoices']);
-    Route::post('/client/get_documents', [App\Http\Controllers\ClientController::class, 'getDocuments']);
-    // Client - (All Placements)
-    Route::get('/client/all_placements', [App\Http\Controllers\ClientController::class, 'index_all_placements']);
-    Route::post('/client/get_all_placement', [App\Http\Controllers\ClientController::class, 'getAllPlacements']);
-    // Client - (All Documents)
-    Route::get('/client/all_documents', [App\Http\Controllers\ClientController::class, 'index_all_documents']);
-    Route::post('/client/get_all_document', [App\Http\Controllers\ClientController::class, 'getAllDocuments']);
-    Route::post('/client/get_old_confidentials', [App\Http\Controllers\ClientController::class, 'getOldConfidentials']);
+    Route::get('/client/list', [App\Http\Controllers\ClientListController::class, 'index']);
+    Route::get('/client/list/get_client', [App\Http\Controllers\ClientListController::class, 'getClientById']);
+    Route::post('/client/list/get_tbl_client_list', [App\Http\Controllers\ClientListController::class, 'getTableClientList']);
+    Route::post('/client/list/create_business_info', [App\Http\Controllers\ClientListController::class, 'createBusinessInfo']);
+    Route::post('/client/list/update_business_info', [App\Http\Controllers\ClientListController::class, 'updateBusinessInfoById']);
+    Route::post('/client/list/delete', [App\Http\Controllers\ClientListController::class, 'delete']);
+
+    // Route::get('/client', [App\Http\Controllers\ClientController::class, 'index']);
+    // Route::post('/client/get_clients', [App\Http\Controllers\ClientController::class, 'getClients']);
+    // // Client - (Add client)
+    // Route::post('/client/get_business_info', [App\Http\Controllers\ClientController::class, 'getBusinessInfo']);
+    // Route::post('/client/get_contact_info', [App\Http\Controllers\ClientController::class, 'getContactInfo']);
+    // Route::post('/client/get_add_confidential', [App\Http\Controllers\ClientController::class, 'getAddConfidential']);
+    // Route::post('/client/get_placements', [App\Http\Controllers\ClientController::class, 'getPlacements']);
+    // Route::post('/client/get_activities', [App\Http\Controllers\ClientController::class, 'getActivities']);
+    // Route::post('/client/get_addplacement_activities', [App\Http\Controllers\ClientController::class, 'getActivities']);
+    // Route::post('/client/get_invoices', [App\Http\Controllers\ClientController::class, 'getInvoices']);
+    // Route::post('/client/get_documents', [App\Http\Controllers\ClientController::class, 'getDocuments']);
+    // // Client - (All Placements)
+    // Route::get('/client/all_placements', [App\Http\Controllers\ClientController::class, 'index_all_placements']);
+    // Route::post('/client/get_all_placement', [App\Http\Controllers\ClientController::class, 'getAllPlacements']);
+    // // Client - (All Documents)
+    // Route::get('/client/all_documents', [App\Http\Controllers\ClientController::class, 'index_all_documents']);
+    // Route::post('/client/get_all_document', [App\Http\Controllers\ClientController::class, 'getAllDocuments']);
+    // Route::post('/client/get_old_confidentials', [App\Http\Controllers\ClientController::class, 'getOldConfidentials']);
 
     // Timesheet
     Route::get('/timesheets', [App\Http\Controllers\TimesheetsController::class, 'index']);

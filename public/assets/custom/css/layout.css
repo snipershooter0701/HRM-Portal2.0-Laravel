@@ -112,6 +112,7 @@
 .line-height-none {
     line-height: 0;
 }
+
 /* ============================ END NECESSARY STYLES ============================ */
 
 
@@ -183,6 +184,13 @@
 .btn-c-no-border-primary {
     font-size: 24px !important;
     color: #3699FF;
+}
+
+input[type=checkbox] {
+    width: 20px !important;
+    height: 15px !important;
+    position: relative;
+    top: 3px;
 }
 
 
@@ -535,6 +543,15 @@ hr {
     display: inline-table !important;
 }
 
+.dataTable .label-danger {
+    color: #FFFFFF;
+    background-color: #ED6B75;
+    border-radius: 5px !important;
+    padding: 4px 6px !important;
+    width: 70px !important;
+    display: inline-table !important;
+}
+
 /* ============================= END AJAX TABLE STYLES ============================= */
 
 /* ============================ BEGIN AJAX TABLE STYLES ============================ */
@@ -542,13 +559,12 @@ hr {
 .form-body .form-group label {
     font-size: 12px !important;
     font-weight: 600 !important;
-    color: #7E8C9C;
+    /* color: #7E8C9C; */
 }
 
 .form-body .form-group input {
     border-radius: 5px;
     height: 24px !important;
-    border: 1px solid #C9D1D5 !important;
     padding: 1px 12px;
 }
 
@@ -581,7 +597,7 @@ hr {
 .form-body .form-group select {
     border-radius: 5px !important;
     height: 24px !important;
-    border: 1px solid #C9D1D5 !important;
+    /* border: 1px solid #C9D1D5 !important; */
     padding: 1px 12px;
 }
 

@@ -5,7 +5,7 @@
 <link href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ url('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ url('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('assets/global/plugins/icheck/skins/all.css') }}" rel="stylesheet" type="text/css" />
+{{-- <link href="{{ url('assets/global/plugins/icheck/skins/all.css') }}" rel="stylesheet" type="text/css" /> --}}
 <link href="{{ url('assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ url('assets/global/plugins/jquery-multi-select/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{ url('assets/global/plugins/select2/css/select2.min.css" rel="stylesheet') }}" type="text/css" />
@@ -19,29 +19,29 @@
 @endsection
 
 @section('content')
-<div id="panel-employee-list" class="move-panel">
-    @include('employee.employee-list')
+<div id="panel-employee-list" class="move-panel ">
+    @include('employee.all_employees.employee_list')
 </div>
-<div id="panel-create-employee" class="move-panel display-none">
-    @include('employee.employee-add')
+<div id="panel-add-employee" class="move-panel display-none">
+    @include('employee.all_employees.add_employee')
 </div>
-<div id="panel-edit-employee" class="move-panel display-none">
+{{-- <div id="panel-edit-employee" class="move-panel display-none">
     @include('employee.employee-edit')
 </div>
 <div id="panel-view-employee" class="move-panel display-none">
     @include('employee.employee-view')
-</div>
+</div> --}}
 <div id="panel-request-list" class="move-panel display-none">
-    @include('employee.request-list')
+    @include('employee.all_request_details.request_list')
 </div>
 <div id="panel-create-request" class="move-panel display-none">
-    @include('employee.request-add')
+    @include('employee.all_request_details.create_request')
 </div>
 <div id="panel-import-employee" class="move-panel display-none">
-    @include('employee.employee-import')
+    @include('employee.action_tools.action_import')
 </div>
 <div id="panel-export-employee" class="move-panel display-none">
-    @include('employee.employee-export')
+    @include('employee.action_tools.action_export')
 </div>
 @endsection
 @section('page_template_js')
@@ -49,11 +49,11 @@
 <script src="{{ url('assets/global/plugins/datatables/datatables.min.js') }}" type="text/javascript"></script>
 <script src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}" type="text/javascript"></script>
 <script src="{{ url('assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
+<script src="{{ url('assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
 <script src="{{ url('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}" type="text/javascript"></script>
-<script src="{{ url('assets/global/plugins/icheck/icheck.min.js') }}" type="text/javascript"></script>
+{{-- <script src="{{ url('assets/global/plugins/icheck/icheck.min.js') }}" type="text/javascript"></script> --}}
 <script src="{{ url('assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js') }}" type="text/javascript"></script>
 <script src="{{ url('assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js') }}" type="text/javascript"></script>
-<script src="{{ url('assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
 <script src="{{ url('assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js') }}" type="text/javascript"></script>
 <script src="{{ url('assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js') }}" type="text/javascript"></script>
 @endsection
@@ -61,7 +61,8 @@
 @section('page_js')
 <script type="text/javascript">
     var PAGE_ID = "page-employee";
-
 </script>
 <script src="{{ url('assets/custom/scripts/employee/index.js?v=' . $randNum) }}" type="text/javascript"></script>
+<script src="{{ url('assets/custom/scripts/employee/add_employee.js?v=' . $randNum) }}" type="text/javascript"></script>
+<script src="{{ url('assets/custom/scripts/employee/request_details.js?v=' . $randNum) }}" type="text/javascript"></script>
 @endsection

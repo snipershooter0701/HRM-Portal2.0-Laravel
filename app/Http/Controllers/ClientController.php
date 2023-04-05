@@ -59,16 +59,6 @@ class ClientController extends Controller
     /**
      * Get Placements info
      */
-    public function getContactInfo()
-    {
-        $ajaxData = $this->getContactInfoTblData();
-        $result = $this->makeContactInfoTblItems($ajaxData['totalItems'], $ajaxData['filterItems'], 'displayContactInfo');
-        return $result;
-    }
-
-    /**
-     * Get Placements info
-     */
     public function getPlacements()
     {
         $ajaxData = $this->getPlacementTblData();
@@ -326,38 +316,6 @@ class ClientController extends Controller
      * Generate 
      */
     private function getAllDocumentTblData()
-    {
-        // Get total Activity
-        $totalItems = Document::all();
-
-        // Get Filtered activities
-        $whereConds = array();
-        if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
-            if ($this->request['filt_title'] != NULL)
-                array_push($whereConds, array("title" => $this->request['filt_title']));
-            if ($this->request['filt_document_type'] != NULL)
-                array_push($whereConds, array("document_type" => $this->request['filt_document_type']));
-            if ($this->request['filt_Client_name'] != NULL)
-                array_push($whereConds, array("Client_name" => $this->request['filt_Client_name']));
-            if ($this->request['filt_employee'] != NULL)
-                array_push($whereConds, array("employee" => $this->request['filt_employee']));
-            if ($this->request['filt_status'] != NULL)
-                array_push($whereConds, array("status" => $this->request['filt_status']));
-            if ($this->request['filt_except_date'] != NULL)
-                array_push($whereConds, array("except_date" => $this->request['filt_except_date']));
-        }
-
-        $filterItems = Document::where($whereConds)->get();
-        return [
-            'totalItems' => $totalItems,
-            'filterItems' => $filterItems
-        ];
-    }
-
-    /**
-     * Generate 
-     */
-    private function getContactInfoTblData()
     {
         // Get total Activity
         $totalItems = Document::all();
@@ -644,57 +602,6 @@ class ClientController extends Controller
                 "5456654",
                 "Makarov",
                 "03/02/2023",
-            );
-            $idx++;
-        }
-
-        if (isset($this->request['customActionType']) && $this->request['customActionType'] == "group_action") {
-            $records["customActionStatus"] = "OK"; // pass custom message(useful for getting status of group actions)
-            $records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
-        }
-
-        $records["draw"] = $sEcho;
-        $records["recordsTotal"] = $iTotalRecords;
-        $records["recordsFiltered"] = $iTotalRecords;
-
-        // echo json_encode($records);
-        return response()->json($records);
-    }
-
-    private function makeContactInfoTblItems($totalItems, $filterItems)
-    {
-        $iTotalRecords = count($totalItems);
-        $iDisplayLength = intval($this->request['length']);
-        $iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
-        $iDisplayStart = intval($this->request['start']);
-        $sEcho = intval($this->request['draw']);
-
-        $records = array();
-        $records["data"] = array();
-
-        $end = $iDisplayStart + $iDisplayLength;
-        $end = $end > $iTotalRecords ? $iTotalRecords : $end;
-
-        $idx = 0;
-        for ($i = $iDisplayStart; $i < $end; $i++) {
-            $id = ($i + 1);
-            $records["data"][] = array(
-                '<input type="checkbox" name="id[]" value="' . $id . '">',
-                $id,
-                "Vladyslav",
-                "Makarov",
-                "makarov@outlook.com",
-                "+12345789",
-                '<div class="input-group text-left">
-                    <div class="icheck-list">
-                        <label>
-                            <input type="checkbox" class="icheck"> Add email to CC list </label>
-                        <label>
-                            <input type="checkbox" checked class="icheck"> Primary Contact </label>
-                        <label>
-                            <input type="checkbox" class="icheck"> Primary accounts email </label>
-                    </div>
-                </div>'
             );
             $idx++;
         }

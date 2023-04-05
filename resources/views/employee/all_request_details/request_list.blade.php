@@ -29,12 +29,6 @@
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-upload"></i></a>
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-download"></i></a>
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-print"></i></a>
-                            {{-- <a href="javascript:;" data-action="0" class="btn-tbl-action tool-action"><i class="icon-printer"></i></a>
-                            <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="icon-check"></i></a>
-                            <a href="javascript:;" data-action="2" class="btn-tbl-action tool-action"><i class="icon-doc"></i></a>
-                            <a href="javascript:;" data-action="3" class="btn-tbl-action tool-action"><i class="icon-paper-clip"></i></a>
-                            <a href="javascript:;" data-action="4" class="btn-tbl-action tool-action"><i class="icon-cloud-upload"></i></a>
-                            <a href="javascript:;" data-action="5" class="btn-tbl-action tool-action"><i class="icon-refresh"></i></a> --}}
                         </div>
                     </div>
                     <div class="table-actions-wrapper">
@@ -53,13 +47,12 @@
                                     <input type="checkbox" class="group-checkable"> </th>
                                 <th width="5%"> No </th>
                                 <th width="10%"> Request ID </th>
-                                <th width="13%"> Employee Name </th>
-                                <th width="10%"> Requested On </th>
-                                <th width="10%"> Responsed On </th>
-                                <th width="10%"> Requested By </th>
-                                <th width="10%"> Approver </th>
-                                <th width="10%"> Template Name </th>
-                                <th width="10%"> Request Status </th>
+                                <th width="15%"> Employee Name </th>
+                                <th width="12%"> Requested On </th>
+                                <th width="12%"> Responsed On </th>
+                                <th width="12%"> Requested By </th>
+                                <th width="12%"> Approver </th>
+                                <th width="12%"> Request Status </th>
                                 <th width="10%"> Action </th>
                             </tr>
                             <tr role="row" class="filter">
@@ -68,26 +61,26 @@
 
                                 {{-- Request ID --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_first_name">
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_request_id">
                                 </td>
 
                                 {{-- Employee Name --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_last_name">
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_emp_name">
                                 </td>
 
                                 {{-- Responsed On --}}
                                 <td>
-                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
+                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy/mm/dd">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_requested_from" placeholder="From">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
                                                 <i class="fa fa-calendar"></i>
                                             </button>
                                         </span>
                                     </div>
-                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_to" placeholder="To">
+                                    <div class="input-group date date-picker" data-date-format="yyyy/mm/dd">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_requested_to" placeholder="To">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
                                                 <i class="fa fa-calendar"></i>
@@ -98,16 +91,16 @@
 
                                 {{-- Responsed On --}}
                                 <td>
-                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
+                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy/mm/dd">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_responsed_from" placeholder="From">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
                                                 <i class="fa fa-calendar"></i>
                                             </button>
                                         </span>
                                     </div>
-                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_to" placeholder="To">
+                                    <div class="input-group date date-picker" data-date-format="yyyy/mm/dd">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_responsed_to" placeholder="To">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
                                                 <i class="fa fa-calendar"></i>
@@ -118,26 +111,22 @@
 
                                 {{-- Requested By --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_category">
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_requested_by">
                                 </td>
 
                                 {{-- Approver --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_category">
-                                </td>
-
-                                {{-- Template Name --}}
-                                <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_poc">
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_approver">
                                 </td>
 
                                 {{-- Request Status --}}
                                 <td>
-                                    <select name="filt_status" class="form-control form-filter input-sm">
+                                    <select name="filt_request_status" class="form-control form-filter input-sm">
                                         <option value="">Select...</option>
-                                        <option value="">Request</option>
-                                        <option value="">Rejected</option>
-                                        <option value="">Apporoved</option>
+                                        <option value="0">Request</option>
+                                        <option value="1">Respond</option>
+                                        <option value="2">Apporoved</option>
+                                        <option value="3">Rejected</option>
                                     </select>
                                 </td>
 

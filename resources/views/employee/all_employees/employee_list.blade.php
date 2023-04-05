@@ -11,9 +11,7 @@
     </ul>
     <div class="page-toolbar">
         <div class="btn-group pull-right">
-            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel" data-panelname="panel-create-employee"><i class="fa fa-plus-circle"></i> Add Employee </button>
-            <button id="btn_show_emp_view_panel" type="button" class="btn-move-panel display-none" data-panelname="panel-view-employee"></button>
-            <button id="btn_show_edit_view_panel" type="button" class="btn-move-panel display-none" data-panelname="panel-edit-employee"></button>
+            <button id="add_employee_btn" type="button" class="btn btn-sm btn-c-primary btn-move-panel" data-panelname="panel-add-employee"><i class="fa fa-plus-circle"></i> Add Employee </button>
         </div>
     </div>
 </div>
@@ -40,12 +38,6 @@
                                 <a class="btn-tbl-action btn-move-panel" data-panelname="panel-import-employee"><i class="fa fa-upload"></i></a>
                                 <a class="btn-tbl-action" data-target="#modal-export" data-toggle="modal"><i class="fa fa-download"></i></a>
                                 <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-print"></i></a>
-                                {{-- <a href="javascript:;" data-action="0" class="btn-tbl-action tool-action"><i class="icon-printer"></i></a>
-                            <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="icon-check"></i></a>
-                            <a href="javascript:;" data-action="2" class="btn-tbl-action tool-action"><i class="icon-doc"></i></a>
-                            <a href="javascript:;" data-action="3" class="btn-tbl-action tool-action"><i class="icon-paper-clip"></i></a>
-                            <a href="javascript:;" data-action="4" class="btn-tbl-action tool-action"><i class="icon-cloud-upload"></i></a>
-                            <a href="javascript:;" data-action="5" class="btn-tbl-action tool-action"><i class="icon-refresh"></i></a> --}}
                             </div>
                         </div>
                     </div>
@@ -58,7 +50,7 @@
                         <button class="btn btn-sm table-group-action-submit btn-c-primary">
                             <i class="fa fa-check"></i> Submit</button>
                     </div>
-                    <table id="tbl_employees" class="table table-striped table-bordered table-hover table-checkable">
+                    <table id="tbl_employee_list" class="table table-striped table-bordered table-hover table-checkable">
                         <thead>
                             <tr role="row" class="heading">
                                 <th width="2%">
@@ -91,11 +83,17 @@
 
                                 {{-- category --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_category"> </td>
+                                    <select name="filt_category" class="form-control form-filter input-sm">
+                                        <option value="">Select...</option>
+                                        <option value="0">W2</option>
+                                        <option value="1">C2C</option>
+                                        <option value="2">1099</option>
+                                    </select>
+                                </td>
 
                                 {{-- date of joining --}}
                                 <td>
-                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
@@ -103,7 +101,7 @@
                                             </button>
                                         </span>
                                     </div>
-                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                    <div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_to" placeholder="To">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
@@ -115,14 +113,17 @@
 
                                 {{-- supervisor --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_poc"> </td>
+                                    <select name="filt_poc" class="form-control form-filter input-sm">
+                                        <option value="">Select...</option>
+                                        <option value="0">Lead Names</option>
+                                </td>
 
                                 {{-- status --}}
                                 <td>
                                     <select name="filt_status" class="form-control form-filter input-sm">
                                         <option value="">Select...</option>
-                                        <option value="pending">active</option>
-                                        <option value="closed">inactive</option>
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
                                     </select>
                                 </td>
                                 <td>

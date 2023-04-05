@@ -21,6 +21,10 @@
     <link href="{{ url('assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="{{ url('assets/global/plugins/datatables/datatables.min.css?v=' . $randNum) }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css?v=' . $randNum) }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css?v=' . $randNum) }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.css?v=' . $randNum) }}" rel="stylesheet" type="text/css" />
     @yield('page_template_css')
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL STYLES -->
@@ -203,17 +207,17 @@
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
-                            <li class="nav-item" id="page-client-list-inv">
-                                <a href="{{ url('/client') }}" class="nav-link ">
+                            <li class="nav-item" id="page-client-list">
+                                <a href="{{ url('/client/list') }}" class="nav-link ">
                                     <span class="title">Client List</span>
                                 </a>
                             </li>
-                            <li class="nav-item" id="page-client-all-placements-inv">
+                            <li class="nav-item" id="page-client-all-placements">
                                 <a href="{{ url('/client/all_placements') }}" class="nav-link ">
                                     <span class="title">All Placements</span>
                                 </a>
                             </li>
-                            <li class="nav-item" id="page-client-all-documents-inv">
+                            <li class="nav-item" id="page-client-all-documents">
                                 <a href="{{ url('/client/all_documents') }}" class="nav-link ">
                                     <span class="title">All Documents</span>
                                 </a>
@@ -307,6 +311,7 @@
         <div class="page-content-wrapper">
             <!-- BEGIN CONTENT BODY -->
             <div class="page-content">
+                @yield('content_header')
                 @yield('content')
             </div>
             <!-- END CONTENT BODY -->
