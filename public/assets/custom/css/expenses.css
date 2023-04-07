@@ -15,10 +15,6 @@
     margin-bottom: 0px;
 }
 
-#panel-expense-add #tbl_add_expenses tbody tr:last-child {
-    background-color: #DEDEDE;
-}
-
 #panel-expense-add #tbl_add_expenses tbody tr:last-child .sorting_1 {
     background-color: #DEDEDE !important;
 }
@@ -34,6 +30,11 @@
 
 .margin-bottom-cancel {
     margin-bottom: unset !important;
+}
+
+.bill-attachment {
+    background-color: unset !important;
+    border: unset !important;
 }
 
 /* ============================ END ADD EMPLOYEE STYLES ============================ */

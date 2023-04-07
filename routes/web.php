@@ -79,9 +79,12 @@ Route::middleware(['auth'])->group(function () {
 
     // Expenses
     Route::get('/expenses', [App\Http\Controllers\ExpensesController::class, 'index']);
-    Route::post('/expenses/get-expenses', [App\Http\Controllers\ExpensesController::class, 'getExpenses']);
-    Route::post('/expenses/get-expenses-activities', [App\Http\Controllers\ExpensesController::class, 'getExpenseActvities']);
-    Route::post('/expenses/get-add-expenses', [App\Http\Controllers\ExpensesController::class, 'getAddExpenses']);
+    Route::post('/expenses/get_expenses_list', [App\Http\Controllers\ExpensesController::class, 'getExpensesList']);
+    Route::post('/expenses/get_expenses_act', [App\Http\Controllers\ExpensesController::class, 'getExpensesAct']);
+    Route::post('/expenses/get_expense', [App\Http\Controllers\ExpensesController::class, 'getExpenseById']);
+    Route::post('/expenses/get_add_expenses', [App\Http\Controllers\ExpensesController::class, 'getAddExpenses']);
+    Route::post('/expenses/get_update_expenses', [App\Http\Controllers\ExpensesController::class, 'updateExpenses']);
+    Route::post('/expenses/get_del_expenses', [App\Http\Controllers\ExpensesController::class, 'delExpenses']);
 
     // Invoices - (All Invoices)
     Route::get('/invoices/all-inv', [App\Http\Controllers\InvoiceAllController::class, 'index']);

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Employee;
+use App\Models\Expense;
+use App\Models\ExpenseBill;
 
 class ExpensesController extends Controller
 {
@@ -35,19 +38,19 @@ class ExpensesController extends Controller
      * 
      * @return $expenses
      */
-    public function getExpenses()
+    public function getExpensesList(Request $request)
     {
-        $ajaxData = $this->getExpenseTblData();
-        $result = $this->makeExpenseTblItems($ajaxData['totalItems'], $ajaxData['filterItems']);
+        $ajaxData = $this->getExpenseTblData($request);
+        $result = $this->makeExpenseTblItems($ajaxData['filterItems'], $ajaxData['employees']);
         return $result;
     }
 
     /**
      * Get expense activities
      */
-    public function getExpenseActvities()
+    public function getExpenseAct()
     {
-        $ajaxData = $this->getExpenseTblData();
+        // $ajaxData = $this->getExpenseTblData();
         $result = $this->makeExpenseActivityTblItems($ajaxData['totalItems'], $ajaxData['filterItems']);
         return $result;
     }
@@ -55,11 +58,153 @@ class ExpensesController extends Controller
     /**
      * Get add expenses
      */
-    public function getAddExpenses()
+    public function getAddExpenses(Request $request)
     {
-        $ajaxData = $this->getExpenseTblData();
-        $result = $this->makeAddExpenseTblItems($ajaxData['totalItems'], $ajaxData['filterItems']);
-        return $result;
+        // Validation TOOD
+        $request->validate([
+            'cate'            => ['required'],
+            'type'            => ['required'],
+            'emp'             => ['required'],
+            'bill_record'     => ['required']
+        ]);
+
+        Expense::create([
+            'category'        =>  $request->cate,
+            'type'            =>  $request->type,
+            'employee_id'     =>  $request->emp,
+        ]);
+
+        $expense_id = Expense::select('id')
+                            ->where('employee_id', $request->emp)
+                            ->latest()
+                            ->first();
+       
+        for($i = 0; $i < count($request->bill_record); $i++) {
+            ExpenseBill::create([
+                'expense_id'    =>  $expense_id->id,
+                'date'          =>  $request->bill_record[$i]['date'],
+                'details'       =>  $request->bill_record[$i]['details'],
+                'amount'        =>  $request->bill_record[$i]['amount'],
+                'attachment'    =>  $request->bill_record[$i]['attachment']
+            ]);
+        }
+
+        return response()->json([
+            'result' => 'success'
+        ]);
+    }
+
+    // Get Expense By ID
+    public function getExpenseById(Request $request)
+    {
+        // Check Validation
+        $request->validate([
+            'id' => ['required']
+        ]);
+
+        $employee = Expense::with(['employee', 'expensebill'])
+                            ->get();
+
+        return response()->json([
+            'result' => 'success',
+            'employee' => $employee
+        ]);
+    }
+
+    // Update Employee Info
+    public function updateExpenses(Request $request) {
+        // Validation TOOD
+        $request->validate([
+            'id'                => ['required'],
+            'first_name'        => ['required'],
+            'last_name'         => ['required'],
+            'title'             => ['required'],
+            'email_address'     => ['required'],
+            'phone_num'         => ['required'],
+            'birth'             => ['required'],
+            'join_date'         => ['required'],
+            'gender'            => ['required'],
+            'employment_type'   => ['required'],
+            'category'          => ['required'],
+            'employee_type'     => ['required'],
+            'employee_status'   => ['required'],
+            'role'              => ['required'],
+            'poc'               => ['required'],
+            'classification'    => ['required'],
+            'per_pay'           => ['required'],
+            'per_change_hrs'    => ['required'],
+            'per_change_pay'    => ['required'],
+            'rate_pay'          => ['required'],
+            'rate_change_hrs'   => ['required'],
+            'rate_change_pay'   => ['required'],
+            'addr_street'       => ['required'],
+            'addr_apt'          => ['required'],
+            'addr_city'         => ['required'],
+            'addr_state'        => ['required'],
+            'addr_country'      => ['required'],
+            'addr_zipcode'      => ['required'],
+            'pay_standard_time' => ['required'],
+            'pay_over_time'     => ['required'],
+            'pay_double_time'   => ['required'],
+            'pay_scale'         => ['required']
+        ]);
+
+        Employee::where('id', $request->id)
+                ->update([
+                    'first_name'        =>  $request->first_name,
+                    'middle_name'       =>  $request->middle_name,
+                    'last_name'         =>  $request->last_name,
+                    'title'             =>  $request->title,
+                    'email'             =>  $request->email_address,
+                    'phone_num'         =>  $request->phone_num,
+                    'dateofbirth'       =>  $request->birth,
+                    'dateofjoining'     =>  $request->join_date,
+                    'gender'            =>  $request->gender,
+                    'employment_type'   =>  $request->employment_type,
+                    'category'          =>  $request->category,
+                    'employee_type'     =>  $request->employee_type,
+                    'status'            =>  $request->employee_status,
+                    'role_id'           =>  $request->role,
+                    'poc_id'            =>  $request->poc,
+                    'classification'    =>  $request->classification,
+                    'pay_percent_value' =>  $request->per_pay,
+                    'pay_percent_hrs'   =>  $request->per_change_hrs,
+                    'pay_percent_to'    =>  $request->per_change_pay,
+                    'pay_rate_value'    =>  $request->rate_pay,
+                    'pay_rate_hrs'      =>  $request->rate_change_hrs,
+                    'pay_rate_to'       =>  $request->rate_change_pay,
+                    'street'            =>  $request->addr_street,
+                    'suite_aptno'       =>  $request->addr_apt,
+                    'city_town'         =>  $request->addr_city,
+                    'state_id'          =>  $request->addr_state,
+                    'country_id'        =>  $request->addr_country,
+                    'zipcode'           =>  $request->addr_zipcode,
+                    'pay_scale'         =>  $request->pay_scale,
+                    'pay_standard_time' =>  $request->pay_standard_time,
+                    'pay_over_time'     =>  $request->pay_over_time,
+                    'pay_double_time'   =>  $request->pay_double_time,
+                    'status_end_date'   =>  $request->employee_status_date,
+                    'department_id'     =>  $request->deparment,
+                ]);
+
+        return response()->json([
+            'result' => 'success'
+        ]);
+    }
+
+    // Delete Employee Info
+    public function delExpenses(Request $request) {
+        // Check Validation
+        $request->validate([
+            'id' => ['required'],
+        ]);
+
+        Employee::where('id', $request->id)
+                ->delete();
+
+        return response()->json([
+            'result' => 'success'
+        ]);
     }
     // =========================== END PUBLIC FUNCTIONS ===========================
 
@@ -67,49 +212,39 @@ class ExpensesController extends Controller
     /**
      * Generate 
      */
-    private function getExpenseTblData()
+    private function getExpenseTblData($request)
     {
-        // Get total employees
-        $totalEmployees = Employee::all();
-
-        // Get Filtered employees
         $whereConds = array();
-        if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
-            if ($this->request['filt_first_name'] != NULL)
-                array_push($whereConds, array("first_name" => $this->request['filt_first_name']));
-            if ($this->request['filt_last_name'] != NULL)
-                array_push($whereConds, array("last_name" => $this->request['filt_last_name']));
-            if ($this->request['filt_phone'] != NULL)
-                array_push($whereConds, array("phone_number" => $this->request['filt_phone']));
-            if ($this->request['filt_email'] != NULL)
-                array_push($whereConds, array("email_address" => $this->request['filt_email']));
-            if ($this->request['filt_category'] != NULL)
-                array_push($whereConds, array("category" => $this->request['filt_category']));
-            if ($this->request['filt_join_date_from'] != NULL)
-                array_push($whereConds, array("date_of_joining >=" => $this->request['filt_join_date_from']));
-            if ($this->request['filt_join_date_to'] != NULL)
-                array_push($whereConds, array("date_of_joining <=" => $this->request['filt_join_date_to']));
-            if ($this->request['filt_poc'] != NULL)
-                array_push($whereConds, array("poc" => $this->request['filt_poc']));
-            if ($this->request['filt_classification'] != NULL)
-                array_push($whereConds, array("classification" => $this->request['filt_classification']));
-            if ($this->request['filt_status'] != NULL)
-                array_push($whereConds, array("employee_status" => $this->request['filt_status']));
+        if ($request['action'] != NULL && $request['action'] == "filter") {
+            if ($request['filt_expenses_category'] != NULL)
+                $whereConds[] = ['category', $request['filt_expenses_category']];
+            if ($request['filt_employee'] != NULL)
+                $whereConds[] = ['employee_id', $this->request['filt_employee']];
+            if ($request['filt_amount'] != NULL)
+                $whereConds[] = ['amount', $this->request['filt_amount']];
+            if ($request['filt_expense_type'] != NULL)
+                $whereConds[] = ['type', $this->request['filt_expense_type']];
         }
-        $filterEmployees = Employee::where($whereConds)->get();
+
+        $expenseItems = Expense::with(['employee', 'expensebill'])
+                                ->where($whereConds)
+                                ->get();
+
+        $employees = Employee::select('id', 'first_name', 'last_name')
+                            ->get();
 
         return [
-            'totalItems' => $totalEmployees,
-            'filterItems' => $filterEmployees
+            'filterItems' => $expenseItems,
+            'employees' => $employees
         ];
     }
 
     /**
      * Generate expense table items
      */
-    private function makeExpenseTblItems($totalItems, $filterItems)
+    private function makeExpenseTblItems($filterItems, $employees)
     {
-        $iTotalRecords = count($totalItems);
+        $iTotalRecords = count($filterItems);
         $iDisplayLength = intval($this->request['length']);
         $iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
         $iDisplayStart = intval($this->request['start']);
@@ -121,20 +256,30 @@ class ExpensesController extends Controller
         $end = $iDisplayStart + $iDisplayLength;
         $end = $end > $iTotalRecords ? $iTotalRecords : $end;
 
+        
         $idx = 0;
+        $total = 0;
         for ($i = $iDisplayStart; $i < $end; $i++) {
             $id = ($i + 1);
+            $amount = 0;
+
+            // Total amount
+            for($j = 0; $j < count($filterItems[$idx]->expensebill); $j ++) {
+                $amount += Intval($filterItems[$idx]->expensebill[$j]->amount);
+            }
+
             $records["data"][] = array(
-                '<input type="checkbox" name="id[]" value="' . $id . '">',
                 $id,
-                (rand() % 2) ? '<span class="label label-sm label-primary">Employee Expense</span>' : '<span class="label label-sm label-grey">Company Expense</span>',
-                "Makarov",
-                "$4500",
-                (rand() % 2) ? '<span class="color-primary">$2000</span>' : '<span class="color-light-green">$1500</span>',
-                '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-eye"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-c-grey"><i class="fa fa-trash"></i></a>'
+                '<input type="checkbox" name="id[]" value="' . $id . '">',
+                $filterItems[$idx]->category == 0 ? '<span class="label label-sm label-primary">Employee Expense</span>' : '<span class="label label-sm label-grey">Company Expense</span>',
+                $filterItems[$idx]->employee->first_name . $filterItems[$idx]->employee->last_name,
+                $filterItems[$idx]->category == 0 ? '<span class="color-light-green">$'.$amount.'</span>' : '<span class="color-primary">$'.$amount.'</span>',
+                $filterItems[$idx]->type == 0 ? '<span class="label label-sm label-primary">Advance</span>' : '<span class="label label-sm label-grey">Service(s)</span>',
+                '<a href="javascript:;" class="btn btn-xs btn-c-primary btn-expense-view" data-id="'.$filterItems[$idx]->id.'"><i class="fa fa-eye"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-c-primary btn-expense-edit" data-id="'.$filterItems[$idx]->id.'"><i class="fa fa-pencil"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-c-grey btn-expense-del" data-id="'.$filterItems[$idx]->id.'"><i class="fa fa-trash"></i></a>'
             );
+            $total += $amount;
             $idx++;
         }
 
@@ -146,6 +291,8 @@ class ExpensesController extends Controller
         $records["draw"] = $sEcho;
         $records["recordsTotal"] = $iTotalRecords;
         $records["recordsFiltered"] = $iTotalRecords;
+        $records["employees"] = $employees;
+        $records["total"] = $total;
 
         // echo json_encode($records);
         return response()->json($records);

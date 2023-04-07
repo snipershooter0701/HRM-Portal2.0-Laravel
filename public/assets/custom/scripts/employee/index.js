@@ -842,9 +842,6 @@ function getRequestDetailsByID(id, emp_id) {
         success: function (data) {
             if (data['result'] == 'success') {
 
-                // move create Request page
-                $('#add_request_details_btn').click();
-
                 var details = data['details'];
                 var doc = data['doc'];
                 $('#req_emp_name').val(details['employee_id']);
@@ -885,6 +882,9 @@ function getRequestDetailsByID(id, emp_id) {
                         $('#uniform-other_n_a_radio').prop('checked', true);
                     }
                 }
+
+                // move create Request page
+                $('#add_request_details_btn').click();
             }
         },
         error: function (err) {

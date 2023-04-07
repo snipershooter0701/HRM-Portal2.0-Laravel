@@ -103,7 +103,7 @@
                             <label class="expenses-total">
                                 <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Total of the above shown Expense(s)
                             </label>
-                            <input type="text" class="form-control form-filter input-sm auto-width" placeholder="Total">
+                            <input type="text" class="form-control form-filter input-sm auto-width" placeholder="Total" id="expense_total">
                         </div>
                     </div>
                 </div>
