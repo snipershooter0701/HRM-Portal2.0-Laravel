@@ -5,3 +5,12 @@
 .btn-plus-primary i {
     font-size: 12px !important;
 }
+
+/* ============================ BEGIN MODAL CSS =========================== */
+.modal-checkbox {
+    display: inline-flex !important;
+    margin: 0px;
+    align-items: center;
+    justify-content: center;
+}
+/* ============================= END MODAL CSS ============================ */

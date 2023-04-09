@@ -1,3 +1,33 @@
+
+$(document).ready(function () {
+    TableTicket.init();
+
+    $('.page-move-btn').click(function () {
+        var panelName = $(this).attr('data-panelname');
+        $('#create_emp_id').val('');
+        $('#create_department_id').val('');
+        $('#create_subject').val('');
+        $('#create_attachment').val('');
+        $('#create_detail').val('');
+        btnStatus('add');
+        movePanel(panelName);
+    });
+
+    // create ticket
+    $('#create_ticket').click(function () {
+        createTicket();
+    });
+
+    // Update ticket
+    $('#update_ticket').click(function () {
+        var id = $(this).attr('data-id');
+        updateTicketInfo(id);
+    });
+});
+
+
+var grid_ticket = new Datatable();
+
 var TableTicket = function () {
 
     var initPickers = function () {
@@ -10,19 +40,52 @@ var TableTicket = function () {
 
     var handleTicketTable = function () {
 
-        let grid = new Datatable();
 
-        grid.init({
+
+        grid_ticket.init({
             src: $("#tbl_tickets"),
-            onSuccess: function (grid, response) { },
-            onError: function (grid) { },
-            onDataLoad: function (grid) {
-                $('.btn-user-tickets').click(function () {
-                    $('#btn_show_user_tickets').trigger('click');
-                })
+            onSuccess: function (grid_ticket, response) {
+                // set employee 
+                var i;
+                var employee = response['employees'];
+                var emp_name = '<option value="">Select</option>';
+                for (i = 0; i < employee.length; i++) {
+                    emp_name += '<option value="' + employee[i]['id'] + '">' + employee[i]['first_name'] + employee[i]['last_name'] + '</option>';
+                }
+                $('#create_emp_id').html(emp_name);
 
-                $('.btn-view').click(function () {
-                    $('#btn_show_ticket').trigger('click');
+                // set department 
+                var i;
+                var department = response['departments'];
+                var depart = '<option value="">Select</option>';
+                for (i = 0; i < department.length; i++) {
+                    depart += '<option value="' + department[i]['id'] + '">' + department[i]['name'] + '</option>';
+                }
+                $('#create_department_id').html(depart);
+            },
+            onError: function (grid_ticket) { },
+            onDataLoad: function (grid_ticket) {
+                // view
+                $('.btn-ticket-view').click(function () {
+                    var id = $(this).attr('data-id');
+                    viewTicketInfo(id);
+                });
+
+                // edit
+                $('.btn-ticket-update').click(function () {
+                    var id = $(this).attr('data-id');
+                    $('#update_ticket').attr('data-id', id);
+                    setTicketUpdateBefore(id)
+                });
+
+                // delete
+                $('.btn-ticket-del').click(function () {
+                    var id = $(this).attr('data-id');
+                    displayConfirmModal('Do you want to delete?', 'Delete Ticket', function (req) {
+                        if (req == 'ok') {
+                            delTicketInfo(id);
+                        }
+                    })
                 });
             },
             loadingMessage: 'Loading...',
@@ -41,7 +104,7 @@ var TableTicket = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": BASE_URL + "/tickets/get-all-tickets", // ajax source
+                    "url": BASE_URL + "/tickets/list", // ajax source
                 },
                 "columnDefs": [
                     {  // set default column settings
@@ -71,42 +134,42 @@ var TableTicket = function () {
         });
 
         // handle group actionsubmit button click
-        grid.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
+        grid_ticket.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
             e.preventDefault();
-            var action = $(".table-group-action-input", grid.getTableWrapper());
-            if (action.val() != "" && grid.getSelectedRowsCount() > 0) {
-                grid.setAjaxParam("customActionType", "group_action");
-                grid.setAjaxParam("customActionName", action.val());
-                grid.setAjaxParam("id", grid.getSelectedRows());
-                grid.getDataTable().ajax.reload();
-                grid.clearAjaxParams();
+            var action = $(".table-group-action-input", grid_ticket.getTableWrapper());
+            if (action.val() != "" && grid_ticket.getSelectedRowsCount() > 0) {
+                grid_ticket.setAjaxParam("customActionType", "group_action");
+                grid_ticket.setAjaxParam("customActionName", action.val());
+                grid_ticket.setAjaxParam("id", grid_ticket.getSelectedRows());
+                grid_ticket.getDataTable().ajax.reload();
+                grid_ticket.clearAjaxParams();
             } else if (action.val() == "") {
                 App.alert({
                     type: 'danger',
                     icon: 'warning',
                     message: 'Please select an action',
-                    container: grid.getTableWrapper(),
+                    container: grid_ticket.getTableWrapper(),
                     place: 'prepend'
                 });
-            } else if (grid.getSelectedRowsCount() === 0) {
+            } else if (grid_ticket.getSelectedRowsCount() === 0) {
                 App.alert({
                     type: 'danger',
                     icon: 'warning',
                     message: 'No record selected',
-                    container: grid.getTableWrapper(),
+                    container: grid_ticket.getTableWrapper(),
                     place: 'prepend'
                 });
             }
         });
 
-        // grid.setAjaxParam("customActionType", "group_action");
-        // grid.getDataTable().ajax.reload();
-        // grid.clearAjaxParams();
+        // grid_ticket.setAjaxParam("customActionType", "group_action");
+        // grid_ticket.getDataTable().ajax.reload();
+        // grid_ticket.clearAjaxParams();
 
         // handle datatable custom tools
         $('#tbl_tickets_tools > a.tool-action').on('click', function () {
             var action = $(this).attr('data-action');
-            grid.getDataTable().button(action).trigger();
+            grid_ticket.getDataTable().button(action).trigger();
         });
     }
 
@@ -277,13 +340,275 @@ var TableTicket = function () {
         init: function () {
             initPickers();
             handleTicketTable();
-            handleTicketActivityTable();
-            handleUserTicketTable();
-            handleEmpTicketActivityTable();
+            //     handleTicketActivityTable();
+            //     handleUserTicketTable();
+            //     handleEmpTicketActivityTable();
         }
     };
 }();
 
-$(document).ready(function () {
-    TableTicket.init();
-});
+
+function refreshTicketList() {
+    grid_ticket.getDataTable().ajax.reload();
+    grid_ticket.clearAjaxParams();
+}
+
+function createTicket() {
+    // validation TODO
+    var validateFields = [{
+        field_id: 'create_emp_id',
+        conditions: [
+            'required' + CONST_VALIDATE_SPLITER + 'Employee Name field is required.'
+        ]
+    }, {
+        field_id: 'create_department_id',
+        conditions: [
+            'required' + CONST_VALIDATE_SPLITER + 'Department field is required.'
+        ]
+    }, {
+        field_id: 'create_subject',
+        conditions: [
+            'required' + CONST_VALIDATE_SPLITER + 'Subject field is required.'
+        ]
+    }, {
+        field_id: 'create_file',
+        conditions: [
+            'required' + CONST_VALIDATE_SPLITER + 'Attachment field is required.',
+        ]
+    }, {
+        field_id: 'create_detail',
+        conditions: [
+            'required' + CONST_VALIDATE_SPLITER + 'Explain field is required.',
+        ]
+    }];
+
+    var isValid = doValidationForm(validateFields);
+    if (!isValid)
+        return;
+
+    var formData = {
+        emp_id: $('#create_emp_id').val(),
+        department_id: $('#create_department_id').val(),
+        subject: $('#create_subject').val(),
+        attachment: $('#create_file').val(),
+        details: $('#create_detail').val(),
+    };
+
+
+    callAjax({
+        url: BASE_URL + '/tickets/add',
+        type: "POST",
+        data: formData,
+        success: function (data) {
+            if (data['result'] == 'success') {
+
+                // Refresh Table.
+                refreshTicketList();
+                toastr.success("New Ticket is successfully created.", "Success");
+
+                // move Employee list page
+                $('#add_ticket_action .page-move-btn').click();
+
+                $('#create_emp_id').val('');
+                $('#create_department_id').val('');
+                $('#create_subject').val('');
+                $('#create_attachment').val('');
+                $('#create_detail').val('');
+            }
+        },
+        error: function (err) {
+            var errors = err.errors;
+            if (errors) {
+                // Show server validation error.
+                var validationFields = [
+                    'business_name' + CONST_VALIDATE_SPLITER + 'create_bus_name',
+                    'contact_number' + CONST_VALIDATE_SPLITER + 'create_bus_contact_num',
+                    'federal_id' + CONST_VALIDATE_SPLITER + 'create_bus_federal_id',
+                    'email' + CONST_VALIDATE_SPLITER + 'create_bus_email',
+                    'website' + CONST_VALIDATE_SPLITER + 'create_bus_website',
+                    'inv_country_id' + CONST_VALIDATE_SPLITER + 'create_bus_inv_country',
+                    'inv_state_id' + CONST_VALIDATE_SPLITER + 'create_bus_inv_state',
+                    'inv_city' + CONST_VALIDATE_SPLITER + 'create_bus_inv_city',
+                    'inv_street' + CONST_VALIDATE_SPLITER + 'create_bus_inv_street',
+                    'inv_suite_aptno' + CONST_VALIDATE_SPLITER + 'create_bus_inv_apt',
+                    'inv_zipcode' + CONST_VALIDATE_SPLITER + 'create_bus_inv_zipcode',
+                    'addr_country_id' + CONST_VALIDATE_SPLITER + 'create_bus_cli_country',
+                    'addr_state_id' + CONST_VALIDATE_SPLITER + 'create_bus_cli_state',
+                    'addr_city' + CONST_VALIDATE_SPLITER + 'create_bus_cli_city',
+                    'addr_street' + CONST_VALIDATE_SPLITER + 'create_bus_cli_street',
+                    'addr_suite_aptno' + CONST_VALIDATE_SPLITER + 'create_bus_cli_apt',
+                    'addr_zipcode' + CONST_VALIDATE_SPLITER + 'create_bus_cli_zipcode',
+                ];
+                showServerValidationErrors(validationFields, errors);
+
+                toastr.error(err.message, "Error");
+            }
+        }
+    });
+}
+
+// get Ticket By ID
+function getTicketByID(id, type) {
+    var formData = {
+        id: id
+    };
+
+    callAjax({
+        url: BASE_URL + '/tickets/by_id',
+        type: "POST",
+        data: formData,
+        success: function (data) {
+            if (data['result'] == 'success') {
+                var ticket = data['ticket'];
+
+                if (type == 'view') {
+                    $('#modal_view_ticket').modal();
+                    $('#create_first_name').val(employee['first_name']);
+                    $('#create_middle_name').val(employee['middle_name']);
+                    $('#create_last_name').val(employee['last_name']);
+                    $('#create_title').val(employee['title']);
+                    $('#create_email_address').val(employee['email']);
+
+                } else {
+                    $('#create_emp_id').val(ticket[0]['employee_id']);
+                    $('#create_department_id').val(ticket[0]['department_id']);
+                    $('#create_subject').val(ticket[0]['subject']);
+                    // $('#create_file').val(ticket[0]['attachment']);
+                    $('#create_detail').val(ticket[0]['details']);
+
+                    // move add Employee page
+                    $('#create_ticket_btn').click();
+                }
+            }
+
+
+        },
+        error: function (err) {
+            var errors = err.errors;
+            if (errors)
+                toastr.error(err.message, "Error");
+        }
+    });
+}
+
+function btnStatus(param) {
+    if (param == 'add') {
+        $('#add_ticket_action').removeClass('hide');
+        $('#update_ticket_action').addClass('hide');
+    } else if (param == 'update') {
+        $('#add_ticket_action').addClass('hide');
+        $('#update_ticket_action').removeClass('hide');
+    }
+}
+
+// View Employee Info
+function viewTicketInfo(id) {
+    // change update btn
+    btnStatus('view');
+    getTicketByID(id, 'view');
+}
+
+function setTicketUpdateBefore(id) {
+    // change update btn
+    btnStatus('update');
+    getTicketByID(id, 'update');
+}
+
+// Update Employee Info
+function updateTicketInfo(id) {
+
+    // validation TODO
+    var validateFields = [{
+        field_id: 'create_emp_id',
+        conditions: [
+            'required' + CONST_VALIDATE_SPLITER + 'Employee Name field is required.'
+        ]
+    }, {
+        field_id: 'create_department_id',
+        conditions: [
+            'required' + CONST_VALIDATE_SPLITER + 'Department field is required.'
+        ]
+    }, {
+        field_id: 'create_subject',
+        conditions: [
+            'required' + CONST_VALIDATE_SPLITER + 'Subject field is required.'
+        ]
+    }, {
+        field_id: 'create_file',
+        conditions: [
+            'required' + CONST_VALIDATE_SPLITER + 'Attachment field is required.',
+        ]
+    }, {
+        field_id: 'create_detail',
+        conditions: [
+            'required' + CONST_VALIDATE_SPLITER + 'Explain field is required.',
+        ]
+    }];
+
+    var isValid = doValidationForm(validateFields);
+    if (!isValid)
+        return;
+
+    var formData = {
+        id: id,
+        emp_id: $('#create_emp_id').val(),
+        department_id: $('#create_department_id').val(),
+        subject: $('#create_subject').val(),
+        attachment: $('#create_file').val(),
+        details: $('#create_detail').val(),
+    };
+
+    callAjax({
+        url: BASE_URL + '/tickets/update',
+        type: "POST",
+        data: formData,
+        success: function (data) {
+            if (data['result'] == 'success') {
+
+                // Refresh Table.
+                refreshTicketList();
+                toastr.success("Ticket is successfully updated.", "Success");
+
+                // move Ticket List Page
+                $('#update_ticket_action .page-move-btn').click();
+
+                $('#create_emp_id').val('');
+                $('#create_department_id').val('');
+                $('#create_subject').val('');
+                $('#create_attachment').val('');
+                $('#create_details').val('');
+            }
+        },
+        error: function (err) {
+            var errors = err.errors;
+            if (errors)
+                toastr.error(err.message, "Error");
+        }
+    });
+}
+
+// Delete Employee
+function delTicketInfo(id) {
+    var formData = {
+        id: id
+    };
+
+    callAjax({
+        url: BASE_URL + '/tickets/del',
+        type: "POST",
+        data: formData,
+        success: function (data) {
+            if (data['result'] == 'success') {
+
+                // Refresh Table.
+                refreshTicketList();
+                toastr.success("Ticket is successfully deleted.", "Success");
+            }
+        },
+        error: function (err) {
+            var errors = err.errors;
+            if (errors)
+                toastr.error(err.message, "Error");
+        }
+    });
+}

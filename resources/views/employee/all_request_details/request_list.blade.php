@@ -3,10 +3,10 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="javascript:;" class="btn-move-panel" data-panelname="panel-employee-list">All Employees</a>
+            <a href="{{ url('/employee/all_employees') }}" class="btn-move-panel" data-panelname="panel-employee-list">All Employees</a>
         </li>
         <li>
-            <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel-request-list">All Request Details</a>
+            <a href="{{ url('/employee/all_request_details') }}" class="btn-move-panel bread-active" data-panelname="panel-request-list">All Request Details</a>
         </li>
     </ul>
     <div class="page-toolbar">

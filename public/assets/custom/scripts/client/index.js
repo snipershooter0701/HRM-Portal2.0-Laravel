@@ -867,6 +867,7 @@ $(document).ready(function () {
     TableClient.init();
 
     $('#add_contact').click(function () {
+        console.log('dsff');
         $('#contact_modal').modal();
     })
 });

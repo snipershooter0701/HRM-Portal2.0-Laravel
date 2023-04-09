@@ -26,8 +26,8 @@ return new class extends Migration
             $table->string('suite_aptno');
             $table->string('street');
             $table->string('zipcode');
-            $table->string('cancelled_check');
-            $table->string('other_attachment');
+            $table->string('cancelled_check')->nullable();
+            $table->string('other_attachment')->nullable();
             $table->integer('status')->default(0)->comment('0: Inactive, 1: Active');
             $table->timestamps();
             $table->softDeletes();

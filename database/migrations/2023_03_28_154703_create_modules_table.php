@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->integer('level')->default('0');
-            $table->string('url')->default('');
+            $table->string('name');
+            $table->integer('level')->default('0')->comment('0: Module, 1: SubModule, 2: Access');
+            $table->string('url')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

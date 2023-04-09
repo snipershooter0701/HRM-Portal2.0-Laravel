@@ -17,12 +17,11 @@ function checkInputValidation(fieldOption) {
     var conditions = fieldOption.conditions;
 
     for (var i in conditions) {
-        var condition = conditions[0];
+        var condition = conditions[i];
         var condArr = condition.split(CONST_VALIDATE_SPLITER);
 
         var cond = condArr[0];
         var error = condArr[1];
-
         if (cond === 'required') {
             if (value === '' || value == undefined) {
                 isValid = false;

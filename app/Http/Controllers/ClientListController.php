@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClientConfidential;
+use App\Models\ClientPlacementDoctype;
+use App\Models\Employee;
+use App\Models\JobTire;
 use Illuminate\Http\Request;
 use App\Models\Client;
+use App\Models\ClientActivity;
 
 class ClientListController extends Controller
 {
@@ -26,7 +31,20 @@ class ClientListController extends Controller
      */
     public function index()
     {
-        return view('client.client_list.index')->with('randNum', rand());
+        $clients = Client::all();
+        $clientPlacementDoctypes = ClientPlacementDoctype::all();
+        $employees = Employee::all();
+        $jobTires = JobTire::all();
+        $docTypes = ClientPlacementDoctype::all();
+
+        return view('client.client_list.index')->with([
+            'randNum' => rand(),
+            'clients' => $clients,
+            'clientPlacementDoctypes' => $clientPlacementDoctypes,
+            'employees' => $employees,
+            'jobTires' => $jobTires,
+            'docTypes' => $docTypes
+        ]);
     }
 
     // ========================== BEGIN PUBLIC FUNCTIONS ==========================
@@ -37,6 +55,16 @@ class ClientListController extends Controller
     {
         $recordData = $this->getClientTblRecords();
         $result = $this->makeClientTblColumns($recordData['filteredRecords'], $recordData['totalCnt'], $recordData['filteredCnt']);
+        return $result;
+    }
+
+    /**
+     * Get client's activity list from model and generate columns for ajax table. (tbl_client_list_activities)
+     */
+    public function getTableClientActsList()
+    {
+        $recordData = $this->getClientActsTblRecords();
+        $result = $this->makeClientActsTblColumns($recordData['filteredRecords'], $recordData['totalCnt'], $recordData['filteredCnt']);
         return $result;
     }
 
@@ -54,10 +82,15 @@ class ClientListController extends Controller
         $id = $this->request['id'];
 
         $client = Client::find($id);
+        $confidential = ClientConfidential::where([
+            ['client_id', '=', $this->request['id']],
+            ['status', '=', config('constants.STATE_ACTIVE')]
+        ])->get()->first();
 
         return response()->json([
             'result' => 'success',
-            'client' => $client
+            'client' => $client,
+            'confidential' => $confidential
         ]);
     }
 
@@ -202,7 +235,7 @@ class ClientListController extends Controller
         $length = $this->request['length'];
 
         // All client count
-        $totalClientCnt = Client::count();
+        $totalRecordCnt = Client::count();
 
         // Get client records for filter condition.
         $whereConds = array();
@@ -213,12 +246,8 @@ class ClientListController extends Controller
                 $whereConds[] = ['email', 'like', '%' . $this->request['filt_email'] . '%'];
             if ($this->request['filt_contact_number'] != NULL)
                 $whereConds[] = ['contact_number', 'like', '%' . $this->request['filt_contact_number'] . '%'];
-            if ($this->request['filt_net_terms_from'] != NULL)
-                array_push($whereConds, array("email_address" => $this->request['filt_net_terms_from']));
-            if ($this->request['filt_net_terms_to'] != NULL)
-                array_push($whereConds, array("email_address" => $this->request['filt_net_terms_to']));
             if ($this->request['filt_status'] != NULL) {
-                if ($this->request['filt_status'] == 1) {
+                if ($this->request['filt_status'] == config('constants.STATE_ACTIVE')) {
                     $whereConds[] = ['count(clientPlacements)', '>', 0];
                 } else {
                     $whereConds[] = ['count(clientPlacements)', '=', 0];
@@ -228,32 +257,29 @@ class ClientListController extends Controller
                 array_push($whereConds, array("date_of_joining >=" => $this->request['filt_placements_from']));
             if ($this->request['filt_placements_to'] != NULL)
                 array_push($whereConds, array("date_of_joining <=" => $this->request['filt_placements_to']));
-        })
+        }
 
         $filteredRecords = Client::with([
             'clientActivePlacements'
         ])->where($whereConds)
             ->get()
-            ->sortBy([
-                [
-                    $sortColumn,
-                    $sortType
-                ]
-            ])->skip($start)->take($length);
+            ->sortBy([[$sortColumn, $sortType]])
+            ->skip($start)
+            ->take($length);
         // var_dump($filteredRecords);
         // exit;
 
         $filteredCnt = count(Client::where($whereConds)->get());
 
         return [
-            'totalCnt' => $totalClientCnt,
+            'totalCnt' => $totalRecordCnt,
             'filteredCnt' => $filteredCnt,
             'filteredRecords' => $filteredRecords
         ];
     }
 
     /**
-     * Generate employee table items
+     * Generate client list table items
      */
     private function makeClientTblColumns($finalRecords, $totalCnt, $filteredCnt)
     {
@@ -277,12 +303,101 @@ class ClientListController extends Controller
                 $finalRecord->business_name,
                 $finalRecord->email,
                 $finalRecord->contact_number,
-                count($finalRecord->clientActivePlacements) > 0 ? $finalRecord->clientActivePlacements[0]['net_terms'] : 0,
                 count($finalRecord->clientActivePlacements) > 0 ? '<span class="label label-sm label-primary">Active</span>' : '<span class="label label-sm label-grey">Inactive</span>',
                 count($finalRecord->clientActivePlacements),
                 '<a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-eye"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-c-primary btn-client-edit" data-id="' . $finalRecord->id . '"><i class="fa fa-pencil"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-c-grey btn-client-delete" data-id="' . $finalRecord->id . '" data-email="' . $finalRecord->email . '"><i class="fa fa-trash"></i></a>'
+            );
+            $idx++;
+        }
+
+        if (isset($this->request['customActionType']) && $this->request['customActionType'] == "group_action") {
+            $records["customActionStatus"] = "OK"; // pass custom message(useful for getting status of group actions)
+            $records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
+        }
+
+        $records["draw"] = $sEcho;
+        $records["recordsTotal"] = $totalCnt;
+        $records["recordsFiltered"] = $filteredCnt;
+
+        return response()->json($records);
+    }
+
+    /**
+     * Get client's activities from model
+     */
+    private function getClientActsTblRecords()
+    {
+        // Params
+        $columns = ['', 'created_at', 'client_id', 'description'];
+        $sortColumn = $columns[$this->request['order'][0]['column']];
+        $sortType = $this->request['order'][0]['dir'];
+        $start = $this->request['start'];
+        $length = $this->request['length'];
+
+        // All client count
+        $totalRecordCnt = ClientActivity::count();
+
+        // Get client records for filter condition.
+        $whereConds = array();
+        $whereClientConds = array();
+        if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
+            if ($this->request['filt_act_date_from'] != NULL)
+                $whereConds[] = ['created_at', '>=', $this->request['filt_act_date_from']];
+            if ($this->request['filt_act_date_to'] != NULL)
+                $whereConds[] = ['created_at', '<=', $this->request['filt_act_date_to']];
+            // if ($this->request['filt_act_updatedby'] !=  like', '%' . $this->request['filt_act_updatedby'] . '%'];
+            if ($this->request['filt_act_description'] != NULL)
+                $whereConds[] = ['description', 'like', '%' . $this->request['filt_act_description'] . '%'];
+        }
+
+        $filteredRecords = ClientActivity::with([
+            'client'
+        ])->where($whereConds)
+            ->whereRelation('client', 'email', 'like', '%' . $this->request['filt_act_updatedby'] . '%')
+            ->get()
+            ->sortBy([[$sortColumn, $sortType]])
+            ->skip($start)
+            ->take($length);
+
+        $filteredCnt = count(ClientActivity::with([
+            'client'
+        ])->where($whereConds)
+            ->whereRelation('client', 'email', 'like', '%' . $this->request['filt_act_updatedby'] . '%')
+            ->get());
+
+        return [
+            'totalCnt' => $totalRecordCnt,
+            'filteredCnt' => $filteredCnt,
+            'filteredRecords' => $filteredRecords
+        ];
+    }
+
+    /**
+     * Generate client's activity list table items
+     */
+    private function makeClientActsTblColumns($finalRecords, $totalCnt, $filteredCnt)
+    {
+        $iTotalRecords = $filteredCnt;
+        $iDisplayLength = intval($this->request['length']);
+        $iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
+        $iDisplayStart = intval($this->request['start']);
+        $sEcho = intval($this->request['draw']);
+
+        $records = array();
+        $records["data"] = array();
+
+        $end = $iDisplayStart + $iDisplayLength;
+        $end = $end > $iTotalRecords ? $iTotalRecords : $end;
+
+        $idx = $iDisplayStart + 1;
+        foreach ($finalRecords as $finalRecord) {
+            $records["data"][] = array(
+                $idx,
+                $finalRecord->created_at,
+                $finalRecord->client->email,
+                $finalRecord->description
             );
             $idx++;
         }

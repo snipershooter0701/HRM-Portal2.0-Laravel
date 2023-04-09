@@ -1,3 +1,5 @@
+var gridInvoices = new Datatable();
+
 var TableAllInvoice = function () {
 
     var initPickers = function () {
@@ -9,14 +11,15 @@ var TableAllInvoice = function () {
     }
 
     var handleInvTable = function () {
-
-        let grid = new Datatable();
-
-        grid.init({
+        gridInvoices.init({
             src: $("#tbl_invoices"),
-            onSuccess: function (grid, response) { },
-            onError: function (grid) { },
-            onDataLoad: function (grid) {
+            onSuccess: function (gridInvoices, response) { },
+            onError: function (gridInvoices) { },
+            onDataLoad: function (gridInvoices) {
+                $('.btn-invoice-delete').click(function() {
+                    var id = $(this).attr('data-id');
+                    deleteInvoice(id);
+                });
             },
             loadingMessage: 'Loading...',
             dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
@@ -34,7 +37,7 @@ var TableAllInvoice = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": BASE_URL + "/invoices/all-inv/get-invs", // ajax source
+                    "url": BASE_URL + "/invoices/all/get_tbl_list", // ajax source
                 },
                 "order": [
                     [1, "asc"]
@@ -58,120 +61,41 @@ var TableAllInvoice = function () {
         });
 
         // handle group actionsubmit button click
-        grid.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
+        gridInvoices.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
             e.preventDefault();
-            var action = $(".table-group-action-input", grid.getTableWrapper());
-            if (action.val() != "" && grid.getSelectedRowsCount() > 0) {
-                grid.setAjaxParam("customActionType", "group_action");
-                grid.setAjaxParam("customActionName", action.val());
-                grid.setAjaxParam("id", grid.getSelectedRows());
-                grid.getDataTable().ajax.reload();
-                grid.clearAjaxParams();
+            var action = $(".table-group-action-input", gridInvoices.getTableWrapper());
+            if (action.val() != "" && gridInvoices.getSelectedRowsCount() > 0) {
+                gridInvoices.setAjaxParam("customActionType", "group_action");
+                gridInvoices.setAjaxParam("customActionName", action.val());
+                gridInvoices.setAjaxParam("id", gridInvoices.getSelectedRows());
+                gridInvoices.getDataTable().ajax.reload();
+                gridInvoices.clearAjaxParams();
             } else if (action.val() == "") {
                 App.alert({
                     type: 'danger',
                     icon: 'warning',
                     message: 'Please select an action',
-                    container: grid.getTableWrapper(),
+                    container: gridInvoices.getTableWrapper(),
                     place: 'prepend'
                 });
-            } else if (grid.getSelectedRowsCount() === 0) {
+            } else if (gridInvoices.getSelectedRowsCount() === 0) {
                 App.alert({
                     type: 'danger',
                     icon: 'warning',
                     message: 'No record selected',
-                    container: grid.getTableWrapper(),
+                    container: gridInvoices.getTableWrapper(),
                     place: 'prepend'
                 });
             }
         });
 
-        // grid.setAjaxParam("customActionType", "group_action");
-        // grid.getDataTable().ajax.reload();
-        // grid.clearAjaxParams();
+        // gridInvoices.setAjaxParam("customActionType", "group_action");
 
         // handle datatable custom tools
         $('#tbl_invoices_tools > a.tool-action').on('click', function () {
             var action = $(this).attr('data-action');
-            grid.getDataTable().button(action).trigger();
+            gridInvoices.getDataTable().button(action).trigger();
         });
-    }
-
-    var handleInvAddSvcSmryTable = function () {
-
-        let grid = new Datatable();
-
-        grid.init({
-            src: $("#tbl_inv_add_svc_smry"),
-            onSuccess: function (grid, response) { },
-            onError: function (grid) { },
-            onDataLoad: function (grid) {
-            },
-            loadingMessage: 'Loading...',
-            dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
-
-                // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
-                // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
-                // So when dropdowns used the scrollable div should be removed. 
-                "dom": "<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'>>",
-
-                "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
-
-                "lengthMenu": [
-                    [10, 20, 50, 100, 150, -1],
-                    [10, 20, 50, 100, 150, "All"] // change per page values here
-                ],
-                "pageLength": 10, // default record count per page
-                "ajax": {
-                    "url": BASE_URL + "/invoices/all-inv/get-svc-smrys", // ajax source
-                },
-                "order": [
-                    [1, "asc"]
-                ],// set first column as a default sort by asc
-            }
-        });
-    }
-
-    var handleInvAddNoteTotalTable = function () {
-
-        let grid = new Datatable();
-
-        grid.init({
-            src: $("#tbl_inv_add_note_total"),
-            onSuccess: function (grid, response) { },
-            onError: function (grid) { },
-            onDataLoad: function (grid) {
-            },
-            loadingMessage: 'Loading...',
-            dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
-
-                // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
-                // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
-                // So when dropdowns used the scrollable div should be removed. 
-                "dom": "<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'>>",
-
-                "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
-
-                "lengthMenu": [
-                    [10, 20, 50, 100, 150, -1],
-                    [10, 20, 50, 100, 150, "All"] // change per page values here
-                ],
-                "pageLength": 10, // default record count per page
-                "ajax": {
-                    "url": BASE_URL + "/invoices/all-inv/get-note-totals", // ajax source
-                },
-                "order": [
-                    [1, "asc"]
-                ],// set first column as a default sort by asc
-            }
-        });
-    }
-
-    var handleSummernote = function () {
-        $('#summernote_1').summernote({height: 300});
-        //API:
-        //var sHTML = $('#summernote_1').code(); // get code
-        //$('#summernote_1').destroy(); // destroy
     }
 
     return {
@@ -179,9 +103,6 @@ var TableAllInvoice = function () {
         init: function () {
             initPickers();
             handleInvTable();
-            handleInvAddSvcSmryTable();
-            handleInvAddNoteTotalTable();
-            handleSummernote();
         }
     };
 }();
@@ -189,3 +110,43 @@ var TableAllInvoice = function () {
 $(document).ready(function () {
     TableAllInvoice.init();
 });
+
+/**
+ * Refresh Invoice table.
+ */
+function refreshInvoiceTable() {
+    gridInvoices.getDataTable().ajax.reload();
+    gridInvoices.clearAjaxParams();
+}
+
+/**
+ * Delete Invoice
+ */
+function deleteInvoice(id)
+{
+    displayConfirmModal("Are you sure to delete this invoice?", "Delete", function (res) {
+        if (res == 'ok') {
+            var formData = {
+                id: id
+            };
+
+            callAjax({
+                url: BASE_URL + '/invoices/all/delete',
+                type: "POST",
+                data: formData,
+                success: function (data) {
+                    if (data['result'] == 'success') {
+                        // Refresh Table.
+                        refreshInvoiceTable();
+                        toastr.success("Invoice is successfully deleted.", "Success");
+                    }
+                },
+                error: function (err) {
+                    var errors = err.errors;
+                    if (errors)
+                        toastr.error(err.message, "Error");
+                }
+            });
+        }
+    });
+}

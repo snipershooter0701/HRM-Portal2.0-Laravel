@@ -1,4 +1,5 @@
 var gridClientListTable = new Datatable();
+var gridClientListActsTable = new Datatable();
 
 var TableClientList = function () {
 
@@ -50,11 +51,11 @@ var TableClientList = function () {
                 "columnDefs": [
                     {  // set default column settings
                         'orderable': false,
-                        'targets': [0, 1, 8]
+                        'targets': [0, 1, 7]
                     }
                 ],
                 "order": [
-                    [1, "asc"]
+                    [2, "asc"]
                 ],// set first column as a default sort by asc
                 buttons: [
                     { extend: 'print', className: 'btn default' },
@@ -114,11 +115,70 @@ var TableClientList = function () {
         });
     }
 
+    var handleClientListActsTable = function () {
+
+        gridClientListActsTable.init({
+            src: $("#tbl_client_list_activities"),
+            onSuccess: function (gridClientListActsTable, response) { },
+            onError: function (gridClientListActsTable) { },
+            onDataLoad: function (gridClientListActsTable) {
+            },
+            loadingMessage: 'Loading...',
+            dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
+
+                // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+                // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
+                // So when dropdowns used the scrollable div should be removed. 
+                //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
+
+                "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+                "lengthMenu": [
+                    [10, 20, 50, 100, 150, -1],
+                    [10, 20, 50, 100, 150, "All"] // change per page values here
+                ],
+                "pageLength": 10, // default record count per page
+                "ajax": {
+                    "url": BASE_URL + "/client/list/get_tbl_client_acts_list", // ajax source
+                },
+                "columnDefs": [
+                    {  // set default column settings
+                        'orderable': false,
+                        'targets': [0]
+                    }
+                ],
+                "order": [
+                    [1, "desc"]
+                ],// set first column as a default sort by asc
+                buttons: [
+                    { extend: 'print', className: 'btn default' },
+                    { extend: 'copy', className: 'btn default' },
+                    { extend: 'pdf', className: 'btn default' },
+                    { extend: 'excel', className: 'btn default' },
+                    { extend: 'csv', className: 'btn default' },
+                    {
+                        text: 'Reload',
+                        className: 'btn default',
+                        action: function (e, dt, node, config) {
+                            dt.ajax.reload();
+                            alert('Datatable reloaded!');
+                        }
+                    }
+                ],
+            }
+        });
+
+        // gridClientListActsTable.setAjaxParam("customActionType", "group_action");
+        // gridClientListActsTable.getDataTable().ajax.reload();
+        // gridClientListActsTable.clearAjaxParams();
+    }
+
     return {
         //main function to initiate the module
         init: function () {
             initPickers();
             handleClientListTable();
+            handleClientListActsTable();
         }
     };
 }();
@@ -184,7 +244,7 @@ function showEditClientPage(id) {
         data: formData,
         success: function (data) {
             if (data['result'] == 'success') {
-                // Set information to form.
+                // Set business information to form.
                 var client = data['client'];
                 $('#edit_client_id').val(client['id']);
                 $('#edit_bus_name').val(client['business_name']);
@@ -205,8 +265,44 @@ function showEditClientPage(id) {
                 $('#edit_bus_cli_apt').val(client['addr_suite_aptno']);
                 $('#edit_bus_cli_zipcode').val(client['addr_zipcode']);
 
+                // Set Confidential information to form
+                var confidential = data['confidential'];
+                if (confidential != null) {
+                    $('#add_conf_bankname').val(confidential['bankname']);
+                    $('#add_conf_accounttype').val(confidential['accounttype']);
+                    $('#add_conf_accountnumber').val(confidential['accountnumber']);
+                    $('#add_conf_routingnumber').val(confidential['routingnumber']);
+                    $('#add_conf_aptno').val(confidential['suite_aptno']);
+                    $('#add_conf_street').val(confidential['street']);
+                    $('#add_conf_city').val(confidential['city']);
+                    $('#add_conf_state').val(confidential['state_id']);
+                    $('#add_conf_country').val(confidential['country_id']);
+                    $('#add_conf_zipcode').val(confidential['zipcode']);
+                    $('#add_conf_status').val(confidential['status']);
+                }
+
                 // Show edit page.
                 $('#btn_edit_client_page').trigger('click');
+
+                // Filter Contact infos table.
+                $('#filt_tbl_contact_info_client_id').val(client['id']);
+                $('#btn_tbl_contact_info_search').trigger('click');
+
+                // Filter Confidential table.
+                $('#filt_tbl_confidential_client_id').val(client['id']);
+                $('#btn_tbl_confidential_search').trigger('click');
+
+                // Filter Placement table
+                $('#filt_tbl_placement_client_id').val(client['id']);
+                $('#btn_tbl_placement_search').trigger('click');
+
+                // Filter Placement activity table
+                $('#filt_tbl_placement_act_client_id').val(client['id']);
+                $('#btn_tbl_placement_act_search').trigger('click');
+
+                // Filter Invoice table
+                $('#filt_tbl_invoice_client_id').val(client['id']);
+                $('#btn_tbl_invoice_search').trigger('click');
             }
         },
         error: function (err) {

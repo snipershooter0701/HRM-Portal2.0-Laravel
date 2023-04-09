@@ -565,14 +565,14 @@
                     </div>
                     <div class="form-actions text-right" id="add_emp_action">
                         <button type="button" class="btn btn-sm btn-c-primary" id="signup_employee">Register</button>
-                        <button type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-employee-list">Cancel</button>
+                        <button type="button" class="btn btn-sm btn-c-grey page-move-btn" data-panelname="panel-employee-list">Cancel</button>
                     </div>
                     <div class="form-actions text-right hide" id="update_emp_action">
                         <button type="button" class="btn btn-sm btn-c-primary" id="update_employee">Update</button>
-                        <button type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-employee-list">Cancel</button>
+                        <button type="button" class="btn btn-sm btn-c-grey page-move-btn" data-panelname="panel-employee-list">Cancel</button>
                     </div>
                     <div class="form-actions text-right hide" id="view_emp_action">
-                        <button type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-employee-list">Cancel</button>
+                        <button type="button" class="btn btn-sm btn-c-grey page-move-btn" data-panelname="panel-employee-list">Cancel</button>
                     </div>
                 </form>
                 <!-- END FORM-->

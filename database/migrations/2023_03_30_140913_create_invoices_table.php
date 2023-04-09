@@ -23,7 +23,6 @@ return new class extends Migration
             $table->integer('received_amount');
             $table->integer('invoice_frequency')->default(0)->comment('0:Weekly, 1:By-weekly, 2: Monthly, 3:Quarterly');
             $table->integer('net_terms');
-            $table->timestamps();
             $table->integer('include_po_attach')->default(0)->comment('0:No, 1:Yes');
             $table->string('invoice_recipient');
             $table->string('invoice_cc_emails')->nullable();
@@ -33,6 +32,7 @@ return new class extends Migration
             $table->string('attachment')->nullable();
             $table->text('payable_to')->nullable();
             $table->text('additional_info')->nullable();
+            $table->timestamps();
             $table->softDeletes();
         });
     }

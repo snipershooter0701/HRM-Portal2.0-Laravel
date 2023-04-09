@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('comment');
             $table->date('expire_date');
             $table->string('attachment');
+            $table->integer('status')->default(1)->comment("0: Inactive, 1: Active");
             $table->timestamps();
             $table->softDeletes();
         });

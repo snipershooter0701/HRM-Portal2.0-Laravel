@@ -59,6 +59,10 @@
     margin-right: 30px !important;
 }
 
+.mb-0 {
+    margin-bottom: 0px !important;
+}
+
 .mb-10 {
     margin-bottom: 10px !important;
 }
@@ -112,7 +116,6 @@
 .line-height-none {
     line-height: 0;
 }
-
 /* ============================ END NECESSARY STYLES ============================ */
 
 
@@ -132,7 +135,7 @@
 }
 
 .backcolor-light-grey {
-    background-color: #E6E6E6 !important;
+    background-color: #f9f9f9  !important;
 }
 
 /* ============================== END COLOR STYLES ============================== */
@@ -256,10 +259,6 @@ h4.section-head {
 .panel-title a {
     font-size: 16px !important;
     font-weight: bold;
-}
-
-.form-group {
-    margin-bottom: 30px !important;
 }
 
 /* ========================== END CUSTOM LABEL STYLES =========================== */
@@ -661,7 +660,8 @@ hr {
 /* =============================== BEGIN MODAL STYLES ==================================*/
 .modal {
     border-radius: 10px !important;
-    margin-top: -270px !important;
+    /* margin-top: -270px !important; */
+    padding: 0px !important;
 }
 
 .modal-header .modal-title {

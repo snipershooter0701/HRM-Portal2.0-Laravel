@@ -1,12 +1,12 @@
 /* =========================== BEGIN VIEW TICKET STYLES =========================== */
-#modal-view-ticket p {
+#modal_view_ticket p {
     font-size: 14px;
     font-weight: bold;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-#modal-view-ticket .form-group input {
+#modal_view_ticket .form-group input {
     padding-left: 0px;
 }
 

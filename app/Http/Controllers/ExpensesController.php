@@ -12,42 +12,29 @@ class ExpensesController extends Controller
 {
     private $request;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
     public function __construct(Request $request)
     {
         $this->request = $request;
     }
 
-    /**
-     * Show the employee page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+   
     public function index()
     {
-        return view('expenses.index')->with('randNum', rand());
+        return view('expenses.expense_index')->with('randNum', rand());
     }
 
     // ========================== BEGIN PUBLIC FUNCTIONS ==========================
-    /**
-     * Get expenses
-     * 
-     * @return $expenses
-     */
-    public function getExpensesList(Request $request)
+    
+    // Get Expense List
+    public function getExpenseList(Request $request)
     {
         $ajaxData = $this->getExpenseTblData($request);
         $result = $this->makeExpenseTblItems($ajaxData['filterItems'], $ajaxData['employees']);
         return $result;
     }
 
-    /**
-     * Get expense activities
-     */
+    // Get Expense Act List
     public function getExpenseAct()
     {
         // $ajaxData = $this->getExpenseTblData();
@@ -55,10 +42,8 @@ class ExpensesController extends Controller
         return $result;
     }
 
-    /**
-     * Get add expenses
-     */
-    public function getAddExpenses(Request $request)
+    // Add Expense
+    public function addExpense(Request $request)
     {
         // Validation TOOD
         $request->validate([
@@ -102,104 +87,72 @@ class ExpensesController extends Controller
             'id' => ['required']
         ]);
 
-        $employee = Expense::with(['employee', 'expensebill'])
+        $expense = Expense::with(['expensebill'])
+                            ->where('id', $request->id)
                             ->get();
 
         return response()->json([
             'result' => 'success',
-            'employee' => $employee
+            'expense' => $expense
         ]);
+
     }
 
-    // Update Employee Info
-    public function updateExpenses(Request $request) {
+    // Update Expense
+    public function updateExpense(Request $request) {
         // Validation TOOD
         $request->validate([
-            'id'                => ['required'],
-            'first_name'        => ['required'],
-            'last_name'         => ['required'],
-            'title'             => ['required'],
-            'email_address'     => ['required'],
-            'phone_num'         => ['required'],
-            'birth'             => ['required'],
-            'join_date'         => ['required'],
-            'gender'            => ['required'],
-            'employment_type'   => ['required'],
-            'category'          => ['required'],
-            'employee_type'     => ['required'],
-            'employee_status'   => ['required'],
-            'role'              => ['required'],
-            'poc'               => ['required'],
-            'classification'    => ['required'],
-            'per_pay'           => ['required'],
-            'per_change_hrs'    => ['required'],
-            'per_change_pay'    => ['required'],
-            'rate_pay'          => ['required'],
-            'rate_change_hrs'   => ['required'],
-            'rate_change_pay'   => ['required'],
-            'addr_street'       => ['required'],
-            'addr_apt'          => ['required'],
-            'addr_city'         => ['required'],
-            'addr_state'        => ['required'],
-            'addr_country'      => ['required'],
-            'addr_zipcode'      => ['required'],
-            'pay_standard_time' => ['required'],
-            'pay_over_time'     => ['required'],
-            'pay_double_time'   => ['required'],
-            'pay_scale'         => ['required']
+            'cate'            => ['required'],
+            'type'            => ['required'],
+            'emp'             => ['required'],
+            'bill_record'     => ['required']
         ]);
 
-        Employee::where('id', $request->id)
+        Expense::where('id', $request->id)
                 ->update([
-                    'first_name'        =>  $request->first_name,
-                    'middle_name'       =>  $request->middle_name,
-                    'last_name'         =>  $request->last_name,
-                    'title'             =>  $request->title,
-                    'email'             =>  $request->email_address,
-                    'phone_num'         =>  $request->phone_num,
-                    'dateofbirth'       =>  $request->birth,
-                    'dateofjoining'     =>  $request->join_date,
-                    'gender'            =>  $request->gender,
-                    'employment_type'   =>  $request->employment_type,
-                    'category'          =>  $request->category,
-                    'employee_type'     =>  $request->employee_type,
-                    'status'            =>  $request->employee_status,
-                    'role_id'           =>  $request->role,
-                    'poc_id'            =>  $request->poc,
-                    'classification'    =>  $request->classification,
-                    'pay_percent_value' =>  $request->per_pay,
-                    'pay_percent_hrs'   =>  $request->per_change_hrs,
-                    'pay_percent_to'    =>  $request->per_change_pay,
-                    'pay_rate_value'    =>  $request->rate_pay,
-                    'pay_rate_hrs'      =>  $request->rate_change_hrs,
-                    'pay_rate_to'       =>  $request->rate_change_pay,
-                    'street'            =>  $request->addr_street,
-                    'suite_aptno'       =>  $request->addr_apt,
-                    'city_town'         =>  $request->addr_city,
-                    'state_id'          =>  $request->addr_state,
-                    'country_id'        =>  $request->addr_country,
-                    'zipcode'           =>  $request->addr_zipcode,
-                    'pay_scale'         =>  $request->pay_scale,
-                    'pay_standard_time' =>  $request->pay_standard_time,
-                    'pay_over_time'     =>  $request->pay_over_time,
-                    'pay_double_time'   =>  $request->pay_double_time,
-                    'status_end_date'   =>  $request->employee_status_date,
-                    'department_id'     =>  $request->deparment,
+                    'category'        =>  $request->cate,
+                    'type'            =>  $request->type,
+                    'employee_id'     =>  $request->emp,
                 ]);
+
+        $update = [];
+        for($i = 0; $i < count($request->bill_record); $i++) {
+            if(!$request->bill_record[$i]['attachment'] || $request->bill_record[$i]['attachment'] == NULL) {
+                $update = [
+                    'expense_id'    =>  $request->id,
+                    'date'          =>  $request->bill_record[$i]['date'],
+                    'details'       =>  $request->bill_record[$i]['details'],
+                    'amount'        =>  $request->bill_record[$i]['amount'],
+                ];
+            } else {
+                $update = [
+                    'expense_id'    =>  $request->id,
+                    'date'          =>  $request->bill_record[$i]['date'],
+                    'details'       =>  $request->bill_record[$i]['details'],
+                    'amount'        =>  $request->bill_record[$i]['amount'],
+                    'attachment'    =>  $request->bill_record[$i]['attachment']
+                ];
+            }
+            ExpenseBill::where('id', $request->bill_record[$i]['id'])
+                        ->update($update);
+        }
 
         return response()->json([
             'result' => 'success'
         ]);
     }
 
-    // Delete Employee Info
-    public function delExpenses(Request $request) {
+    // Delete Expense
+    public function delExpense(Request $request) {
         // Check Validation
         $request->validate([
             'id' => ['required'],
         ]);
 
-        Employee::where('id', $request->id)
+        Expense::where('id', $request->id)
+                ->delete();
+
+        ExpenseBill::where('expense_id', $request->id)
                 ->delete();
 
         return response()->json([
@@ -207,6 +160,8 @@ class ExpensesController extends Controller
         ]);
     }
     // =========================== END PUBLIC FUNCTIONS ===========================
+
+
 
     // ========================== BEGIN PRIVATE FUNCTIONS ==========================
     /**
@@ -269,8 +224,8 @@ class ExpensesController extends Controller
             }
 
             $records["data"][] = array(
-                $id,
                 '<input type="checkbox" name="id[]" value="' . $id . '">',
+                $id,
                 $filterItems[$idx]->category == 0 ? '<span class="label label-sm label-primary">Employee Expense</span>' : '<span class="label label-sm label-grey">Company Expense</span>',
                 $filterItems[$idx]->employee->first_name . $filterItems[$idx]->employee->last_name,
                 $filterItems[$idx]->category == 0 ? '<span class="color-light-green">$'.$amount.'</span>' : '<span class="color-primary">$'.$amount.'</span>',

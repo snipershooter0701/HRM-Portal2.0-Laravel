@@ -25,9 +25,9 @@ return new class extends Migration {
             $table->integer('client_dt_bill_rate')->nullable();
             $table->integer('client_vendor_id')->nullable();
             $table->integer('vendor_contractor_id')->nullable();
-            $table->integer('vendor_contractor_netterms');
-            $table->string('vendor_contractor_po_attachment');
-            $table->integer('vendor_contractor_po_id');
+            $table->integer('vendor_contractor_netterms')->nullable();
+            $table->string('vendor_contractor_po_attachment')->nullable();
+            $table->integer('vendor_contractor_po_id')->nullable();
             $table->integer('vendor_contractor_bill_rate')->default(0);
             $table->integer('vendor_contractor_at_bill_rate')->nullable();
             $table->integer('vendor_contractor_dt_bill_rate')->nullable();

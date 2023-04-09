@@ -51,7 +51,6 @@
                                 <th width="20%"> Business Name </th>
                                 <th width="15%"> Email </th>
                                 <th width="15%"> Contact Number </th>
-                                <th width="10%"> Net Terms </th>
                                 <th width="10%"> Status</th>
                                 <th width="8%"> Active Placements </th>
                                 <th width="10%"> Action </th>
@@ -73,12 +72,6 @@
                                 {{-- Contact Number --}}
                                 <td>
                                     <input type="text" class="form-control form-filter input-sm" name="filt_contact_number">
-                                </td>
-
-                                {{-- Net Terms --}}
-                                <td>
-                                    <input type="text" class="form-control form-filter input-sm margin-bottom-5" name="filt_net_terms_from" placeholder="From">
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_net_terms_to" placeholder="To">
                                 </td>
 
                                 {{-- Status --}}
@@ -107,35 +100,64 @@
                     </table>
                 </div>
 
-                {{-- activities table --}}
-                <h4 class="section-head">Activities</h4>
-                <hr>
-
-                <table id="tbl_activity" class="table table-striped table-bordered table-hover">
-                    <thead>
-                        <tr role="row" class="heading">
-                            <th width="20%"> Date & Time </th>
-                            <th width="15%"> Updated By </th>
-                            <th width="15%"> Description </th>
-                        </tr>
-                        <tr role="row" class="filter">
-
-                            {{-- time_date --}}
-                            <td>
-                                <input type="text" class="form-control form-filter input-sm" name="filt_time_date"> </td>
-
-                            {{-- updated by --}}
-                            <td>
-                                <input type="text" class="form-control form-filter input-sm" name="filt_updated_by"> </td>
-
-                            {{-- description --}}
-                            <td>
-                                <input type="text" class="form-control form-filter input-sm" name="filt_description"> </td>
-
-                        </tr>
-                    </thead>
-                    <tbody> </tbody>
-                </table>
+                {{-- BEGIN ACTIVITIES TABLE --}}
+                <div class="panel-group accordion mt-30" id="accordion_client_acts">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#accordion_client_acts" href="#collapse_client_activities" aria-expanded="false"> Activities </a>
+                            </h4>
+                        </div>
+                        <div id="collapse_client_activities" class="panel-collapse collapse" aria-expanded="false">
+                            <div class="panel-body">
+                                <div class="table-container">
+                                    <table id="tbl_client_list_activities" class="table table-striped table-bordered table-hover table-checkable">
+                                        <thead>
+                                            <tr role="row" class="heading">
+                                                <th width="10%"> No </th>
+                                                <th width="20%"> Date & Time </th>
+                                                <th width="30%"> Updated By </th>
+                                                <th width="40%"> Description </th>
+                                            </tr>
+                                            <tr role="row" class="filter">
+                                                <td>
+                                                    <button class="btn btn-xs btn-c-primary filter-submit"><i class="fa fa-search"></i></button>
+                                                    <button class="btn btn-xs btn-c-grey filter-cancel"><i class="fa fa-times"></i></button>
+                                                </td>
+                                                <td>
+                                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_act_date_from" placeholder="From">
+                                                        <span class="input-group-btn">
+                                                            <button class="btn btn-sm default" type="button">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_act_date_to" placeholder="To">
+                                                        <span class="input-group-btn">
+                                                            <button class="btn btn-sm default" type="button">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control form-filter input-sm" name="filt_act_updatedby">
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control form-filter input-sm" name="filt_act_description">
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody> </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- END ACTIVITIES TABLE --}}
             </div>
         </div>
         <!-- End: life time stats -->

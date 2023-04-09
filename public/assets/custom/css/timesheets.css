@@ -2,5 +2,5 @@
 #tbl_submit_timesheets.table-bordered>tbody>tr>th,
 #tbl_submit_timesheets.table-bordered>thead>tr>th,
 #tbl_submit_timesheets.table-bordered>thead>tr>th {
-    border: 1px solid #aaaaaa !important;
+    /* border: 1px solid #aaaaaa !important; */
 }

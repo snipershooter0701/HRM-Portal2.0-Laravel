@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
+use App\Models\Timesheet;
 use App\Models\Employee;
+use App\Models\JobTire;
 
+/**
+ * Timesheets -> All Timesheets
+ */
 class TimesheetsController extends Controller
 {
     private $request;
@@ -20,13 +26,20 @@ class TimesheetsController extends Controller
     }
 
     /**
-     * Show the employee page.
+     * Show the timesheets page.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        return view('timesheets.index')->with('randNum', rand());
+        $employees = Employee::all();
+        $jobTires = JobTire::all();
+
+        return view('timesheets.index')->with([
+            'randNum' => rand(),
+            'employees' => $employees,
+            'jobTires' => $jobTires
+        ]);
     }
 
     // ========================== BEGIN PUBLIC FUNCTIONS ==========================
@@ -35,39 +48,85 @@ class TimesheetsController extends Controller
      */
     public function getAllTimesheets()
     {
-        $ajaxData = $this->getAllTimesheetRecords();
-        $result = $this->makeAllTimesheets($ajaxData['totalItems'], $ajaxData['filterItems']);
+        $recordData = $this->getAllTimesheetRecords();
+        $result = $this->makeAllTimesheets($recordData['filteredRecords'], $recordData['totalCnt'], $recordData['filteredCnt']);
         return $result;
     }
 
     /**
-     * Get due timesheets
+     * Create client's placement.
      */
-    public function getDueTimesheets()
+    public function create()
     {
-        $ajaxData = $this->getDueTimesheetRecords();
-        $result = $this->makeDueTimesheets($ajaxData['totalItems'], $ajaxData['filterItems']);
-        return $result;
+        // Check Validation
+        $this->request->validate([
+            'employee_id' => ['required'],
+            'job_tire_id' => ['required'],
+            'date_from' => ['required'],
+            'date_to' => ['required'],
+            'attachment' => ['required'],
+            'report' => ['required']
+        ]);
+
+        // Create new record
+        Timesheet::create([
+            'employee_id' => $this->request['employee_id'],
+            'client_id' => 1,
+            'placement_id' => 1,
+            'job_tire_id' => $this->request['job_tire_id'],
+            'date_from' => $this->request['date_from'],
+            'date_to' => $this->request['date_to'],
+            'attachment' => $this->request['attachment'],
+            'report' => $this->request['report'],
+            'submitted_on' => "2023-03-03",
+            'total_billable_hours' => "120:00",
+            'standard_mon' => $this->request['standard_mon'],
+            'standard_tue' => $this->request['standard_tue'],
+            'standard_wed' => $this->request['standard_wed'],
+            'standard_thu' => $this->request['standard_thu'],
+            'standard_fri' => $this->request['standard_fri'],
+            'standard_sat' => $this->request['standard_sat'],
+            'standard_sun' => $this->request['standard_sun'],
+            'over_time' => $this->request['over_time'],
+            'over_mon' => $this->request['over_mon'],
+            'over_tue' => $this->request['over_tue'],
+            'over_wed' => $this->request['over_wed'],
+            'over_thu' => $this->request['over_thu'],
+            'over_fri' => $this->request['over_fri'],
+            'over_sat' => $this->request['over_sat'],
+            'over_sun' => $this->request['over_sun'],
+            'double_time' => $this->request['double_time'],
+            'double_mon' => $this->request['double_mon'],
+            'double_tue' => $this->request['double_tue'],
+            'double_wed' => $this->request['double_wed'],
+            'double_thu' => $this->request['double_thu'],
+            'double_fri' => $this->request['double_fri'],
+            'double_sat' => $this->request['double_sat'],
+            'double_sun' => $this->request['double_sun']
+        ]);
+
+        return response()->json([
+            'result' => 'success'
+        ]);
     }
 
     /**
-     * Get await invoices
+     * Delete timesheet.
      */
-    public function getAwaitInvoices()
+    public function delete()
     {
-        $ajaxData = $this->getAwaitInvoiceRecords();
-        $result = $this->makeAwaitInvoices($ajaxData['totalItems'], $ajaxData['filterItems']);
-        return $result;
-    }
+        // Check Validation
+        $this->request->validate([
+            'id' => ['required'],
+        ]);
 
-    /**
-     * Get submit timesheets
-     */
-    public function getSubmitTimesheets()
-    {
-        $ajaxData = $this->getSumitTimesheetRecords();
-        $result = $this->makeSubmitTimesheets($ajaxData['totalItems'], $ajaxData['filterItems']);
-        return $result;
+        // Delete timesheet.
+        $timesheet = Timesheet::find($this->request['id']);
+        $timesheet->delete();
+
+        return response()->json([
+            'result' => 'success'
+        ]);
     }
     // ========================== END PUBLIC FUNCTIONS ==========================
 
@@ -77,149 +136,107 @@ class TimesheetsController extends Controller
      */
     private function getAllTimesheetRecords()
     {
-        // Get total employees
-        $totalEmployees = Employee::all();
+        // Params
+        $columns = ['', 'employee_id', 'client_id', '', '', 'status', '', 'submitted_on', '', ''];
+        $sortColumn = $columns[$this->request['order'][0]['column']];
+        $sortType = $this->request['order'][0]['dir'];
+        $start = $this->request['start'];
+        $length = $this->request['length'];
 
-        // Get Filtered employees
+        // Get client records for filter condition.
         $whereConds = array();
         if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
-            if ($this->request['filt_first_name'] != NULL)
-                array_push($whereConds, array("first_name" => $this->request['filt_first_name']));
-            if ($this->request['filt_last_name'] != NULL)
-                array_push($whereConds, array("last_name" => $this->request['filt_last_name']));
-            if ($this->request['filt_phone'] != NULL)
-                array_push($whereConds, array("phone_number" => $this->request['filt_phone']));
-            if ($this->request['filt_email'] != NULL)
-                array_push($whereConds, array("email_address" => $this->request['filt_email']));
-            if ($this->request['filt_category'] != NULL)
-                array_push($whereConds, array("category" => $this->request['filt_category']));
-            if ($this->request['filt_join_date_from'] != NULL)
-                array_push($whereConds, array("date_of_joining >=" => $this->request['filt_join_date_from']));
-            if ($this->request['filt_join_date_to'] != NULL)
-                array_push($whereConds, array("date_of_joining <=" => $this->request['filt_join_date_to']));
-            if ($this->request['filt_poc'] != NULL)
-                array_push($whereConds, array("poc" => $this->request['filt_poc']));
-            if ($this->request['filt_classification'] != NULL)
-                array_push($whereConds, array("classification" => $this->request['filt_classification']));
-            if ($this->request['filt_status'] != NULL)
-                array_push($whereConds, array("employee_status" => $this->request['filt_status']));
-        }
-        $filterEmployees = Employee::where($whereConds)->get();
+            if ($this->request['filt_date_range'] != NULL) {
+                if ($this->request['filt_date_range'] == config('constants.DATE_RANGE_ALL')) {
 
-        return [
-            'totalItems' => $totalEmployees,
-            'filterItems' => $filterEmployees
-        ];
-    }
+                } else if ($this->request['filt_date_range'] == config('constants.DATE_RANGE_CUR_WEEK')) {
 
-    /**
-     * Generate employee table items
-     */
-    private function makeAllTimesheets($totalItems, $filterItems)
-    {
-        $iTotalRecords = count($totalItems);
-        $iDisplayLength = intval($this->request['length']);
-        $iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
-        $iDisplayStart = intval($this->request['start']);
-        $sEcho = intval($this->request['draw']);
+                } else if ($this->request['filt_date_range'] == config('constants.DATE_RANGE_LAST_WEEK')) {
 
-        $records = array();
-        $records["data"] = array();
+                } else if ($this->request['filt_date_range'] == config('constants.DATE_RANGE_CUR_MTH')) {
 
-        $end = $iDisplayStart + $iDisplayLength;
-        $end = $end > $iTotalRecords ? $iTotalRecords : $end;
+                } else if ($this->request['filt_date_range'] == config('constants.DATE_RANGE_LAST_MTH')) {
 
-        $idx = 0;
-        for ($i = $iDisplayStart; $i < $end; $i++) {
-            $id = ($i + 1);
+                } else if ($this->request['filt_date_range'] == config('constants.DATE_RANGE_LAST_3_MTH')) {
 
-            // Status
-            $status = rand();
-            if ($status % 3 == 0) {
-                $reqstatus = '<span class="label label-sm label-primary">Request</span>';
-            } else if ($status % 3 == 1) {
-                $reqstatus = '<span class="label label-sm label-info">Approved</span>';
-            } else {
-                $reqstatus = '<span class="label label-sm label-grey">Rejected</span>';
+                } else if ($this->request['filt_date_range'] == config('constants.DATE_RANGE_LAST_6_MTH')) {
+
+                } else if ($this->request['filt_date_range'] == config('constants.DATE_RANGE_CUSTOM')) {
+
+                }
+                $whereConds[] = ['job_tire_id', '=', $this->request['filt_job_tire']];
             }
-
-            $records["data"][] = array(
-                '<input type="checkbox" name="id[]" value="' . $id . '">',
-                $id,
-                "Makarov",
-                "Anthony",
-                "03/02/2023",
-                "32:00",
-                $reqstatus,
-                "03/09/2023",
-                '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-eye"></i></a>',
-                '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-c-info"><i class="fa fa-thumbs-o-up"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-c-danger"><i class="fa fa-download"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-c-grey"><i class="fa fa-times"></i></a>'
-            );
-            $idx++;
-        }
-
-        if (isset($this->request['customActionType']) && $this->request['customActionType'] == "group_action") {
-            $records["customActionStatus"] = "OK"; // pass custom message(useful for getting status of group actions)
-            $records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
-        }
-
-        $records["draw"] = $sEcho;
-        $records["recordsTotal"] = $iTotalRecords;
-        $records["recordsFiltered"] = $iTotalRecords;
-
-        // echo json_encode($records);
-        return response()->json($records);
-    }
-
-    /**
-     * Get all timesheets records from DB.
-     */
-    private function getDueTimesheetRecords()
-    {
-        // Get total employees
-        $totalEmployees = Employee::all();
-
-        // Get Filtered employees
-        $whereConds = array();
-        if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
-            if ($this->request['filt_first_name'] != NULL)
-                array_push($whereConds, array("first_name" => $this->request['filt_first_name']));
-            if ($this->request['filt_last_name'] != NULL)
-                array_push($whereConds, array("last_name" => $this->request['filt_last_name']));
-            if ($this->request['filt_phone'] != NULL)
-                array_push($whereConds, array("phone_number" => $this->request['filt_phone']));
-            if ($this->request['filt_email'] != NULL)
-                array_push($whereConds, array("email_address" => $this->request['filt_email']));
-            if ($this->request['filt_category'] != NULL)
-                array_push($whereConds, array("category" => $this->request['filt_category']));
-            if ($this->request['filt_join_date_from'] != NULL)
-                array_push($whereConds, array("date_of_joining >=" => $this->request['filt_join_date_from']));
-            if ($this->request['filt_join_date_to'] != NULL)
-                array_push($whereConds, array("date_of_joining <=" => $this->request['filt_join_date_to']));
-            if ($this->request['filt_poc'] != NULL)
-                array_push($whereConds, array("poc" => $this->request['filt_poc']));
-            if ($this->request['filt_classification'] != NULL)
-                array_push($whereConds, array("classification" => $this->request['filt_classification']));
+            if ($this->request['filt_bill_hours'] != NULL)
+                $whereConds[] = ['net_terms', '=', $this->request['filt_bill_hours']];
             if ($this->request['filt_status'] != NULL)
-                array_push($whereConds, array("employee_status" => $this->request['filt_status']));
+                $whereConds[] = ['status', '=', $this->request['filt_status']];
+            if ($this->request['filt_submitted_on_from'] != NULL)
+                $whereConds[] = ['submitted_on', '>=', $this->request['filt_submitted_on_from']];
+            if ($this->request['filt_submitted_on_to'] != NULL)
+                $whereConds[] = ['submitted_on', '<=', $this->request['filt_submitted_on_to']];
         }
-        $filterEmployees = Employee::where($whereConds)->get();
+
+        // All record count
+        $totalRecordCnt = count(Timesheet::all());
+
+        // Filtered records
+        $filteredRecords = Timesheet::with([
+            'client',
+            'employee',
+            'jobtire'
+        ])->where($whereConds)
+            ->whereHas('employee', function (Builder $query) {
+                if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
+                    if ($this->request['filt_employee'] != NULL)
+                        $query->where('email', 'like', '%' . $this->request['filt_employee'] . '%');
+                }
+            })
+            ->whereHas('client', function (Builder $query) {
+                if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
+                    if ($this->request['filt_client'] != NULL)
+                        $query->where('email', 'like', '%' . $this->request['filt_client'] . '%');
+                }
+            })
+            ->get()
+            ->sortBy([[$sortColumn, $sortType]])
+            ->skip($start)
+            ->take($length);
+
+        // Filtered record count
+        $filteredCnt = count(
+            Timesheet::with([
+                'client',
+                'employee',
+                'jobtire'
+            ])->where($whereConds)
+                ->whereHas('employee', function (Builder $query) {
+                    if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
+                        if ($this->request['filt_employee'] != NULL)
+                            $query->where('email', 'like', '%' . $this->request['filt_employee'] . '%');
+                    }
+                })
+                ->whereHas('client', function (Builder $query) {
+                    if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
+                        if ($this->request['filt_client'] != NULL)
+                            $query->where('email', 'like', '%' . $this->request['filt_client'] . '%');
+                    }
+                })
+                ->get()
+        );
 
         return [
-            'totalItems' => $totalEmployees,
-            'filterItems' => $filterEmployees
+            'totalCnt' => $totalRecordCnt,
+            'filteredCnt' => $filteredCnt,
+            'filteredRecords' => $filteredRecords
         ];
     }
 
     /**
-     * Generate employee table items
+     * Generate timesheet table items
      */
-    private function makeDueTimesheets($totalItems, $filterItems)
+    private function makeAllTimesheets($finalRecords, $totalCnt, $filteredCnt)
     {
-        $iTotalRecords = count($totalItems);
+        $iTotalRecords = $filteredCnt;
         $iDisplayLength = intval($this->request['length']);
         $iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
         $iDisplayStart = intval($this->request['start']);
@@ -231,28 +248,31 @@ class TimesheetsController extends Controller
         $end = $iDisplayStart + $iDisplayLength;
         $end = $end > $iTotalRecords ? $iTotalRecords : $end;
 
-        $idx = 0;
-        for ($i = $iDisplayStart; $i < $end; $i++) {
-            $id = ($i + 1);
-
-            // Status
-            $status = rand();
-            if ($status % 3 == 0) {
-                $reqstatus = '<span class="label label-sm label-primary">Request</span>';
-            } else if ($status % 3 == 1) {
-                $reqstatus = '<span class="label label-sm label-info">Approved</span>';
-            } else {
-                $reqstatus = '<span class="label label-sm label-grey">Rejected</span>';
-            }
+        $idx = $iDisplayStart + 1;
+        foreach ($finalRecords as $finalRecord) {
+            $employeeName = ($finalRecord->employee != null) ? ($finalRecord->employee->email) : '';
+            $clientName = ($finalRecord->client != null) ? ($finalRecord->client->email) : '';
+            if ($finalRecord->status == config('constants.TIMESHEET_STATUS_REQESTED'))
+                $status = '<span class="label label-sm label-primary">Submitted</span>';
+            else if ($finalRecord->status == config('constants.TIMESHEET_STATUS_APPROVED'))
+                $status = '<span class="label label-sm label-info">Approve</span>';
+            else
+                $status = '<span class="label label-sm label-grey">Rejected</span>';
 
             $records["data"][] = array(
-                $id,
-                'Makarov',
-                "Mar-13-19",
-                "Pl-2358",
-                "Regular",
-                "client Name",
-                '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-send-o"></i></a>',
+                '<input type="checkbox" name="id[]" value="' . $finalRecord->id . '">',
+                $idx,
+                $employeeName,
+                $clientName,
+                $finalRecord->date_from . '~' . $finalRecord->date_to,
+                $finalRecord->total_billable_hours,
+                $status,
+                $finalRecord->submitted_on,
+                '<a href="javascript:;" class="btn btn-xs btn-c-primary btn-timesheet-view" data-id="' . $finalRecord->id . '"*><i class="fa fa-eye"></i></a>',
+                '<a href="javascript:;" class="btn btn-xs btn-c-primary btn-timesheet-edit" data-id="' . $finalRecord->id . '"*><i class="fa fa-pencil"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-c-info btn-timesheet-active" data-id="' . $finalRecord->id . '"*><i class="fa fa-thumbs-o-up"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-c-danger btn-timesheet-inactive" data-id="' . $finalRecord->id . '"*><i class="fa fa-thumbs-o-down"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-c-grey btn-timesheet-delete" data-id="' . $finalRecord->id . '"*><i class="fa fa-trash"></i></a>'
             );
             $idx++;
         }
@@ -263,187 +283,9 @@ class TimesheetsController extends Controller
         }
 
         $records["draw"] = $sEcho;
-        $records["recordsTotal"] = $iTotalRecords;
-        $records["recordsFiltered"] = $iTotalRecords;
+        $records["recordsTotal"] = $totalCnt;
+        $records["recordsFiltered"] = $filteredCnt;
 
-        // echo json_encode($records);
-        return response()->json($records);
-    }
-
-    /**
-     * Get awaiting invoice records from DB.
-     */
-    private function getAwaitInvoiceRecords()
-    {
-        // Get total employees
-        $totalEmployees = Employee::all();
-
-        // Get Filtered employees
-        $whereConds = array();
-        if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
-            if ($this->request['filt_first_name'] != NULL)
-                array_push($whereConds, array("first_name" => $this->request['filt_first_name']));
-            if ($this->request['filt_last_name'] != NULL)
-                array_push($whereConds, array("last_name" => $this->request['filt_last_name']));
-            if ($this->request['filt_phone'] != NULL)
-                array_push($whereConds, array("phone_number" => $this->request['filt_phone']));
-            if ($this->request['filt_email'] != NULL)
-                array_push($whereConds, array("email_address" => $this->request['filt_email']));
-            if ($this->request['filt_category'] != NULL)
-                array_push($whereConds, array("category" => $this->request['filt_category']));
-            if ($this->request['filt_join_date_from'] != NULL)
-                array_push($whereConds, array("date_of_joining >=" => $this->request['filt_join_date_from']));
-            if ($this->request['filt_join_date_to'] != NULL)
-                array_push($whereConds, array("date_of_joining <=" => $this->request['filt_join_date_to']));
-            if ($this->request['filt_poc'] != NULL)
-                array_push($whereConds, array("poc" => $this->request['filt_poc']));
-            if ($this->request['filt_classification'] != NULL)
-                array_push($whereConds, array("classification" => $this->request['filt_classification']));
-            if ($this->request['filt_status'] != NULL)
-                array_push($whereConds, array("employee_status" => $this->request['filt_status']));
-        }
-        $filterEmployees = Employee::where($whereConds)->get();
-
-        return [
-            'totalItems' => $totalEmployees,
-            'filterItems' => $filterEmployees
-        ];
-    }
-
-    /**
-     * Generate await invoice table items.
-     */
-    private function makeAwaitInvoices($totalItems, $filterItems)
-    {
-        $iTotalRecords = count($totalItems);
-        $iDisplayLength = intval($this->request['length']);
-        $iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
-        $iDisplayStart = intval($this->request['start']);
-        $sEcho = intval($this->request['draw']);
-
-        $records = array();
-        $records["data"] = array();
-
-        $end = $iDisplayStart + $iDisplayLength;
-        $end = $end > $iTotalRecords ? $iTotalRecords : $end;
-
-        $idx = 0;
-        for ($i = $iDisplayStart; $i < $end; $i++) {
-            $id = ($i + 1);
-
-            $records["data"][] = array(
-                '<input type="checkbox" name="id[]" value="' . $id . '">',
-                $id,
-                "Makarov",
-                "Anthony",
-                "Monthly",
-                "03/02/2023 - 03/09/2023",
-                "145",
-                '<a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-eye"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-c-grey"><i class="fa fa-times"></i></a>'
-            );
-            $idx++;
-        }
-
-        if (isset($this->request['customActionType']) && $this->request['customActionType'] == "group_action") {
-            $records["customActionStatus"] = "OK"; // pass custom message(useful for getting status of group actions)
-            $records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
-        }
-
-        $records["draw"] = $sEcho;
-        $records["recordsTotal"] = $iTotalRecords;
-        $records["recordsFiltered"] = $iTotalRecords;
-
-        // echo json_encode($records);
-        return response()->json($records);
-    }
-
-    /**
-     * Get awaiting invoice records from DB.
-     */
-    private function getSumitTimesheetRecords()
-    {
-        // Get total employees
-        $totalEmployees = Employee::all();
-
-        // Get Filtered employees
-        $whereConds = array();
-        if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
-            if ($this->request['filt_first_name'] != NULL)
-                array_push($whereConds, array("first_name" => $this->request['filt_first_name']));
-            if ($this->request['filt_last_name'] != NULL)
-                array_push($whereConds, array("last_name" => $this->request['filt_last_name']));
-            if ($this->request['filt_phone'] != NULL)
-                array_push($whereConds, array("phone_number" => $this->request['filt_phone']));
-            if ($this->request['filt_email'] != NULL)
-                array_push($whereConds, array("email_address" => $this->request['filt_email']));
-            if ($this->request['filt_category'] != NULL)
-                array_push($whereConds, array("category" => $this->request['filt_category']));
-            if ($this->request['filt_join_date_from'] != NULL)
-                array_push($whereConds, array("date_of_joining >=" => $this->request['filt_join_date_from']));
-            if ($this->request['filt_join_date_to'] != NULL)
-                array_push($whereConds, array("date_of_joining <=" => $this->request['filt_join_date_to']));
-            if ($this->request['filt_poc'] != NULL)
-                array_push($whereConds, array("poc" => $this->request['filt_poc']));
-            if ($this->request['filt_classification'] != NULL)
-                array_push($whereConds, array("classification" => $this->request['filt_classification']));
-            if ($this->request['filt_status'] != NULL)
-                array_push($whereConds, array("employee_status" => $this->request['filt_status']));
-        }
-        $filterEmployees = Employee::where($whereConds)->get();
-
-        return [
-            'totalItems' => $totalEmployees,
-            'filterItems' => $filterEmployees
-        ];
-    }
-
-    /**
-     * Generate await invoice table items.
-     */
-    private function makeSubmitTimesheets($totalItems, $filterItems)
-    {
-        $iTotalRecords = count($totalItems);
-        $iDisplayLength = intval($this->request['length']);
-        $iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
-        $iDisplayStart = intval($this->request['start']);
-        $sEcho = intval($this->request['draw']);
-
-        $records = array();
-        $records["data"] = array();
-
-        $end = $iDisplayStart + $iDisplayLength;
-        $end = $end > $iTotalRecords ? $iTotalRecords : $end;
-
-        $idx = 0;
-        for ($i = $iDisplayStart; $i < $end; $i++) {
-            $id = ($i + 1);
-
-            $records["data"][] = array(
-                "Pay Classification",
-                "20-Feb",
-                "21-Feb",
-                "22-Feb",
-                '23-Feb',
-                '24-Feb',
-                '25-Feb',
-                '26-Feb',
-                '32:00'
-            );
-            $idx++;
-        }
-
-        if (isset($this->request['customActionType']) && $this->request['customActionType'] == "group_action") {
-            $records["customActionStatus"] = "OK"; // pass custom message(useful for getting status of group actions)
-            $records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
-        }
-
-        $records["draw"] = $sEcho;
-        $records["recordsTotal"] = $iTotalRecords;
-        $records["recordsFiltered"] = $iTotalRecords;
-
-        // echo json_encode($records);
         return response()->json($records);
     }
 // ========================== END PRIVATE FUNCTIONS ==========================

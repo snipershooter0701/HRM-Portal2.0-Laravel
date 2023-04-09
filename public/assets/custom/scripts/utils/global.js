@@ -1,14 +1,6 @@
 $(document).ready(function () {
     $('.btn-move-panel').click(function () {
         var panelName = $(this).attr('data-panelname');
-        if ($(this).parent().attr('id') == 'update_emp_action' || $(this).parent().attr('id') == 'view_emp_action') {
-            $('#add_emp_action').removeClass('hide');
-            $('#update_emp_action').addClass('hide');
-            $('#view_emp_action').addClass('hide');
-        } else if($(this).parent().attr('id') == 'update_req_action') {
-            $('#add_req_action').removeClass('hide');
-            $('#update_req_action').addClass('hide');
-        }
         movePanel(panelName);
     });
 });

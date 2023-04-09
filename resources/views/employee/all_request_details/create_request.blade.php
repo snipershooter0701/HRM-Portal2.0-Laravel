@@ -340,11 +340,11 @@
                     </div>
                     <div class="form-actions text-right mt-20" id="add_req_action">
                         <button type="button" class="btn btn-sm btn-c-primary" id="create_req_details">Create Details</button>
-                        <button type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-request-list">Cancel</button>
+                        <button type="button" class="btn btn-sm btn-c-grey page-move-btn" data-panelname="panel-request-list">Cancel</button>
                     </div>
                     <div class="form-actions text-right mt-20 hide" id="update_req_action">
                         <button type="button" class="btn btn-sm btn-c-primary" id="update_req_details">Update Details</button>
-                        <button type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-request-list">Cancel</button>
+                        <button type="button" class="btn btn-sm btn-c-grey page-move-btn" data-panelname="panel-request-list">Cancel</button>
                     </div>
                 </form>
                 <!-- END FORM-->
