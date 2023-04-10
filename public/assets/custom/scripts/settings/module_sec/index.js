@@ -97,7 +97,7 @@ var TableModuleSec = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": BASE_URL + "/settings/role_perm/get_tbl_act_list", // ajax source
+                    "url": BASE_URL + "/settings/module_sec/get_tbl_act_list", // ajax source
                 },
                 "columnDefs": [
                     {  // set default column settings
@@ -132,6 +132,11 @@ $(document).ready(function () {
 function refreshRoleTable() {
     gridModuleSecTable.getDataTable().ajax.reload();
     gridModuleSecTable.clearAjaxParams();
+}
+
+function refreshRoleActTable() {
+    gridModuleSecActTable.getDataTable().ajax.reload();
+    gridModuleSecActTable.clearAjaxParams();
 }
 
 function showEditModal(id) {
@@ -205,6 +210,7 @@ function updateRoleSecurity() {
             if (data['result'] == 'success') {
                 // Refresh Table.
                 refreshRoleTable();
+                refreshRoleActTable();
                 toastr.success("Module Security is updated.", "Success");
 
                 // Cancel Panel

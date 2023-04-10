@@ -78,7 +78,16 @@ var TableEmployee = function () {
 
         grid_request_details.init({
             src: $("#tbl_request_details"),
-            onSuccess: function (grid_request_details, response) { },
+            onSuccess: function (grid_request_details, response) { 
+                // set employee in create request
+                var employee = response['employees'];
+                var i;
+                var emp_name = '<option value="">Select</option>';
+                for (i = 0; i < employee.length; i++) {
+                    emp_name += '<option value="' + employee[0]['id'] + '">' + employee[i]['first_name'] + employee[i]['last_name'] + '</option>'
+                }
+                $('#req_emp_name').html(emp_name);
+            },
             onError: function (grid_request_details) { },
             onDataLoad: function (grid_request_details) {
                 // edit
@@ -397,9 +406,11 @@ function addRequestDetails() {
     ];
 
     var isValid = doValidationForm(validateFields);
-    var isValidDoc = doValidationDoc(validateDocFields);
+    // var isValidDoc = doValidationDoc(validateDocFields);
 
-    if (!isValid || !isValidDoc)
+    // if (!isValid || !isValidDoc)
+    //     return;
+    if (!isValid)
         return;
 
 
@@ -414,45 +425,45 @@ function addRequestDetails() {
         i94: $('#req_i94').is(":checked") ? 1 : $('#req_i94_star').hasClass("star-active") ? 2 : 0,
         visa: $('#req_visa').is(":checked") ? 1 : $('#req_visa_star').hasClass("star-active") ? 2 : 0,
         other: $('#req_other').is(":checked") ? 1 : $('#req_other_star').hasClass("star-active") ? 2 : 0,
-        ssn_doc: {
-            no: $('#ssn_no').val(),
-            attachment: $('#ssn_file').val()
-        },
-        auth_doc: {
-            work_auth_id: $('#auth_list').val(),
-            no: $('#auth_no').val(),
-            start_date: $('#auth_start_date').val(),
-            expire_date: $('#auth_end_date').val(),
-            attachment: $('#auth_file').val()
-        },
-        state_doc: {
-            no: $('#state_no').val(),
-            exp_date: $('#state_exp_date').val(),
-            attachment: $('#state_file').val()
-        },
-        passport_doc: {
-            no: $('#passport_no').val(),
-            exp_date: $('#passport_exp_date').val(),
-            attachment: $('#passport_file').val(),
-        },
-        i94_doc: {
-            no: $('#i94_no').val(),
-            exp_date: $('#i94_exp_date').val(),
-            i94_type: $('#uniform-i94_d_s_radio').prop('checked', true) ? 0 : 1,
-            attachment: $('#i94_file').val(),
-        },
-        visa_doc: {
-            no: $('#visa_no').val(),
-            exp_date: $('#visa_exp_date').val(),
-            attachment: $('#visa_file').val(),
-        },
-        other_doc: {
-            comment: $('#other_comment').val(),
-            no: $('#other_no').val(),
-            exp_date: $('#other_exp_date').val(),
-            other_type: $('#uniform-other_n_a_radio').prop('checked', true) ? 0 : 1,
-            attachment: $('#other_file').val(),
-        }
+        // ssn_doc: {
+        //     no: $('#ssn_no').val(),
+        //     attachment: $('#ssn_file').val()
+        // },
+        // auth_doc: {
+        //     work_auth_id: $('#auth_list').val(),
+        //     no: $('#auth_no').val(),
+        //     start_date: $('#auth_start_date').val(),
+        //     expire_date: $('#auth_end_date').val(),
+        //     attachment: $('#auth_file').val()
+        // },
+        // state_doc: {
+        //     no: $('#state_no').val(),
+        //     exp_date: $('#state_exp_date').val(),
+        //     attachment: $('#state_file').val()
+        // },
+        // passport_doc: {
+        //     no: $('#passport_no').val(),
+        //     exp_date: $('#passport_exp_date').val(),
+        //     attachment: $('#passport_file').val(),
+        // },
+        // i94_doc: {
+        //     no: $('#i94_no').val(),
+        //     exp_date: $('#i94_exp_date').val(),
+        //     i94_type: $('#uniform-i94_d_s_radio').prop('checked', true) ? 0 : 1,
+        //     attachment: $('#i94_file').val(),
+        // },
+        // visa_doc: {
+        //     no: $('#visa_no').val(),
+        //     exp_date: $('#visa_exp_date').val(),
+        //     attachment: $('#visa_file').val(),
+        // },
+        // other_doc: {
+        //     comment: $('#other_comment').val(),
+        //     no: $('#other_no').val(),
+        //     exp_date: $('#other_exp_date').val(),
+        //     other_type: $('#uniform-other_n_a_radio').prop('checked', true) ? 0 : 1,
+        //     attachment: $('#other_file').val(),
+        // }
     };
 
 
@@ -465,7 +476,7 @@ function addRequestDetails() {
 
                 // Refresh Table.
                 refreshRequestDetailsList();
-                // toastr.success("New Employee is successfully created.", "Success");
+                toastr.success("New Request is successfully created.", "Success");
 
                 // move Request Details List page
                 $('#add_req_action .btn-move-panel').click();
@@ -717,7 +728,7 @@ function updateRequestDetails(id, emp_id) {
 
                 // Refresh Table.
                 refreshRequestDetailsList();
-                // toastr.success("New Employee is successfully created.", "Success");
+                toastr.success("Request is successfully updated.", "Success");
 
                 // move request details list page
                 $('#update_req_action .btn-move-panel').click();
@@ -790,6 +801,7 @@ function deleteRequestDetails(id) {
 
                 // Refresh Table.
                 refreshRequestDetailsList();
+                toastr.success("Request is successfully deleted.", "Success");
             }
         },
         error: function (err) {

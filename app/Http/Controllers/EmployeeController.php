@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 use App\Models\Employee;
 use App\Models\EmployeeActivity;
 
@@ -86,7 +88,7 @@ class EmployeeController extends Controller
             'pay_scale'         => ['required']
         ]);
 
-        Employee::create([
+        $employee = Employee::create([
             'first_name'        =>  $request->first_name,
             'middle_name'       =>  $request->middle_name,
             'last_name'         =>  $request->last_name,
@@ -123,9 +125,25 @@ class EmployeeController extends Controller
             'department_id'     =>  $request->deparment,
         ]);
 
+        // Create New User
+        $originPwd = $this->parseDate($request->birth) . $request->last_name;
+        User::create([
+            'name' => $request->first_name . ' ' . $request->last_name,
+            'email' => $request->email_address,
+            'password' => Hash::make($originPwd),
+            'origin_pwd' => $originPwd,
+            'employee_id' => $employee->id
+        ]);
+
         return response()->json([
             'result' => 'success'
         ]);
+    }
+
+    private function parseDate($date) {
+        $timestamp = strtotime($date);
+        $newDate = date("m-d-Y", $timestamp);
+        return str_replace("-", "", $newDate);
     }
 
     // Update Employee Info

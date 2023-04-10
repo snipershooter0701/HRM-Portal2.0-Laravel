@@ -278,24 +278,27 @@ $(document).ready(function () {
  * Refresh client's placement table.
  */
 function refreshPlacementTable() {
-    gridPlacementTable.getDataTable().ajax.reload();
-    gridPlacementTable.clearAjaxParams();
+    // gridPlacementTable.getDataTable().ajax.reload();
+    // gridPlacementTable.clearAjaxParams();
+    $('#btn_tbl_placement_search').trigger('click');
 }
 
 /**
  * Refresh client's placement activities table.
  */
 function refreshPlacementActTable() {
-    gridPlacementActTable.getDataTable().ajax.reload();
-    gridPlacementActTable.clearAjaxParams();
+    // gridPlacementActTable.getDataTable().ajax.reload();
+    // gridPlacementActTable.clearAjaxParams();
+    $('#btn_tbl_placement_act_search').trigger('click');
 }
 
 /**
  * Refresh client's invoice table.
  */
 function refreshInvoiceActTable() {
-    gridInvoiceTable.getDataTable().ajax.reload();
-    gridInvoiceTable.clearAjaxParams();
+    // gridInvoiceTable.getDataTable().ajax.reload();
+    // gridInvoiceTable.clearAjaxParams();
+    $('#btn_tbl_invoice_search').trigger('click');
 }
 
 /**

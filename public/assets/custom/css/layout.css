@@ -294,6 +294,12 @@ h4.section-head {
 
 /* =============================== END SIDEBAR STYLES ============================== */
 
+/* =============================== BEGIN ALERT STYLES ============================== */
+.alert i {
+    font-size: 18px !important;
+}
+/* ================================ END ALERT STYLES =============================== */
+
 /* ============================== BEGIN FILEINPUT STYLES ============================= */
 .fileinput .uneditable-input {
     height: 24px !important;
@@ -386,6 +392,10 @@ hr {
 .page-header.navbar .top-menu .navbar-nav>li.dropdown-user .dropdown-toggle:hover,
 .page-header.navbar .top-menu .navbar-nav>li.dropdown.open .dropdown-toggle {
     background: #C9D1D5 !important;
+}
+
+.page-header.navbar .top-menu .navbar-nav .dropdown .dropdown-menu i{
+    font-size: 12px !important;
 }
 
 .page-content-wrapper,

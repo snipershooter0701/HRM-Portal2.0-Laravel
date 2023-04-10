@@ -446,6 +446,7 @@ class ClientPlacementController extends Controller
         $idx = $iDisplayStart + 1;
         foreach ($finalRecords as $finalRecord) {
             $records["data"][] = array(
+                '<input type="checkbox" name="id[]" value="' . $finalRecord->id . '">',
                 $idx,
                 $finalRecord->employee->first_name,
                 $finalRecord->invoice_date,

@@ -128,6 +128,17 @@ $(document).ready(function () {
     $('#btn_submit_timeheet_ok').click(function () {
         createTimesheet();
     });
+
+    $('#btn_submit_add_item').click(function() {
+        var showOrder = $('#show_order').val();
+        if (showOrder == '0') {
+            $('#show_order').val("1");
+            $('#time_over').removeClass('display-none');
+        } else if (showOrder == '1') {
+            $('#show_order').val("2");
+            $('#time_double').removeClass('display-none');
+        }
+    });
 });
 
 /**

@@ -38,8 +38,8 @@
 
 @section('page_js')
 <script type="text/javascript">
-    var PAGE_ID = "page-client";
-    var PAGE_SUB_ID = "page-client-all-placements";
+    var PAGE_ID = "page_client";
+    var PAGE_SUB_ID = "page_client_all_placements";
 
 </script>
 <script src="{{ url('assets/custom/scripts/client/all_placements/index.js?v=' . $randNum) }}" type="text/javascript"></script>

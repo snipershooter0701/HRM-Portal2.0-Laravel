@@ -32,50 +32,67 @@ $(document).ready(function () {
 function doRegister() {
     // Check validation
     var validateFields = [{
-        field_id: 'reg-username',
+        field_id: 'reg_firstname',
         conditions: [
-            'required' + CONST_VALIDATE_SPLITER + 'Name is required.'
+            'required' + CONST_VALIDATE_SPLITER + 'First Name is required.'
         ]
     }, {
-        field_id: 'reg-email',
+        field_id: 'reg_lastname',
+        conditions: [
+            'required' + CONST_VALIDATE_SPLITER + 'Last Name is required.'
+        ]
+    }, {
+        field_id: 'reg_email',
         conditions: [
             'required' + CONST_VALIDATE_SPLITER + 'Email is required.',
             'valid_email' + CONST_VALIDATE_SPLITER + 'Email is invalid.'
         ]
     }, {
-        field_id: 'reg-password',
+        field_id: 'reg_phoneno',
         conditions: [
-            'required' + CONST_VALIDATE_SPLITER + 'Password is required.',
-            'min_length[6]' + CONST_VALIDATE_SPLITER + 'Password enter at least 6 characters.',
-            'max_length[18]' + CONST_VALIDATE_SPLITER + 'Password enter no more than 18 characters.'
+            'required' + CONST_VALIDATE_SPLITER + 'Phone Number is required.'
         ]
     }, {
-        field_id: 'reg-rpassword',
+        field_id: 'reg_poc',
         conditions: [
-            'required' + CONST_VALIDATE_SPLITER + 'Confirm password is required.',
-            'is_match_field[reg-password]' + CONST_VALIDATE_SPLITER + 'Confirm password is not match'
+            // 'required' + CONST_VALIDATE_SPLITER + 'Email is required.',
+            // 'valid_email' + CONST_VALIDATE_SPLITER + 'Email is invalid.'
         ]
-    }];
+    }
+        // {
+        //     field_id: 'reg-password',
+        //     conditions: [
+        //         'required' + CONST_VALIDATE_SPLITER + 'Password is required.',
+        //         'min_length[6]' + CONST_VALIDATE_SPLITER + 'Password enter at least 6 characters.',
+        //         'max_length[18]' + CONST_VALIDATE_SPLITER + 'Password enter no more than 18 characters.'
+        //     ]
+        // }, {
+        //     field_id: 'reg-rpassword',
+        //     conditions: [
+        //         'required' + CONST_VALIDATE_SPLITER + 'Confirm password is required.',
+        //         'is_match_field[reg-password]' + CONST_VALIDATE_SPLITER + 'Confirm password is not match'
+        //     ]
+        // }
+    ];
     var isValid = doValidationForm(validateFields);
     if (!isValid)
         return;
 
     var formData = {
-        name: $('#reg-username').val(),
-        email: $('#reg-email').val(),
-        password: $('#reg-password').val(),
-        password_confirmation: $('#reg-rpassword').val()
+        first_name: $('#reg_firstname').val(),
+        last_name: $('#reg_lastname').val(),
+        email: $('#reg_email').val(),
+        phone_no: $('#reg_phoneno').val(),
+        poc: $('#reg_poc').val(),
     };
 
     callAjax({
-        url: BASE_URL + '/register',
+        url: BASE_URL + '/user_signup',
         type: "POST",
         data: formData,
         success: function (data) {
             if (data['result'] == 'success') {
-                if (data['is_registered'] == true) {
-                    document.location = BASE_URL + '/home';
-                }
+                toastr.success("Your signup request is successfully sent. Please wait until you receive our email.", "Success");
             }
         },
         error: function (err) {
@@ -92,6 +109,8 @@ function doRegister() {
 
                 if (errors.rpassword) showValidError("reg-rpassword", errors.rpassword[0]);
                 else hideValidError("reg-rpassword");
+
+                toastr.error(err.message, "Error");
             }
         }
     });

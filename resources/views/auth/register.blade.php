@@ -10,20 +10,41 @@
     <h3>Sign Up</h3>
     <p> Enter your account details below: </p>
     <div class="form-group">
-        <label class="control-label visible-ie8 visible-ie9">Username</label>
+        <label class="control-label visible-ie8 visible-ie9">First Name</label>
         <div class="input-icon">
             <i class="fa fa-user"></i>
-            <input id="reg-username" class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username" />
+            <input id="reg_firstname" class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="First Name" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label visible-ie8 visible-ie9">Last Name</label>
+        <div class="input-icon">
+            <i class="fa fa-user"></i>
+            <input id="reg_lastname" class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Last Name" />
         </div>
     </div>
     <div class="form-group">
         <label class="control-label visible-ie8 visible-ie9">Email</label>
         <div class="input-icon">
             <i class="fa fa-envelope"></i>
-            <input id="reg-email" class="form-control placeholder-no-fix" type="text" placeholder="Email" name="email" />
+            <input id="reg_email" class="form-control placeholder-no-fix" type="text" placeholder="Email" />
         </div>
     </div>
     <div class="form-group">
+        <label class="control-label visible-ie8 visible-ie9">Phone No</label>
+        <div class="input-icon">
+            <i class="fa fa-phone"></i>
+            <input id="reg_phoneno" class="form-control placeholder-no-fix" type="text" placeholder="Phone Number" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label visible-ie8 visible-ie9">Point of Contact</label>
+        <div class="input-icon">
+            <i class="fa fa-plane"></i>
+            <input id="reg_poc" class="form-control placeholder-no-fix" type="text" placeholder="Point of Contact" />
+        </div>
+    </div>
+    {{-- <div class="form-group">
         <label class="control-label visible-ie8 visible-ie9">Password</label>
         <div class="input-icon">
             <i class="fa fa-lock"></i>
@@ -38,7 +59,7 @@
                 <input id="reg-rpassword" class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Re-type Your Password" name="rpassword" />
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="form-group">
         <label>
             <input type="checkbox" name="tnc" /> I agree to the

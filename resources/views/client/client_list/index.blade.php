@@ -92,8 +92,8 @@
 
 @section('page_js')
 <script type="text/javascript">
-    var PAGE_ID = "page-client";
-    var PAGE_SUB_ID = "page-client-list";
+    var PAGE_ID = "page_client";
+    var PAGE_SUB_ID = "page_client_list";
 
 </script>
 <script src="{{ url('assets/custom/scripts/client/client_list/list.js?v=' . $randNum) }}" type="text/javascript"></script>

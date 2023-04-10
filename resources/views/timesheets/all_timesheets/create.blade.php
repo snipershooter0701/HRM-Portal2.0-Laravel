@@ -72,7 +72,7 @@
                                         <th width="10%"> <b>Fri</b> </th>
                                         <th width="10%" class="backcolor-light-grey"> <b>Sat</b> </th>
                                         <th width="10%" class="backcolor-light-grey"> <b>Sun</b> </th>
-                                        <th width="15%" class="backcolor-light-grey" rowspan="2"> <button type="button" class="btn btn-sm btn-c-primary">Add Item</button> </th>
+                                        <th width="15%" class="backcolor-light-grey" rowspan="2"> <button id="btn_submit_add_item" type="button" class="btn btn-sm btn-c-primary">Add Item</button> </th>
                                     </tr>
                                     <tr role="row">
                                         <th width="15%" class="backcolor-light-grey"> <b>Pay Classification</b> </th>
@@ -86,6 +86,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <input id="show_order" type="hidden" value="0">
                                     <tr id="time_std" role="row">
                                         <td class="backcolor-light-grey"> <b>Standard Time</b> </td>
                                         <td>
@@ -125,7 +126,7 @@
                                         </td>
                                         <td class="backcolor-light-grey"> 40:00 </td>
                                     </tr>
-                                    <tr id="time_over" role="row" class="">
+                                    <tr id="time_over" role="row" class="display-none">
                                         <td class="backcolor-light-grey"> <b>Over Time</b> </td>
                                         <td>
                                             <div class=" form-group mb-0 ">
@@ -164,7 +165,7 @@
                                         </td>
                                         <td class="backcolor-light-grey"> 00:00 </td>
                                     </tr>
-                                    <tr id="time_double" role="row" class="">
+                                    <tr id="time_double" role="row" class="display-none">
                                         <td class="backcolor-light-grey"> <b>Double Time</b> </td>
                                         <td>
                                             <div class=" form-group mb-0 ">

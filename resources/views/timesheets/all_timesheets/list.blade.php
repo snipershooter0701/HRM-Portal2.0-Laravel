@@ -5,12 +5,6 @@
         <li>
             <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel-all-timesheet-list">All Timesheets</a>
         </li>
-        <li>
-            <a href="javascript:;" class="btn-move-panel" data-panelname="panel-due-timesheet-list">Due Timesheets</a>
-        </li>
-        <li>
-            <a href="javascript:;" class="btn-move-panel" data-panelname="panel-awaiting-invoices-list">Awaiting invoices</a>
-        </li>
     </ul>
     <div class="page-toolbar">
         <div class="btn-group pull-right">

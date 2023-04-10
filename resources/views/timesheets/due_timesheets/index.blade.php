@@ -17,26 +17,11 @@
 @endsection
 
 @section('content')
-{{-- BEGIN ALL TIMESHEETS --}}
-<div id="panel-all-timesheet-list" class="move-panel">
-    @include('timesheets.all_timesheets.list')
-</div>
-<div id="panel-create-timesheet" class="move-panel display-none">
-    @include('timesheets.all_timesheets.create')
-</div>
-{{-- END ALL TIMESHEETS --}}
-
 {{-- BEGIN DUE TIMESHEETS --}}
-<div id="panel-due-timesheet-list" class="move-panel display-none">
+<div id="panel-due-timesheet-list" class="move-panel">
     @include('timesheets.due_timesheets.list')
 </div>
 {{-- END DUE TIMESHEETS --}}
-
-{{-- BEGIN AWITING INVOICES --}}
-<div id="panel-awaiting-invoices-list" class="move-panel display-none">
-    @include('timesheets.awaiting_invoices.list')
-</div>
-{{-- END AWITING INVOICES --}}
 @endsection
 
 @section('page_template_js')
@@ -54,10 +39,9 @@
 
 @section('page_js')
 <script type="text/javascript">
-    var PAGE_ID = "page-timesheets";
+    var PAGE_ID = "page_timesheets";
+    var PAGE_SUB_ID = "page_timesheets_due";
 
 </script>
-<script src="{{ url('assets/custom/scripts/timesheets/all_timesheets/index.js?v=' . $randNum) }}" type="text/javascript"></script>
 <script src="{{ url('assets/custom/scripts/timesheets/due_timesheets/index.js?v=' . $randNum) }}" type="text/javascript"></script>
-<script src="{{ url('assets/custom/scripts/timesheets/awaiting_invoices/index.js?v=' . $randNum) }}" type="text/javascript"></script>
 @endsection

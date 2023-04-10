@@ -34,7 +34,7 @@ var TableAwaitInvoices = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": BASE_URL + "/timesheets/await_inv/get_tbl_list", // ajax source
+                    "url": BASE_URL + "/timesheets/awaiting/get_tbl_list", // ajax source
                 },
                 "columnDefs": [
                     {  // set default column settings

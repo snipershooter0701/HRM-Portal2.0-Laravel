@@ -681,93 +681,93 @@ function addEmployee() {
     }
 
     var isValid = doValidationForm(validateFields);
-    // if (!isValid)
-    //     return;
-
-    // var formData = {
-    //     first_name: $('#create_first_name').val(),
-    //     last_name: $('#create_last_name').val(),
-    //     title: $('#create_title').val(),
-    //     email_address: $('#create_email_address').val(),
-    //     phone_num: $('#create_phone_num').val(),
-    //     birth: $('#create_birth').val(),
-    //     join_date: $('#create_join').val(),
-    //     gender: $('#create_gender').val(),
-    //     employment_type: $('#create_employment_type').val(),
-    //     category: $('#create_category').val(),
-    //     employee_type: $('#create_employee_type').val(),
-    //     employee_status: $('#create_employee_status').val(),
-    //     role: $('#create_role').val(),
-    //     poc: $('#create_poc').val(),
-    //     classification: $('#create_classification').val(),
-    //     addr_street: $('#create_emp_street').val(),
-    //     addr_apt: $('#create_emp_apt').val(),
-    //     addr_city: $('#create_emp_city').val(),
-    //     addr_state: $('#create_emp_state').val(),
-    //     addr_country: $('#create_emp_country').val(),
-    //     addr_zipcode: $('#create_emp_zipcode').val(),
-    //     pay_standard_time: $('#create_pay_standard_time').is(":checked") ? 1 : 0,
-    //     pay_over_time: $('#create_pay_over_time').is(":checked") ? 1 : 0,
-    //     pay_double_time: $('#create_pay_double_time').is(":checked") ? 1 : 0,
-    //     pay_scale: $('#create_pay_scale').val(),
-    //     middle_name: $('#create_middle_name').val(),
-    //     employee_status_date: $('#create_employee_status_date').val(),
-    //     deparment: $('#create_deparment').val(),
-    // };
-
-
-    // // pay classification TODO
-    // if (payScaleFlag == '0') {
-    //     formData.per_pay = $('#create_pay_percent_val').val();
-    //     formData.per_change_hrs = $('#create_pay_percent_hrs').val();
-    //     formData.per_change_pay = $('#create_pay_percent_to').val();
-    //     formData.rate_pay = 75;
-    //     formData.rate_change_hrs = 1920;
-    //     formData.rate_change_pay = 80;
-    // } else {
-    //     formData.per_pay = 75;
-    //     formData.per_change_hrs = 1920;
-    //     formData.per_change_pay = 80;
-    //     formData.rate_pay = $('#create_pay_rate_val').val();
-    //     formData.rate_change_hrs = $('#create_pay_rate_hrs').val();
-    //     formData.rate_change_pay = $('#create_pay_rate_to').val();
-    // }
-
-
+    if (!isValid)
+        return;
 
     var formData = {
-        first_name: 'sniper',
-        last_name: 'shooter',
-        title: 'hgfhgfh',
-        email_address: 'snipershooter@gmail.com',
-        phone_num: '456489',
-        birth: '2024-02-05',
-        join_date: '2023-05-08',
-        gender: '0',
-        employment_type: '0',
-        category: '0',
-        employee_type: '0',
-        employee_status: '1',
-        role: '0',
-        poc: '0',
-        classification: '0',
-        per_pay: '56',
-        per_change_hrs: '456',
-        per_change_pay: '56',
-        rate_pay: '565',
-        rate_change_hrs: '565',
-        rate_change_pay: '565',
-        addr_street: 'dsfds',
-        addr_apt: 'tyty',
-        addr_city: 'sfdf',
-        addr_state: '0',
-        addr_country: '0',
-        addr_zipcode: '5656',
-        pay_standard_time: '0',
-        pay_over_time: '0',
-        pay_double_time: '0',
-        pay_scale: '0'
+        first_name: $('#create_first_name').val(),
+        last_name: $('#create_last_name').val(),
+        title: $('#create_title').val(),
+        email_address: $('#create_email_address').val(),
+        phone_num: $('#create_phone_num').val(),
+        birth: $('#create_birth').val(),
+        join_date: $('#create_join').val(),
+        gender: $('#create_gender').val(),
+        employment_type: $('#create_employment_type').val(),
+        category: $('#create_category').val(),
+        employee_type: $('#create_employee_type').val(),
+        employee_status: $('#create_employee_status').val(),
+        role: $('#create_role').val(),
+        poc: $('#create_poc').val(),
+        classification: $('#create_classification').val(),
+        addr_street: $('#create_emp_street').val(),
+        addr_apt: $('#create_emp_apt').val(),
+        addr_city: $('#create_emp_city').val(),
+        addr_state: $('#create_emp_state').val(),
+        addr_country: $('#create_emp_country').val(),
+        addr_zipcode: $('#create_emp_zipcode').val(),
+        pay_standard_time: $('#create_pay_standard_time').is(":checked") ? 1 : 0,
+        pay_over_time: $('#create_pay_over_time').is(":checked") ? 1 : 0,
+        pay_double_time: $('#create_pay_double_time').is(":checked") ? 1 : 0,
+        pay_scale: $('#create_pay_scale').val(),
+        middle_name: $('#create_middle_name').val(),
+        employee_status_date: $('#create_employee_status_date').val(),
+        deparment: $('#create_deparment').val(),
     };
+
+
+    // pay classification TODO
+    if (payScaleFlag == '0') {
+        formData.per_pay = $('#create_pay_percent_val').val();
+        formData.per_change_hrs = $('#create_pay_percent_hrs').val();
+        formData.per_change_pay = $('#create_pay_percent_to').val();
+        formData.rate_pay = 75;
+        formData.rate_change_hrs = 1920;
+        formData.rate_change_pay = 80;
+    } else {
+        formData.per_pay = 75;
+        formData.per_change_hrs = 1920;
+        formData.per_change_pay = 80;
+        formData.rate_pay = $('#create_pay_rate_val').val();
+        formData.rate_change_hrs = $('#create_pay_rate_hrs').val();
+        formData.rate_change_pay = $('#create_pay_rate_to').val();
+    }
+
+
+
+    // var formData = {
+    //     first_name: 'sniper',
+    //     last_name: 'shooter',
+    //     title: 'hgfhgfh',
+    //     email_address: 'snipershooter@gmail.com',
+    //     phone_num: '456489',
+    //     birth: '2024-02-05',
+    //     join_date: '2023-05-08',
+    //     gender: '0',
+    //     employment_type: '0',
+    //     category: '0',
+    //     employee_type: '0',
+    //     employee_status: '1',
+    //     role: '0',
+    //     poc: '0',
+    //     classification: '0',
+    //     per_pay: '56',
+    //     per_change_hrs: '456',
+    //     per_change_pay: '56',
+    //     rate_pay: '565',
+    //     rate_change_hrs: '565',
+    //     rate_change_pay: '565',
+    //     addr_street: 'dsfds',
+    //     addr_apt: 'tyty',
+    //     addr_city: 'sfdf',
+    //     addr_state: '0',
+    //     addr_country: '0',
+    //     addr_zipcode: '5656',
+    //     pay_standard_time: '0',
+    //     pay_over_time: '0',
+    //     pay_double_time: '0',
+    //     pay_scale: '0'
+    // };
 
     callAjax({
         url: BASE_URL + '/employee/all_employees/add',
@@ -778,10 +778,10 @@ function addEmployee() {
 
                 // Refresh Table.
                 refreshEmployeeList();
-                // toastr.success("New Employee is successfully created.", "Success");
+                toastr.success("New Employee is successfully created.", "Success");
 
                 // move Employee list page
-                $('#add_emp_action .btn-move-panel').click();
+                $('#add_emp_action .page-move-btn').click();
 
                 $('#create_first_name').val('');
                 $('#create_middle_name').val('');
@@ -1005,11 +1005,10 @@ function updateEmployeeInfo(id) {
 
                 // Refresh Table.
                 refreshEmployeeList();
-                refreshRequestDetailsList();
-                // toastr.success("New Employee is successfully created.", "Success");
+                toastr.success("Employee is successfully updated.", "Success");
 
                 // move Employee list page
-                $('#update_emp_action .btn-move-panel').click();
+                $('#update_emp_action .page-move-btn').click();
 
                 $('#create_first_name').val('');
                 $('#create_middle_name').val('');
@@ -1068,7 +1067,7 @@ function deleteEmployeeInfo(id) {
 
                 // Refresh Table.
                 refreshEmployeeList();
-                refreshRequestDetailsList();
+                toastr.success("Employee is successfully deleted.", "Success");
 
             }
         },

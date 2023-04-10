@@ -35,7 +35,7 @@ class TimesheetsController extends Controller
         $employees = Employee::all();
         $jobTires = JobTire::all();
 
-        return view('timesheets.index')->with([
+        return view('timesheets.all_timesheets.index')->with([
             'randNum' => rand(),
             'employees' => $employees,
             'jobTires' => $jobTires

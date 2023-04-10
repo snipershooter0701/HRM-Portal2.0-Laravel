@@ -9,9 +9,9 @@
     <div class="page-toolbar">
         <div class="btn-group pull-right">
             <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-create-businfo"><i class="fa fa-plus-circle"></i> Add Client </button>
-            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-create-placement"><i class="fa fa-plus-circle"></i> Add Placement </button>
-            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-create-document"><i class="fa fa-plus-circle"></i> Add Document </button>
-            <button id="btn_edit_client_page" type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-edit-businfo"><i class="fa fa-plus-circle"></i> Edit Client </button>
+            <button id="btn_edit_client_page" class="btn-move-panel display-none" data-panelname="panel-edit-businfo"><i class="fa fa-plus-circle"></i> Edit Client </button>
+            {{-- <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-create-placement"><i class="fa fa-plus-circle"></i> Add Placement </button> --}}
+            {{-- <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-create-document"><i class="fa fa-plus-circle"></i> Add Document </button> --}}
         </div>
     </div>
 </div>

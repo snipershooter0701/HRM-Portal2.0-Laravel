@@ -16,134 +16,132 @@
             <div class="portlet-title">
                 <div class="caption">
                     <span class="caption-helper mr-10 active-tab btn-move-panel" data-panelname="panel-business-info">Business Info</span>
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-contact-info">Contact Info</span>
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-add-confidential">Add Confidential</span>
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-placement">Placements</span>
-                    <span class="caption-helper btn-move-panel" data-panelname="panel-document">Documents</span>
+                    {{-- <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-contact-info">Contact Info</span> --}}
+                    {{-- <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-add-confidential">Add Confidential</span> --}}
+                    {{-- <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-placement">Placements</span> --}}
+                    {{-- <span class="caption-helper btn-move-panel" data-panelname="panel-document">Documents</span> --}}
                 </div>
             </div>
             <div class="portlet-body">
                 <!-- BEGIN FORM-->
-                <form action="#">
-                    <div class="form-body">
-                        {{-- business info --}}
-                        <div class="row">
-                            <div class="form-group col-sm-2">
-                                <label class="control-label">Business Name <span class="required" aria-required="true">*</span></label>
-                                <input id="create_bus_name" type="text" class="form-control">
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label class="control-label">Contact Number <span class="required" aria-required="true">*</span></label>
-                                <input id="create_bus_contact_num" type="text" class="form-control">
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label class="control-label">Client ID</label>
-                                <input id="create_bus_client_id" type="text" class="form-control" disabled>
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label class="control-label">Federal ID <span class="required" aria-required="true">*</span></label>
-                                <input id="create_bus_federal_id" type="text" class="form-control">
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label class="control-label">Email <span class="required" aria-required="true">*</span></label>
-                                <input id="create_bus_email" type="text" class="form-control">
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label class="control-label">Website</label>
-                                <input id="create_bus_website" type="text" class="form-control">
-                            </div>
+                <div class="form-body">
+                    {{-- business info --}}
+                    <div class="row">
+                        <div class="form-group col-sm-2">
+                            <label class="control-label">Business Name <span class="required" aria-required="true">*</span></label>
+                            <input id="create_bus_name" type="text" class="form-control">
                         </div>
-                        {{-- business info --}}
-
-                        {{-- Invoice Location --}}
-                        <h4 class="section-head">Invoice Location</h4>
-                        <hr>
-                        <div class="row">
-                            <div class="form-group col-sm-2">
-                                <label class="control-label">Suite/Apt No <span class="required" aria-required="true">*</span></label>
-                                <input id="create_bus_inv_apt" type="text" class="form-control">
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label class="control-label">Street <span class="required" aria-required="true">*</span></label>
-                                <input id="create_bus_inv_street" type="text" class="form-control">
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label class="control-label">City/Town <span class="required" aria-required="true">*</span></label>
-                                <input id="create_bus_inv_city" type="text" class="form-control">
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label class="control-label">State <span class="required" aria-required="true">*</span></label>
-                                <select id="create_bus_inv_state" class="form-control">
-                                    <option value="1" >Alabama</option>
-                                    <option value="2">Alaska</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label class="control-label">Country <span class="required" aria-required="true">*</span></label>
-                                <select id="create_bus_inv_country" class="form-control">
-                                    <option value="1">United State</option>
-                                    <option value="2">Alaska</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label class="control-label">Zip Code <span class="required" aria-required="true">*</span></label>
-                                <input id="create_bus_inv_zipcode" type="text" class="form-control">
-                            </div>
+                        <div class="form-group col-sm-2">
+                            <label class="control-label">Contact Number <span class="required" aria-required="true">*</span></label>
+                            <input id="create_bus_contact_num" type="text" class="form-control">
                         </div>
-                        {{-- Invoice Location --}}
-
-                        {{-- Client Address --}}
-                        <div class="row">
-                            <div class="col-md-6 ">
-                                <h4 class="section-head">Client Address</h4>
-                            </div>
-                            <div class="col-md-6 section-action mt-25 text-right">
-                                <label>
-                                    <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Same as invoice address
-                                </label>
-                            </div>
+                        <div class="form-group col-sm-2">
+                            <label class="control-label">Client ID</label>
+                            <input id="create_bus_client_id" type="text" class="form-control" disabled>
                         </div>
-                        <hr>
-                        <div class="row">
-                            <div class="form-group col-sm-2">
-                                <label class="control-label">Suite/Apt No <span class="required" aria-required="true">*</span></label>
-                                <input  id="create_bus_cli_apt" type="text" class="form-control">
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label class="control-label">Street <span class="required" aria-required="true">*</span></label>
-                                <input id="create_bus_cli_street" type="text" class="form-control">
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label class="control-label">City/Town <span class="required" aria-required="true">*</span></label>
-                                <input id="create_bus_cli_city" type="text" class="form-control">
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label class="control-label">State <span class="required" aria-required="true">*</span></label>
-                                <select id="create_bus_cli_state" class="form-control">
-                                    <option value="1" >Alabama</option>
-                                    <option value="2">Alaska</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label class="control-label">Country <span class="required" aria-required="true">*</span></label>
-                                <select id="create_bus_cli_country" class="form-control">
-                                    <option value="1">United State</option>
-                                    <option value="2">Alaska</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label class="control-label">Zip Code <span class="required" aria-required="true">*</span></label>
-                                <input id="create_bus_cli_zipcode" type="text" class="form-control">
-                            </div>
+                        <div class="form-group col-sm-2">
+                            <label class="control-label">Federal ID <span class="required" aria-required="true">*</span></label>
+                            <input id="create_bus_federal_id" type="text" class="form-control">
                         </div>
-                        {{-- Client Address --}}
-
+                        <div class="form-group col-sm-2">
+                            <label class="control-label">Email <span class="required" aria-required="true">*</span></label>
+                            <input id="create_bus_email" type="text" class="form-control">
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label class="control-label">Website</label>
+                            <input id="create_bus_website" type="text" class="form-control">
+                        </div>
                     </div>
-                    <div class="form-actions text-right">
-                        <button id="btn_create_businfo" type="submit" class="btn btn-sm btn-c-primary">Create</button>
-                        <button id="btn_cancel_businfo" type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-client">Cancel</button>
+                    {{-- business info --}}
+
+                    {{-- Invoice Location --}}
+                    <h4 class="section-head">Invoice Location</h4>
+                    <hr>
+                    <div class="row">
+                        <div class="form-group col-sm-2">
+                            <label class="control-label">Suite/Apt No <span class="required" aria-required="true">*</span></label>
+                            <input id="create_bus_inv_apt" type="text" class="form-control">
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label class="control-label">Street <span class="required" aria-required="true">*</span></label>
+                            <input id="create_bus_inv_street" type="text" class="form-control">
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label class="control-label">City/Town <span class="required" aria-required="true">*</span></label>
+                            <input id="create_bus_inv_city" type="text" class="form-control">
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label class="control-label">State <span class="required" aria-required="true">*</span></label>
+                            <select id="create_bus_inv_state" class="form-control">
+                                <option value="1">Alabama</option>
+                                <option value="2">Alaska</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label class="control-label">Country <span class="required" aria-required="true">*</span></label>
+                            <select id="create_bus_inv_country" class="form-control">
+                                <option value="1">United State</option>
+                                <option value="2">Alaska</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label class="control-label">Zip Code <span class="required" aria-required="true">*</span></label>
+                            <input id="create_bus_inv_zipcode" type="text" class="form-control">
+                        </div>
                     </div>
-                </form>
+                    {{-- Invoice Location --}}
+
+                    {{-- Client Address --}}
+                    <div class="row">
+                        <div class="col-md-6 ">
+                            <h4 class="section-head">Client Address</h4>
+                        </div>
+                        <div class="col-md-6 section-action mt-25 text-right">
+                            <label>
+                                <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Same as invoice address
+                            </label>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="form-group col-sm-2">
+                            <label class="control-label">Suite/Apt No <span class="required" aria-required="true">*</span></label>
+                            <input id="create_bus_cli_apt" type="text" class="form-control">
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label class="control-label">Street <span class="required" aria-required="true">*</span></label>
+                            <input id="create_bus_cli_street" type="text" class="form-control">
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label class="control-label">City/Town <span class="required" aria-required="true">*</span></label>
+                            <input id="create_bus_cli_city" type="text" class="form-control">
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label class="control-label">State <span class="required" aria-required="true">*</span></label>
+                            <select id="create_bus_cli_state" class="form-control">
+                                <option value="1">Alabama</option>
+                                <option value="2">Alaska</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label class="control-label">Country <span class="required" aria-required="true">*</span></label>
+                            <select id="create_bus_cli_country" class="form-control">
+                                <option value="1">United State</option>
+                                <option value="2">Alaska</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label class="control-label">Zip Code <span class="required" aria-required="true">*</span></label>
+                            <input id="create_bus_cli_zipcode" type="text" class="form-control">
+                        </div>
+                    </div>
+                    {{-- Client Address --}}
+
+                </div>
+                <div class="form-actions text-right">
+                    <button id="btn_create_businfo" type="submit" class="btn btn-sm btn-c-primary">Create</button>
+                    <button id="btn_cancel_businfo" type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-client">Cancel</button>
+                </div>
                 <!-- END FORM-->
             </div>
         </div>

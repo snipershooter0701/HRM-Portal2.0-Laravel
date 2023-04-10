@@ -19,12 +19,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::post('/user_signup', [App\Http\Controllers\Auth\UserSignupController::class, 'signup']);
+
 Route::middleware(['auth'])->group(function () {
 
     // Dashboard
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::post('/home/gen', [App\Http\Controllers\HomeController::class, 'genEmailPwd']);
 
+    // Common
+    Route::post('/notifications', [App\Http\Controllers\NotificationController::class, 'getNotifications']);
 
     Route::prefix("employee")->group(function () {
         // Employee - All Employees
@@ -54,63 +58,85 @@ Route::middleware(['auth'])->group(function () {
     // Client
     Route::prefix('client')->group(function () {
         // List Page
-        Route::get('/list', [App\Http\Controllers\ClientListController::class, 'index']);
-        Route::post('/list/get_tbl_client_list', [App\Http\Controllers\ClientListController::class, 'getTableClientList']);
-        Route::post('/list/get_tbl_client_acts_list', [App\Http\Controllers\ClientListController::class, 'getTableClientActsList']);
-        Route::get('/list/get_client', [App\Http\Controllers\ClientListController::class, 'getClientById']);
+        Route::prefix('list')->group(function () {
+            Route::get('/', [App\Http\Controllers\ClientListController::class, 'index']);
+            Route::post('/get_tbl_client_list', [App\Http\Controllers\ClientListController::class, 'getTableClientList']);
+            Route::post('/get_tbl_client_acts_list', [App\Http\Controllers\ClientListController::class, 'getTableClientActsList']);
+            Route::get('/get_client', [App\Http\Controllers\ClientListController::class, 'getClientById']);
 
-        // Client (Business Info)
-        Route::post('/list/create_business_info', [App\Http\Controllers\ClientListController::class, 'createBusinessInfo']);
-        Route::post('/list/update_business_info', [App\Http\Controllers\ClientListController::class, 'updateBusinessInfoById']);
-        Route::post('/list/delete', [App\Http\Controllers\ClientListController::class, 'delete']);
+            // Client (Business Info)
+            Route::post('/create_business_info', [App\Http\Controllers\ClientListController::class, 'createBusinessInfo']);
+            Route::post('/update_business_info', [App\Http\Controllers\ClientListController::class, 'updateBusinessInfoById']);
+            Route::post('/delete', [App\Http\Controllers\ClientListController::class, 'delete']);
+        });
 
         // Client (Contact Info)
-        Route::post('/contact_info/get_tbl_list', [App\Http\Controllers\ClientContactController::class, 'getTableContactInfoList']);
-        Route::post('/contact_info/get_by_id', [App\Http\Controllers\ClientContactController::class, 'getContactById']);
-        Route::post('/contact_info/create', [App\Http\Controllers\ClientContactController::class, 'create']);
-        Route::post('/contact_info/update', [App\Http\Controllers\ClientContactController::class, 'update']);
-        Route::post('/contact_info/delete', [App\Http\Controllers\ClientContactController::class, 'delete']);
+        Route::prefix('/contact_info')->group(function () {
+            Route::post('/get_tbl_list', [App\Http\Controllers\ClientContactController::class, 'getTableContactInfoList']);
+            Route::post('/get_by_id', [App\Http\Controllers\ClientContactController::class, 'getContactById']);
+            Route::post('/create', [App\Http\Controllers\ClientContactController::class, 'create']);
+            Route::post('/update', [App\Http\Controllers\ClientContactController::class, 'update']);
+            Route::post('/delete', [App\Http\Controllers\ClientContactController::class, 'delete']);
+        });
 
         // Client (Confidential)
-        Route::post('/confidential/get_tbl_list', [App\Http\Controllers\ClientConfidentialController::class, 'getTableConfidentialList']);
-        Route::post('/confidential/create', [App\Http\Controllers\ClientConfidentialController::class, 'create']);
-        Route::post('/confidential/update', [App\Http\Controllers\ClientConfidentialController::class, 'update']);
-        Route::post('/confidential/delete', [App\Http\Controllers\ClientConfidentialController::class, 'delete']);
+        Route::prefix('confidential')->group(function () {
+            Route::post('/get_tbl_list', [App\Http\Controllers\ClientConfidentialController::class, 'getTableConfidentialList']);
+            Route::post('/create', [App\Http\Controllers\ClientConfidentialController::class, 'create']);
+            Route::post('/update', [App\Http\Controllers\ClientConfidentialController::class, 'update']);
+            Route::post('/delete', [App\Http\Controllers\ClientConfidentialController::class, 'delete']);
+        });
 
         // Client (Placement)
-        Route::post('/placement/get_ones_placement_tbl_list', [App\Http\Controllers\ClientPlacementController::class, 'getTableOnesPlacementList']);
-        Route::post('/placement/get_activities_tbl_list', [App\Http\Controllers\ClientPlacementController::class, 'getTableActivitiesList']);
-        Route::post('/placement/get_invoices_tbl_list', [App\Http\Controllers\ClientPlacementController::class, 'getTableInvoicesList']);
-        Route::post('/placement/create', [App\Http\Controllers\ClientPlacementController::class, 'create']);
-        Route::post('/placement/delete', [App\Http\Controllers\ClientPlacementController::class, 'delete']);
+        Route::prefix('placement')->group(function () {
+            Route::post('/get_ones_placement_tbl_list', [App\Http\Controllers\ClientPlacementController::class, 'getTableOnesPlacementList']);
+            Route::post('/get_activities_tbl_list', [App\Http\Controllers\ClientPlacementController::class, 'getTableActivitiesList']);
+            Route::post('/get_invoices_tbl_list', [App\Http\Controllers\ClientPlacementController::class, 'getTableInvoicesList']);
+            Route::post('/create', [App\Http\Controllers\ClientPlacementController::class, 'create']);
+            Route::post('/delete', [App\Http\Controllers\ClientPlacementController::class, 'delete']);
+        });
 
         // Client (Placement Activities)
-        Route::post('/document/get_tbl_list', [App\Http\Controllers\ClientDocumentController::class, 'getTableDocumentList']);
-        Route::post('/document/create', [App\Http\Controllers\ClientDocumentController::class, 'create']);
+        Route::prefix('document')->group(function () {
+            Route::post('/get_tbl_list', [App\Http\Controllers\ClientDocumentController::class, 'getTableDocumentList']);
+            Route::post('/create', [App\Http\Controllers\ClientDocumentController::class, 'create']);
+        });
 
         // Client (All Placements)
-        Route::get('/all_placements', [App\Http\Controllers\ClientAllPlacementController::class, 'index']);
-        Route::post('/all_placements/get_placements_tbl_list', [App\Http\Controllers\ClientAllPlacementController::class, 'getTablePlacementList']);
-        Route::post('/all_placements/get_acts_tbl_list', [App\Http\Controllers\ClientAllPlacementController::class, 'getTableActivitieList']);
-        Route::post('/all_placements/create', [App\Http\Controllers\ClientAllPlacementController::class, 'create']);
-        Route::post('/all_placements/delete', [App\Http\Controllers\ClientAllPlacementController::class, 'delete']);
+        Route::prefix('all_placements')->group(function () {
+            Route::get('/', [App\Http\Controllers\ClientAllPlacementController::class, 'index']);
+            Route::post('/get_placements_tbl_list', [App\Http\Controllers\ClientAllPlacementController::class, 'getTablePlacementList']);
+            Route::post('/get_acts_tbl_list', [App\Http\Controllers\ClientAllPlacementController::class, 'getTableActivitieList']);
+            Route::post('/create', [App\Http\Controllers\ClientAllPlacementController::class, 'create']);
+            Route::post('/delete', [App\Http\Controllers\ClientAllPlacementController::class, 'delete']);
+        });
 
         // Client (All Documents)
-        Route::get('/all_documents', [App\Http\Controllers\ClientAllDocumentController::class, 'index']);
-        Route::post('/all_documents/get_tbl_list', [App\Http\Controllers\ClientAllDocumentController::class, 'getTableDocumentList']);
-        Route::post('/all_documents/create', [App\Http\Controllers\ClientAllDocumentController::class, 'create']);
+        Route::prefix('all_documents')->group(function () {
+            Route::get('/', [App\Http\Controllers\ClientAllDocumentController::class, 'index']);
+            Route::post('/get_tbl_list', [App\Http\Controllers\ClientAllDocumentController::class, 'getTableDocumentList']);
+            Route::post('/create', [App\Http\Controllers\ClientAllDocumentController::class, 'create']);
+        });
     });
 
     // Timesheet
     Route::prefix('timesheets')->group(function () {
-        Route::get('/', [App\Http\Controllers\TimesheetsController::class, 'index']);
-        Route::post('/all/get_tbl_list', [App\Http\Controllers\TimesheetsController::class, 'getAllTimesheets']);
-        Route::post('/all/create', [App\Http\Controllers\TimesheetsController::class, 'create']);
-        Route::post('/all/delete', [App\Http\Controllers\TimesheetsController::class, 'delete']);
+        Route::prefix('all')->group(function () {
+            Route::get('/', [App\Http\Controllers\TimesheetsController::class, 'index']);
+            Route::post('/get_tbl_list', [App\Http\Controllers\TimesheetsController::class, 'getAllTimesheets']);
+            Route::post('/create', [App\Http\Controllers\TimesheetsController::class, 'create']);
+            Route::post('/delete', [App\Http\Controllers\TimesheetsController::class, 'delete']);
+        });
 
-        Route::post('/due/get_tbl_list', [App\Http\Controllers\TimesheetDueController::class, 'getDueTimesheets']);
+        Route::prefix('due')->group(function() {
+            Route::get('/', [App\Http\Controllers\TimesheetDueController::class, 'index']);
+            Route::post('/get_tbl_list', [App\Http\Controllers\TimesheetDueController::class, 'getDueTimesheets']);
+        });
 
-        Route::post('/await_inv/get_tbl_list', [App\Http\Controllers\TimesheetAwaitInvController::class, 'getAwaitInvoices']);
+        Route::prefix('awaiting')->group(function() {
+            Route::get('/', [App\Http\Controllers\TimesheetAwaitInvController::class, 'index']);
+            Route::post('/get_tbl_list', [App\Http\Controllers\TimesheetAwaitInvController::class, 'getAwaitInvoices']);
+        });
     });
 
     // Expenses
@@ -123,7 +149,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/update', [App\Http\Controllers\ExpensesController::class, 'updateExpense']);
         Route::post('/del', [App\Http\Controllers\ExpensesController::class, 'delExpense']);
     });
-    
+
     // Invoices - (All Invoices)
     Route::prefix('invoices')->group(function () {
         Route::get('/all', [App\Http\Controllers\InvoiceAllController::class, 'index']);
@@ -160,6 +186,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/del', [App\Http\Controllers\TicketController::class, 'delTicket']);
         Route::post('/get-emp-tickets', [App\Http\Controllers\TicketController::class, 'getEmpTickets']);
     });
+
     // Settings
     Route::prefix("settings")->group(function () {
         // Settings - (Organization Hierarchy)
@@ -183,9 +210,10 @@ Route::middleware(['auth'])->group(function () {
         });
 
         // Settings - Module Security
-        Route::prefix('module_sec')->group(function() {
+        Route::prefix('module_sec')->group(function () {
             Route::get('/', [App\Http\Controllers\SettingModuleSecController::class, 'index']);
             Route::post('/get_tbl_list', [App\Http\Controllers\SettingModuleSecController::class, 'getTableRoles']);
+            Route::post('/get_tbl_act_list', [App\Http\Controllers\SettingModuleSecController::class, 'getTableRoleActs']);
             Route::post('/get_role', [App\Http\Controllers\SettingModuleSecController::class, 'getRoleById']);
             Route::post('/update', [App\Http\Controllers\SettingModuleSecController::class, 'update']);
         });

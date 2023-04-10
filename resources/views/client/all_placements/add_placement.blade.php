@@ -78,7 +78,7 @@
                             <label class="control-label">Client PO ID <span class="required" aria-required="true">*</span></label>
                             <input id="add_placement_po_id" type="text" class="form-control">
                         </div>
-                    </div>-
+                    </div>
                     <div class="row">
                         <div class="form-group col-sm-3">
                             <label class="control-label">Job Title <span class="required" aria-required="true">*</span></label>

@@ -246,7 +246,7 @@ class SettingRoleController extends Controller
     private function getRoleActTableList()
     {
         // Params
-        $columns = ['', 'name', ''];
+        $columns = ['', 'created_at', '', 'description'];
         $sortColumn = $columns[$this->request['order'][0]['column']];
         $sortType = $this->request['order'][0]['dir'];
         $start = $this->request['start'];

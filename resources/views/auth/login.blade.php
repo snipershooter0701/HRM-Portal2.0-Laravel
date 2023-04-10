@@ -32,7 +32,7 @@
             <input type="checkbox" name="remember" value="1" /> Remember me </label>
         <button id="btn-login" class="btn green pull-right"> Login </button>
     </div>
-    <div class="login-options">
+    {{-- <div class="login-options">
         <h4>Or login with</h4>
         <ul class="social-icons">
             <li>
@@ -48,13 +48,13 @@
                 <a class="linkedin" data-original-title="Linkedin" href="javascript:;"> </a>
             </li>
         </ul>
-    </div>
-    <div class="forget-password">
+    </div> --}}
+    {{-- <div class="forget-password">
         <h4>Forgot your password ?</h4>
         <p> no worries, click
             <a href="javascript:;" id="forget-password"> here </a> to reset your password.
         </p>
-    </div>
+    </div> --}}
     <div class="create-account">
         <p> Don't have an account yet ?&nbsp;
             <a href="{{ url('register') }}" id="register-btn"> Create an account </a>

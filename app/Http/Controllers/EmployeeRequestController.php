@@ -28,7 +28,7 @@ class EmployeeRequestController extends Controller
     public function getRequestDetailsList()
     {
         $ajaxData = $this->getRequestDetailsTblData();
-        $result = $this->makeRequestDetailsTblItems($ajaxData['filterItems']);
+        $result = $this->makeRequestDetailsTblItems($ajaxData['filterItems'], $ajaxData['employees']);
         return $result;
     }
 
@@ -75,83 +75,83 @@ class EmployeeRequestController extends Controller
             'comment'            =>  $request->comment
         ]);
 
-        $createArray = array();
-        if($request->ssn == '1' || $request->ssn == '2') {
-            $createArray = [
-                'employee_id'       =>  $request->employee_id,
-                'doc_title_id'      => 0,
-                'no'                => $request->ssn_doc['no'],
-                'attachment'        => $request->ssn_doc['attachment'],
-            ];
-            Document::create($createArray);
-        }
+        // $createArray = array();
+        // if($request->ssn == '1' || $request->ssn == '2') {
+        //     $createArray = [
+        //         'employee_id'       =>  $request->employee_id,
+        //         'doc_title_id'      => 0,
+        //         'no'                => $request->ssn_doc['no'],
+        //         'attachment'        => $request->ssn_doc['attachment'],
+        //     ];
+        //     Document::create($createArray);
+        // }
         
-        if($request->auth == 1 || $request->auth == 2) {
-            $createArray = [
-                'employee_id'       =>  $request->employee_id,
-                'doc_title_id'      => '1',
-                'work_auth_id'      => $request->auth_doc['work_auth_id'],
-                'no'                => $request->auth_doc['no'],
-                'start_date'        => $request->auth_doc['start_date'],
-                'expire_date'       => $request->auth_doc['expire_date'],
-                'attachment'        => $request->auth_doc['attachment'],
-            ];
-            Document::create($createArray);
-        }
+        // if($request->auth == 1 || $request->auth == 2) {
+        //     $createArray = [
+        //         'employee_id'       =>  $request->employee_id,
+        //         'doc_title_id'      => '1',
+        //         'work_auth_id'      => $request->auth_doc['work_auth_id'],
+        //         'no'                => $request->auth_doc['no'],
+        //         'start_date'        => $request->auth_doc['start_date'],
+        //         'expire_date'       => $request->auth_doc['expire_date'],
+        //         'attachment'        => $request->auth_doc['attachment'],
+        //     ];
+        //     Document::create($createArray);
+        // }
         
-        if($request->state == 1 || $request->state == 2) {
-            $createArray = [
-                'employee_id'       =>  $request->employee_id,
-                'doc_title_id'      => '2',
-                'no'                => $request->state_doc['no'],
-                'exp_date'          => $request->state_doc['exp_date'],
-                'attachment'        => $request->state_doc['attachment'],
-            ];
-            Document::create($createArray);
-        }
-        if($request->passport == 1 || $request->passport == 2) {
-            $createArray = [
-                'employee_id'       =>  $request->employee_id,
-                'doc_title_id'      => '3',
-                'no'                => $request->passport_doc['no'],
-                'exp_date'          => $request->passport_doc['exp_date'],
-                'attachment'        => $request->passport_doc['attachment'],
-            ];
-            Document::create($createArray);
-        }
-        if($request->i94 == 1 || $request->i94 == 2) {
-            $createArray = [
-                'employee_id'       =>  $request->employee_id,
-                'doc_title_id'      => '4',
-                'no'                => $request->i94_doc['no'],
-                'exp_date'          => $request->i94_doc['exp_date'],
-                'i94_type'          => $request->i94_doc['i94_type'],
-                'attachment'        => $request->i94_doc['attachment'],
-            ];
-            Document::create($createArray);
-        }
-        if($request->visa_doc == 1 || $request->visa_doc == 2) {
-            $createArray = [
-                'employee_id'       =>  $request->employee_id,
-                'doc_title_id'      => '5',
-                'no'                => $request->visa_doc['no'],
-                'exp_date'          => $request->visa_doc['exp_date'],
-                'attachment'        => $request->visa_doc['attachment'],
-            ];
-            Document::create($createArray);
-        }
-        if($request->other_doc == 1 || $request->other_doc == 2) {
-            $createArray = [
-                'employee_id'       =>  $request->employee_id,
-                'doc_title_id'      => '6',
-                'comment'           => $request->other_doc['comment'],
-                'no'                => $request->other_doc['no'],
-                'exp_date'          => $request->other_doc['exp_date'],
-                'other_type'        => $request->other_doc['other_type'],
-                'attachment'        => $request->other_doc['attachment'],
-            ];
-            Document::create($createArray);
-        }
+        // if($request->state == 1 || $request->state == 2) {
+        //     $createArray = [
+        //         'employee_id'       =>  $request->employee_id,
+        //         'doc_title_id'      => '2',
+        //         'no'                => $request->state_doc['no'],
+        //         'exp_date'          => $request->state_doc['exp_date'],
+        //         'attachment'        => $request->state_doc['attachment'],
+        //     ];
+        //     Document::create($createArray);
+        // }
+        // if($request->passport == 1 || $request->passport == 2) {
+        //     $createArray = [
+        //         'employee_id'       =>  $request->employee_id,
+        //         'doc_title_id'      => '3',
+        //         'no'                => $request->passport_doc['no'],
+        //         'exp_date'          => $request->passport_doc['exp_date'],
+        //         'attachment'        => $request->passport_doc['attachment'],
+        //     ];
+        //     Document::create($createArray);
+        // }
+        // if($request->i94 == 1 || $request->i94 == 2) {
+        //     $createArray = [
+        //         'employee_id'       =>  $request->employee_id,
+        //         'doc_title_id'      => '4',
+        //         'no'                => $request->i94_doc['no'],
+        //         'exp_date'          => $request->i94_doc['exp_date'],
+        //         'i94_type'          => $request->i94_doc['i94_type'],
+        //         'attachment'        => $request->i94_doc['attachment'],
+        //     ];
+        //     Document::create($createArray);
+        // }
+        // if($request->visa_doc == 1 || $request->visa_doc == 2) {
+        //     $createArray = [
+        //         'employee_id'       =>  $request->employee_id,
+        //         'doc_title_id'      => '5',
+        //         'no'                => $request->visa_doc['no'],
+        //         'exp_date'          => $request->visa_doc['exp_date'],
+        //         'attachment'        => $request->visa_doc['attachment'],
+        //     ];
+        //     Document::create($createArray);
+        // }
+        // if($request->other_doc == 1 || $request->other_doc == 2) {
+        //     $createArray = [
+        //         'employee_id'       =>  $request->employee_id,
+        //         'doc_title_id'      => '6',
+        //         'comment'           => $request->other_doc['comment'],
+        //         'no'                => $request->other_doc['no'],
+        //         'exp_date'          => $request->other_doc['exp_date'],
+        //         'other_type'        => $request->other_doc['other_type'],
+        //         'attachment'        => $request->other_doc['attachment'],
+        //     ];
+        //     Document::create($createArray);
+        // }
         
         return response()->json([
             'result' => 'success'
@@ -502,6 +502,10 @@ class EmployeeRequestController extends Controller
                 $whereConds[] = ['status', $this->request['filt_request_status']];
         }
 
+        $employees = Employee::select('id', 'first_name', 'last_name', 'phone_num', 'category', 'dateofjoining', 'poc_id', 'status')
+                                    ->where($whereConds)
+                                    ->get();
+
         $filterEmployees = EmployeeRequest::with(['employee'])
                                         ->with(['requested_by'])
                         // ->where($whereConds)
@@ -510,12 +514,13 @@ class EmployeeRequestController extends Controller
                         // ->toArray();
 
         return [
-            'filterItems' => $filterEmployees
+            'filterItems' => $filterEmployees,
+            'employees' => $employees,
         ];
     }
 
     // Display Request Details List
-    private function makeRequestDetailsTblItems($filterItems)
+    private function makeRequestDetailsTblItems($filterItems, $employees)
     {
         $filteredCnt = count($filterItems);
         $iTotalRecords = $filteredCnt;
@@ -570,6 +575,7 @@ class EmployeeRequestController extends Controller
         $records["draw"] = $sEcho;
         $records["recordsTotal"] = $iTotalRecords;
         $records["recordsFiltered"] = $iTotalRecords;
+        $records["employees"] = $employees;
 
         // echo json_encode($records);
         return response()->json($records);

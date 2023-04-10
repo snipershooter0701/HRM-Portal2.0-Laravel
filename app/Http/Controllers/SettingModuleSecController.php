@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RoleModuleActivity;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Role;
@@ -45,6 +46,16 @@ class SettingModuleSecController extends Controller
     {
         $recordData = $this->getModuleSecTableList();
         $result = $this->makeModuleSecTblItems($recordData['filteredRecords'], $recordData['totalCnt'], $recordData['filteredCnt']);
+        return $result;
+    }
+
+    /**
+     * Get role activity list from model and generate columns for ajax table. (tbl_role_activities)
+     */
+    public function getTableRoleActs()
+    {
+        $recordData = $this->getRoleActTableList();
+        $result = $this->makeRoleActTblColumns($recordData['filteredRecords'], $recordData['totalCnt'], $recordData['filteredCnt']);
         return $result;
     }
 
@@ -99,6 +110,14 @@ class SettingModuleSecController extends Controller
                 'module_id' => $roleModuleId
             ]);
         }
+
+        // Create Activity
+        $description = "Updated role's security (Role: " . $role['name'] . ", ModuleCount: " . count($roleModuleIds) . ")";
+        RoleModuleActivity::create([
+            'role_id' => $this->request['id'],
+            'updated_by' => config('constants.AUTH_ID'),
+            'description' => $description
+        ]);
 
         return response()->json([
             'result' => 'success'
@@ -191,6 +210,97 @@ class SettingModuleSecController extends Controller
                 $deleteRoleArr[$finalRecord->access_delete],
                 'Access to ' . $finalRecord->access_permission . ' Actions',
                 '<a href="javascript:;" class="btn btn-xs btn-c-primary btn-role-edit" data-id="' . $finalRecord->id . '"><i class="fa fa-pencil"></i></a>'
+            );
+            $idx++;
+        }
+
+        if (isset($this->request['customActionType']) && $this->request['customActionType'] == "group_action") {
+            $records["customActionStatus"] = "OK"; // pass custom message(useful for getting status of group actions)
+            $records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
+        }
+
+        $records["draw"] = $sEcho;
+        $records["recordsTotal"] = $totalCnt;
+        $records["recordsFiltered"] = $filteredCnt;
+
+        return response()->json($records);
+    }
+
+    /**
+     * Get role activity list from model.
+     */
+    private function getRoleActTableList()
+    {
+        // Params
+        $columns = ['', 'created_at', '', 'description'];
+        $sortColumn = $columns[$this->request['order'][0]['column']];
+        $sortType = $this->request['order'][0]['dir'];
+        $start = $this->request['start'];
+        $length = $this->request['lengh'];
+
+        // Get filter condition.t
+        $whereConds = array();
+        if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
+            if ($this->request['filt_act_date_from'] != NULL)
+                $whereConds[] = ['created_at', '>=', $this->request['filt_act_date_from']];
+            if ($this->request['filt_act_date_to'] != NULL)
+                $whereConds[] = ['created_at', '<=', $this->request['filt_act_date_to']];
+            if ($this->request['filt_act_description'] != NULL)
+                $whereConds[] = ['description', 'like', '%' . $this->request['filt_act_description'] . '%'];
+        }
+
+        // All record count
+        $totalRecordCnt = RoleModuleActivity::count();
+
+        // Filtered records
+        $filteredRecords = RoleModuleActivity::with([
+            'updatedBy'
+        ])->where($whereConds)
+            ->whereHas('updatedBy', function (Builder $query) {
+                if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
+                    if ($this->request['filt_act_updatedby'] != NULL)
+                        $query->where('email', 'like', '%' . $this->request['filt_act_updatedby'] . '%');
+                }
+            })
+            ->get()
+            ->sortBy([[$sortColumn, $sortType]])
+            ->skip($start)
+            ->take($length);
+
+        // Filtered record cnt
+        $filteredCnt = count(RoleModuleActivity::where($whereConds)->get());
+
+        return [
+            'totalCnt' => $totalRecordCnt,
+            'filteredCnt' => $filteredCnt,
+            'filteredRecords' => $filteredRecords
+        ];
+    }
+
+    /**
+     * Generate role activity list table items
+     */
+    private function makeRoleActTblColumns($finalRecords, $totalCnt, $filteredCnt)
+    {
+        $iTotalRecords = $filteredCnt;
+        $iDisplayLength = intval($this->request['length']);
+        $iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
+        $iDisplayStart = intval($this->request['start']);
+        $sEcho = intval($this->request['draw']);
+
+        $records = array();
+        $records["data"] = array();
+
+        $end = $iDisplayStart + $iDisplayLength;
+        $end = $end > $iTotalRecords ? $iTotalRecords : $end;
+
+        $idx = $iDisplayStart + 1;
+        foreach ($finalRecords as $finalRecord) {
+            $records["data"][] = array(
+                $idx,
+                $finalRecord->created_at,
+                ($finalRecord->updatedBy) ? $finalRecord->updatedBy->email : '',
+                $finalRecord->description
             );
             $idx++;
         }

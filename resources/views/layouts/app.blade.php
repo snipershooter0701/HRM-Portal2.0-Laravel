@@ -25,8 +25,6 @@
     <link href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css?v=' . $randNum) }}" rel="stylesheet" type="text/css" />
     <link href="{{ url('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css?v=' . $randNum) }}" rel="stylesheet" type="text/css" />
     <link href="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.css?v=' . $randNum) }}" rel="stylesheet" type="text/css" />
-    <link href="{{ url('assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css') }}" rel="stylesheet" type="text/css" />
     @yield('page_template_css')
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL STYLES -->
@@ -70,25 +68,16 @@
                     <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                             <i class="icon-bell"></i>
-                            <span class="badge badge-default"> 0 </span>
+                            <span id="notification_badge" class="badge badge-default"> 0 </span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="external">
                                 <h3>
-                                    <span class="bold">0 pending</span> notifications</h3>
+                                    <span id="notification_pending_cnt" class="bold">0 pending</span> notifications</h3>
                                 <a href="page_user_profile_1.html">view all</a>
-                            </li>`
+                            </li>
                             <li>
-                                <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
-                                    {{-- <li>
-                                        <a href="javascript:;">
-                                            <span class="time">just now</span>
-                                            <span class="details">
-                                                <span class="label label-sm label-icon label-success">
-                                                    <i class="fa fa-plus"></i>
-                                                </span> New user registered. </span>
-                                        </a>
-                                    </li> --}}
+                                <ul id="notification" class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
                                 </ul>
                             </li>
                         </ul>
@@ -128,15 +117,14 @@
                             </li> --}}
                             <li class="divider"> </li>
                             <li>
-                                <a href="page_user_lock_1.html">
-                                    <i class="icon-lock"></i> Lock Screen </a>
+                                <a href="javascript:;"> <i class="icon-lock"></i> Lock Screen </a>
                             </li>
                             <li>
-                                <a href="page_user_lock_1.html">
-                                    <i class="icon-key"></i> Log Out </a>
+                                <a id="btn_logout" href="javascript:;"> <i class="icon-key"></i> Log Out </a>
                             </li>
                         </ul>
                     </li>
+                    <form method="POST" action="{{ url('/logout') }}" class="display-none">@csrf<input id="btn_do_logout" type="submit"></form>
                     <!-- END USER LOGIN DROPDOWN -->
                     <!-- BEGIN QUICK SIDEBAR TOGGLER -->
                     <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
@@ -203,24 +191,24 @@
                             </li>
                         </ul>
                     </li>
-                    <li id="page-timesheets" class="nav-item">
+                    <li id="page_timesheets" class="nav-item">
                         <a class="nav-link nav-toggle">
                             <i class="fa fa-calendar"></i>
                             <span class="title">Timesheets</span>
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
-                            <li class="nav-item" id="page-client-list">
+                            <li class="nav-item" id="page_timesheets_all">
                                 <a href="{{ url('/timesheets/all') }}" class="nav-link ">
                                     <span class="title">All Timesheets</span>
                                 </a>
                             </li>
-                            <li class="nav-item" id="page-client-all-placements">
+                            <li class="nav-item" id="page_timesheets_due">
                                 <a href="{{ url('/timesheets/due') }}" class="nav-link ">
                                     <span class="title">Due Timesheets</span>
                                 </a>
                             </li>
-                            <li class="nav-item" id="page-client-all-documents">
+                            <li class="nav-item" id="page_timesheets_awaiting">
                                 <a href="{{ url('/timesheets/awaiting') }}" class="nav-link ">
                                     <span class="title">Awaiting Timesheets</span>
                                 </a>
@@ -241,24 +229,24 @@
                             </li>
                         </ul>
                     </li>
-                    <li id="page-client" class="nav-item">
+                    <li id="page_client" class="nav-item">
                         <a class="nav-link nav-toggle">
                             <i class="fa fa-user-secret"></i>
                             <span class="title">Client</span>
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
-                            <li class="nav-item" id="page-client-list">
+                            <li class="nav-item" id="page_client_list">
                                 <a href="{{ url('/client/list') }}" class="nav-link ">
                                     <span class="title">Client List</span>
                                 </a>
                             </li>
-                            <li class="nav-item" id="page-client-all-placements">
+                            <li class="nav-item" id="page_client_all_placements">
                                 <a href="{{ url('/client/all_placements') }}" class="nav-link ">
                                     <span class="title">All Placements</span>
                                 </a>
                             </li>
-                            <li class="nav-item" id="page-client-all-documents">
+                            <li class="nav-item" id="page_client_all_documents">
                                 <a href="{{ url('/client/all_documents') }}" class="nav-link ">
                                     <span class="title">All Documents</span>
                                 </a>
@@ -460,14 +448,13 @@
         </div>
     </div>
 
-
     <!-- BEGIN JS CONSTANTS -->
     <script type="text/javascript">
         const BASE_URL = "{{ url('') }}";
         const CSRF_TOKEN = "{{ csrf_token() }}";
+
     </script>
     <!-- END JS CONSTANTS -->
-    
     <!-- BEGIN CORE PLUGINS -->
     <script src="{{ url('assets/global/plugins/jquery.min.js') }}" type="text/javascript"></script>
     <script src="{{ url('assets/global/plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
@@ -484,8 +471,6 @@
     <script src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js?v=' . $randNum) }}" type="text/javascript"></script>
     <script src="{{ url('assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js?v=' . $randNum) }}" type="text/javascript"></script>
     <script src="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url('assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js') }}" type="text/javascript"></script>
-    <script src="{{ url('assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js') }}" type="text/javascript"></script>
     @yield('page_template_js')
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL SCRIPTS -->
@@ -524,6 +509,12 @@
             $('#' + PAGE_SUB_ID).addClass('open');
         }
         // $('#' + PAGE_ID).find('a').append('<span class="selected"></span>');
+
+        $(document).ready(function() {
+            $('#btn_logout').click(function() {
+                $('#btn_do_logout').trigger('click');
+            });
+        });
 
     </script>
     <!-- END PAGE LEVEL SCRIPTS -->

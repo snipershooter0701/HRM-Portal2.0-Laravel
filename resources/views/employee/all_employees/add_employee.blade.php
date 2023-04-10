@@ -47,7 +47,7 @@
                         <div class="row">
                             <div class="form-group col-sm-2">
                                 <label class="control-label">Date of Birth <span class="required" aria-required="true">*</span></label>
-                                <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+                                <div class="input-group date date-picker" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
                                     <input type="text" class="form-control" id="create_birth">
                                     <span class="input-group-btn">
                                         <button class="btn default" type="button">
@@ -58,7 +58,7 @@
                             </div>
                             <div class="form-group col-sm-2">
                                 <label class="control-label">Date of Joining <span class="required" aria-required="true">*</span></label>
-                                <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+                                <div class="input-group date date-picker" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
                                     <input type="text" class="form-control" id="create_join">
                                     <span class="input-group-btn">
                                         <button class="btn default" type="button">
@@ -117,7 +117,7 @@
                             </div>
                             <div class="form-group col-sm-2">
                                 <label class="control-label">Employee Status Date</label>
-                                <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                <div class="input-group date date-picker" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
                                     <input type="text" class="form-control" id="create_employee_status_date" readonly>
                                     <span class="input-group-btn">
                                         <button class="btn default" type="button">

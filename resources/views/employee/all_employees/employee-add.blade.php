@@ -131,7 +131,7 @@
                             </div>
                             <div class="form-group col-sm-2">
                                 <label class="control-label">Employee Status Date</label>
-                                <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                <div class="input-group date date-picker" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
                                     <input type="text" class="form-control" readonly>
                                     <span class="input-group-btn">
                                         <button class="btn default" type="button">

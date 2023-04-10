@@ -61,8 +61,14 @@ return [
     'ROLE_MODULE_LEVEL_ACCESS' => 2,
     // =========================== END MODULE SECURITY =============================
 
-    // ticket
+    // ============================ BEGIN USER SIGNUPS ==============================
+    'USER_SIGNUP_NOT_WATECHED' => 0,
+    'USER_SIGNUP_WATECHED' => 1,
+    // ============================= END USER SIGNUPS ===============================
+    
+    // ============================ BEGIN TICKETS ==============================
     'TICKET_STATUS_REQUESTED' => 0,
     'TICKET_STATUS_ASSIGNED' => 1,
     'TICKET_STATUS_COMPLETED' => 2,
+    // ============================ END TICKETS ==============================
 ];

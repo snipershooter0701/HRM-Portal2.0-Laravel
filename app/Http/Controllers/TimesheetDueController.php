@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Timesheet;
 use App\Models\Employee;
+use App\Models\JobTire;
 
 class TimesheetDueController extends Controller
 {
@@ -19,6 +20,23 @@ class TimesheetDueController extends Controller
     public function __construct(Request $request)
     {
         $this->request = $request;
+    }
+
+    /**
+     * Show the timesheets page.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        $employees = Employee::all();
+        $jobTires = JobTire::all();
+
+        return view('timesheets.due_timesheets.index')->with([
+            'randNum' => rand(),
+            'employees' => $employees,
+            'jobTires' => $jobTires
+        ]);
     }
 
     // ========================== BEGIN PUBLIC FUNCTIONS ==========================

@@ -23,6 +23,7 @@
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <link href="{{ url('assets/global/plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ url('assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL STYLES -->
     <link href="{{ url('assets/global/css/components.min.css') }}" rel="stylesheet" id="style_components" type="text/css" />
@@ -39,8 +40,8 @@
 <body class=" login">
     <!-- BEGIN LOGO -->
     <div class="logo">
-        <a href="index.html">
-            <img src="../assets/custom/img/logo-big.png" alt="" /> </a>
+        {{-- <a href="index.html">
+            <img src="../assets/custom/img/logo-big.png" alt="" /> </a> --}}
     </div>
     <!-- END LOGO -->
     <!-- BEGIN LOGIN -->
@@ -49,7 +50,7 @@
     </div>
     <!-- END LOGIN -->
     <!-- BEGIN COPYRIGHT -->
-    <div class="copyright"> Copyright &copy; 2023 www.revanthvytal.com </div>
+    <div class="copyright"> Copyright &copy; 2023 www.revanthvytla.com </div>
     <!-- END COPYRIGHT -->
 
     <!-- BEGIN CORE PLUGINS -->
@@ -70,6 +71,7 @@
     </script>
     <script src="{{ url('assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
     <script src="{{ url('assets/global/plugins/backstretch/jquery.backstretch.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.js') }}" type="text/javascript"></script>
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL SCRIPTS -->
     <script src="{{ url('assets/global/scripts/app.min.js') }}" type="text/javascript"></script>
