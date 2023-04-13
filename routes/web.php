@@ -243,7 +243,6 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/jobtire/delete', [App\Http\Controllers\SettingGeneralController::class, 'deleteJobTire']);
         });
 
-
         Route::get('/settings', [App\Http\Controllers\SettingController::class, 'index']);
         Route::get('/settings/role_permission', [App\Http\Controllers\SettingController::class, 'index_role_permission']);
         Route::get('/settings/module_security', [App\Http\Controllers\SettingController::class, 'index_module_security']);
@@ -260,12 +259,40 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/settings/level_list/get_activities', [App\Http\Controllers\SettingController::class, 'getActivity']);
     });
 
-    // Documentation
-    Route::get('/documentation', [App\Http\Controllers\DocumentationController::class, 'index']);
-    Route::post('/documentation/get-org-docs', [App\Http\Controllers\DocumentationController::class, 'getOrgDocs']);
-    Route::post('/documentation/get-org-docs-activity', [App\Http\Controllers\DocumentationController::class, 'getOrgDocsAct']);
-    Route::post('/documentation/get-emp-docs', [App\Http\Controllers\DocumentationController::class, 'getEmpDocs']);
-    Route::post('/documentation/get-emp-docs-activity', [App\Http\Controllers\DocumentationController::class, 'getOrgDocsAct']);
-    Route::post('/documentation/get-exp-docs', [App\Http\Controllers\DocumentationController::class, 'getExpDocs']);
-    Route::post('/documentation/get-group-docs', [App\Http\Controllers\DocumentationController::class, 'getGroupDocs']);
+    // Documentation - organization doc
+    Route::prefix("documentation/organization")->group(function () {
+        Route::get('/', [App\Http\Controllers\DocumentationOrgController::class, 'index']);
+        Route::post('/all_list', [App\Http\Controllers\DocumentationOrgController::class, 'getAllDocList']);
+        Route::post('/my_doc/list', [App\Http\Controllers\DocumentationOrgController::class, 'getMyDocList']);
+        Route::post('/my_doc/create', [App\Http\Controllers\DocumentationOrgController::class, 'createMyDoc']);
+        Route::post('/my_doc/share', [App\Http\Controllers\DocumentationOrgController::class, 'shareMyDoc']);
+        Route::post('/my_doc/plus', [App\Http\Controllers\DocumentationOrgController::class, 'plusMyDoc']);
+        Route::post('/share_doc/list', [App\Http\Controllers\DocumentationOrgController::class, 'getShareDocList']);
+        Route::post('/share_doc/update', [App\Http\Controllers\DocumentationOrgController::class, 'updateShareDoc']);
+        Route::post('/share_doc/del', [App\Http\Controllers\DocumentationOrgController::class, 'delSharedoc']);
+    });
+
+    // Documentation - employee doc
+    Route::prefix("documentation/employee")->group(function () {
+        Route::get('/', [App\Http\Controllers\DocumentationEmpController::class, 'index']);
+        Route::post('/list', [App\Http\Controllers\DocumentationEmpController::class, 'getEmpDocList']);
+    });
+
+    // Documentation - expiring doc
+    Route::prefix("documentation/expiring")->group(function () {
+        Route::get('/', [App\Http\Controllers\DocumentationExpController::class, 'index']);
+        Route::post('/list', [App\Http\Controllers\DocumentationExpController::class, 'getExpDocList']);
+       
+    });
+
+    // Documentation - group doc
+    Route::prefix("documentation/group")->group(function () {
+        Route::get('/', [App\Http\Controllers\DocumentationGroupController::class, 'index']);
+        Route::post('/get-org-docs', [App\Http\Controllers\DocumentationGroupController::class, 'getOrgDocs']);
+        Route::post('/get-org-docs-activity', [App\Http\Controllers\DocumentationGroupController::class, 'getOrgDocsAct']);
+        Route::post('/get-emp-docs', [App\Http\Controllers\DocumentationGroupController::class, 'getEmpDocs']);
+        Route::post('/get-emp-docs-activity', [App\Http\Controllers\DocumentationGroupController::class, 'getOrgDocsAct']);
+        Route::post('/get-exp-docs', [App\Http\Controllers\DocumentationGroupController::class, 'getExpDocs']);
+        Route::post('/get-group-docs', [App\Http\Controllers\DocumentationGroupController::class, 'getGroupDocs']);
+    });
 });

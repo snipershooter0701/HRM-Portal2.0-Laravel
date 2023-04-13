@@ -52,5 +52,5 @@
     var PAGE_ID = "page_tickets";
     var PAGE_SUB_ID = "page_ticket_list";
 </script>
-<script src="{{ url('assets/custom/scripts/tickets/index.js?v=' . $randNum) }}" type="text/javascript"></script>
+<script src="{{ url('assets/custom/scripts/tickets/ticket_index.js?v=' . $randNum) }}" type="text/javascript"></script>
 @endsection

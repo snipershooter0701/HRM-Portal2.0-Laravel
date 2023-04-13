@@ -52,7 +52,7 @@ class TicketController extends Controller
             'id' => ['required']
         ]);
 
-        $ticket = Ticket::with(['employee'])
+        $ticket = Ticket::with(['employee', 'assigned'])
                         ->where('id', $request->id)
                         ->get();
 

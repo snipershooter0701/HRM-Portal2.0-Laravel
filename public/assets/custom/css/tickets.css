@@ -1,13 +1,20 @@
 /* =========================== BEGIN VIEW TICKET STYLES =========================== */
 #modal_view_ticket p {
     font-size: 14px;
-    font-weight: bold;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-#modal_view_ticket .form-group input {
-    padding-left: 0px;
+.font-14 {
+    font-size: 14px !important;
+}
+
+.webkit-right {
+    text-align: -webkit-right;
+}
+
+#modal_view_ticket .control-label {
+    font-weight: unset !important;
 }
 
 /* ============================ END VIEW TICKET STYLES ============================ */
@@ -16,6 +23,10 @@
 .discussion-chat {
     border: 1px solid #c9c9c9;
     border-radius: 5px !important;
+}
+
+.discussion-chat .chat-message {
+    height: 420px;
 }
 
 .discussion-chat .chat-message .post.out {
@@ -133,6 +144,10 @@
 .discussion-chat .chat-form button {
     padding-top: 2px !important;
     padding-bottom: 2px !important;
+}
+
+.chat-message {
+    padding: 0 10px !important;
 }
 
 /* =========================== BEGIN DISCUSSION STYLES =========================== */

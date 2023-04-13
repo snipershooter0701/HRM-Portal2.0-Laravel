@@ -71,31 +71,31 @@
 
                                 {{-- Employee Name --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_last_name">
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_emp_name">
                                 </td>
 
                                 {{-- Title --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_first_name">
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_tile">
                                 </td>
 
                                 {{-- Comment --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_last_name">
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_comment">
                                 </td>
 
                                 {{-- Exp Date --}}
                                 <td>
-                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
+                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy/mm/dd">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_exp_date_from" placeholder="From">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
                                                 <i class="fa fa-calendar"></i>
                                             </button>
                                         </span>
                                     </div>
-                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_to" placeholder="To">
+                                    <div class="input-group date date-picker" data-date-format="yyyy/mm/dd">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_exp_date_to" placeholder="To">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
                                                 <i class="fa fa-calendar"></i>
@@ -106,21 +106,21 @@
 
                                 {{-- Modified By --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_last_name">
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_modified_by">
                                 </td>
 
                                 {{-- Modified On --}}
                                 <td>
-                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
+                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy/mm/dd">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_modified_on_from" placeholder="From">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
                                                 <i class="fa fa-calendar"></i>
                                             </button>
                                         </span>
                                     </div>
-                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_to" placeholder="To">
+                                    <div class="input-group date date-picker" data-date-format="yyyy/mm/dd">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_modified_on_to" placeholder="To">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
                                                 <i class="fa fa-calendar"></i>

@@ -17,7 +17,7 @@
     </ul>
     <div class="page-toolbar">
         <div class="btn-group pull-right">
-            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel" data-panelname="panel-org-doc-create"><i class="fa fa-plus-circle"></i> Add Document </button>
+            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel" data-panelname="panel-org-doc-create" id="create_doc"><i class="fa fa-plus-circle"></i> Add Document </button>
         </div>
     </div>
 </div>
@@ -30,7 +30,7 @@
             <div class="portlet-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-sm btn-c-primary pull-right"><i class="fa fa-plus-circle"></i> Create Folder </button>
+                        <button type="button" class="btn btn-sm btn-c-primary pull-right" id="create_folder"><i class="fa fa-plus-circle"></i> Create Folder </button>
                     </div>
                 </div>
                 <div class="row">
@@ -50,7 +50,7 @@
 
                                         {{-- Folder Name --}}
                                         <td>
-                                            <input type="text" class="form-control form-filter input-sm" name="filt_first_name">
+                                            <input type="text" class="form-control form-filter input-sm" name="filt_folder_name">
                                         </td>
 
                                         {{-- Action --}}
@@ -61,38 +61,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Folder1</td>
-                                        <td>
-                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-share-alt"></i></a>
-                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-plus"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Folder2</td>
-                                        <td>
-                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-share-alt"></i></a>
-                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-plus"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Folder3</td>
-                                        <td>
-                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-share-alt"></i></a>
-                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-plus"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Folder4</td>
-                                        <td>
-                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-share-alt"></i></a>
-                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-plus"></i></a>
-                                        </td>
-                                    </tr>
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -114,12 +83,12 @@
 
                                         {{-- Folder Name --}}
                                         <td>
-                                            <input type="text" class="form-control form-filter input-sm" name="filt_first_name">
+                                            <input type="text" class="form-control form-filter input-sm" name="filt_folder_name">
                                         </td>
 
                                         {{-- Shared To --}}
                                         <td>
-                                            <input type="text" class="form-control form-filter input-sm" name="filt_first_name">
+                                            <input type="text" class="form-control form-filter input-sm" name="filt_share_to">
                                         </td>
 
                                         {{-- Action --}}
@@ -130,42 +99,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Folder1</td>
-                                        <td>a@a.com, b@b.com</td>
-                                        <td>
-                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-pencil"></i></a>
-                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Folder2</td>
-                                        <td>a@a.com, b@b.com</td>
-                                        <td>
-                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-pencil"></i></a>
-                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Folder3</td>
-                                        <td>a@a.com, c@c.com</td>
-                                        <td>
-                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-pencil"></i></a>
-                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Folder4</td>
-                                        <td>a@a.com, d@d.com</td>
-                                        <td>
-                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-pencil"></i></a>
-                                            <a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-trash"></i></a>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -214,26 +147,26 @@
 
                                 {{-- Title --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_first_name">
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_title">
                                 </td>
 
                                 {{-- Comment --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_last_name">
+                                    <input type="text" class="form-control form-filter input-sm" name="tile_comment">
                                 </td>
 
                                 {{-- Exp Date --}}
                                 <td>
-                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
+                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy/mm/dd">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_exp_date_from" placeholder="From">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
                                                 <i class="fa fa-calendar"></i>
                                             </button>
                                         </span>
                                     </div>
-                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_to" placeholder="To">
+                                    <div class="input-group date date-picker" data-date-format="yyyy/mm/dd">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_exp_date_to" placeholder="To">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
                                                 <i class="fa fa-calendar"></i>
@@ -244,21 +177,21 @@
 
                                 {{-- Modified By --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_last_name">
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_modify_by">
                                 </td>
 
                                 {{-- Modified On --}}
                                 <td>
-                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_from" placeholder="From">
+                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy/mm/dd">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_modify_from" placeholder="From">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
                                                 <i class="fa fa-calendar"></i>
                                             </button>
                                         </span>
                                     </div>
-                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_join_date_to" placeholder="To">
+                                    <div class="input-group date date-picker" data-date-format="yyyy/mm/dd">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_modify_to" placeholder="To">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
                                                 <i class="fa fa-calendar"></i>

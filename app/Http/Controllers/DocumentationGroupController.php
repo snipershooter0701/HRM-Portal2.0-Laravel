@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 
-class DocumentationController extends Controller
+class DocumentationGroupController extends Controller
 {
     private $request;
 
@@ -26,7 +26,7 @@ class DocumentationController extends Controller
      */
     public function index()
     {
-        return view('documentation.index')->with('randNum', rand());
+        return view('documentation.group.group_index')->with('randNum', rand());
     }
 
     // ========================== BEGIN PUBLIC FUNCTIONS ==========================

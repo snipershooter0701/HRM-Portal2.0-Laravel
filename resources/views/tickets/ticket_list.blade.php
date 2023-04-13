@@ -188,7 +188,7 @@
     </div>
 </div>
 
-<div id="modal_view_ticket" class="modal fade" tabindex="-1" data-width="760">
+<div id="modal_view_ticket" class="modal fade" tabindex="-1" data-width="900">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
         <h4 class="modal-title">Ticket</h4>
@@ -196,31 +196,45 @@
     <div class="modal-body">
         <div class="form-body">
             <div class="row">
-                <div class="col-md-2">
-                </div>
-                <div class="col-md-4">
-                    <p>Employee Name: Test</p>
-                    <p>Ticket No: 125</p>
-                    <p>Subject: Test</p>
-                    <p>Explain Briefly: Test</p>
-                    <p>Status: Close</p>
-                </div>
-                <div class="col-md-4">
-                    <p>Assigned To: Test</p>
-                    <p>Created On: 03/01/2023</p>
-                    <p>Closed On: 03/02/2023</p>
-                    <div class="form-group">
-                        <input type="file" class="form-control">
+                <div class="col-sm-4">
+                    <div class="form-group col-sm-12">
+                        <label class="col-sm-5 control-label pd-0 text-right">Employee Name:</label>
+                        <label class="col-sm-7 control-label" id="view_emp_name"></label>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label class="col-sm-5 control-label pd-0 text-right">Ticket No:</label>
+                        <label class="col-sm-7 control-label" id="view_ticket_no"></label>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label class="col-sm-5 control-label pd-0 text-right">Subject:</label>
+                        <label class="col-sm-7 control-label" id="view_subject"></label>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label class="col-sm-5 control-label pd-0 text-right">Explain Briefly:</label>
+                        <label class="col-sm-7 control-label" id="view_details"></label>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label class="col-sm-5 control-label pd-0 text-right">Status:</label>
+                        <label class="col-sm-7 control-label" id="view_status"></label>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label class="col-sm-5 control-label pd-0 text-right">Assigned To:</label>
+                        <label class="col-sm-7 control-label" id="view_assigned_to"></label>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label class="col-sm-5 control-label pd-0 text-right">Created On:</label>
+                        <label class="col-sm-7 control-label" id="view_created_on"></label>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label class="col-sm-5 control-label pd-0 text-right">Closed On:</label>
+                        <label class="col-sm-7 control-label" id="view_closed_on"></label>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <input type="file" class="form-control" id="view_file">
                     </div>
                 </div>
-                <div class="col-md-2">
-                </div>
-            </div>
-            <div class="row mt-30">
-                <div class="col-md-2">
-                </div>
-                <div class="col-md-8">
-                    <p>Discussion:</p>
+                <div class="col-sm-8">
+                    <div>Discussion:</div>
                     <div class="discussion-chat">
                         <div class="chat-message">
                             <div class="post out">
@@ -264,18 +278,13 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Type a message here...">
                                 <div class="input-group-btn">
-                                    {{-- <button type="button" class="btn green">
-                                        <i class="icon-paper-clip"></i>
-                                    </button> --}}
-                                    <button type="button" class="btn green">
+                                    <button type="button" class="btn green" id="ticket_discuss">
                                         <i class="icon-paper-clip"></i>
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-2">
                 </div>
             </div>
         </div>

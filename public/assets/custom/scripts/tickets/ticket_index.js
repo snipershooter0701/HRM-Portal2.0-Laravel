@@ -23,6 +23,11 @@ $(document).ready(function () {
         var id = $(this).attr('data-id');
         updateTicketInfo(id);
     });
+
+    // Discussion
+    $('#ticket_discuss').click(function () {
+        setChatHis();
+    });
 });
 
 
@@ -459,29 +464,31 @@ function getTicketByID(id, type) {
         data: formData,
         success: function (data) {
             if (data['result'] == 'success') {
-                var ticket = data['ticket'];
+                var ticket = data['ticket'][0];
 
                 if (type == 'view') {
+                    $('#view_emp_name').html(ticket['employee']['first_name'] + ticket['employee']['last_name']);
+                    $('#view_ticket_no').html(ticket['id']);
+                    $('#view_subject').html(ticket['subject']);
+                    $('#view_details').html(ticket['details']);
+                    $('#view_status').html(ticket['status'] == 0 ? 'Request' : ticket['status'] == 1 ? 'Assigned' : 'Completed');
+                    $('#view_assigned_to').html(ticket['assigned']['first_name'] + ticket['assigned']['last_name']);
+                    $('#view_created_on').html(ticket['created_on'] == null ? '' : ticket['created_on']);
+                    $('#view_closed_on').html(ticket['closed_on'] == null ? '' : ticket['closed_on']);
+                    $('#view_file').val(ticket['attacment']);
                     $('#modal_view_ticket').modal();
-                    $('#create_first_name').val(employee['first_name']);
-                    $('#create_middle_name').val(employee['middle_name']);
-                    $('#create_last_name').val(employee['last_name']);
-                    $('#create_title').val(employee['title']);
-                    $('#create_email_address').val(employee['email']);
 
                 } else {
-                    $('#create_emp_id').val(ticket[0]['employee_id']);
-                    $('#create_department_id').val(ticket[0]['department_id']);
-                    $('#create_subject').val(ticket[0]['subject']);
-                    // $('#create_file').val(ticket[0]['attachment']);
-                    $('#create_detail').val(ticket[0]['details']);
+                    $('#create_emp_id').val(ticket['employee_id']);
+                    $('#create_department_id').val(ticket['department_id']);
+                    $('#create_subject').val(ticket['subject']);
+                    // $('#create_file').val(ticket['attachment']);
+                    $('#create_detail').val(ticket['details']);
 
                     // move add Employee page
                     $('#create_ticket_btn').click();
                 }
             }
-
-
         },
         error: function (err) {
             var errors = err.errors;

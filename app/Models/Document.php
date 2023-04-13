@@ -24,4 +24,10 @@ class Document extends Model
         'employee_id',           
         'status'       
     ];
+
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class, 'employee_id');
+    }
 }

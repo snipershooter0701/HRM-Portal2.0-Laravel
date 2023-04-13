@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('folder_id');
             $table->integer('receiver_id');
+            $table->integer('share_id');
             $table->timestamps();
             $table->softDeletes();
         });

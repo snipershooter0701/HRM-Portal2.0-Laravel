@@ -6,3 +6,12 @@
 .bs-select .dropdown-menu li a {
     padding: 4px 8px !important;
 }
+
+#confirm_modal .folder-name {
+    width: 270px;
+    margin: auto;
+}
+
+#confirm_modal .modal-body {
+    text-align: unset !important;
+}

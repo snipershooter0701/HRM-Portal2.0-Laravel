@@ -381,22 +381,22 @@
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
-                            <li id="page_organization_documents" class="nav-item">
+                            <li id="page_org_document" class="nav-item">
                                 <a href="{{ url('/documentation/organization') }}" class="nav-link ">
                                     <span class="title">Organization Documents</span>
                                 </a>
                             </li>
-                            <li id="page_employee_documents" class="nav-item">
+                            <li id="page_emp_document" class="nav-item">
                                 <a href="{{ url('/documentation/employee') }}" class="nav-link ">
                                     <span class="title">Employee Documents</span>
                                 </a>
                             </li>
-                            <li id="page-expiring_documents" class="nav-item">
+                            <li id="page_exp_document" class="nav-item">
                                 <a href="{{ url('/documentation/expiring') }}" class="nav-link ">
                                     <span class="title">Expiring Documents</span>
                                 </a>
                             </li>
-                            <li id="page_group_documents" class="nav-item">
+                            <li id="page_group_document" class="nav-item">
                                 <a href="{{ url('/documentation/group') }}" class="nav-link ">
                                     <span class="title">Group Documents</span>
                                 </a>
