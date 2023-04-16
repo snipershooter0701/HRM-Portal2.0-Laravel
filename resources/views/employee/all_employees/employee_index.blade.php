@@ -22,7 +22,7 @@
     @include('employee.all_employees.employee_list')
 </div>
 <div id="panel-add-employee" class="move-panel display-none">
-    @include('employee.all_employees.add_employee')
+    @include('employee.all_employees.employee_add')
 </div>
 {{-- <div id="panel-edit-employee" class="move-panel display-none">
     @include('employee.employee-edit')

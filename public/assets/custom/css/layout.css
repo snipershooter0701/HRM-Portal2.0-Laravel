@@ -55,6 +55,10 @@
     margin-right: 0px !important;
 }
 
+.mr-5 {
+    margin-right: 5px !important;
+}
+
 .mr-10 {
     margin-right: 10px !important;
 }
@@ -85,6 +89,10 @@
 
 .ml-0 {
     margin-left: 0px !important;
+}
+
+.ml-5 {
+    margin-left: 5px !important;
 }
 
 .ml-10 {

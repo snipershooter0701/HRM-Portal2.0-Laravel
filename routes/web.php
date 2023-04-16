@@ -282,17 +282,14 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix("documentation/expiring")->group(function () {
         Route::get('/', [App\Http\Controllers\DocumentationExpController::class, 'index']);
         Route::post('/list', [App\Http\Controllers\DocumentationExpController::class, 'getExpDocList']);
-       
     });
 
     // Documentation - group doc
     Route::prefix("documentation/group")->group(function () {
         Route::get('/', [App\Http\Controllers\DocumentationGroupController::class, 'index']);
-        Route::post('/get-org-docs', [App\Http\Controllers\DocumentationGroupController::class, 'getOrgDocs']);
-        Route::post('/get-org-docs-activity', [App\Http\Controllers\DocumentationGroupController::class, 'getOrgDocsAct']);
-        Route::post('/get-emp-docs', [App\Http\Controllers\DocumentationGroupController::class, 'getEmpDocs']);
-        Route::post('/get-emp-docs-activity', [App\Http\Controllers\DocumentationGroupController::class, 'getOrgDocsAct']);
-        Route::post('/get-exp-docs', [App\Http\Controllers\DocumentationGroupController::class, 'getExpDocs']);
-        Route::post('/get-group-docs', [App\Http\Controllers\DocumentationGroupController::class, 'getGroupDocs']);
+        Route::post('/list', [App\Http\Controllers\DocumentationGroupController::class, 'getGroupList']);
+        Route::post('/create', [App\Http\Controllers\DocumentationGroupController::class, 'createGroup']);
+        Route::post('/searchGroup', [App\Http\Controllers\DocumentationGroupController::class, 'getSearchGroupList']);
+        
     });
 });

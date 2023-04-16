@@ -27,11 +27,7 @@ $(document).ready(function () {
         updateEmployeeInfo(id);
     });
 
-    // Add Employee
-    $('#btn-emp-add').click(function () {
-        createEmployee();
-    });
-
+    // import - overwrite
     $('#uniform-options_overwrite').click(function () {
         displayConfirmModal('Do you want to Overwrite?', "Overwrite Option", function (res) {
             if (res != 'ok') {
@@ -913,7 +909,7 @@ function getEmployeeByID(id) {
 }
 
 function btnStatus(param) {
-    if(param == 'add') {
+    if (param == 'add') {
         $('#add_emp_action').removeClass('hide');
         $('#update_emp_action').addClass('hide');
         $('#view_emp_action').addClass('hide');

@@ -3,16 +3,16 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="javascript:;" class="btn-move-panel" data-panelname="panel-org-doc-list">Organization Document</a>
+            <a href="{{ url('/documentation/organization') }}" class="btn-move-panel" data-panelname="panel-org-doc-list">Organization Document</a>
         </li>
         <li>
-            <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel-emp-doc-list">Employee Documents</a>
+            <a href="{{ url('/documentation/employee') }}" class="btn-move-panel bread-active" data-panelname="panel-emp-doc-list">Employee Documents</a>
         </li>
         <li>
-            <a href="javascript:;" class="btn-move-panel" data-panelname="panel-exp-doc-list">Expiring Documents</a>
+            <a href="{{ url('/documentation/expiring') }}" class="btn-move-panel" data-panelname="panel-exp-doc-list">Expiring Documents</a>
         </li>
         <li>
-            <a href="javascript:;" class="btn-move-panel" data-panelname="panel-group-doc-list">Group Documents</a>
+            <a href="{{ url('/documentation/group') }}" class="btn-move-panel" data-panelname="panel-group-doc-list">Group Documents</a>
         </li>
     </ul>
     <div class="page-toolbar">

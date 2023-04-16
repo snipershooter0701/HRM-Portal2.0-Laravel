@@ -3,16 +3,16 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="javascript:;" class="btn-move-panel" data-panelname="panel-org-doc-list">Organization Document</a>
+            <a href="{{ url('/documentation/organization') }}" class="btn-move-panel" data-panelname="panel-org-doc-list">Organization Document</a>
         </li>
         <li>
-            <a href="javascript:;" class="btn-move-panel " data-panelname="panel-emp-doc-list">Employee Documents</a>
+            <a href="{{ url('/documentation/employee') }}" class="btn-move-panel " data-panelname="panel-emp-doc-list">Employee Documents</a>
         </li>
         <li>
-            <a href="javascript:;" class="btn-move-panel" data-panelname="panel-exp-doc-list">Expiring Documents</a>
+            <a href="{{ url('/documentation/expiring') }}" class="btn-move-panel" data-panelname="panel-exp-doc-list">Expiring Documents</a>
         </li>
         <li>
-            <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel-group-doc-list">Group Documents</a>
+            <a href="{{ url('/documentation/group') }}" class="btn-move-panel bread-active" data-panelname="panel-group-doc-list">Group Documents</a>
         </li>
     </ul>
     <div class="page-toolbar">
@@ -31,11 +31,9 @@
             <div class="portlet-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <select id="select_group" class="bs-select form-control input-small input-sm" data-style="blue">
+                        <select id="view_group" class="bs-select form-control input-small input-sm" data-style="blue">
                             <option value="">View Group(s)</option>
-                            <option value="">Group 1</option>
-                            <option value="">Group 2</option>
-                            <option value="create-group">Create Group</option>
+                            <option value="-1">Create Group</option>
                         </select>
                     </div>
                 </div>
@@ -77,10 +75,10 @@
 
                                 {{-- Employee Name --}}
                                 <td class="display-flex">
-                                    <select name="filt_status" class="form-control form-filter input-sm">
+                                    <select name="filt_emp" class="form-control form-filter input-sm">
                                         <option value="">Select...</option>
-                                        <option value="pending">Makarov</option>
-                                        <option value="closed">Tareq</option>
+                                        <option value="1">Makarov</option>
+                                        <option value="32">Tareq</option>
                                     </select>
                                     <button type="button" class="btn btn-sm btn-c-primary ml-10"><i class="fa fa-plus-circle"></i> Add Button </button>
                                 </td>
