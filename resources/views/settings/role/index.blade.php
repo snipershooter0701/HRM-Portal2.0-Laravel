@@ -1,12 +1,6 @@
 @extends('layouts.app')
 
 @section('page_template_css')
-{{-- <link href="{{ url('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" /> --}}
-{{-- <link href="{{ url('assets/global/plugins/icheck/skins/all.css') }}" rel="stylesheet" type="text/css" /> --}}
-{{-- <link href="{{ url('assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css" /> --}}
-{{-- <link href="{{ url('assets/global/plugins/jquery-multi-select/css/multi-select.css')}}" rel="stylesheet" type="text/css" /> --}}
-{{-- <link href="{{ url('assets/global/plugins/select2/css/select2.min.css" rel="stylesheet') }}" type="text/css" /> --}}
-{{-- <link href="{{ url('assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" /> --}}
 <link href="{{ url('assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ url('assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css') }}" rel="stylesheet" type="text/css" />
 @endsection
@@ -29,7 +23,6 @@
 <!-- END PAGE HEADER-->
 <div class="row">
     <div class="col-md-12">
-        <!-- Begin: life time stats -->
         <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-body">
                 {{-- BEGIN ROLE PERMISSION TABLE --}}
@@ -111,7 +104,7 @@
 
                                                 {{-- Date & Time --}}
                                                 <td>
-                                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
                                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_act_date_from" placeholder="From">
                                                         <span class="input-group-btn">
                                                             <button class="btn btn-sm default" type="button">
@@ -119,7 +112,7 @@
                                                             </button>
                                                         </span>
                                                     </div>
-                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                    <div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
                                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_act_date_to" placeholder="To">
                                                         <span class="input-group-btn">
                                                             <button class="btn btn-sm default" type="button">
@@ -150,7 +143,6 @@
                 {{-- END ACTIVITIES TABLE --}}
             </div>
         </div>
-        <!-- End: life time stats -->
     </div>
 </div>
 @endsection
@@ -231,19 +223,14 @@
 @endsection
 
 @section('page_template_js')
-{{-- <script src="{{ url('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}" type="text/javascript"></script> --}}
-{{-- <script src="{{ url('assets/global/plugins/icheck/icheck.min.js') }}" type="text/javascript"></script> --}}
-{{-- <script src="{{ url('assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js') }}" type="text/javascript"></script> --}}
-{{-- <script src="{{ url('assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js') }}" type="text/javascript"></script> --}}
-{{-- <script src="{{ url('assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script> --}}
 <script src="{{ url('assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js') }}" type="text/javascript"></script>
 <script src="{{ url('assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js') }}" type="text/javascript"></script>
 @endsection
 
 @section('page_js')
 <script type="text/javascript">
-    var PAGE_ID = "page-settings";
-    var PAGE_SUB_ID = "page-settings-role-perm";
+    var PAGE_ID = "page_settings";
+    var PAGE_SUB_ID = "page_settings_role_perm";
 
 </script>
 <script src="{{ url('assets/custom/scripts/settings/role/index.js?v=' . $randNum) }}" type="text/javascript"></script>

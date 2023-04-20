@@ -65,7 +65,7 @@
 
                                 {{-- Month/week--}}
                                 <td>
-                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_monthweek" placeholder="From">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">

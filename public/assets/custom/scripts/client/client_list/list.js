@@ -51,7 +51,7 @@ var TableClientList = function () {
                 "columnDefs": [
                     {  // set default column settings
                         'orderable': false,
-                        'targets': [0, 1, 7]
+                        'targets': [0, 1, 5, 7]
                     }
                 ],
                 "order": [

@@ -281,8 +281,10 @@ class EmployeeRequestController extends Controller
             'id' => ['required'],
         ]);
 
-        EmployeeRequest::where('id', $request->id)
-                        ->delete();
+        for($i = 0; $i < count($request->id); $i ++) {
+            EmployeeRequest::where('id', $request->id[$i])
+                            ->delete();
+        }
 
         return response()->json([
             'result' => 'success'
@@ -296,186 +298,6 @@ class EmployeeRequestController extends Controller
     ///////////////////////////   Display Request Details ::: Begin  //////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////
-
-   
-    private function makeEmpPlacementTblItems($totalItems, $filterItems)
-    {
-        $iTotalRecords = count($totalItems);
-        $iDisplayLength = intval($this->request['length']);
-        $iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
-        $iDisplayStart = intval($this->request['start']);
-        $sEcho = intval($this->request['draw']);
-
-        $records = array();
-        $records["data"] = array();
-
-        $end = $iDisplayStart + $iDisplayLength;
-        $end = $end > $iTotalRecords ? $iTotalRecords : $end;
-
-        $status_list = array(
-            array("success" => "Pending"),
-            array("info" => "Closed"),
-            array("danger" => "On Hold"),
-            array("warning" => "Fraud")
-        );
-
-        $idx = 0;
-        for ($i = $iDisplayStart; $i < $end; $i++) {
-            $status = $status_list[rand(0, 2)];
-            $id = ($i + 1);
-            $records["data"][] = array(
-                $id,
-                $filterItems[$idx]->first_name,
-                'acstive',
-                '2023-01-01',
-                '2023-03-23',
-                '1',
-                $filterItems[$idx]->classification ? '<span class="label-active-noborder">Billable</span>' : '<span class="label-inactive-noborder">Non-Billable</span>',
-                "Jo Tire" . $idx
-            );
-            $idx++;
-        }
-
-        $records["data"][] = array(
-            '',
-            '',
-            '',
-            '',
-            'Total Billable Hours',
-            '48',
-            '',
-            ''
-        );
-
-        if (isset($this->request['customActionType']) && $this->request['customActionType'] == "group_action") {
-            $records["customActionStatus"] = "OK"; // pass custom message(useful for getting status of group actions)
-            $records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
-        }
-
-        $records["draw"] = $sEcho;
-        $records["recordsTotal"] = $iTotalRecords;
-        $records["recordsFiltered"] = $iTotalRecords;
-
-        // echo json_encode($records);
-        return response()->json($records);
-    }
-    
-    public function makeAddHisTblItems($totalItems, $filterItems)
-    {
-        $iTotalRecords = count($totalItems);
-        $iDisplayLength = intval($this->request['length']);
-        $iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
-        $iDisplayStart = intval($this->request['start']);
-        $sEcho = intval($this->request['draw']);
-
-        $records = array();
-        $records["data"] = array();
-
-        $end = $iDisplayStart + $iDisplayLength;
-        $end = $end > $iTotalRecords ? $iTotalRecords : $end;
-
-        $status_list = array(
-            array("success" => "Pending"),
-            array("info" => "Closed"),
-            array("danger" => "On Hold"),
-            array("warning" => "Fraud")
-        );
-
-        $idx = 1;
-        for ($i = $iDisplayStart; $i < $end; $i++) {
-            $status = $status_list[rand(0, 2)];
-            $id = ($i + 1);
-            $records["data"][] = array(
-                $idx,
-                "03/01/2023 16:05:02",
-                "test@test.com",
-                "Description" . $idx
-            );
-            $idx++;
-        }
-
-        if (isset($this->request['customActionType']) && $this->request['customActionType'] == "group_action") {
-            $records["customActionStatus"] = "OK"; // pass custom message(useful for getting status of group actions)
-            $records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
-        }
-
-        $records["draw"] = $sEcho;
-        $records["recordsTotal"] = $iTotalRecords;
-        $records["recordsFiltered"] = $iTotalRecords;
-
-        // echo json_encode($records);
-        return response()->json($records);
-    }
-
-    /**
-     * Generate request detail items
-     */
-    private function makeRequestDetailItems($totalItems, $filterItems)
-    {
-        $iTotalRecords = count($totalItems);
-        $iDisplayLength = intval($this->request['length']);
-        $iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
-        $iDisplayStart = intval($this->request['start']);
-        $sEcho = intval($this->request['draw']);
-
-        $records = array();
-        $records["data"] = array();
-
-        $end = $iDisplayStart + $iDisplayLength;
-        $end = $end > $iTotalRecords ? $iTotalRecords : $end;
-
-        $status_list = array(
-            array("success" => "Pending"),
-            array("info" => "Closed"),
-            array("danger" => "On Hold"),
-            array("warning" => "Fraud")
-        );
-
-        $idx = 1;
-        for ($i = $iDisplayStart; $i < $end; $i++) {
-            $status = $status_list[rand(0, 2)];
-            $id = ($i + 1);
-
-            $reqstatus = "";
-            $status = rand();
-            if ($status % 3 == 0) {
-                $reqstatus = '<span class="label label-sm label-primary">Request</span>';
-            } else if ($status % 3 == 1) {
-                $reqstatus = '<span class="label label-sm label-info">Approved</span>';
-            } else {
-                $reqstatus = '<span class="label label-sm label-grey">Rejected</span>';
-            }
-
-            $records["data"][] = array(
-                '<input type="checkbox" name="id[]" value="' . $id . '">',
-                $idx,
-                "RQA0001245",
-                "Makarov",
-                "03/05/2023",
-                "03/15/2023",
-                "Makarov",
-                "Makarov",
-                "W4",
-                $reqstatus,
-                '<a href="javascript:;" class="btn btn-xs btn-c-primary"><i class="fa fa-pencil"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-c-grey"><i class="fa fa-trash"></i></a>'
-            );
-            $idx++;
-        }
-
-        if (isset($this->request['customActionType']) && $this->request['customActionType'] == "group_action") {
-            $records["customActionStatus"] = "OK"; // pass custom message(useful for getting status of group actions)
-            $records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
-        }
-
-        $records["draw"] = $sEcho;
-        $records["recordsTotal"] = $iTotalRecords;
-        $records["recordsFiltered"] = $iTotalRecords;
-
-        // echo json_encode($records);
-        return response()->json($records);
-    }
-
 
     // Generate Request Details Filter Condition
     private function getRequestDetailsTblData() {
@@ -552,7 +374,7 @@ class EmployeeRequestController extends Controller
             }
 
             $records["data"][] = array(
-                '<input type="checkbox" name="id[]" value="' . $id . '">',
+                '<input type="checkbox" name="id" value="' . $filterItems[$idx]->id . '">',
                 $id,
                 'RQA' . $filterItems[$idx]->id,
                 $filterItems[$idx]->employee->first_name . $filterItems[$idx]->employee->last_name,

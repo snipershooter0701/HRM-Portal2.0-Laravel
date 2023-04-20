@@ -45,11 +45,19 @@ class Client extends Model
     ];
 
     /**
-     * Get the actived placements for client.
+     * Get the client's actived placements.
      */
-    public function clientActivePlacements()
+    public function activePlacements()
     {
-        return $this->hasMany(ClientPlacement::class)->where('job_status', 1);
+        return $this->hasMany(ClientPlacement::class)->where('job_status', config('constants.STATE_ACTIVE'));
+    }
+
+    /**
+     * Get the client's actived placement count.
+     */
+    public function activePlacementCnt()
+    {
+        return $this->hasMany(ClientPlacement::class)->sum('id');
     }
 
     /**

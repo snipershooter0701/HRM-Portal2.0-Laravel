@@ -1,3 +1,6 @@
+var gridAwaitInvTable = new Datatable();
+var graidAwaitInvActTable = new Datatable();
+
 var TableAllInvoice = function () {
 
     var initPickers = function () {
@@ -10,13 +13,15 @@ var TableAllInvoice = function () {
 
     var handleInvTable = function () {
 
-        let grid = new Datatable();
-
-        grid.init({
+        gridAwaitInvTable.init({
             src: $("#tbl_await_invoices"),
-            onSuccess: function (grid, response) { },
-            onError: function (grid) { },
-            onDataLoad: function (grid) {
+            onSuccess: function (gridAwaitInvTable, response) { },
+            onError: function (gridAwaitInvTable) { },
+            onDataLoad: function (gridAwaitInvTable) {
+                $('.btn-invoice-delete').click(function() {
+                    var id = $(this).attr('data-id');
+                    deleteAwaitInvoice(id);
+                });
             },
             loadingMessage: 'Loading...',
             dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
@@ -34,7 +39,7 @@ var TableAllInvoice = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": BASE_URL + "/invoices/await-inv/get-invs", // ajax source
+                    "url": BASE_URL + "/invoices/await_inv/get_tbl_list", // ajax source
                 },
                 "order": [
                     [1, "asc"]
@@ -58,54 +63,48 @@ var TableAllInvoice = function () {
         });
 
         // handle group actionsubmit button click
-        grid.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
+        gridAwaitInvTable.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
             e.preventDefault();
-            var action = $(".table-group-action-input", grid.getTableWrapper());
-            if (action.val() != "" && grid.getSelectedRowsCount() > 0) {
-                grid.setAjaxParam("customActionType", "group_action");
-                grid.setAjaxParam("customActionName", action.val());
-                grid.setAjaxParam("id", grid.getSelectedRows());
-                grid.getDataTable().ajax.reload();
-                grid.clearAjaxParams();
+            var action = $(".table-group-action-input", gridAwaitInvTable.getTableWrapper());
+            if (action.val() != "" && gridAwaitInvTable.getSelectedRowsCount() > 0) {
+                gridAwaitInvTable.setAjaxParam("customActionType", "group_action");
+                gridAwaitInvTable.setAjaxParam("customActionName", action.val());
+                gridAwaitInvTable.setAjaxParam("id", gridAwaitInvTable.getSelectedRows());
+                gridAwaitInvTable.getDataTable().ajax.reload();
+                gridAwaitInvTable.clearAjaxParams();
             } else if (action.val() == "") {
                 App.alert({
                     type: 'danger',
                     icon: 'warning',
                     message: 'Please select an action',
-                    container: grid.getTableWrapper(),
+                    container: gridAwaitInvTable.getTableWrapper(),
                     place: 'prepend'
                 });
-            } else if (grid.getSelectedRowsCount() === 0) {
+            } else if (gridAwaitInvTable.getSelectedRowsCount() === 0) {
                 App.alert({
                     type: 'danger',
                     icon: 'warning',
                     message: 'No record selected',
-                    container: grid.getTableWrapper(),
+                    container: gridAwaitInvTable.getTableWrapper(),
                     place: 'prepend'
                 });
             }
         });
 
-        // grid.setAjaxParam("customActionType", "group_action");
-        // grid.getDataTable().ajax.reload();
-        // grid.clearAjaxParams();
-
         // handle datatable custom tools
         $('#tbl_await_invoices_tools > a.tool-action').on('click', function () {
             var action = $(this).attr('data-action');
-            grid.getDataTable().button(action).trigger();
+            gridAwaitInvTable.getDataTable().button(action).trigger();
         });
     }
 
     var handleInvActivities = function () {
 
-        let grid = new Datatable();
-
-        grid.init({
+        graidAwaitInvActTable.init({
             src: $("#tbl_ivc_activities"),
-            onSuccess: function (grid, response) { },
-            onError: function (grid) { },
-            onDataLoad: function (grid) {
+            onSuccess: function (graidAwaitInvActTable, response) { },
+            onError: function (graidAwaitInvActTable) { },
+            onDataLoad: function (graidAwaitInvActTable) {
             },
             loadingMessage: 'Loading...',
             dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
@@ -123,7 +122,7 @@ var TableAllInvoice = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": BASE_URL + "/invoices/due-inv/get-activities", // ajax source
+                    "url": BASE_URL + "/invoices/await_inv/get_tbl_act_list", // ajax source
                 },
                 "order": [
                     [1, "asc"]
@@ -145,3 +144,51 @@ var TableAllInvoice = function () {
 $(document).ready(function () {
     TableAllInvoice.init();
 });
+
+/**
+ * Refresh Await Invoice table.
+ */
+function refreshInvoiceTable() {
+    gridAwaitInvTable.getDataTable().ajax.reload();
+    gridAwaitInvTable.clearAjaxParams();
+}
+
+/**
+ * Refresh Await Invoice Activity table.
+ */
+function refreshInvoiceActTable() {
+    graidAwaitInvActTable.getDataTable().ajax.reload();
+    graidAwaitInvActTable.clearAjaxParams();
+}
+
+/**
+ * Delete Await Invoice
+ */
+function deleteAwaitInvoice(id) {
+    displayConfirmModal("Are you sure to delete this invoice?", "Delete", function (res) {
+        if (res == 'ok') {
+            var formData = {
+                id: id
+            };
+
+            callAjax({
+                url: BASE_URL + '/invoices/await_inv/delete',
+                type: "POST",
+                data: formData,
+                success: function (data) {
+                    if (data['result'] == 'success') {
+                        // Refresh Table.
+                        refreshInvoiceTable();
+                        refreshInvoiceActTable();
+                        toastr.success("Awaiting Invoice is successfully deleted.", "Success");
+                    }
+                },
+                error: function (err) {
+                    var errors = err.errors;
+                    if (errors)
+                        toastr.error(err.message, "Error");
+                }
+            });
+        }
+    });
+}

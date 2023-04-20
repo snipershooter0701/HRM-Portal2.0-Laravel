@@ -22,8 +22,12 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            // UserSeeder::class
-            ModuleSeeder::class
+            UserSeeder::class,
+            ModuleSeeder::class,
+            RoleSeeder::class,
+            LevelSeeder::class,
+            LevelRoleSeeder::class,
+            DepartmentSeeder::class
         ]);
     }
 }

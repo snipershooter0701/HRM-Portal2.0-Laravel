@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Role;
 use App\Models\Level;
+use App\Models\LevelRole;
 use App\Models\LevelActivity;
 
 class SettingOrgHichyController extends Controller
@@ -49,25 +51,42 @@ class SettingOrgHichyController extends Controller
     }
 
     /**
+     * Get level by level_id
+     */
+    public function getLevelById()
+    {
+        // Check Validation
+        $this->request->validate([
+            'id' => ['required']
+        ]);
+
+        $levelId = $this->request['id'];
+
+        $level = Level::with('roles')->where(['id' => $levelId])->first();
+
+        return response()->json([
+            'result' => 'success',
+            'level' => $level
+        ]);
+    }
+
+    /**
      * Create level.
      */
     public function create()
     {
         // Check Validation
         $this->request->validate([
-            'name' => ['required'],
-            'role_id' => ['required']
+            'name' => ['required', 'numeric']
         ]);
 
         // Create new record
         $level = Level::create([
-            'name' => $this->request['name'],
-            'role_id' => $this->request['role_id']
+            'name' => $this->request['name']
         ]);
 
         // Create new activity.
-        $role = Role::find($this->request['role_id']);
-        $description = "Created new level (Level: " . $level['name'] . ", Role: " . $role['name'] . ")";
+        $description = "Created new level (Level: " . $level['name'] . ")";
         LevelActivity::create([
             'level_id' => $level['id'],
             'updated_by' => config('constants.AUTH_ID'),
@@ -86,24 +105,28 @@ class SettingOrgHichyController extends Controller
     {
         // Check Validation
         $this->request->validate([
-            'id' => ['required'],
-            'name' => ['required'],
-            'role_id' => ['required']
+            'level_id' => ['required']
         ]);
 
         // Update
-        $level = Level::find($this->request['id']);
-        $level->update([
-            'name' => $this->request['name'],
-            'role_id' => $this->request['role_id']
-        ]);
+        $levelId = $this->request['level_id'];
+        $roles = $this->request['roles'];
+        LevelRole::where([
+            'level_id' => $levelId
+        ])->delete();
+        foreach ($roles as $role) {
+            LevelRole::create([
+                'level_id' => $levelId,
+                'role_id' => $role,
+            ]);
+        }
 
         // Create new activity.
-        $role = Role::find($this->request['role_id']);
-        $description = "Updated role (Level: " . $level['name'] . ", Role: " . $role['name'] . ")";
+        $level = Level::find($levelId);
+        $description = "Updated role (Level: " . $level['name'] . ")";
         LevelActivity::create([
             'level_id' => $level['id'],
-            'updated_by' => config('constants.AUTH_ID'),
+            'updated_by' => Auth::user()->employee->id,
             'description' => $description
         ]);
 
@@ -126,9 +149,12 @@ class SettingOrgHichyController extends Controller
         $level = Level::find($this->request['id']);
         $level->delete();
 
+        LevelRole::where([
+            'level_id' => $this->request['id']
+        ])->delete();
+
         // Create new activity.
-        $role = Role::find($level['role_id']);
-        $description = "Deleted level (Level: " . $level['name'] . ", Role: " . $role['name'] . ")";
+        $description = "Deleted level (Level: " . $level['name'] . ")";
         LevelActivity::create([
             'level_id' => $level['id'],
             'updated_by' => config('constants.AUTH_ID'),
@@ -175,15 +201,11 @@ class SettingOrgHichyController extends Controller
         $totalRecordCnt = Level::count();
 
         // Filtered records
-        $filteredRecords = Level::with([
-            'role'
-        ])->where($whereConds)
-            ->whereHas('role', function (Builder $query) {
-                if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
-                    if ($this->request['filt_role'] != NULL)
-                        $query->where('id', $this->request['filt_role']);
-                }
-            })
+        $filteredRecords = Level::select(['levels.id as id', 'levels.name as name', 'level_roles.role_id as role_id'])
+            ->leftJoin('level_roles', function ($join) {
+                $join->on('levels.id', '=', 'level_roles.level_id');
+            })->where($whereConds)
+            ->groupBy(['id'])
             ->get()
             ->sortBy([[$sortColumn, $sortType]])
             ->skip($start)
@@ -218,13 +240,24 @@ class SettingOrgHichyController extends Controller
 
         $idx = $iDisplayStart + 1;
         foreach ($finalRecords as $finalRecord) {
-            $actionBtn = '<a href="javascript:;" class="btn btn-xs btn-c-primary btn-level-edit" data-id="' . $finalRecord->id . '"  data-name="' . $finalRecord->name . '" data-role="' . $finalRecord->role_id . '"><i class="fa fa-pencil"></i></a>
-            <a href="javascript:;" class="btn btn-xs btn-c-grey btn-level-delete" data-id="' . $finalRecord->id . '" data-name="' . $finalRecord->name . '"><i class="fa fa-trash"></i></a>';
+            $actionBtn = '
+                <a href="javascript:;" class="btn btn-xs btn-c-primary btn-level-edit" data-id="' . $finalRecord->id . '">
+                    <i class="fa fa-pencil"></i>
+                </a>
+                <a href="javascript:;" class="btn btn-xs btn-c-grey btn-level-delete" data-id="' . $finalRecord->id . '">
+                    <i class="fa fa-trash"></i>
+                </a>
+            ';
+
+            $roleNames = "";
+            $roleCnt = count($finalRecord->roles);
+            for ($i = 0; $i < $roleCnt; $i++)
+                $roleNames .= ($i == 0 ? "" : ", ") . $finalRecord->roles[$i]->role->name;
 
             $records["data"][] = array(
                 $idx,
                 $finalRecord->name,
-                ($finalRecord->role) ? $finalRecord->role->name : '',
+                $roleNames,
                 $actionBtn
             );
             $idx++;

@@ -18,13 +18,7 @@ var TableRole = function () {
             onDataLoad: function (gridLevelTable) {
                 $('.btn-level-edit').click(function () {
                     var id = $(this).attr('data-id');
-                    var name = $(this).attr('data-name');
-                    var department = $(this).attr('data-department');
-
-                    $('#edit_level_id').val(id);
-                    $('#edit_level_name').val(name);
-                    $('#edit_level_department').val(department);
-                    $('#btn_show_level_edit_modal').trigger('click');
+                    showLevelInfoToEditModal(id);
                 });
 
                 $('.btn-level-delete').click(function () {
@@ -157,6 +151,45 @@ function refreshLevelActTable() {
 }
 
 /**
+ * Show level information to edit modal.
+ */
+function showLevelInfoToEditModal(id)
+{
+    var formData = {
+        id: id
+    };
+
+    callAjax({
+        url: BASE_URL + '/settings/org_hierarchy/get_level',
+        type: "POST",
+        data: formData,
+        success: function (data) {
+            if (data['result'] == 'success') {
+                var level = data['level'];
+                if (level != null) {
+                    $('#edit_level_id').val(level['id']);
+
+                    var roleTags = document.getElementsByClassName('edit-role');
+                    for (var i in roleTags)
+                        roleTags[i].checked = false;
+
+                    var roles = level['roles'];
+                    for (var i in roles)
+                        document.getElementById('edit_role' + roles[i]['role_id']).checked = true;
+                }
+                $('#btn_show_level_edit_modal').trigger('click');
+            }
+        },
+        error: function (err) {
+            var errors = err.errors;
+            if (errors) {
+                toastr.error(err.message, "Error");
+            }
+        }
+    });
+}
+
+/**
  * Create Level
  */
 function createLevel() {
@@ -164,12 +197,8 @@ function createLevel() {
     var validateFields = [{
         field_id: 'add_level_name',
         conditions: [
-            'required' + CONST_VALIDATE_SPLITER + 'Level Name is required.'
-        ]
-    }, {
-        field_id: 'add_level_role',
-        conditions: [
-            'required' + CONST_VALIDATE_SPLITER + 'Role is required.'
+            'required' + CONST_VALIDATE_SPLITER + 'Level Name is required.',
+            'numeric' + CONST_VALIDATE_SPLITER + "Level Name must be a number."
         ]
     }];
     var isValid = doValidationForm(validateFields);
@@ -177,8 +206,7 @@ function createLevel() {
         return;
 
     var formData = {
-        name: $('#add_level_name').val(),
-        role_id: $('#add_level_role').val()
+        name: $('#add_level_name').val()
     };
 
     callAjax({
@@ -189,7 +217,6 @@ function createLevel() {
             if (data['result'] == 'success') {
                 // Init Form.
                 $('#add_level_name').val("");
-                $('#add_level_role').val("");
 
                 // Refresh Table.
                 refreshLevelTable();
@@ -219,26 +246,18 @@ function createLevel() {
  * Update Level
  */
 function updateLevel() {
-    // Check Validation
-    var validateFields = [{
-        field_id: 'edit_level_name',
-        conditions: [
-            'required' + CONST_VALIDATE_SPLITER + 'Level Name is required.'
-        ]
-    }, {
-        field_id: 'edit_level_role',
-        conditions: [
-            'required' + CONST_VALIDATE_SPLITER + 'Role is required.'
-        ]
-    }];
-    var isValid = doValidationForm(validateFields);
-    if (!isValid)
-        return;
+    var roleTags = document.getElementsByClassName('edit-role');
+    var roles = [];
+    for (var i in roleTags) {
+        var roleTag = roleTags[i];
+        if (roleTag.checked == true) {
+            roles.push(roleTag.getAttribute('data-id'));
+        }
+    }
 
     var formData = {
-        id: $('#edit_level_id').val(),
-        name: $('#edit_level_name').val(),
-        role_id: $('#edit_level_role').val()
+        level_id: $('#edit_level_id').val(),
+        roles: roles
     };
 
     callAjax({

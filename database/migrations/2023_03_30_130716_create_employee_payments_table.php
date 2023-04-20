@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('employee_payments', function (Blueprint $table) {
             $table->id();
             $table->integer('employee_id');
-            $table->integer('date_range_id');
+            $table->integer('client_id');
             $table->integer('pay');
             $table->date('paid_on');
             $table->timestamps();

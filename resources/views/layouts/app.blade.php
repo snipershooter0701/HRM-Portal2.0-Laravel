@@ -172,240 +172,41 @@
                             <span class="title">Dashboard</span>
                         </a>
                     </li>
-                    <li id="page_employee" class="nav-item">
-                        <a class="nav-link nav-toggle">
-                            <i class="fa fa-users"></i>
-                            <span class="title">Employee</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li class="nav-item" id="page_employee_list">
-                                <a href="{{ url('/employee/all_employees') }}" class="nav-link ">
-                                    <span class="title">All Employee List</span>
-                                </a>
-                            </li>
-                            <li class="nav-item" id="page_request_list">
-                                <a href="{{ url('/employee/all_request_details') }}" class="nav-link ">
-                                    <span class="title">All Request Details</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li id="page_timesheets" class="nav-item">
-                        <a class="nav-link nav-toggle">
-                            <i class="fa fa-calendar"></i>
-                            <span class="title">Timesheets</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li class="nav-item" id="page_timesheets_all">
-                                <a href="{{ url('/timesheets/all') }}" class="nav-link ">
-                                    <span class="title">All Timesheets</span>
-                                </a>
-                            </li>
-                            <li class="nav-item" id="page_timesheets_due">
-                                <a href="{{ url('/timesheets/due') }}" class="nav-link ">
-                                    <span class="title">Due Timesheets</span>
-                                </a>
-                            </li>
-                            <li class="nav-item" id="page_timesheets_awaiting">
-                                <a href="{{ url('/timesheets/awaiting') }}" class="nav-link ">
-                                    <span class="title">Awaiting Timesheets</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li id="page_expenses" class="nav-item">
-                        <a class="nav-link nav-toggle">
-                            <i class="fa fa-dollar"></i>
-                            <span class="title">Expenses</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li class="nav-item" id="page_expense_list">
-                                <a href="{{ url('/expenses') }}" class="nav-link ">
-                                    <span class="title">Expense List</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li id="page_client" class="nav-item">
-                        <a class="nav-link nav-toggle">
-                            <i class="fa fa-user-secret"></i>
-                            <span class="title">Client</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li class="nav-item" id="page_client_list">
-                                <a href="{{ url('/client/list') }}" class="nav-link ">
-                                    <span class="title">Client List</span>
-                                </a>
-                            </li>
-                            <li class="nav-item" id="page_client_all_placements">
-                                <a href="{{ url('/client/all_placements') }}" class="nav-link ">
-                                    <span class="title">All Placements</span>
-                                </a>
-                            </li>
-                            <li class="nav-item" id="page_client_all_documents">
-                                <a href="{{ url('/client/all_documents') }}" class="nav-link ">
-                                    <span class="title">All Documents</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li id="page-vendor" class="nav-item">
-                        <a class="nav-link nav-toggle">
-                            <i class="fa fa-globe"></i>
-                            <span class="title">Vendor</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li class="nav-item  ">
-                                <a href="{{ url('/vendor/list') }}" class="nav-link ">
-                                    <span class="title">Vendor List</span>
-                                </a>
-                            </li>
-                            <li class="nav-item  ">
-                                <a href="{{ url('/vendor/all_placements') }}" class="nav-link ">
-                                    <span class="title">All Placements</span>
-                                </a>
-                            </li>
-                            <li class="nav-item  ">
-                                <a href="{{ url('/vendor/all_documents') }}" class="nav-link ">
-                                    <span class="title">All Documents</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li id="page-invoices" class="nav-item">
-                        <a class="nav-link nav-toggle">
-                            <i class="fa fa-sticky-note"></i>
-                            <span class="title">Invoices</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li id="page-invoices-all-inv" class="nav-item">
-                                <a href="{{ url('/invoices/all_inv') }}" class="nav-link ">
-                                    <span class="title">All Invoices</span>
-                                </a>
-                            </li>
-                            <li id="page-invoices-due-inv" class="nav-item">
-                                <a href="{{ url('/invoices/due_inv') }}" class="nav-link ">
-                                    <span class="title">Due Invoices</span>
-                                </a>
-                            </li>
-                            <li id="page-invoices-await-inv" class="nav-item">
-                                <a href="{{ url('/invoices/await_inv') }}" class="nav-link ">
-                                    <span class="title">Awaiting Invoices</span>
-                                </a>
-                            </li>
-                            <li id="page-invoices-client-pay" class="nav-item">
-                                <a href="{{ url('/invoices/client_pay') }}" class="nav-link ">
-                                    <span class="title">Client Payments</span>
-                                </a>
-                            </li>
-                            <li id="page-invoices-employee-pay" class="nav-item">
-                                <a href="{{ url('/invoices/employee_pay') }}" class="nav-link ">
-                                    <span class="title">Employee Payments</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li id="page_tickets" class="nav-item">
-                        <a class="nav-link nav-toggle">
-                            <i class="fa fa-bookmark"></i>
-                            <span class="title">Tickets</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li id="page_ticket_list" class="nav-item">
-                                <a href="{{ url('/tickets') }}" class="nav-link ">
-                                    <span class="title">Ticket List</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li id="page-settings" class="nav-item">
-                        <a class="nav-link nav-toggle">
-                            <i class="fa fa-cog"></i>
-                            <span class="title">Settings</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li id="page-settings-org-hierarchy" class="nav-item">
-                                <a href="{{ url('/settings/org_hierarchy') }}" class="nav-link ">
-                                    <span class="title">Organization Hierarchy</span>
-                                </a>
-                            </li>
-                            <li id="page-settings-role-perm" class="nav-item">
-                                <a href="{{ url('/settings/role_perm') }}" class="nav-link ">
-                                    <span class="title">Role Permission</span>
-                                </a>
-                            </li>
-                            <li id="page-settings-module-sec" class="nav-item">
-                                <a href="{{ url('/settings/module_sec') }}" class="nav-link ">
-                                    <span class="title">Module Security</span>
-                                </a>
-                            </li>
-                            <li id="page-settings-general" class="nav-item">
-                                <a href="{{ url('/settings/general') }}" class="nav-link ">
-                                    <span class="title">General Module</span>
-                                </a>
-                            </li>
-                            <li id="page-invoices-employee-pay" class="nav-item">
-                                <a href="{{ url('/settings/invoice') }}" class="nav-link ">
-                                    <span class="title">Invoice Setting</span>
-                                </a>
-                            </li>
-                            <li id="page-invoices-employee-pay" class="nav-item">
-                                <a href="{{ url('/settings/new_company') }}" class="nav-link ">
-                                    <span class="title">Create New Company</span>
-                                </a>
-                            </li>
-                            <li id="page-invoices-employee-pay" class="nav-item">
-                                <a href="{{ url('/settings/application') }}" class="nav-link ">
-                                    <span class="title">Application Setting</span>
-                                </a>
-                            </li>
-                            <li id="page-invoices-employee-pay" class="nav-item">
-                                <a href="{{ url('/settings/backup') }}" class="nav-link ">
-                                    <span class="title">Backup and Download</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li id="page_documentation" class="nav-item">
-                        <a class="nav-link nav-toggle">
-                            <i class="fa fa-file-text"></i>
-                            <span class="title">Documentation</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li id="page_org_document" class="nav-item">
-                                <a href="{{ url('/documentation/organization') }}" class="nav-link ">
-                                    <span class="title">Organization Documents</span>
-                                </a>
-                            </li>
-                            <li id="page_emp_document" class="nav-item">
-                                <a href="{{ url('/documentation/employee') }}" class="nav-link ">
-                                    <span class="title">Employee Documents</span>
-                                </a>
-                            </li>
-                            <li id="page_exp_document" class="nav-item">
-                                <a href="{{ url('/documentation/expiring') }}" class="nav-link ">
-                                    <span class="title">Expiring Documents</span>
-                                </a>
-                            </li>
-                            <li id="page_group_document" class="nav-item">
-                                <a href="{{ url('/documentation/group') }}" class="nav-link ">
-                                    <span class="title">Group Documents</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                    @php
+                    $permissions = Auth::user()->employee->role->permissions;
+                    $prevLevel = config('constants.ROLE_MODULE_LEVEL_MODULE');
+                    foreach ($permissions as $permission) {
+                    if ($prevLevel == config('constants.ROLE_MODULE_LEVEL_SUBMODULE') && $permission->module['level'] != config('constants.ROLE_MODULE_LEVEL_SUBMODULE'))
+                    {
+                    echo '
                 </ul>
-                <!-- END SIDEBAR MENU -->
-                <!-- END SIDEBAR MENU -->
+                </li>';}
+
+                if ($permission->module['level'] == config('constants.ROLE_MODULE_LEVEL_MODULE')) {
+                $prevLevel = config('constants.ROLE_MODULE_LEVEL_MODULE');
+                echo '<li id="' . $permission->module['tagid'] . '" class="nav-item">
+                    <a class="nav-link nav-toggle">
+                        <i class="' . $permission->module['icon'] . '"></i>
+                        <span class="title">' . $permission->module['name'] . '</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">';
+                        } else if ($permission->module['level'] == config('constants.ROLE_MODULE_LEVEL_SUBMODULE')) {
+                        $prevLevel = config('constants.ROLE_MODULE_LEVEL_SUBMODULE');
+                        echo '
+                        <li class="nav-item" id="' . $permission->module['tagid'] . '">
+                            <a href="'. url($permission->module['url']) . '" class="nav-link ">
+                                <span class="title">' . $permission->module['name'] . '</span>
+                            </a>
+                        </li>';
+                        } else {
+                        $prevLevel = config('constants.ROLE_MODULE_LEVEL_ACCESS');
+                        }
+                        }
+                        @endphp
+                    </ul>
+                    <!-- END SIDEBAR MENU -->
+                    <!-- END SIDEBAR MENU -->
             </div>
             <!-- END SIDEBAR -->
         </div>

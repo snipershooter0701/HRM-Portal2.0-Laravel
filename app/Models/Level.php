@@ -12,12 +12,11 @@ class Level extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'role_id',
         'name'
     ];
 
-    public function role()
+    public function roles()
     {
-        return $this->belongsTo(Role::class);
+        return $this->hasMany(LevelRole::class);
     }
 }

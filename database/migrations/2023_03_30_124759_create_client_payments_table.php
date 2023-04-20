@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->integer('client_id');
             $table->date('payment_received_date');
+            $table->integer('amount_due');
             $table->integer('amount_received');
-            $table->integer('client_confidential_id');
-            $table->string('ref_no');
+            $table->integer('bank_id');
+            $table->integer('pay_method_id');
             $table->string('comments')->nullable();
             $table->string('attachment')->nullable();
             $table->timestamps();

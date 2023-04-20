@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
+use App\Models\Client;
+use App\Models\ClientActivity;
 use App\Models\ClientConfidential;
 use App\Models\ClientPlacementDoctype;
 use App\Models\Employee;
 use App\Models\JobTire;
-use Illuminate\Http\Request;
-use App\Models\Client;
-use App\Models\ClientActivity;
 
 class ClientListController extends Controller
 {
@@ -228,7 +229,7 @@ class ClientListController extends Controller
     private function getClientTblRecords()
     {
         // Params
-        $columns = ['', '', 'business_name', 'email', 'contact_number', '', '', '', ''];
+        $columns = ['', '', 'business_name', 'email', 'contact_number', '', '', ''];
         $sortColumn = $columns[$this->request['order'][0]['column']];
         $sortType = $this->request['order'][0]['dir'];
         $start = $this->request['start'];
@@ -239,6 +240,8 @@ class ClientListController extends Controller
 
         // Get client records for filter condition.
         $whereConds = array();
+        $placementCntFrom = 0;
+        $placementCntTo = 0;
         if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
             if ($this->request['filt_business_name'] != NULL)
                 $whereConds[] = ['business_name', 'like', '%' . $this->request['filt_business_name'] . '%'];
@@ -247,25 +250,29 @@ class ClientListController extends Controller
             if ($this->request['filt_contact_number'] != NULL)
                 $whereConds[] = ['contact_number', 'like', '%' . $this->request['filt_contact_number'] . '%'];
             if ($this->request['filt_status'] != NULL) {
-                if ($this->request['filt_status'] == config('constants.STATE_ACTIVE')) {
-                    $whereConds[] = ['count(clientPlacements)', '>', 0];
-                } else {
-                    $whereConds[] = ['count(clientPlacements)', '=', 0];
-                }
+                if ($this->request['filt_status'] == config('constants.STATE_ACTIVE'))
+                    $placementCntFrom = 1;
+                else
+                    $placementCntFrom = 0;
             }
-            if ($this->request['filt_placements_from'] != NULL)
-                array_push($whereConds, array("date_of_joining >=" => $this->request['filt_placements_from']));
+            if ($this->request['filt_placements_from'] != NULL && $this->request['filt_placements_from'] > $placementCntFrom) {
+                $placementCntFrom = $this->request['filt_placements_from'];
+            }
             if ($this->request['filt_placements_to'] != NULL)
-                array_push($whereConds, array("date_of_joining <=" => $this->request['filt_placements_to']));
+                $placementCntTo = $this->request['filt_placements_to'];
         }
 
         $filteredRecords = Client::with([
-            'clientActivePlacements'
+            'activePlacements'
         ])->where($whereConds)
+            ->whereHas('activePlacements', function (Builder $query) {
+            }, '>=', $placementCntFrom)
             ->get()
             ->sortBy([[$sortColumn, $sortType]])
             ->skip($start)
             ->take($length);
+        // ->toArray();
+
         // var_dump($filteredRecords);
         // exit;
 
@@ -303,8 +310,8 @@ class ClientListController extends Controller
                 $finalRecord->business_name,
                 $finalRecord->email,
                 $finalRecord->contact_number,
-                count($finalRecord->clientActivePlacements) > 0 ? '<span class="label label-sm label-primary">Active</span>' : '<span class="label label-sm label-grey">Inactive</span>',
-                count($finalRecord->clientActivePlacements),
+                count($finalRecord->activePlacements) > 0 ? '<span class="label label-sm label-primary">Active</span>' : '<span class="label label-sm label-grey">Inactive</span>',
+                count($finalRecord->activePlacements),
                 '<a href="javascript:;" class="btn btn-xs btn-c-primary btn-view"><i class="fa fa-eye"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-c-primary btn-client-edit" data-id="' . $finalRecord->id . '"><i class="fa fa-pencil"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-c-grey btn-client-delete" data-id="' . $finalRecord->id . '" data-email="' . $finalRecord->email . '"><i class="fa fa-trash"></i></a>'

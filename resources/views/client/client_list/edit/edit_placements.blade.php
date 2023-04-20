@@ -16,17 +16,17 @@
             <div class="portlet-title">
                 <div class="caption">
                     <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-edit-businfo">Business Info</span>
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-edit-contactinfo">Contact Info</span>
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-edit-confidential">Add Confidential</span>
-                    <span class="caption-helper mr-10 active-tab btn-move-panel" data-panelname="panel-edit-placement">Placements</span>
-                    <span class="caption-helper btn-move-panel" data-panelname="panel-edit-documents">Documents</span>
+                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_contactinfo">Contact Info</span>
+                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_confidential">Add Confidential</span>
+                    <span class="caption-helper mr-10 active-tab btn-move-panel" data-panelname="panel_edit_placement">Placements</span>
+                    <span class="caption-helper btn-move-panel" data-panelname="panel_edit_documents">Documents</span>
                 </div>
             </div>
             <div class="portlet-body">
                 {{-- BEGIN PLACEMENT TABLE --}}
                 <div class="table-container">
                     <div class="actions">
-                        <button type="button" class="btn btn-sm btn-c-primary btn-move-panel" data-panelname="panel-create-placement"><i class="fa fa-plus-circle"></i> Add Placement </button>
+                        <button type="button" class="btn btn-sm btn-c-primary btn-move-panel" data-panelname="panel_create_placement"><i class="fa fa-plus-circle"></i> Add Placement </button>
                         <div id="tbl_placements_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-copy"></i></a>
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-upload"></i></a>
@@ -90,7 +90,7 @@
 
                                 {{-- Start Date --}}
                                 <td>
-                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_start_date_from" placeholder="From">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
@@ -98,7 +98,7 @@
                                             </button>
                                         </span>
                                     </div>
-                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                    <div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_start_date_to" placeholder="To">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
@@ -110,7 +110,7 @@
 
                                 {{-- End Date --}}
                                 <td>
-                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_end_date_from" placeholder="From">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
@@ -118,7 +118,7 @@
                                             </button>
                                         </span>
                                     </div>
-                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                    <div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_end_date_to" placeholder="To">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LevelRole;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Role;
 use App\Models\RoleActivity;
 use App\Models\Department;
@@ -70,7 +72,7 @@ class SettingRoleController extends Controller
         $description = "Created new role (Role: " . $role['name'] . ", Department: " . $department['name'] . ")";
         RoleActivity::create([
             'role_id' => $role['id'],
-            'updated_by' => config('constants.AUTH_ID'),
+            'updated_by' => Auth::user()->employee->id,
             'description' => $description
         ]);
 
@@ -103,7 +105,7 @@ class SettingRoleController extends Controller
         $description = "Updated role (Role: " . $role['name'] . ", Department: " . $department['name'] . ")";
         RoleActivity::create([
             'role_id' => $role['id'],
-            'updated_by' => config('constants.AUTH_ID'),
+            'updated_by' => Auth::user()->employee->id,
             'description' => $description
         ]);
 
@@ -126,12 +128,16 @@ class SettingRoleController extends Controller
         $role = Role::find($this->request['id']);
         $role->delete();
 
+        LevelRole::where([
+            'role_id' => $role['id']
+        ])->delete();
+
         // Create new activity.
         $department = Department::find($role['department_id']);
         $description = "Deleted role (Role: " . $role['name'] . ", Department: " . $department['name'] . ")";
         RoleActivity::create([
             'role_id' => $role['id'],
-            'updated_by' => config('constants.AUTH_ID'),
+            'updated_by' => Auth::user()->employee->id,
             'description' => $description
         ]);
 

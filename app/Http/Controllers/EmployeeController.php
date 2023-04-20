@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Employee;
 use App\Models\EmployeeActivity;
+use App\Models\Role;
+use App\Models\Document;
 
 class EmployeeController extends Controller
 {
@@ -29,32 +31,33 @@ class EmployeeController extends Controller
     public function getEmployeeList()
     {
         $ajaxData = $this->getEmployeeListTblData();
-        $result = $this->makeEmployeeListTblItems($ajaxData['filterItems']);
+        $result = $this->makeEmployeeListTblItems($ajaxData['filterItems'], $ajaxData['role'], $ajaxData['max_id']);
         return $result;
     }
 
     // Get Employee By ID
     public function getEmployeeByID(Request $request)
     {
-       // Check Validation
-       $request->validate([
+        // Check Validation
+        $request->validate([
             'id' => ['required']
         ]);
 
         $employee = Employee::find($request->id);
+        $doc = Document::where('employee_id', $request->id)->get();
 
         return response()->json([
             'result' => 'success',
-            'employee' => $employee
+            'employee' => $employee,
+            'doc' => $doc,
         ]);
     }
 
     // Add Employee
     public function addEmployee(Request $request)
     {
-
         // Validation TOOD
-          $request->validate([
+        $request->validate([
             'first_name'        => ['required'],
             'last_name'         => ['required'],
             'title'             => ['required'],
@@ -81,11 +84,7 @@ class EmployeeController extends Controller
             'addr_city'         => ['required'],
             'addr_state'        => ['required'],
             'addr_country'      => ['required'],
-            'addr_zipcode'      => ['required'],
-            'pay_standard_time' => ['required'],
-            'pay_over_time'     => ['required'],
-            'pay_double_time'   => ['required'],
-            'pay_scale'         => ['required']
+            'addr_zipcode'      => ['required']
         ]);
 
         $employee = Employee::create([
@@ -124,6 +123,89 @@ class EmployeeController extends Controller
             'status_end_date'   =>  $request->employee_status_date,
             'department_id'     =>  $request->deparment,
         ]);
+
+        EmployeeActivity::create([
+            'employee_id'   =>  $employee->id,   
+            'updated_by'    =>  '1',               // session
+            'description'   =>  'Create Employee',
+        ]);
+
+        $createArray = array();
+        if($request->ssn == '1') {
+            $createArray = [
+                'employee_id'       =>  $employee->id,
+                'doc_title_id'      => '0',
+                'no'                => $request->ssn_doc['no'],
+                'attachment'        => $request->ssn_doc['attachment'],
+            ];
+            Document::create($createArray);
+        }
+        if($request->auth == '1') {
+            $createArray = [
+                'employee_id'       =>  $employee->id,
+                'doc_title_id'      => '1',
+                'work_auth_id'      => $request->auth_doc['work_auth_id'],
+                'no'                => $request->auth_doc['no'],
+                'start_date'        => $request->auth_doc['start_date'],
+                'expire_date'       => $request->auth_doc['expire_date'],
+                'attachment'        => $request->auth_doc['attachment'],
+            ];
+            Document::create($createArray);
+        }
+        if($request->state == '1') {
+            $createArray = [
+                'employee_id'       =>  $employee->id,
+                'doc_title_id'      => '2',
+                'no'                => $request->state_doc['no'],
+                'exp_date'          => $request->state_doc['exp_date'],
+                'attachment'        => $request->state_doc['attachment'],
+            ];
+            Document::create($createArray);
+        }
+        if($request->passport == '1') {
+            $createArray = [
+                'employee_id'       =>  $employee->id,
+                'doc_title_id'      => '3',
+                'no'                => $request->passport_doc['no'],
+                'exp_date'          => $request->passport_doc['exp_date'],
+                'attachment'        => $request->passport_doc['attachment'],
+            ];
+            Document::create($createArray);
+        }
+        if($request->i94 == '1') {
+            $createArray = [
+                'employee_id'       =>  $employee->id,
+                'doc_title_id'      => '4',
+                'no'                => $request->i94_doc['no'],
+                'exp_date'          => $request->i94_doc['exp_date'],
+                'i94_type'          => $request->i94_doc['i94_type'],
+                'attachment'        => $request->i94_doc['attachment'],
+            ];
+            Document::create($createArray);
+        }
+        if($request->visa == '1') {
+            $createArray = [
+                'employee_id'       =>  $employee->id,
+                'doc_title_id'      => '5',
+                'no'                => $request->visa_doc['no'],
+                'exp_date'          => $request->visa_doc['exp_date'],
+                'attachment'        => $request->visa_doc['attachment'],
+            ];
+            Document::create($createArray);
+        }
+        if(count( $request->other_array) ) {
+            for($i = 0; $i < count($request->other_array); $i ++) {
+                $createArray = [
+                    'employee_id'       =>  $employee->id,
+                    'doc_title_id'      => '6',
+                    'comment'           => $request->other_array[$i]['title'],
+                    'no'                => $request->other_array[$i]['no'],
+                    'exp_date'          => $request->other_array[$i]['exp_date'],
+                    'attachment'        => $request->other_array[$i]['attachment'],
+                ];
+                Document::create($createArray);
+            }
+        }
 
         // Create New User
         $originPwd = $this->parseDate($request->birth) . $request->last_name;
@@ -222,6 +304,104 @@ class EmployeeController extends Controller
                     'department_id'     =>  $request->deparment,
                 ]);
 
+            if($request->ssn == '1') {
+                $createArray = array();
+                $createArray = [
+                    'employee_id'       =>  $request->id,
+                    'doc_title_id'      => '0',
+                    'no'                => $request->ssn_doc['no'],
+                    'attachment'        => $request->ssn_doc['attachment'],
+                ];
+                Document::where('id', $request->ssn_id)
+                        ->update($createArray);
+            }
+            if($request->auth == '1') {
+                $createArray = array(); 
+
+                $createArray = [
+                    'employee_id'       =>  $request->id,
+                    'doc_title_id'      => '1',
+                    'work_auth_id'      => $request->auth_doc['work_auth_id'],
+                    'no'                => $request->auth_doc['no'],
+                    'start_date'        => $request->auth_doc['start_date'],
+                    'expire_date'       => $request->auth_doc['expire_date'],
+                    'attachment'        => $request->auth_doc['attachment'],
+                ];
+                Document::where('id', $request->auth_id)
+                        ->update($createArray);
+            }
+            if($request->state == '1') {
+                $createArray = array();
+                $createArray = [
+                    'employee_id'       =>  $request->id,
+                    'doc_title_id'      => '2',
+                    'no'                => $request->state_doc['no'],
+                    'exp_date'          => $request->state_doc['exp_date'],
+                    'attachment'        => $request->state_doc['attachment'],
+                ];
+                Document::where('id', $request->state_id)
+                        ->update($createArray);
+            }
+            if($request->passport == '1') {
+                $createArray = array();
+                $createArray = [
+                    'employee_id'       =>  $request->id,
+                    'doc_title_id'      => '3',
+                    'no'                => $request->passport_doc['no'],
+                    'exp_date'          => $request->passport_doc['exp_date'],
+                    'attachment'        => $request->passport_doc['attachment'],
+                ];
+                Document::where('id', $request->passport_id)
+                        ->update($createArray);
+            }
+            if($request->i94 == '1') {
+                $createArray = array();
+                $createArray = [
+                    'employee_id'       =>  $request->id,
+                    'doc_title_id'      => '4',
+                    'no'                => $request->i94_doc['no'],
+                    'exp_date'          => $request->i94_doc['exp_date'],
+                    'i94_type'          => $request->i94_doc['i94_type'],
+                    'attachment'        => $request->i94_doc['attachment'],
+                ];
+                Document::where('id', $request->i94_id)
+                        ->update($createArray);
+            }
+            if($request->visa == '1') {
+                $createArray = array();
+                $createArray = [
+                    'employee_id'       =>  $request->id,
+                    'doc_title_id'      => '5',
+                    'no'                => $request->visa_doc['no'],
+                    'exp_date'          => $request->visa_doc['exp_date'],
+                    'attachment'        => $request->visa_doc['attachment'],
+                ];
+                Document::where('id', $request->visa_id)
+                        ->update($createArray);
+            }
+            if( count( $request->other_array) ) {
+                for($i = 0; $i < count( $request->other_array); $i ++) {
+                    $createArray = array();
+                    $createArray = [
+                        'employee_id'       =>  $request->id,
+                        'doc_title_id'      => '6',
+                        'comment'           => $request->other_array[$i]['title'],
+                        'no'                => $request->other_array[$i]['no'],
+                        'exp_date'          => $request->other_array[$i]['exp_date'],
+                        'attachment'        => $request->other_array[$i]['attachment'],
+                    ];
+                    
+                    Document::where('id', $request->other_ids[$i])
+                        ->update($createArray);
+                }
+            }
+
+            EmployeeActivity::create([
+                'employee_id'   =>  $request->id,   
+                'updated_by'    =>  '1',               // session
+                'description'   =>  'Update Employee',
+            ]);
+
         return response()->json([
             'result' => 'success'
         ]);
@@ -234,8 +414,24 @@ class EmployeeController extends Controller
             'id' => ['required'],
         ]);
 
-        Employee::where('id', $request->id)
+        for($i = 0; $i < count($request->id); $i ++) {
+            Employee::where('id', $request->id[$i])
+                    ->delete();
+
+            User::where('employee_id', $request->id[$i])
                 ->delete();
+
+            Document::where('employee_id', $request->id[$i])
+                    ->delete();
+        }
+
+        for($i = 0; $i < count($request->id); $i ++) {
+            EmployeeActivity::create([
+                'employee_id'   =>  $request->id[$i],
+                'updated_by'    =>  '1',               // session
+                'description'   =>  'Delete Employee',
+            ]);
+        }
 
         return response()->json([
             'result' => 'success'
@@ -245,18 +441,32 @@ class EmployeeController extends Controller
     // Employee Activity
     public function getEmpAct()
     {
-        $ajaxData = $this->getEmployeeActivityTblData();
-        $result = $this->makeEmpActivityTblItems($ajaxData['totalItems'], $ajaxData['filterItems']);
+        // Get Filtered employees
+        $whereConds = array();
+        if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
+            if ($this->request['filt_act_date_time'] != NULL)
+                $whereConds[] = ['act_date_time', 'like', '%' . $this->request['filt_act_date_time'] . '%'];
+            if ($this->request['filt_act_updated_by'] != NULL)
+                $whereConds[] = ['updated_by', 'like', '%' . $this->request['filt_act_updated_by'] . '%'];
+            if ($this->request['filt_act_description'] != NULL)
+                $whereConds[] = ['description', 'like', '%' . $this->request['filt_act_description'] . '%'];
+        }
+
+        $filterAct = EmployeeActivity::with(['updatedby'])
+                                    ->where($whereConds)
+                                    ->get();
+
+        $result = $this->makeEmpActivityTblItems($filterAct);
         return $result;
     }
 
     // Employee Placements
-    public function getAddPlacements()
-    {
-        $ajaxData = $this->getEmployeeListTblData();
-        $result = $this->makeEmpPlacementTblItems($ajaxData['totalItems'], $ajaxData['filterItems']);
-        return $result;
-    }
+    // public function getAddPlacements()
+    // {
+    //     $ajaxData = $this->getEmployeeListTblData();
+    //     $result = $this->makeEmpPlacementTblItems($ajaxData['totalItems'], $ajaxData['filterItems']);
+    //     return $result;
+    // }
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -297,8 +507,14 @@ class EmployeeController extends Controller
                                     ->where($whereConds)
                                     ->get();
 
+        $max_id = Employee::max('id');
+
+        $roles = Role::all();
+
         return [
-            'filterItems' => $filterEmployees
+            'filterItems' => $filterEmployees,
+            'role'        => $roles,
+            'max_id'      => $max_id
         ];
     }
 
@@ -318,19 +534,17 @@ class EmployeeController extends Controller
                 $whereConds[] = ['description', 'like', '%' . $this->request['filt_act_description'] . '%'];
         }
 
-        $filterEmployees = EmployeeActivity::select('id', 'first_name', 'last_name', 'phone_num', 'category', 'dateofjoining', 'poc_id', 'status')
+        $filterEmployees = EmployeeActivity::with(['updatedby'])
                                     ->where($whereConds)
                                     ->get();
 
-        return [
-            'filterItems' => $filterEmployees
-        ];
+        
     }
 
     /**
      * Display Employee List
      */
-    private function makeEmployeeListTblItems($filterItems)
+    private function makeEmployeeListTblItems($filterItems, $role, $max_id)
     {
         $filteredCnt = count($filterItems);
         $iTotalRecords = $filteredCnt;
@@ -362,7 +576,7 @@ class EmployeeController extends Controller
             $poc = $filterItems[$idx]->poc_id == 0 ? 'Lead Names' : 'etc';
 
             $records["data"][] = array(
-                '<input type="checkbox" name="id[]" value="' . $id . '">',
+                '<input type="checkbox" name="id" value="' . $filterItems[$idx]->id . '">',
                 $id,
                 $filterItems[$idx]->first_name,
                 $filterItems[$idx]->last_name,
@@ -388,10 +602,58 @@ class EmployeeController extends Controller
         $records["recordsTotal"] = $iTotalRecords;
         $records["recordsFiltered"] = $iTotalRecords;
         $records["emp_id"] = $empID_array;
+        $records["role"] = $role;
+        $records["max_id"] = $max_id;
+        $records["curr_date"] = date("Y-m-d"); 
 
         // echo json_encode($records);
         return response()->json($records);
     }
+
+    private function makeEmpActivityTblItems($filterItems)
+    {
+        $filteredCnt = count($filterItems);
+        $iTotalRecords = $filteredCnt;
+
+        $iDisplayLength = intval($this->request['length']);
+        $iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
+        $iDisplayStart = intval($this->request['start']);
+        $sEcho = intval($this->request['draw']);
+
+        $records = array();
+        $records["data"] = array();
+
+        $end = $iDisplayStart + $iDisplayLength;
+        $end = $end > $iTotalRecords ? $iTotalRecords : $end;
+
+        $idx = 0;
+        for ($i = $iDisplayStart; $i < $end; $i++) {
+            $id = ($i + 1);
+
+            $records["data"][] = array(
+                $id,
+                date_format($filterItems[$idx]->updated_at, 'Y-m-d H:i:s'),
+                $filterItems[$idx]->updatedby->email,
+                $filterItems[$idx]->description
+            );
+            $idx++;
+        }
+
+        if (isset($this->request['customActionType']) && $this->request['customActionType'] == "group_action") {
+            $records["customActionStatus"] = "OK"; // pass custom message(useful for getting status of group actions)
+            $records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
+        }
+
+        $records["draw"] = $sEcho;
+        $records["recordsTotal"] = $iTotalRecords;
+        $records["recordsFiltered"] = $iTotalRecords;
+
+        // echo json_encode($records);
+        return response()->json($records);
+    }
+
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                     Display All Employee List ::: End                                      //

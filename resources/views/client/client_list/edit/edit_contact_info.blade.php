@@ -16,10 +16,10 @@
             <div class="portlet-title">
                 <div class="caption">
                     <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-edit-businfo">Business Info</span>
-                    <span class="caption-helper mr-10 btn-move-panel active-tab" data-panelname="panel-edit-contactinfo">Contact Info</span>
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-edit-confidential">Add Confidential</span>
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-edit-placement">Placements</span>
-                    <span class="caption-helper btn-move-panel" data-panelname="panel-edit-documents">Documents</span>
+                    <span class="caption-helper mr-10 btn-move-panel active-tab" data-panelname="panel_edit_contactinfo">Contact Info</span>
+                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_confidential">Add Confidential</span>
+                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_placement">Placements</span>
+                    <span class="caption-helper btn-move-panel" data-panelname="panel_edit_documents">Documents</span>
                 </div>
             </div>
             <div class="portlet-body">
@@ -119,7 +119,7 @@
                     </div>
                     <div class="form-actions text-right">
                         <button type="submit" class="btn btn-sm btn-c-primary">Save</button>
-                        <button type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-client">Cancel</button>
+                        <button type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel_client">Cancel</button>
                     </div>
                 </form>
                 <!-- END FORM-->

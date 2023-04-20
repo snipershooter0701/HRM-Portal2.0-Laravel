@@ -1,4 +1,5 @@
-var gridInvoices = new Datatable();
+var gridInvoiceTable = new Datatable();
+var gridInvoiceActTable = new Datatable();
 
 var TableAllInvoice = function () {
 
@@ -11,11 +12,11 @@ var TableAllInvoice = function () {
     }
 
     var handleInvTable = function () {
-        gridInvoices.init({
+        gridInvoiceTable.init({
             src: $("#tbl_invoices"),
-            onSuccess: function (gridInvoices, response) { },
-            onError: function (gridInvoices) { },
-            onDataLoad: function (gridInvoices) {
+            onSuccess: function (gridInvoiceTable, response) { },
+            onError: function (gridInvoiceTable) { },
+            onDataLoad: function (gridInvoiceTable) {
                 $('.btn-invoice-delete').click(function() {
                     var id = $(this).attr('data-id');
                     deleteInvoice(id);
@@ -37,8 +38,14 @@ var TableAllInvoice = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": BASE_URL + "/invoices/all/get_tbl_list", // ajax source
+                    "url": BASE_URL + "/invoices/all_inv/get_tbl_list", // ajax source
                 },
+                "columnDefs": [
+                    {  // set default column settings
+                        'orderable': false,
+                        'targets': [0, 9]
+                    }
+                ],
                 "order": [
                     [1, "asc"]
                 ],// set first column as a default sort by asc
@@ -61,40 +68,78 @@ var TableAllInvoice = function () {
         });
 
         // handle group actionsubmit button click
-        gridInvoices.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
+        gridInvoiceTable.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
             e.preventDefault();
-            var action = $(".table-group-action-input", gridInvoices.getTableWrapper());
-            if (action.val() != "" && gridInvoices.getSelectedRowsCount() > 0) {
-                gridInvoices.setAjaxParam("customActionType", "group_action");
-                gridInvoices.setAjaxParam("customActionName", action.val());
-                gridInvoices.setAjaxParam("id", gridInvoices.getSelectedRows());
-                gridInvoices.getDataTable().ajax.reload();
-                gridInvoices.clearAjaxParams();
+            var action = $(".table-group-action-input", gridInvoiceTable.getTableWrapper());
+            if (action.val() != "" && gridInvoiceTable.getSelectedRowsCount() > 0) {
+                gridInvoiceTable.setAjaxParam("customActionType", "group_action");
+                gridInvoiceTable.setAjaxParam("customActionName", action.val());
+                gridInvoiceTable.setAjaxParam("id", gridInvoiceTable.getSelectedRows());
+                gridInvoiceTable.getDataTable().ajax.reload();
+                gridInvoiceTable.clearAjaxParams();
             } else if (action.val() == "") {
                 App.alert({
                     type: 'danger',
                     icon: 'warning',
                     message: 'Please select an action',
-                    container: gridInvoices.getTableWrapper(),
+                    container: gridInvoiceTable.getTableWrapper(),
                     place: 'prepend'
                 });
-            } else if (gridInvoices.getSelectedRowsCount() === 0) {
+            } else if (gridInvoiceTable.getSelectedRowsCount() === 0) {
                 App.alert({
                     type: 'danger',
                     icon: 'warning',
                     message: 'No record selected',
-                    container: gridInvoices.getTableWrapper(),
+                    container: gridInvoiceTable.getTableWrapper(),
                     place: 'prepend'
                 });
             }
         });
 
-        // gridInvoices.setAjaxParam("customActionType", "group_action");
+        // gridInvoiceTable.setAjaxParam("customActionType", "group_action");
 
         // handle datatable custom tools
         $('#tbl_invoices_tools > a.tool-action').on('click', function () {
             var action = $(this).attr('data-action');
-            gridInvoices.getDataTable().button(action).trigger();
+            gridInvoiceTable.getDataTable().button(action).trigger();
+        });
+    }
+
+    var handleInvActTable = function () {
+
+        gridInvoiceActTable.init({
+            src: $("#tbl_invoice_activities"),
+            onSuccess: function (gridInvoiceActTable, response) { },
+            onError: function (gridInvoiceActTable) { },
+            onDataLoad: function (gridInvoiceActTable) { },
+            loadingMessage: 'Loading...',
+            dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
+
+                // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+                // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
+                // So when dropdowns used the scrollable div should be removed. 
+                //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
+
+                "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+                "lengthMenu": [
+                    [10, 20, 50, 100, 150, -1],
+                    [10, 20, 50, 100, 150, "All"] // change per page values here
+                ],
+                "pageLength": 10, // default record count per page
+                "ajax": {
+                    "url": BASE_URL + "/invoices/all_inv/get_tbl_act_list", // ajax source
+                },
+                "columnDefs": [
+                    {  // set default column settings
+                        'orderable': false,
+                        'targets': [0]
+                    }
+                ],
+                "order": [
+                    [1, "desc"]
+                ],// set first column as a default sort by asc
+            }
         });
     }
 
@@ -103,6 +148,7 @@ var TableAllInvoice = function () {
         init: function () {
             initPickers();
             handleInvTable();
+            handleInvActTable();
         }
     };
 }();
@@ -115,8 +161,16 @@ $(document).ready(function () {
  * Refresh Invoice table.
  */
 function refreshInvoiceTable() {
-    gridInvoices.getDataTable().ajax.reload();
-    gridInvoices.clearAjaxParams();
+    gridInvoiceTable.getDataTable().ajax.reload();
+    gridInvoiceTable.clearAjaxParams();
+}
+
+/**
+ * Refresh Invoice Activity table.
+ */
+function refreshInvoiceActTable() {
+    gridInvoiceActTable.getDataTable().ajax.reload();
+    gridInvoiceActTable.clearAjaxParams();
 }
 
 /**
@@ -131,13 +185,14 @@ function deleteInvoice(id)
             };
 
             callAjax({
-                url: BASE_URL + '/invoices/all/delete',
+                url: BASE_URL + '/invoices/all_inv/delete',
                 type: "POST",
                 data: formData,
                 success: function (data) {
                     if (data['result'] == 'success') {
                         // Refresh Table.
                         refreshInvoiceTable();
+                        refreshInvoiceActTable();
                         toastr.success("Invoice is successfully deleted.", "Success");
                     }
                 },

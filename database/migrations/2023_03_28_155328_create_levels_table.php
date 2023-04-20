@@ -14,7 +14,6 @@ return new class extends Migration {
     {
         Schema::create('levels', function (Blueprint $table) {
             $table->id();
-            $table->integer('role_id');
             $table->string('name');
             $table->timestamps();
             $table->softDeletes();

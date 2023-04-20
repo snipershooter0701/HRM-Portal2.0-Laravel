@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('updated_by');
             $table->string('description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

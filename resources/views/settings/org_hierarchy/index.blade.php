@@ -29,7 +29,6 @@
 <!-- END PAGE HEADER-->
 <div class="row">
     <div class="col-md-12">
-        <!-- Begin: life time stats -->
         <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-body">
                 {{-- BEGIN LEVEL TABLE --}}
@@ -111,7 +110,7 @@
 
                                                 {{-- Date & Time --}}
                                                 <td>
-                                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
                                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_act_date_from" placeholder="From">
                                                         <span class="input-group-btn">
                                                             <button class="btn btn-sm default" type="button">
@@ -119,7 +118,7 @@
                                                             </button>
                                                         </span>
                                                     </div>
-                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                    <div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
                                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_act_date_to" placeholder="To">
                                                         <span class="input-group-btn">
                                                             <button class="btn btn-sm default" type="button">
@@ -150,7 +149,6 @@
                 {{-- END ACTIVITIES TABLE --}}
             </div>
         </div>
-        <!-- End: life time stats -->
     </div>
 </div>
 @endsection
@@ -166,22 +164,10 @@
     <div class="modal-body">
         <div class="form-body">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-group">
                         <label class="control-label">Name<span class="required" aria-required="true">*</span></label>
                         <input id="add_level_name" type="text" class="form-control">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Role<span class="required" aria-required="true">*</span></label>
-                        <select id="add_level_role" class="form-control">
-                            <option value="">Select...</option>
-                            @php
-                            foreach($roles as $role)
-                            echo '<option value="' . $role->id . '">' . $role->name . '</option>'
-                            @endphp
-                        </select>
                     </div>
                 </div>
             </div>
@@ -201,24 +187,14 @@
         <div class="form-body">
             <input id="edit_level_id" type="hidden" class="form-control">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Name<span class="required" aria-required="true">*</span></label>
-                        <input id="edit_level_name" type="text" class="form-control">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Role<span class="required" aria-required="true">*</span></label>
-                        <select id="edit_level_role" class="form-control">
-                            <option value="">Select...</option>
-                            @php
-                            foreach($roles as $role)
-                            echo '<option value="' . $role->id . '">' . $role->name . '</option>'
-                            @endphp
-                        </select>
-                    </div>
-                </div>
+                @php
+                foreach($roles as $role) {
+                echo
+                '<div class="col-md-6">
+                    <label><input type="checkbox" id="edit_role' . $role->id . '" class="icheck edit-role" data-checkbox="icheckbox_square-blue" data-id="' . $role->id . '">' . $role->name . '</label>
+                </div>';
+                }
+                @endphp
             </div>
         </div>
     </div>
@@ -240,8 +216,8 @@
 
 @section('page_js')
 <script type="text/javascript">
-    var PAGE_ID = "page-settings";
-    var PAGE_SUB_ID = "page-settings-org-hierarchy";
+    var PAGE_ID = "page_settings";
+    var PAGE_SUB_ID = "page_settings_org_hierarchy";
 
 </script>
 <script src="{{ url('assets/custom/scripts/settings/org_hierarchy/index.js?v=' . $randNum) }}" type="text/javascript"></script>

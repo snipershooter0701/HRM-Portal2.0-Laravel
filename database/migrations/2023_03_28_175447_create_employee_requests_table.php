@@ -27,7 +27,7 @@ return new class extends Migration
             $table->date('requested_on')->nullable();
             $table->integer('requested_by_id')->nullable();
             $table->date('responsed_on')->nullable();
-            $table->integer('approver_id')-nullable();
+            $table->integer('approver_id')->nullable();
             $table->date('approved_on')->nullable();
             $table->integer('status')->default(0)->comment('0: Request, 1: Respond, 2: Approved, 3: Rejected');
             $table->timestamps();

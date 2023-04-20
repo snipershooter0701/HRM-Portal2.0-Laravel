@@ -82,7 +82,7 @@
                                         <option value="{{config('constants.DATE_RANGE_LAST_6_MTH')}}">Last 6 Months</option>
                                         <option value="{{config('constants.DATE_RANGE_CUSTOM')}}">Custom</option>
                                     </select>
-                                    <div class="input-group date date-picker margin-bottom-5 display-none" data-date-format="dd/mm/yyyy">
+                                    <div class="input-group date date-picker margin-bottom-5 display-none" data-date-format="yyyy-mm-dd">
                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_date_from" placeholder="From">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
@@ -90,7 +90,7 @@
                                             </button>
                                         </span>
                                     </div>
-                                    <div class="input-group date date-picker display-none" data-date-format="dd/mm/yyyy">
+                                    <div class="input-group date date-picker display-none" data-date-format="yyyy-mm-dd">
                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_date_to" placeholder="To">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">

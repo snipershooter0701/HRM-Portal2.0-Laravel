@@ -22,8 +22,19 @@ class Role extends Model
         'access_permission'
     ];
 
+    /**
+     * Get role's department.
+     */
     public function department()
     {
         return $this->belongsTo(Department::class);
+    }
+
+    /**
+     * Get the permissions of role.
+     */
+    public function permissions()
+    {
+        return $this->hasMany(RoleModule::class);
     }
 }

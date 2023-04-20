@@ -8,10 +8,10 @@
     </ul>
     <div class="page-toolbar">
         <div class="btn-group pull-right">
-            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-create-businfo"><i class="fa fa-plus-circle"></i> Add Client </button>
-            <button id="btn_edit_client_page" class="btn-move-panel display-none" data-panelname="panel-edit-businfo"><i class="fa fa-plus-circle"></i> Edit Client </button>
-            {{-- <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-create-placement"><i class="fa fa-plus-circle"></i> Add Placement </button> --}}
-            {{-- <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-create-document"><i class="fa fa-plus-circle"></i> Add Document </button> --}}
+            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel_create_businfo"><i class="fa fa-plus-circle"></i> Add Client </button>
+            <button id="btn_edit_client_page" class="btn-move-panel display-none" data-panelname="panel_edit_businfo"><i class="fa fa-plus-circle"></i> Edit Client </button>
+            {{-- <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel_create_placement"><i class="fa fa-plus-circle"></i> Add Placement </button> --}}
+            {{-- <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel_create_document"><i class="fa fa-plus-circle"></i> Add Document </button> --}}
         </div>
     </div>
 </div>
@@ -78,8 +78,8 @@
                                 <td>
                                     <select name="filt_status" class="form-control form-filter input-sm">
                                         <option value="">Select...</option>
-                                        <option value="1">Active</option>
-                                        <option value="0">Inactive</option>
+                                        <option value="{{ config('status.STATE_ACTIVE') }}">Active</option>
+                                        <option value="{{ config('status.STATE_INACTIVE') }}">Inactive</option>
                                     </select>
                                 </td>
 
@@ -125,7 +125,7 @@
                                                     <button class="btn btn-xs btn-c-grey filter-cancel"><i class="fa fa-times"></i></button>
                                                 </td>
                                                 <td>
-                                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
                                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_act_date_from" placeholder="From">
                                                         <span class="input-group-btn">
                                                             <button class="btn btn-sm default" type="button">
@@ -133,7 +133,7 @@
                                                             </button>
                                                         </span>
                                                     </div>
-                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                    <div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
                                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_act_date_to" placeholder="To">
                                                         <span class="input-group-btn">
                                                             <button class="btn btn-sm default" type="button">

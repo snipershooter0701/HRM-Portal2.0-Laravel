@@ -1,5 +1,6 @@
 <?php
 
+// use App\Http\Middleware\CheckRole;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,9 +31,9 @@ Route::middleware(['auth'])->group(function () {
     // Common
     Route::post('/notifications', [App\Http\Controllers\NotificationController::class, 'getNotifications']);
 
-    Route::prefix("employee")->group(function () {
+    Route::prefix("employee")->middleware(['checkrole:/employee'])->group(function () {
         // Employee - All Employees
-        Route::prefix('all_employees')->group(function () {
+        Route::prefix('all_employees')->middleware(['checkrole:/employee/all_employees'])->group(function () {
             Route::get('/', [App\Http\Controllers\EmployeeController::class, 'index']);
             Route::post('/list', [App\Http\Controllers\EmployeeController::class, 'getEmployeeList']);
             Route::post('/by_id', [App\Http\Controllers\EmployeeController::class, 'getEmployeeByID']);
@@ -43,8 +44,9 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/act', [App\Http\Controllers\EmployeeController::class, 'getEmpAct']);
             Route::post('/get-add-placements', [App\Http\Controllers\EmployeeController::class, 'getAddPlacements']);
         });
+
         // Employee - All Request Details
-        Route::prefix('all_request_details')->group(function () {
+        Route::prefix('all_request_details')->middleware(['checkrole:/employee/all_request_details'])->group(function () {
             Route::get('/', [App\Http\Controllers\EmployeeRequestController::class, 'index']);
             Route::post('/list', [App\Http\Controllers\EmployeeRequestController::class, 'getRequestDetailsList']);
             Route::post('/by_id', [App\Http\Controllers\EmployeeRequestController::class, 'getRequestDetailsByID']);
@@ -56,9 +58,9 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Client
-    Route::prefix('client')->group(function () {
+    Route::prefix('client')->middleware(['checkrole:/client'])->group(function () {
         // List Page
-        Route::prefix('list')->group(function () {
+        Route::prefix('list')->middleware(['checkrole:/client/list'])->group(function () {
             Route::get('/', [App\Http\Controllers\ClientListController::class, 'index']);
             Route::post('/get_tbl_client_list', [App\Http\Controllers\ClientListController::class, 'getTableClientList']);
             Route::post('/get_tbl_client_acts_list', [App\Http\Controllers\ClientListController::class, 'getTableClientActsList']);
@@ -71,7 +73,7 @@ Route::middleware(['auth'])->group(function () {
         });
 
         // Client (Contact Info)
-        Route::prefix('/contact_info')->group(function () {
+        Route::prefix('/contact_info')->middleware(['checkrole:/client/contact_info'])->group(function () {
             Route::post('/get_tbl_list', [App\Http\Controllers\ClientContactController::class, 'getTableContactInfoList']);
             Route::post('/get_by_id', [App\Http\Controllers\ClientContactController::class, 'getContactById']);
             Route::post('/create', [App\Http\Controllers\ClientContactController::class, 'create']);
@@ -80,7 +82,7 @@ Route::middleware(['auth'])->group(function () {
         });
 
         // Client (Confidential)
-        Route::prefix('confidential')->group(function () {
+        Route::prefix('confidential')->middleware(['checkrole:/client/confidential'])->group(function () {
             Route::post('/get_tbl_list', [App\Http\Controllers\ClientConfidentialController::class, 'getTableConfidentialList']);
             Route::post('/create', [App\Http\Controllers\ClientConfidentialController::class, 'create']);
             Route::post('/update', [App\Http\Controllers\ClientConfidentialController::class, 'update']);
@@ -88,7 +90,7 @@ Route::middleware(['auth'])->group(function () {
         });
 
         // Client (Placement)
-        Route::prefix('placement')->group(function () {
+        Route::prefix('placement')->middleware(['checkrole:/client/placement'])->group(function () {
             Route::post('/get_ones_placement_tbl_list', [App\Http\Controllers\ClientPlacementController::class, 'getTableOnesPlacementList']);
             Route::post('/get_activities_tbl_list', [App\Http\Controllers\ClientPlacementController::class, 'getTableActivitiesList']);
             Route::post('/get_invoices_tbl_list', [App\Http\Controllers\ClientPlacementController::class, 'getTableInvoicesList']);
@@ -97,13 +99,13 @@ Route::middleware(['auth'])->group(function () {
         });
 
         // Client (Placement Activities)
-        Route::prefix('document')->group(function () {
+        Route::prefix('document')->middleware(['checkrole:/client/document'])->group(function () {
             Route::post('/get_tbl_list', [App\Http\Controllers\ClientDocumentController::class, 'getTableDocumentList']);
             Route::post('/create', [App\Http\Controllers\ClientDocumentController::class, 'create']);
         });
 
         // Client (All Placements)
-        Route::prefix('all_placements')->group(function () {
+        Route::prefix('all_placements')->middleware(['checkrole:/client/all_placements'])->group(function () {
             Route::get('/', [App\Http\Controllers\ClientAllPlacementController::class, 'index']);
             Route::post('/get_placements_tbl_list', [App\Http\Controllers\ClientAllPlacementController::class, 'getTablePlacementList']);
             Route::post('/get_acts_tbl_list', [App\Http\Controllers\ClientAllPlacementController::class, 'getTableActivitieList']);
@@ -112,7 +114,7 @@ Route::middleware(['auth'])->group(function () {
         });
 
         // Client (All Documents)
-        Route::prefix('all_documents')->group(function () {
+        Route::prefix('all_documents')->middleware(['checkrole:/client/all_documents'])->group(function () {
             Route::get('/', [App\Http\Controllers\ClientAllDocumentController::class, 'index']);
             Route::post('/get_tbl_list', [App\Http\Controllers\ClientAllDocumentController::class, 'getTableDocumentList']);
             Route::post('/create', [App\Http\Controllers\ClientAllDocumentController::class, 'create']);
@@ -120,27 +122,27 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Timesheet
-    Route::prefix('timesheets')->group(function () {
-        Route::prefix('all')->group(function () {
+    Route::prefix('timesheets')->middleware(['checkrole:/timesheets'])->group(function () {
+        Route::prefix('all')->middleware(['checkrole:/timesheets/all'])->group(function () {
             Route::get('/', [App\Http\Controllers\TimesheetsController::class, 'index']);
             Route::post('/get_tbl_list', [App\Http\Controllers\TimesheetsController::class, 'getAllTimesheets']);
             Route::post('/create', [App\Http\Controllers\TimesheetsController::class, 'create']);
             Route::post('/delete', [App\Http\Controllers\TimesheetsController::class, 'delete']);
         });
 
-        Route::prefix('due')->group(function() {
+        Route::prefix('due')->middleware(['checkrole:/timesheets/due'])->group(function () {
             Route::get('/', [App\Http\Controllers\TimesheetDueController::class, 'index']);
             Route::post('/get_tbl_list', [App\Http\Controllers\TimesheetDueController::class, 'getDueTimesheets']);
         });
 
-        Route::prefix('awaiting')->group(function() {
+        Route::prefix('awaiting')->middleware(['checkrole:/timesheets/awaiting'])->group(function () {
             Route::get('/', [App\Http\Controllers\TimesheetAwaitInvController::class, 'index']);
             Route::post('/get_tbl_list', [App\Http\Controllers\TimesheetAwaitInvController::class, 'getAwaitInvoices']);
         });
     });
 
     // Expenses
-    Route::prefix('expenses')->group(function () {
+    Route::prefix('expenses')->middleware(['checkrole:/expenses'])->group(function () {
         Route::get('/', [App\Http\Controllers\ExpensesController::class, 'index']);
         Route::post('/list', [App\Http\Controllers\ExpensesController::class, 'getExpenseList']);
         Route::post('/act', [App\Http\Controllers\ExpensesController::class, 'getExpenseAct']);
@@ -150,34 +152,54 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/del', [App\Http\Controllers\ExpensesController::class, 'delExpense']);
     });
 
-    // Invoices - (All Invoices)
-    Route::prefix('invoices')->group(function () {
-        Route::get('/all', [App\Http\Controllers\InvoiceAllController::class, 'index']);
-        Route::post('/all/get_tbl_list', [App\Http\Controllers\InvoiceAllController::class, 'getInvoices']);
-        Route::post('/all/get_tbl_svc_smrys', [App\Http\Controllers\InvoiceAllController::class, 'getSvcSmrys']);
-        Route::post('/all/get_tbl_note_totals', [App\Http\Controllers\InvoiceAllController::class, 'getNoteTotals']);
-        Route::post('/all/create', [App\Http\Controllers\InvoiceAllController::class, 'create']);
-        Route::post('/all/delete', [App\Http\Controllers\InvoiceAllController::class, 'delete']);
+    // Invoices
+    Route::prefix('invoices')->middleware(['checkrole:/invoices'])->group(function () {
+        // Invoices - (All Invoices)
+        Route::prefix('all_inv')->middleware(['checkrole:/invoices/all_inv'])->group(function () {
+            Route::get('/', [App\Http\Controllers\InvoiceAllController::class, 'index']);
+            Route::post('/get_tbl_list', [App\Http\Controllers\InvoiceAllController::class, 'getInvoices']);
+            Route::post('/get_tbl_act_list', [App\Http\Controllers\InvoiceAllController::class, 'getInvoiceActs']);
+            Route::post('/get_tbl_svc_smrys', [App\Http\Controllers\InvoiceAllController::class, 'getSvcSmrys']);
+            Route::post('/get_tbl_note_totals', [App\Http\Controllers\InvoiceAllController::class, 'getNoteTotals']);
+            Route::post('/create', [App\Http\Controllers\InvoiceAllController::class, 'create']);
+            Route::post('/delete', [App\Http\Controllers\InvoiceAllController::class, 'delete']);
+        });
 
         // Invoices - (Due Invoices)
-        Route::get('/due-inv', [App\Http\Controllers\InvoiceDueController::class, 'index']);
-        Route::post('/due-inv/get-activities', [App\Http\Controllers\InvoiceDueController::class, 'getActivities']);
+        Route::prefix('due_inv')->middleware(['checkrole:/invoices/due_inv'])->group(function() {
+            Route::get('/', [App\Http\Controllers\InvoiceDueController::class, 'index']);
+            Route::post('/get_tbl_list', [App\Http\Controllers\InvoiceDueController::class, 'getInvoices']); 
+            Route::post('/get_tbl_act_list', [App\Http\Controllers\InvoiceDueController::class, 'getInvoiceActs']); 
+            Route::post('/delete', [App\Http\Controllers\InvoiceDueController::class, 'delete']); 
+        });
 
         // Invoices - (Awaiting Invoices)
-        Route::get('/await-inv', [App\Http\Controllers\InvoiceAwaitController::class, 'index']);
-        Route::post('/await-inv/get-invs', [App\Http\Controllers\InvoiceAwaitController::class, 'getInvoices']);
+        Route::prefix('await_inv')->middleware(['checkrole:/invoices/await_inv'])->group(function() {
+            Route::get('/', [App\Http\Controllers\InvoiceAwaitController::class, 'index']);
+            Route::post('/get_tbl_list', [App\Http\Controllers\InvoiceAwaitController::class, 'getInvoices']);
+            Route::post('/get_tbl_act_list', [App\Http\Controllers\InvoiceAwaitController::class, 'getInvoiceActs']); 
+            Route::post('/delete', [App\Http\Controllers\InvoiceAwaitController::class, 'delete']); 
+        });
 
         // Invoices - (Client Payments)
-        Route::get('/client-pay', [App\Http\Controllers\InvoiceCliPayController::class, 'index']);
-        Route::post('/client-pay/get_payments', [App\Http\Controllers\InvoiceCliPayController::class, 'getPayments']);
+        Route::prefix('client_pay')->middleware(['checkrole:/invoices/client_pay'])->group(function() {
+            Route::get('/', [App\Http\Controllers\InvoiceCliPayController::class, 'index']);
+            Route::post('/get_tbl_list', [App\Http\Controllers\InvoiceCliPayController::class, 'getPayments']);
+            Route::post('/get_tbl_act_list', [App\Http\Controllers\InvoiceCliPayController::class, 'getPaymentActs']);
+            Route::post('/create', [App\Http\Controllers\InvoiceCliPayController::class, 'create']);
+            Route::post('/delete', [App\Http\Controllers\InvoiceCliPayController::class, 'delete']);
+        });
 
         // Invoices - (Employee Payments)
-        Route::get('/employee-pay', [App\Http\Controllers\InvoiceEmpPayController::class, 'index']);
-        Route::post('/employee-pay/get_payments', [App\Http\Controllers\InvoiceEmpPayController::class, 'getPayments']);
+        Route::prefix('employee_pay')->middleware(['checkrole:/invoices/employee_pay'])->group(function() {
+            Route::get('/', [App\Http\Controllers\InvoiceEmpPayController::class, 'index']);
+            Route::post('/get_tbl_list', [App\Http\Controllers\InvoiceEmpPayController::class, 'getPayments']);
+            Route::post('/get_tbl_act_list', [App\Http\Controllers\InvoiceEmpPayController::class, 'getPaymentActs']);
+        });
     });
 
     // Tickets
-    Route::prefix('tickets')->group(function () {
+    Route::prefix('tickets')->middleware(['checkrole:/tickets'])->group(function () {
         Route::get('/', [App\Http\Controllers\TicketController::class, 'index']);
         Route::post('/list', [App\Http\Controllers\TicketController::class, 'getTicketList']);
         Route::post('/by_id', [App\Http\Controllers\TicketController::class, 'getTicketById']);
@@ -188,19 +210,20 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Settings
-    Route::prefix("settings")->group(function () {
+    Route::prefix("settings")->middleware(['checkrole:/settings'])->group(function () {
         // Settings - (Organization Hierarchy)
-        Route::prefix('org_hierarchy')->group(function () {
+        Route::prefix('org_hierarchy')->middleware(['checkrole:/settings/org_hierarchy'])->group(function () {
             Route::get('/', [App\Http\Controllers\SettingOrgHichyController::class, 'index']);
             Route::post('/get_tbl_list', [App\Http\Controllers\SettingOrgHichyController::class, 'getTableRoles']);
             Route::post('/get_tbl_act_list', [App\Http\Controllers\SettingOrgHichyController::class, 'getTableLevelActs']);
+            Route::post('/get_level', [App\Http\Controllers\SettingOrgHichyController::class, 'getLevelById']);
             Route::post('/create', [App\Http\Controllers\SettingOrgHichyController::class, 'create']);
             Route::post('/update', [App\Http\Controllers\SettingOrgHichyController::class, 'update']);
             Route::post('/delete', [App\Http\Controllers\SettingOrgHichyController::class, 'delete']);
         });
 
         // Settings - (Role Permission)
-        Route::prefix('role_perm')->group(function () {
+        Route::prefix('role_perm')->middleware(['checkrole:/settings/role_perm'])->group(function () {
             Route::get('/', [App\Http\Controllers\SettingRoleController::class, 'index']);
             Route::post('/get_tbl_list', [App\Http\Controllers\SettingRoleController::class, 'getTableRoles']);
             Route::post('/get_tbl_act_list', [App\Http\Controllers\SettingRoleController::class, 'getTableRoleActs']);
@@ -210,7 +233,7 @@ Route::middleware(['auth'])->group(function () {
         });
 
         // Settings - Module Security
-        Route::prefix('module_sec')->group(function () {
+        Route::prefix('module_sec')->middleware(['checkrole:/settings/module_sec'])->group(function () {
             Route::get('/', [App\Http\Controllers\SettingModuleSecController::class, 'index']);
             Route::post('/get_tbl_list', [App\Http\Controllers\SettingModuleSecController::class, 'getTableRoles']);
             Route::post('/get_tbl_act_list', [App\Http\Controllers\SettingModuleSecController::class, 'getTableRoleActs']);
@@ -219,7 +242,7 @@ Route::middleware(['auth'])->group(function () {
         });
 
         // Settings - (General)
-        Route::prefix("general")->group(function () {
+        Route::prefix("general")->middleware(['checkrole:/settings/general'])->group(function () {
             Route::get('/', [App\Http\Controllers\SettingGeneralController::class, 'index']);
 
             Route::post('/department/get_tbl_list', [App\Http\Controllers\SettingGeneralController::class, 'getDepartmentList']);
@@ -243,20 +266,25 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/jobtire/delete', [App\Http\Controllers\SettingGeneralController::class, 'deleteJobTire']);
         });
 
-        Route::get('/settings', [App\Http\Controllers\SettingController::class, 'index']);
-        Route::get('/settings/role_permission', [App\Http\Controllers\SettingController::class, 'index_role_permission']);
-        Route::get('/settings/module_security', [App\Http\Controllers\SettingController::class, 'index_module_security']);
-        Route::get('/settings/create_new_company', [App\Http\Controllers\SettingController::class, 'index_create_new_company']);
-        Route::get('/settings/application_setting', [App\Http\Controllers\SettingController::class, 'index_application_setting']);
-        Route::get('/settings/backup_download', [App\Http\Controllers\SettingController::class, 'index_backup_download']);
+        // Settings - (Invoice)
+        Route::prefix('invoice')->middleware(['checkrole:/settings/invoice'])->group(function () {
+            Route::get('/', [App\Http\Controllers\SettingInvoiceController::class, 'index']);
+        });
 
-        Route::post('/settings/get_level_list', [App\Http\Controllers\SettingController::class, 'getLevelList']);
-        Route::post('/settings/get_role_permission', [App\Http\Controllers\SettingController::class, 'getRolePermission']);
-        Route::post('/settings/get_module_security', [App\Http\Controllers\SettingController::class, 'getModuleSecurity']);
-        Route::post('/settings/get_create_new_company', [App\Http\Controllers\SettingController::class, 'getCreateNewCompany']);
-        Route::post('/settings/get_application_setting', [App\Http\Controllers\SettingController::class, 'getApplicationSetting']);
-        Route::post('/settings/get_backup_download', [App\Http\Controllers\SettingController::class, 'getBackupDownload']);
-        Route::post('/settings/level_list/get_activities', [App\Http\Controllers\SettingController::class, 'getActivity']);
+        // Settings - (New Company)
+        Route::prefix('new_company')->middleware(['checkrole:/settings/new_company'])->group(function () {
+            Route::get('/', [App\Http\Controllers\SettingNewCompanyController::class, 'index']);
+        });
+
+        // Settings - (Application)
+        Route::prefix('application')->middleware(['checkrole:/settings/application'])->group(function () {
+            Route::get('/', [App\Http\Controllers\SettingApplicationController::class, 'index']);
+        });
+
+        // Settings - (Backup & Download)
+        Route::prefix('backup')->middleware(['checkrole:/settings/backup'])->group(function () {
+            Route::get('/', [App\Http\Controllers\SettingBackupController::class, 'index']);
+        });
     });
 
     // Documentation - organization doc
@@ -292,4 +320,5 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/searchGroup', [App\Http\Controllers\DocumentationGroupController::class, 'getSearchGroupList']);
         
     });
+
 });

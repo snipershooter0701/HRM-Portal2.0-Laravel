@@ -44,4 +44,8 @@ class Employee extends Model
         'status_end_date',
         'department_id'       
     ];
+
+    public function role() {
+        return $this->belongsTo(Role::class);
+    }   
 }

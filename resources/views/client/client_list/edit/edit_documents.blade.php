@@ -16,17 +16,17 @@
             <div class="portlet-title">
                 <div class="caption">
                     <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-edit-businfo">Business Info</span>
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-edit-contactinfo">Contact Info</span>
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-edit-confidential">Add Confidential</span>
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-edit-placement">Placements</span>
-                    <span class="caption-helper active-tab btn-move-panel" data-panelname="panel-edit-documents">Documents</span>
+                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_contactinfo">Contact Info</span>
+                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_confidential">Add Confidential</span>
+                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_placement">Placements</span>
+                    <span class="caption-helper active-tab btn-move-panel" data-panelname="panel_edit_documents">Documents</span>
                 </div>
             </div>
             <div class="portlet-body">
                 {{-- BEGIN DOCUMENT TABLE --}}
                 <div class="table-container">
                     <div class="actions">
-                        <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel-create-document"><i class="fa fa-plus-circle"></i> Add Document </button>
+                        <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel_create_document"><i class="fa fa-plus-circle"></i> Add Document </button>
                         <div id="tbl_document_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-copy"></i></a>
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-upload"></i></a>

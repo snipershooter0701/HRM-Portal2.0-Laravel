@@ -13,13 +13,15 @@ class UserSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
-        //
-        DB::table('users')->insert([
-            'name' => 'SacredDevKing',
-            'email' => 'sacreddevking@gmail.com',
-            'password' => '$2y$10$4XxgRb8pS/.qM8Ce2qV4N.k7VINYvKqwiHiUEnWNvgSn0VUx1SvRi'
-        ]);
-    }
+    
+     public function run()
+     {
+         //
+         DB::table('users')->insert([
+             'name' => 'SacredDevKing',
+             'email' => 'sacreddevking@gmail.com',
+             'password' => '$2y$10$4XxgRb8pS/.qM8Ce2qV4N.k7VINYvKqwiHiUEnWNvgSn0VUx1SvRi',
+             'employee_id' => '1'
+         ]);
+     }
 }

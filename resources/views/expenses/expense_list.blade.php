@@ -98,10 +98,10 @@
                         <tbody> </tbody>
                     </table>
                     <div class="row">
-                        <div class="col-md-3"></div>
+                        <div class="col-md-4"></div>
                         <div class="col-md-6">
                             <label class="expenses-total">
-                                <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Total of the above shown Expense(s)
+                                <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Total Expense(s)
                             </label>
                             <input type="text" class="form-control form-filter input-sm auto-width" placeholder="Total" id="expense_total">
                         </div>

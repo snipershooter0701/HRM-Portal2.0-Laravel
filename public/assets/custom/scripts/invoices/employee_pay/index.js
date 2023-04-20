@@ -1,4 +1,7 @@
-var TableAllInvoice = function () {
+var gridEmpPayTable = new Datatable();
+var gridEmpPayActTable = new Datatable();
+
+var TableEmployeePay = function () {
 
     var initPickers = function () {
         //init date pickers
@@ -8,20 +11,18 @@ var TableAllInvoice = function () {
         });
     }
 
-    var handleInvTable = function () {
+    var handleEmpPay = function () {
 
-        let grid = new Datatable();
-
-        grid.init({
+        gridEmpPayTable.init({
             src: $("#tbl_employee_pays"),
-            onSuccess: function (grid, response) { },
-            onError: function (grid) { },
-            onDataLoad: function (grid) {
-                $('.btn-show-emp-pay').click(function() {
+            onSuccess: function (gridEmpPayTable, response) { },
+            onError: function (gridEmpPayTable) { },
+            onDataLoad: function (gridEmpPayTable) {
+                $('.btn-show-emp-pay').click(function () {
                     $('#btn_show_emp_payment').trigger('click');
                 });
 
-                $('.btn-pay-emp-pay').click(function() {
+                $('.btn-pay-emp-pay').click(function () {
                     $('#btn_pay_emp_payment').trigger('click');
                 });
             },
@@ -41,10 +42,16 @@ var TableAllInvoice = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": BASE_URL + "/invoices/employee-pay/get_payments", // ajax source
+                    "url": BASE_URL + "/invoices/employee_pay/get_tbl_list", // ajax source
                 },
+                "columnDefs": [
+                    {  // set default column settings
+                        'orderable': false,
+                        'targets': [0, 1, 12]
+                    }
+                ],
                 "order": [
-                    [1, "asc"]
+                    [4, "desc"]
                 ],// set first column as a default sort by asc
                 buttons: [
                     { extend: 'print', className: 'btn default' },
@@ -65,54 +72,48 @@ var TableAllInvoice = function () {
         });
 
         // handle group actionsubmit button click
-        grid.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
+        gridEmpPayTable.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
             e.preventDefault();
-            var action = $(".table-group-action-input", grid.getTableWrapper());
-            if (action.val() != "" && grid.getSelectedRowsCount() > 0) {
-                grid.setAjaxParam("customActionType", "group_action");
-                grid.setAjaxParam("customActionName", action.val());
-                grid.setAjaxParam("id", grid.getSelectedRows());
-                grid.getDataTable().ajax.reload();
-                grid.clearAjaxParams();
+            var action = $(".table-group-action-input", gridEmpPayTable.getTableWrapper());
+            if (action.val() != "" && gridEmpPayTable.getSelectedRowsCount() > 0) {
+                gridEmpPayTable.setAjaxParam("customActionType", "group_action");
+                gridEmpPayTable.setAjaxParam("customActionName", action.val());
+                gridEmpPayTable.setAjaxParam("id", gridEmpPayTable.getSelectedRows());
+                gridEmpPayTable.getDataTable().ajax.reload();
+                gridEmpPayTable.clearAjaxParams();
             } else if (action.val() == "") {
                 App.alert({
                     type: 'danger',
                     icon: 'warning',
                     message: 'Please select an action',
-                    container: grid.getTableWrapper(),
+                    container: gridEmpPayTable.getTableWrapper(),
                     place: 'prepend'
                 });
-            } else if (grid.getSelectedRowsCount() === 0) {
+            } else if (gridEmpPayTable.getSelectedRowsCount() === 0) {
                 App.alert({
                     type: 'danger',
                     icon: 'warning',
                     message: 'No record selected',
-                    container: grid.getTableWrapper(),
+                    container: gridEmpPayTable.getTableWrapper(),
                     place: 'prepend'
                 });
             }
         });
 
-        // grid.setAjaxParam("customActionType", "group_action");
-        // grid.getDataTable().ajax.reload();
-        // grid.clearAjaxParams();
-
         // handle datatable custom tools
         $('#tbl_employee_pays_tools > a.tool-action').on('click', function () {
             var action = $(this).attr('data-action');
-            grid.getDataTable().button(action).trigger();
+            gridEmpPayTable.getDataTable().button(action).trigger();
         });
     }
 
-    var handleInvActivities = function () {
+    var handleEmpPayActivity = function () {
 
-        let grid = new Datatable();
-
-        grid.init({
+        gridEmpPayActTable.init({
             src: $("#tbl_pay_activities"),
-            onSuccess: function (grid, response) { },
-            onError: function (grid) { },
-            onDataLoad: function (grid) {
+            onSuccess: function (gridEmpPayActTable, response) { },
+            onError: function (gridEmpPayActTable) { },
+            onDataLoad: function (gridEmpPayActTable) {
             },
             loadingMessage: 'Loading...',
             dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
@@ -130,7 +131,7 @@ var TableAllInvoice = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": BASE_URL + "/invoices/due-inv/get-activities", // ajax source
+                    "url": BASE_URL + "/invoices/employee_pay/get_tbl_act_list", // ajax source
                 },
                 "order": [
                     [1, "asc"]
@@ -143,12 +144,28 @@ var TableAllInvoice = function () {
         //main function to initiate the module
         init: function () {
             initPickers();
-            handleInvTable();
-            handleInvActivities();
+            handleEmpPay();
+            handleEmpPayActivity();
         }
     };
 }();
 
 $(document).ready(function () {
-    TableAllInvoice.init();
+    TableEmployeePay.init();
 });
+
+/**
+ * Refresh employee payment table.
+ */
+function refreshEmpPayTable() {
+    gridEmpPayTable.getDataTable().ajax.reload();
+    gridEmpPayTable.clearAjaxParams();
+}
+
+/**
+ * Refresh employee payment activity table.
+ */
+function refreshEmpPayActTable() {
+    gridEmpPayActTable.getDataTable().ajax.reload();
+    gridEmpPayActTable.clearAjaxParams();
+}

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->integer('level')->default('0')->comment('0: Module, 1: SubModule, 2: Access');
             $table->string('url')->nullable();
+            $table->string('tagid')->nullable();
+            $table->string('icon')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -35,7 +35,7 @@ var TableDueInvoice = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": BASE_URL + "/invoices/all/get_tbl_svc_smrys", // ajax source
+                    "url": BASE_URL + "/invoices/all_inv/get_tbl_svc_smrys", // ajax source
                 },
                 "order": [
                     [1, "asc"]
@@ -68,7 +68,7 @@ var TableDueInvoice = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": BASE_URL + "/invoices/all/get_tbl_note_totals", // ajax source
+                    "url": BASE_URL + "/invoices/all_inv/get_tbl_note_totals", // ajax source
                 },
                 "order": [
                     [1, "asc"]
@@ -126,13 +126,18 @@ function createInvoice() {
     }, {
         field_id: 'add_invoice_netterms',
         conditions: [
-            'required' + CONST_VALIDATE_SPLITER + 'Net terms is required.',
-            'numeric' + CONST_VALIDATE_SPLITER + 'Net terms will be number.'
+            'required' + CONST_VALIDATE_SPLITER + 'Net Terms is required.',
+            'numeric' + CONST_VALIDATE_SPLITER + 'Net Terms will be number.'
         ]
     }, {
         field_id: 'add_invoice_client_address',
         conditions: [
             'required' + CONST_VALIDATE_SPLITER + 'Client Billing Address is required.'
+        ]
+    }, {
+        field_id: 'add_invoice_from_address',
+        conditions: [
+            'required' + CONST_VALIDATE_SPLITER + 'From Address is required.'
         ]
     }, {
         field_id: 'add_invoice_cc_emails',
@@ -212,7 +217,7 @@ function createInvoice() {
     };
 
     callAjax({
-        url: BASE_URL + '/invoices/all/create',
+        url: BASE_URL + '/invoices/all_inv/create',
         type: "POST",
         data: formData,
         success: function (data) {
@@ -240,6 +245,7 @@ function createInvoice() {
                 
                 // Refresh Table.
                 refreshInvoiceTable();
+                refreshInvoiceActTable();
                 toastr.success("Invoice is successfully created.", "Success")
 
                 $('#btn_create_invoice_cancel').trigger('click');

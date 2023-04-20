@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Invoice;
+use App\Models\InvoiceActivity;
 use App\Models\Client;
 use App\Models\Employee;
 
@@ -31,7 +33,7 @@ class InvoiceAllController extends Controller
     {
         $clients = Client::all();
         $employees = Employee::all();
-        return view('invoices.all-inv.index')->with([
+        return view('invoices.all_inv.index')->with([
             'randNum' => rand(),
             'clients' => $clients,
             'employees' => $employees,
@@ -48,6 +50,18 @@ class InvoiceAllController extends Controller
     {
         $recordData = $this->getInvoiceRecords();
         $result = $this->makeInvoiceTblItems($recordData['filteredRecords'], $recordData['totalCnt'], $recordData['filteredCnt']);
+        return $result;
+    }
+
+    /**
+     * Get invice activities
+     * 
+     * @return $activities
+     */
+    public function getInvoiceActs()
+    {
+        $recordData = $this->getInviceActTableList();
+        $result = $this->makeInvoiceActTblItems($recordData['filteredRecords'], $recordData['totalCnt'], $recordData['filteredCnt']);
         return $result;
     }
 
@@ -99,7 +113,7 @@ class InvoiceAllController extends Controller
             // 'additional_info' => ['required'],
         ]);
 
-        Invoice::create([
+        $invoice = Invoice::create([
             'employee_id' => $this->request['employee_id'],
             'client_id' => $this->request['client_id'],
             'invoice_date' => $this->request['invoice_date'],
@@ -119,6 +133,16 @@ class InvoiceAllController extends Controller
             'additional_info' => $this->request['additional_info'],
         ]);
 
+        // Create Invice Activity
+        $employee = Employee::find($invoice->employee_id);
+        $client = Client::find($invoice->client_id);
+        $description = "Created invoice (Client: " . $client['email'] . ", Employee: " . $employee['email'] . ", Invoice Date: " . $invoice['invoice_date'] . ")";
+        InvoiceActivity::create([
+            'invoice_id' => $invoice['id'],
+            'updated_by' => Auth::user()->employee->id,
+            'description' => $description
+        ]);
+
         return response()->json([
             'result' => 'success'
         ]);
@@ -134,12 +158,19 @@ class InvoiceAllController extends Controller
             'id' => ['required'],
         ]);
 
-        // Params
-        $id = $this->request['id'];
-
-        $invoice = Invoice::find($id);
+        $invoice = Invoice::find($this->request['id']);
         $invoice->delete();
-        
+
+        // Create Invoice Activity
+        $employee = Employee::find($invoice->employee_id);
+        $client = Client::find($invoice->client_id);
+        $description = "Deleted invoice (Client: " . $client['email'] . ", Employee: " . $employee['email'] . ", Invoice Date: " . $invoice['invoice_date'] . ")";
+        InvoiceActivity::create([
+            'invoice_id' => $invoice['id'],
+            'updated_by' => Auth::user()->employee->id,
+            'description' => $description
+        ]);
+
         return response()->json([
             'result' => 'success'
         ]);
@@ -153,7 +184,7 @@ class InvoiceAllController extends Controller
     private function getInvoiceRecords()
     {
         // Params
-        $columns = ['', 'employee_id', 'client_id', 'invoice_frequency', 'invoice_from', 'total_hours', ''];
+        $columns = ['', '', 'employee_id', 'invoice_date', 'invoice_due_date', 'invoiced_amount', 'received_amount', '', ''];
         $sortColumn = $columns[$this->request['order'][0]['column']];
         $sortType = $this->request['order'][0]['dir'];
         $start = $this->request['start'];
@@ -163,25 +194,25 @@ class InvoiceAllController extends Controller
         $whereConds = array();
         if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
             if ($this->request['filt_inv_date_from'] != NULL)
-                $whereConds[] = ['invoice_date', '<=', $this->request['filt_inv_date_from']];
+                $whereConds[] = ['invoice_date', '>=', $this->request['filt_inv_date_from']];
             if ($this->request['filt_inv_date_to'] != NULL)
-                $whereConds[] = ['invoice_date', '>=', $this->request['filt_inv_date_to']];
+                $whereConds[] = ['invoice_date', '<=', $this->request['filt_inv_date_to']];
             if ($this->request['filt_inv_due_date_from'] != NULL)
-                $whereConds[] = ['invoice_due_date', '<=', $this->request['filt_inv_due_date_from']];
+                $whereConds[] = ['invoice_due_date', '>=', $this->request['filt_inv_due_date_from']];
             if ($this->request['filt_inv_due_date_to'] != NULL)
-                $whereConds[] = ['invoice_due_date', '>=', $this->request['filt_inv_due_date_to']];
+                $whereConds[] = ['invoice_due_date', '<=', $this->request['filt_inv_due_date_to']];
             if ($this->request['filt_inv_amount_from'] != NULL)
-                $whereConds[] = ['invoiced_amount', '<=', $this->request['filt_inv_amount_from']];
+                $whereConds[] = ['invoiced_amount', '>=', $this->request['filt_inv_amount_from']];
             if ($this->request['filt_inv_amount_to'] != NULL)
-                $whereConds[] = ['invoiced_amount', '>=', $this->request['filt_inv_amount_to']];
+                $whereConds[] = ['invoiced_amount', '<=', $this->request['filt_inv_amount_to']];
             if ($this->request['filt_rec_amount_from'] != NULL)
-                $whereConds[] = ['received_amount', '<=', $this->request['filt_rec_amount_from']];
+                $whereConds[] = ['received_amount', '>=', $this->request['filt_rec_amount_from']];
             if ($this->request['filt_rec_amount_to'] != NULL)
-                $whereConds[] = ['received_amount', '>=', $this->request['filt_rec_amount_to']];
+                $whereConds[] = ['received_amount', '<=', $this->request['filt_rec_amount_to']];
             // if ($this->request['filt_pastdue_from'] != NULL)
-            //     $whereConds[] = ['received_amount', '<=', $this->request['filt_pastdue_from']];
+            //     $whereConds[] = ['received_amount', '>=', $this->request['filt_pastdue_from']];
             // if ($this->request['filt_pastdue_to'] != NULL)
-            //     $whereConds[] = ['received_amount', '>=', $this->request['filt_pastdue_to']];
+            //     $whereConds[] = ['received_amount', '<=', $this->request['filt_pastdue_to']];
         }
 
         // All record count
@@ -256,21 +287,112 @@ class InvoiceAllController extends Controller
 
         $idx = $iDisplayStart + 1;
         foreach ($finalRecords as $finalRecord) {
-            $employeeName = ($finalRecord->employee != null) ? ($finalRecord->employee->email) : '';
-            $clientName = ($finalRecord->client != null) ? ($finalRecord->client->email) : '';
+            $employeeEmail = ($finalRecord->employee != null) ? ($finalRecord->employee->email) : '';
+            $clientEmail = ($finalRecord->client != null) ? ($finalRecord->client->email) : '';
 
             $records["data"][] = array(
                 '<input type="checkbox" name="id[]" value="' . $finalRecord->id . '">',
                 $idx,
-                $employeeName,
-                $clientName,
+                $employeeEmail,
+                $clientEmail,
                 $finalRecord->invoice_date,
                 $finalRecord->invoice_due_date,
                 $finalRecord->invoiced_amount,
                 $finalRecord->received_amount,
-                '10',
+                '10 days',
                 '<a href="javascript:;" class="btn btn-xs btn-c-primary btn-invoice-edit" data-id="' . $finalRecord->id . '"*><i class="fa fa-pencil"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-c-grey btn-invoice-delete" data-id="' . $finalRecord->id . '"*><i class="fa fa-trash"></i></a>'
+            );
+            $idx++;
+        }
+
+        if (isset($this->request['customActionType']) && $this->request['customActionType'] == "group_action") {
+            $records["customActionStatus"] = "OK"; // pass custom message(useful for getting status of group actions)
+            $records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
+        }
+
+        $records["draw"] = $sEcho;
+        $records["recordsTotal"] = $totalCnt;
+        $records["recordsFiltered"] = $filteredCnt;
+
+        return response()->json($records);
+    }
+
+    /**
+     * Get invice activity list from model.
+     */
+    private function getInviceActTableList()
+    {
+        // Params
+        $columns = ['', 'created_at', '', 'description'];
+        $sortColumn = $columns[$this->request['order'][0]['column']];
+        $sortType = $this->request['order'][0]['dir'];
+        $start = $this->request['start'];
+        $length = $this->request['lengh'];
+
+        // Get filter condition.t
+        $whereConds = array();
+        if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
+            if ($this->request['filt_act_date_from'] != NULL)
+                $whereConds[] = ['created_at', '>=', $this->request['filt_act_date_from']];
+            if ($this->request['filt_act_date_to'] != NULL)
+                $whereConds[] = ['created_at', '<=', $this->request['filt_act_date_to']];
+            if ($this->request['filt_act_description'] != NULL)
+                $whereConds[] = ['description', 'like', '%' . $this->request['filt_act_description'] . '%'];
+        }
+
+        // All record count
+        $totalRecordCnt = InvoiceActivity::count();
+
+        // Filtered records
+        $filteredRecords = InvoiceActivity::with([
+            'updatedBy'
+        ])->where($whereConds)
+            ->whereHas('updatedBy', function (Builder $query) {
+                if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
+                    if ($this->request['filt_act_updatedby'] != NULL)
+                        $query->where('email', 'like', '%' . $this->request['filt_act_updatedby'] . '%');
+                }
+            })
+            ->get()
+            ->sortBy([[$sortColumn, $sortType]])
+            ->skip($start)
+            ->take($length);
+
+        // Filtered record cnt
+        $filteredCnt = count(InvoiceActivity::where($whereConds)->get());
+
+        return [
+            'totalCnt' => $totalRecordCnt,
+            'filteredCnt' => $filteredCnt,
+            'filteredRecords' => $filteredRecords
+        ];
+    }
+
+    /**
+     * Generate role activity list table items
+     */
+    private function makeInvoiceActTblItems($finalRecords, $totalCnt, $filteredCnt)
+    {
+        $iTotalRecords = $filteredCnt;
+        $iDisplayLength = intval($this->request['length']);
+        $iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
+        $iDisplayStart = intval($this->request['start']);
+        $sEcho = intval($this->request['draw']);
+
+        $records = array();
+        $records["data"] = array();
+
+        $end = $iDisplayStart + $iDisplayLength;
+        $end = $end > $iTotalRecords ? $iTotalRecords : $end;
+
+        $idx = $iDisplayStart + 1;
+        foreach ($finalRecords as $finalRecord) {
+            $records["data"][] = array(
+                $idx,
+                $finalRecord->created_at,
+                ($finalRecord->updatedBy) ? $finalRecord->updatedBy->email : '',
+                $finalRecord->description
             );
             $idx++;
         }

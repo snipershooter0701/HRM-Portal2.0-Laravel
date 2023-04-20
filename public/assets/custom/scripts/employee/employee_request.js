@@ -1,5 +1,4 @@
 var grid_request_details = new Datatable();
-var grid_emp_activity = new Datatable();
 
 $(document).ready(function () {
     TableEmployee.init();
@@ -7,6 +6,7 @@ $(document).ready(function () {
     $('.page-move-btn').click(function () {
         var panelName = $(this).attr('data-panelname');
         btnStatus('add');
+        initCreatePage();
         movePanel(panelName);
     });
 
@@ -39,14 +39,6 @@ $(document).ready(function () {
 
     });
 
-
-    // $('#req_emp_name').change(function () {
-    //     console.log('=========');
-    //     var name = $(this).find(':selected').attr('data-name');
-    //     console.log(name);
-    //     $('#req_emp_name').attr('data-name', name);
-    // });
-
     // Update Request Details
     $('#update_req_details').click(function () {
         var id = $(this).attr('data-id');
@@ -78,7 +70,7 @@ var TableEmployee = function () {
 
         grid_request_details.init({
             src: $("#tbl_request_details"),
-            onSuccess: function (grid_request_details, response) { 
+            onSuccess: function (grid_request_details, response) {
                 // set employee in create request
                 var employee = response['employees'];
                 var i;
@@ -101,10 +93,10 @@ var TableEmployee = function () {
 
                 // delete
                 $('.btn-req-delete').click(function () {
-                    var id = $(this).attr('data-id');
+                    var ids = [$(this).attr('data-id')];
                     displayConfirmModal('Do you want to delete?', 'Delete Request Details', function (req) {
                         if (req == 'ok') {
-                            deleteRequestDetails(id);
+                            deleteRequestDetails(ids);
                         }
                     })
                 });
@@ -160,12 +152,18 @@ var TableEmployee = function () {
         grid_request_details.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
             e.preventDefault();
             var action = $(".table-group-action-input", grid_request_details.getTableWrapper());
-            if (action.val() != "" && grid_request_details.getSelectedRowsCount() > 0) {
-                grid_request_details.setAjaxParam("customActionType", "group_action");
-                grid_request_details.setAjaxParam("customActionName", action.val());
-                grid_request_details.setAjaxParam("id", grid_request_details.getSelectedRows());
-                grid_request_details.getDataTable().ajax.reload();
-                grid_request_details.clearAjaxParams();
+            if (action.val() == "delete" && grid_request_details.getSelectedRowsCount() > 0) {
+                // grid_request_details.setAjaxParam("customActionType", "group_action");
+                // grid_request_details.setAjaxParam("customActionName", action.val());
+                // grid_request_details.setAjaxParam("id", grid_request_details.getSelectedRows());
+                // grid_request_details.getDataTable().ajax.reload();
+                // grid_request_details.clearAjaxParams();
+                var val = [];
+                $('input[name="id"]:checkbox:checked').each(function (i) {
+                    val[i] = $(this).val();
+                });
+                deleteRequestDetails(val);
+
             } else if (action.val() == "") {
                 App.alert({
                     type: 'danger',
@@ -220,6 +218,51 @@ function refreshRequestDetailsList() {
     // gridClientListTable.setAjaxParam("customActionType", "group_action");
     grid_request_details.getDataTable().ajax.reload();
     grid_request_details.clearAjaxParams();
+}
+
+function initCreatePage() {
+    $('#req_emp_name').val('');
+    $('#req_comment').val('');
+    $("#req_ssn").prop("checked", false);
+    $('#req_ssn_star').removeClass("star-active");
+    $('#req_auth').prop("checked", false);
+    $('#req_auth_star').removeClass("star-active");
+    $('#req_state').prop("checked", false);
+    $('#req_state_star').removeClass("star-active");
+    $('#req_passport').prop("checked", false);
+    $('#req_passport_star').removeClass("star-active");
+    $('#req_i94').prop("checked", false);
+    $('#req_i94_star').removeClass("star-active");
+    $('#req_visa').prop("checked", false);
+    $('#req_visa_star').removeClass("star-active");
+    $('#req_other').prop("checked", false);
+    $('#req_other_star').removeClass("star-active");
+    $('#ssn_no').val('');
+    $('#ssn_file').val('')
+    $('#auth_list').val('');
+    $('#auth_no').val('');
+    $('#auth_start_date').val('');
+    $('#auth_end_date').val('');
+    $('#auth_file').val('')
+    $('#state_no').val('');
+    $('#state_exp_date').val('');
+    $('#state_file').val('')
+    $('#passport_no').val('');
+    $('#passport_exp_date').val('');
+    $('#passport_file').val('');
+    $('#i94_no').val('');
+    $('#i94_exp_date').val('');
+    $('#uniform-i94_d_s_radio').prop('checked', true)
+    $('#i94_file').val('');
+    $('#visa_no').val('');
+    $('#visa_exp_date').val('');
+    $('#visa_file').val('');
+    $('#other_comment').val('');
+    $('#other_no').val('');
+    $('#other_exp_date').val('');
+    $('#uniform-other_n_a_radio').prop('checked', true)
+    $('#other_file').val('');
+
 }
 
 
@@ -479,50 +522,7 @@ function addRequestDetails() {
                 toastr.success("New Request is successfully created.", "Success");
 
                 // move Request Details List page
-                $('#add_req_action .btn-move-panel').click();
-
-                // Clear History
-                $('#req_emp_name').val('');
-                $('#req_comment').val('');
-                $("#req_ssn").prop("checked", false);
-                $('#req_ssn_star').removeClass("star-active");
-                $('#req_auth').prop("checked", false);
-                $('#req_auth_star').removeClass("star-active");
-                $('#req_state').prop("checked", false);
-                $('#req_state_star').removeClass("star-active");
-                $('#req_passport').prop("checked", false);
-                $('#req_passport_star').removeClass("star-active");
-                $('#req_i94').prop("checked", false);
-                $('#req_i94_star').removeClass("star-active");
-                $('#req_visa').prop("checked", false);
-                $('#req_visa_star').removeClass("star-active");
-                $('#req_other').prop("checked", false);
-                $('#req_other_star').removeClass("star-active");
-                $('#ssn_no').val('');
-                $('#ssn_file').val('')
-                $('#auth_list').val('');
-                $('#auth_no').val('');
-                $('#auth_start_date').val('');
-                $('#auth_end_date').val('');
-                $('#auth_file').val('')
-                $('#state_no').val('');
-                $('#state_exp_date').val('');
-                $('#state_file').val('')
-                $('#passport_no').val('');
-                $('#passport_exp_date').val('');
-                $('#passport_file').val('');
-                $('#i94_no').val('');
-                $('#i94_exp_date').val('');
-                $('#uniform-i94_d_s_radio').prop('checked', true)
-                $('#i94_file').val('');
-                $('#visa_no').val('');
-                $('#visa_exp_date').val('');
-                $('#visa_file').val('');
-                $('#other_comment').val('');
-                $('#other_no').val('');
-                $('#other_exp_date').val('');
-                $('#uniform-other_n_a_radio').prop('checked', true)
-                $('#other_file').val('');
+                $('#add_req_action .page-move-btn').click();
 
             }
         },
@@ -643,7 +643,6 @@ function setRequestDetailsUpdateBefore(id, emp_id) {
 // Update Request Details
 function updateRequestDetails(id, emp_id) {
 
-    console.log(emp_id);
     // validation TODO
     var validateFields = [
         {
@@ -731,50 +730,7 @@ function updateRequestDetails(id, emp_id) {
                 toastr.success("Request is successfully updated.", "Success");
 
                 // move request details list page
-                $('#update_req_action .btn-move-panel').click();
-
-                // Clear History
-                $('#req_emp_name').val('');
-                $('#req_comment').val('');
-                $("#req_ssn").prop("checked", false);
-                $('#req_ssn_star').removeClass("star-active");
-                $('#req_auth').prop("checked", false);
-                $('#req_auth_star').removeClass("star-active");
-                $('#req_state').prop("checked", false);
-                $('#req_state_star').removeClass("star-active");
-                $('#req_passport').prop("checked", false);
-                $('#req_passport_star').removeClass("star-active");
-                $('#req_i94').prop("checked", false);
-                $('#req_i94_star').removeClass("star-active");
-                $('#req_visa').prop("checked", false);
-                $('#req_visa_star').removeClass("star-active");
-                $('#req_other').prop("checked", false);
-                $('#req_other_star').removeClass("star-active");
-                $('#ssn_no').val('');
-                $('#ssn_file').val('')
-                $('#auth_list').val('');
-                $('#auth_no').val('');
-                $('#auth_start_date').val('');
-                $('#auth_end_date').val('');
-                $('#auth_file').val('')
-                $('#state_no').val('');
-                $('#state_exp_date').val('');
-                $('#state_file').val('')
-                $('#passport_no').val('');
-                $('#passport_exp_date').val('');
-                $('#passport_file').val('');
-                $('#i94_no').val('');
-                $('#i94_exp_date').val('');
-                $('#uniform-i94_d_s_radio').prop('checked', true)
-                $('#i94_file').val('');
-                $('#visa_no').val('');
-                $('#visa_exp_date').val('');
-                $('#visa_file').val('');
-                $('#other_comment').val('');
-                $('#other_no').val('');
-                $('#other_exp_date').val('');
-                $('#uniform-other_n_a_radio').prop('checked', true)
-                $('#other_file').val('');
+                $('#update_req_action .page-move-btn').click();
 
             }
         },

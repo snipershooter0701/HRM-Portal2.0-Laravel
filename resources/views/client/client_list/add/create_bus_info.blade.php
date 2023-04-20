@@ -140,7 +140,7 @@
                 </div>
                 <div class="form-actions text-right">
                     <button id="btn_create_businfo" type="submit" class="btn btn-sm btn-c-primary">Create</button>
-                    <button id="btn_cancel_businfo" type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-client">Cancel</button>
+                    <button id="btn_cancel_businfo" type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel_client">Cancel</button>
                 </div>
                 <!-- END FORM-->
             </div>

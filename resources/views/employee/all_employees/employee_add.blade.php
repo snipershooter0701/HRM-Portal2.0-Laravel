@@ -96,7 +96,6 @@
                             <div class="form-group col-sm-2">
                                 <label class="control-label">Employee Type <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control" id="create_employee_type">
-                                    <option value="">Select</option>
                                     <option value="0">Employee/Contractor</option>
                                     <option value="1">Back-office Staff</option>
                                 </select>
@@ -105,7 +104,7 @@
                         <div class="row">
                             <div class="form-group col-sm-2">
                                 <label class="control-label">Employee ID <span class="required" aria-required="true">*</span></label>
-                                <input type="text" class="form-control" value="45" id="create_employee_id" readonly>
+                                <input type="text" class="form-control" id="create_employee_id" readonly>
                             </div>
                             <div class="form-group col-sm-2">
                                 <label class="control-label">Employee Status <span class="required" aria-required="true">*</span></label>
@@ -116,9 +115,10 @@
                                 </select>
                             </div>
                             <div class="form-group col-sm-2">
-                                <label class="control-label">Employee Status Date</label>
-                                <div class="input-group date date-picker" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+                                <label class="control-label">Employee Status End Date</label>
+                                <div class="input-group">
                                     <input type="text" class="form-control" id="create_employee_status_date" readonly>
+                                    <input type="hidden" class="form-control curr_date">
                                     <span class="input-group-btn">
                                         <button class="btn default" type="button">
                                             <i class="fa fa-calendar"></i>
@@ -136,14 +136,6 @@
                             <div class="form-group col-sm-2">
                                 <label class="control-label">Role <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control" id="create_role">
-                                    <option value="">Select</option>
-                                    <option value="0">Employee</option>
-                                    <option value="1">Admin</option>
-                                    <option value="2">CEO</option>
-                                    <option value="3">CTO</option>
-                                    <option value="4">Partner</option>
-                                    <option value="5">Timesheets Approver</option>
-                                    <option value="6">Immigration</option>
                                 </select>
                             </div>
                             <div class="form-group col-sm-2">
@@ -158,7 +150,6 @@
                             <div class="form-group col-sm-2">
                                 <label class="control-label">Classification <span class="required" aria-required="true">*</span></label>
                                 <select class="form-control" id="create_classification">
-                                    <option value="">Select</option>
                                     <option value="1">Billable</option>
                                     <option value="0">Non-Billable</option>
                                 </select>
@@ -210,216 +201,221 @@
                             </div>
                             <div class="col-md-6 section-action mt-25 text-right">
                                 <label>
-                                    <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Allow Employee to add Later
+                                    <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue" id="allow_emp_later"> Allow Employee to add Later
                                 </label>
                             </div>
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="row">
-                                <div class="form-group col-md-2">
-                                    <label class="control-label doc-label">SSN</label>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label">Document No</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label"> </label>
-                                    <div class="fileinput fileinput-new" data-provides="fileinput">
-                                        <div class="input-group">
-                                            <div class="form-control uneditable-input" data-trigger="fileinput">
-                                                <i class="fa fa-file fileinput-exists"></i>&nbsp;
-                                                <span class="fileinput-filename"> </span>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label doc-label">SSN</label>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label">Document No</label>
+                                        <input type="text" class="form-control" id="ssn_no">
+                                    </div>
+                                    {{-- <div class="form-group col-md-2">
+                                        <label class="control-label"> </label>
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group">
+                                                <div class="form-control uneditable-input" data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                    <span class="fileinput-filename"> </span>
+                                                </div>
+                                                <span class="input-group-btn input-group-addon btn default btn-file">
+                                                    <button class="btn default fileinput-new" type="button">
+                                                        <i class="fa fa-upload"></i>
+                                                    </button>
+                                                    <button class="btn default fileinput-exists" type="button">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                    <input type="file" name="...">
+                                                </span>
+                                                <button class="btn red input-group-btn fileinput-exists" data-dismiss="fileinput" type="button">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
                                             </div>
-                                            <span class="input-group-btn input-group-addon btn default btn-file">
-                                                <button class="btn default fileinput-new" type="button">
-                                                    <i class="fa fa-upload"></i>
+                                        </div>
+                                    </div> --}}
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label"></label>
+                                        <input type="file" class="form-control" id="ssn_file">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label doc-label">Work Authorization</label>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label">Work Auth List</label>
+                                        <input type="text" class="form-control" id="auth_list">
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label">Document No</label>
+                                        <input type="text" class="form-control" id="auth_no">
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label">Start Date</label>
+                                        <div class="input-group date date-picker" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+                                            <input type="text" class="form-control" id="auth_start_date">
+                                            <span class="input-group-btn">
+                                                <button class="btn default" type="button">
+                                                    <i class="fa fa-calendar"></i>
                                                 </button>
-                                                <button class="btn default fileinput-exists" type="button">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                <input type="file" name="...">
                                             </span>
-                                            <button class="btn red input-group-btn fileinput-exists" data-dismiss="fileinput" type="button">
-                                                <i class="fa fa-times"></i>
-                                            </button>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-2">
-                                    <label class="control-label doc-label">Work Authorization</label>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label">Work Auth List</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label">Document No</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label">Start Date</label>
-                                    <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-btn">
-                                            <button class="btn default" type="button">
-                                                <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label">End Date</label>
+                                        <div class="input-group date date-picker" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+                                            <input type="text" class="form-control" id="auth_end_date">
+                                            <span class="input-group-btn">
+                                                <button class="btn default" type="button">
+                                                    <i class="fa fa-calendar"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label"></label>
+                                        <input type="file" class="form-control" id="auth_file">
                                     </div>
                                 </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label">End Date</label>
-                                    <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-btn">
-                                            <button class="btn default" type="button">
-                                                <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
+                                <div class="row">
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label doc-label">State ID/Drive License</label>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label">Document No</label>
+                                        <input type="text" class="form-control" id="state_no">
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label">Exp Date</label>
+                                        <div class="input-group date date-picker" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+                                            <input type="text" class="form-control" id="state_exp_date">
+                                            <span class="input-group-btn">
+                                                <button class="btn default" type="button">
+                                                    <i class="fa fa-calendar"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label"></label>
+                                        <input type="file" class="form-control" id="state_file">
                                     </div>
                                 </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label"></label>
-                                    <input type="file" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-2">
-                                    <label class="control-label doc-label">State ID/Drive License</label>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label">Document No</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label">Exp Date</label>
-                                    <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-btn">
-                                            <button class="btn default" type="button">
-                                                <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
+                                <div class="row">
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label doc-label">Passport</label>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label">Document No</label>
+                                        <input type="text" class="form-control" id="passport_no">
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label">Exp Date</label>
+                                        <div class="input-group date date-picker" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+                                            <input type="text" class="form-control" id="passport_exp_date">
+                                            <span class="input-group-btn">
+                                                <button class="btn default" type="button">
+                                                    <i class="fa fa-calendar"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label"></label>
+                                        <input type="file" class="form-control" id="passport_file">
                                     </div>
                                 </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label"></label>
-                                    <input type="file" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-2">
-                                    <label class="control-label doc-label">Passport</label>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label">Document No</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label">Exp Date</label>
-                                    <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-btn">
-                                            <button class="btn default" type="button">
-                                                <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
+                                <div class="row">
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label doc-label">I-94</label>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label">Document No</label>
+                                        <input type="text" class="form-control" id="i94_no">
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label">Admit Until date</label>
+                                        <div class="radio-list">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="optionsRadios" id="i94_ds_radio" value="option1" checked> D/S
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="optionsRadios" id="i94_other_radio" value="option2" > Other
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label"></label>
+                                        <input type="file" class="form-control" id="i94_file">
                                     </div>
                                 </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label"></label>
-                                    <input type="file" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-2">
-                                    <label class="control-label doc-label">I-94</label>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label">Document No</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label">Admit Until date</label>
-                                    <div class="radio-list">
-                                        <label class="radio-inline">
-                                            <input type="radio" name="optionsRadios" id="optionsRadios25" value="option1" checked=""> D/S
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input type="radio" name="optionsRadios" id="optionsRadios26" value="option2" checked=""> Other
-                                        </label>
+                                <div class="row">
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label doc-label">Visa</label>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label">Document No</label>
+                                        <input type="text" class="form-control" id="visa_no">
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label">Exp Date</label>
+                                        <div class="input-group date date-picker" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+                                            <input type="text" class="form-control" id="visa_exp_date">
+                                            <span class="input-group-btn">
+                                                <button class="btn default" type="button">
+                                                    <i class="fa fa-calendar"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label"></label>
+                                        <input type="file" class="form-control" id="visa_file">
                                     </div>
                                 </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label"></label>
-                                    <input type="file" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-2">
-                                    <label class="control-label doc-label">Visa</label>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label">Document No</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label">Exp Date</label>
-                                    <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-btn">
-                                            <button class="btn default" type="button">
-                                                <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
+                                <div class="row">
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label doc-label">Other Docummment</label>
+                                    </div>
+                                    <div class="form-group col-md-10" style="padding-top: 6px;">
+                                        <a id="btn_add_other_doc" href="javascript:;" class="btn-c-no-border-primary" data-id="1"><i class="fa fa-plus-circle icon-16"></i></a>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label"></label>
-                                    <input type="file" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-2">
-                                    <label class="control-label doc-label">Other Docummment</label>
-                                </div>
-                                <div class="form-group col-md-10" style="padding-top: 6px;">
-                                    <a id="btn-add-other-doc" href="javascript:;" class="btn-c-no-border-primary"><i class="fa fa-plus-circle icon-16"></i></a>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-2">
-                                    <label class="control-label doc-label"></label>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label">Title</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label">Document No</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label">Exp Date</label>
-                                    <div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-btn">
-                                            <button class="btn default" type="button">
-                                                <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
+                                <div class="other-doc">
+                                    <div class="row row-0" data-id="0">
+                                        <div class="form-group col-md-2">
+                                            <label class="control-label doc-label"></label>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label class="control-label">Comment</label>
+                                            <input type="text" class="form-control other-title-0">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label class="control-label">Document No</label>
+                                            <input type="text" class="form-control other-no-0">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label class="control-label">Exp Date</label>
+                                            <div class="input-group date date-picker" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+                                                <input type="text" class="form-control other-exp-date-0">
+                                                <span class="input-group-btn">
+                                                    <button class="btn default" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label class="control-label"></label>
+                                            <input type="file" class="form-control other-file-0">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="control-label"></label>
-                                    <input type="file" class="form-control">
-                                </div>
-                                <div class="form-group col-md-2" style="padding-top: 15px;">
-                                    <a id="btn-remove-other-doc" href="javascript:;" class="btn-c-no-border-primary"><i class="fa fa-minus-circle icon-16"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -432,7 +428,7 @@
                             </div>
                             <div class="col-md-6 section-action mt-25 text-right">
                                 <label>
-                                    <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Add Later
+                                    <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue" id="allow_pay_later"> Add Later
                                 </label>
                             </div>
                         </div>
@@ -534,8 +530,8 @@
                                                 <thead>
                                                     <tr role="row" class="heading">
                                                         <th width="10%"> No </th>
-                                                        <th width="30%"> Date & Time </th>
-                                                        <th width="20%"> Updated By </th>
+                                                        <th width="20%"> Date & Time </th>
+                                                        <th width="30%"> Updated By </th>
                                                         <th width="40%"> Description </th>
                                                     </tr>
 

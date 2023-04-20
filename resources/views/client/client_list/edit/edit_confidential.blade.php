@@ -16,10 +16,10 @@
             <div class="portlet-title">
                 <div class="caption">
                     <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-edit-businfo">Business Info</span>
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-edit-contactinfo">Contact Info</span>
-                    <span class="caption-helper mr-10 active-tab btn-move-panel" data-panelname="panel-edit-confidential">Add Confidential</span>
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-edit-placement">Placements</span>
-                    <span class="caption-helper btn-move-panel" data-panelname="panel-edit-documents">Documents</span>
+                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_contactinfo">Contact Info</span>
+                    <span class="caption-helper mr-10 active-tab btn-move-panel" data-panelname="panel_edit_confidential">Add Confidential</span>
+                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_placement">Placements</span>
+                    <span class="caption-helper btn-move-panel" data-panelname="panel_edit_documents">Documents</span>
                 </div>
             </div>
             <div class="portlet-body">
@@ -105,7 +105,7 @@
                 <div class="form-actions text-right">
                     <button id="btn_create_confidential" class="btn btn-sm btn-c-primary">Create</button>
                     <button class="btn btn-sm btn-c-primary display-none">Update</button>
-                    <button class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-client">Cancel</button>
+                    <button class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel_client">Cancel</button>
                 </div>
                 <!-- END FORM-->
 
@@ -158,7 +158,7 @@
 
                                                 {{-- Updated On --}}
                                                 <td>
-                                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                                    <div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
                                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_updated_from" placeholder="From">
                                                         <span class="input-group-btn">
                                                             <button class="btn btn-sm default" type="button">
@@ -166,7 +166,7 @@
                                                             </button>
                                                         </span>
                                                     </div>
-                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                    <div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
                                                         <input type="text" class="form-control form-filter input-sm" readonly name="filt_updated_to" placeholder="To">
                                                         <span class="input-group-btn">
                                                             <button class="btn btn-sm default" type="button">
