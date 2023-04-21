@@ -272,6 +272,15 @@ $(document).ready(function () {
     $('#btn_add_placement_create').click(function () {
         createPlacement();
     });
+
+    $('#btn_show_add_placement_page').click(function () {
+        showAddPlacementPage();
+    });
+
+    $('#add_placement_employee').change(function() {
+        var empId = $(this).val();
+        changeCategoryByEmp(empId);
+    });
 });
 
 /**
@@ -567,6 +576,66 @@ function deletePlacement(id) {
                         toastr.error(err.message, "Error");
                 }
             });
+        }
+    });
+}
+
+/**
+ * Show add placement page.
+ */
+function showAddPlacementPage() {
+    var formData = {
+    };
+
+    callAjax({
+        url: BASE_URL + '/client/placement/get_new',
+        type: "POST",
+        data: formData,
+        success: function (data) {
+            if (data['result'] == 'success') {
+                var last = data['last'];
+                var clientId = $('#edit_client_id').val();
+
+                // Set base values.
+                $('#add_placement_client').val(clientId);
+                $('#add_placement_id').val(last['id'] != null ? last['id'] + 1 : 1);
+
+                $('#go_to_add_placement_page').trigger('click');
+            }
+        },
+        error: function (err) {
+            var errors = err.errors;
+            if (errors)
+                toastr.error(err.message, "Error");
+        }
+    });
+}
+
+/**
+ * Change Category by Employee Id
+ */
+function changeCategoryByEmp(empId)
+{
+    var formData = {
+        empId: empId
+    };
+
+    callAjax({
+        url: BASE_URL + '/client/placement/get_employee',
+        type: "POST",
+        data: formData,
+        success: function (data) {
+            if (data['result'] == 'success') {
+                var employee = data['employee'];
+
+                // Set base values.
+                $('#add_placement_category').val(employee['category']);
+            }
+        },
+        error: function (err) {
+            var errors = err.errors;
+            if (errors)
+                toastr.error(err.message, "Error");
         }
     });
 }

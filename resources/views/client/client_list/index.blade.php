@@ -2,6 +2,7 @@
 
 @section('page_template_css')
 <link href="{{ url('assets/global/plugins/icheck/skins/all.css?v=' . $randNum) }}" rel="stylesheet" type="text/css" />
+<link href="{{ url('assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css?v=' . $randNum) }}" rel="stylesheet" type="text/css" />
 <link href="{{ url('assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css?v=' . $randNum) }}" rel="stylesheet" type="text/css" />
 <link href="{{ url('assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css?v=' . $randNum) }}" rel="stylesheet" type="text/css" />
 @endsection
@@ -57,7 +58,8 @@
 @endsection
 
 @section('page_template_js')
-<script src="{{ url('assets/global/plugins/icheck/icheck.min.js?v=' . $randNum) }}" type="text/javascript"></script>
+{{-- <script src="{{ url('assets/global/plugins/icheck/icheck.min.js?v=' . $randNum) }}" type="text/javascript"></script> --}}
+<script src="{{ url('assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}" type="text/javascript"></script>
 <script src="{{ url('assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js') }}" type="text/javascript"></script>
 <script src="{{ url('assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js') }}" type="text/javascript"></script>
 @endsection

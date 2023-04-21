@@ -4,6 +4,16 @@ $(document).ready(function () {
         movePanel(panelName);
     });
 
+    /**
+     * Refresh custom ajax table.
+     */
+    $('.filter-custom-cancel').click(function () {
+        var filterClassName = $(this).attr('data-classname');
+        var searchBtnId = $(this).attr('data-search');
+        $('.' + filterClassName).val("");
+        $('#' + searchBtnId).trigger("click");
+    });
+
     showNotifications();
 });
 
@@ -53,7 +63,7 @@ function showNotifications() {
                         '</a></li>'
                     );
                 }
-                
+
                 $('#notification_badge').html(cnt);
                 $('#notification_pending_cnt').html(cnt + ' pending')
             }

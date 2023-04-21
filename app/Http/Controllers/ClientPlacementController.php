@@ -159,6 +159,34 @@ class ClientPlacementController extends Controller
             'result' => 'success'
         ]);
     }
+
+    public function getNew()
+    {
+        $last = ClientPlacement::all()->last();
+
+        return response()->json([
+            'result' => 'success',
+            'last' => $last
+        ]);
+    }
+
+    /**
+     * Get Employee By Id
+     */
+    public function getEmployeeById()
+    {
+        // Check Validation
+        $this->request->validate([
+            'empId' => ['required'],
+        ]);
+
+        $employee = Employee::find($this->request['empId']);
+
+        return response()->json([
+            'result' => 'success',
+            'employee' => $employee
+        ]);
+    }
     // =========================== END PUBLIC FUNCTIONS ===========================
 
     // ========================== BEGIN PRIVATE FUNCTIONS ==========================
@@ -168,7 +196,7 @@ class ClientPlacementController extends Controller
     private function getOnesPlacementTblRecords()
     {
         // Params
-        $columns = ['', 'employee_id', 'job_tire_id', 'job_status', 'job_start_date', 'job_end_date', ''];
+        $columns = ['', '', 'employee_id', 'job_tire_id', 'job_status', 'job_start_date', 'job_end_date', ''];
         $sortColumn = $columns[$this->request['order'][0]['column']];
         $sortType = $this->request['order'][0]['dir'];
         $start = $this->request['start'];

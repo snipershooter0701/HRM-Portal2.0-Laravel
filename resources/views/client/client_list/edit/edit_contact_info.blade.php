@@ -15,7 +15,7 @@
         <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-title">
                 <div class="caption">
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-edit-businfo">Business Info</span>
+                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_businfo">Business Info</span>
                     <span class="caption-helper mr-10 btn-move-panel active-tab" data-panelname="panel_edit_contactinfo">Contact Info</span>
                     <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_confidential">Add Confidential</span>
                     <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_placement">Placements</span>
@@ -56,22 +56,22 @@
 
                                 {{-- First name --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_firstname">
+                                    <input type="text" class="form-control form-filter input-sm tbl-contact-infos-filter" name="filt_firstname">
                                 </td>
 
                                 {{-- Last Name --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_lastname">
+                                    <input type="text" class="form-control form-filter input-sm tbl-contact-infos-filter" name="filt_lastname">
                                 </td>
 
                                 {{-- Email --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_email">
+                                    <input type="text" class="form-control form-filter input-sm tbl-contact-infos-filter" name="filt_email">
                                 </td>
 
                                 {{-- Phone --}}
                                 <td>
-                                    <input type=" text" class="form-control form-filter input-sm" name="filt_phone">
+                                    <input type=" text" class="form-control form-filter input-sm tbl-contact-infos-filter" name="filt_phone">
                                 </td>
 
                                 {{-- Checkbox --}}
@@ -80,7 +80,7 @@
                                 {{-- Action --}}
                                 <td>
                                     <button id="btn_tbl_contact_info_search" class="btn btn-xs btn-c-primary filter-submit"><i class="fa fa-search"></i></button>
-                                    <button id="btn_tbl_contact_info_reset" class="btn btn-xs btn-c-grey filter-cancel"><i class="fa fa-times"></i></button>
+                                    <button id="btn_tbl_contact_info_reset" class="btn btn-xs btn-c-grey filter-custom-cancel" data-classname="tbl-contact-infos-filter" data-search="btn_tbl_contact_info_search"><i class="fa fa-times"></i></button>
                                 </td>
                             </tr>
                         </thead>
@@ -90,38 +90,32 @@
                 </div>
 
                 <!-- BEGIN FORM-->
-                <form action="#">
-                    <div class="form-body">
-                        {{-- CC List --}}
-                        <h4 class="section-head color-primary">Notifiers</h4>
-                        <hr>
-                        {{-- <div class="row"> --}}
+                <div class="form-body">
+                    {{-- CC List --}}
+                    <h4 class="section-head color-primary">Notifiers</h4>
+                    <hr>
+                    {{-- <div class="row"> --}}
 
-                        <div class="form-group has-notifier">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    To:
-                                </span>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group has-notifier">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    CC:
-                                </span>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group has-notifier">
-                            <textarea class="form-control" row="15"></textarea>
+                    <div class="form-group has-notifier">
+                        <div class="input-group">
+                            <span style="font-size:16px;">To: </span>
+                            <input id="notifier_to" type="text">
                         </div>
                     </div>
-                    <div class="form-actions text-right">
-                        <button type="submit" class="btn btn-sm btn-c-primary">Save</button>
-                        <button type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel_client">Cancel</button>
+                    <div class="form-group has-notifier">
+                        <div class="input-group">
+                            <span style="font-size:16px;">CC: </span>
+                            <input id="notifier_cc" type="text">
+                        </div>
                     </div>
-                </form>
+                    <div class="form-group has-notifier">
+                        <textarea class="form-control" row="10"></textarea>
+                    </div>
+                </div>
+                <div class="form-actions text-right">
+                    <button id="btn_edit_contract_send" type="submit" class="btn btn-sm btn-c-primary">Send</button>
+                    <button id="btn_edit_contract_cancel" type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel_client">Cancel</button>
+                </div>
                 <!-- END FORM-->
             </div>
         </div>

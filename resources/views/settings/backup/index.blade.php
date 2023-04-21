@@ -16,21 +16,82 @@
 @endsection
 
 @section('content')
-<!-- BEGIN PAGE HEADER-->
-<!-- BEGIN PAGE BAR -->
-<div class="page-bar c-page-bar">
-    <ul class="page-breadcrumb">
-        <li>
-            <a href="javascript:;" class="btn-move-panel bread-active">Backup and Download</a>
-        </li>
-    </ul>
-</div>
-<!-- END PAGE BAR -->
-<!-- END PAGE HEADER-->
-<div class="row">
-    <div class="col-md-12">
-        <div class="portlet light portlet-fit portlet-datatable bordered">
-            <div class="portlet-body">
+<div id="panel_setting_backup">
+    <!-- BEGIN PAGE HEADER-->
+    <!-- BEGIN PAGE BAR -->
+    <div class="page-bar c-page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <a href="javascript:;" class="btn-move-panel bread-active">Backup and Download</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- END PAGE BAR -->
+    <!-- END PAGE HEADER-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet light portlet-fit portlet-datatable bordered">
+                <div class="portlet-body">
+                    <a id="download_file_latest" class="display-none" href="{{ $last != null ? url('/storage/backup/' . $last->name) : '' }}">1</a>
+                    <a id="download_file_old" class="display-none" href="{{ $old != null ? url('/storage/backup/' . $old->name) : '' }}">1</a>
+                    <iframe id="my_iframe" style="display:none;"></iframe>
+                    <div class="row">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Database Backup</label>
+                                <div class="col-md-8">
+                                    <p id="span_availalble" class="backup-info {{ $last != null ? '' : 'display-none' }}"><i class="backup-icon-avaiable fa fa-check"></i> Available</p>
+                                    <p id="span_unavailalble" class="backup-info {{ $last != null ? 'display-none' : '' }}"><i class="backup-icon-unavaiable fa fa-close"></i> Unavailable</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">File Information</label>
+                                <div class="col-md-8">
+                                    <div id="file_info_exist" class="{{$last != null ? '' : 'display-none'}}">
+                                        <p class="backup-info">File Name: <b id="backup_filename">{{ $last != null ? $last->name : '' }}</b></p>
+                                        <p class="backup-info">Size: <b id="backup_filesize">{{ $last != null ? (round($last->size / 1024, 2)) : '' }} KB ({{ $last != null ? $last->size : '' }} bytes)</b></p>
+                                        <p class="backup-info">Backup Date: <b id="backup_date">{{ $last != null ? $last->created_at : '' }} ({{ $last != null ? Carbon\Carbon::now()->diffInDays(date_create($last->created_at)) : '' }} days ago)</b></p>
+                                    </div>
+                                    <div id="file_info_no" class="{{$last != null ? 'display-none' : ''}}">
+                                        <p class="backup-info">No Information</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Auto Backup</label>
+                                <div class="col-md-4">
+                                    <select id="backup_auto" class="form-control">
+                                        <option value="{{ config('constants.BACKUP_NONE') }}">None</option>
+                                        <option value="{{ config('constants.BACKUP_DAILY') }}">Daily</option>
+                                        <option value="{{ config('constants.BACKUP_WEEKILY') }}">Weekly</option>
+                                        <option value="{{ config('constants.BACKUP_BIWEEKLY') }}">Bi Weekly</option>
+                                        <option value="{{ config('constants.BACKUP_MONTHLY') }}">Monthly</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <button id="btn_download_custom" type="button" class="btn btn-lg btn-c-primary mt-20 pl-30 pr-30"><i class="fa fa-download"></i> Download Current One</button>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <button id="btn_download_auto_new" type="button" class="btn btn-lg btn-c-primary mt-20 pl-30 pr-30 {{ $last == null ? 'display-none' : '' }}"><i class="fa fa-download"></i> Download Latest One </button>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <button id="btn_download_auto_old" type="button" class="btn btn-lg btn-c-primary mt-20 pl-30 pr-30 {{ $old == null ? 'display-none' : '' }}"><i class="fa fa-download"></i> Download Old One </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -56,5 +117,5 @@
     var PAGE_SUB_ID = "page_settings_backup";
 
 </script>
-<script src="{{ url('assets/custom/scripts/settings/application/index.js?v=' . $randNum) }}" type="text/javascript"></script>
+<script src="{{ url('assets/custom/scripts/settings/backup/index.js?v=' . $randNum) }}" type="text/javascript"></script>
 @endsection

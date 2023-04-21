@@ -3,6 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
+use App\Mail\Subscribe;
+use App\Models\User;
+use App\Models\Employee;
+use App\Models\EmployeeActivity;
+use App\Models\Role;
+use App\Models\Document;
+use App\Models\EmployeeRequest;
 
 class HomeController extends Controller
 {
@@ -22,7 +32,135 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home.index')->with('randNum', rand());
+        $id = Auth::user()->employee->id;
+        $status = EmployeeRequest::select('status')->where('employee_id', $id)->get();
+
+        if(count($status) > 0)
+            return view('home.index')->with('randNum', rand())->with('status', $status[0]['status']);
+        return view('home.index')->with('randNum', rand())->with('status', 'exist');
+        
+    }
+
+    public function getRequestStatus()
+    {
+        $employee = Auth::user()->employee->role;
+        if($employee['name'] == 'Employee') {
+            $req = EmployeeRequest::with(['employee', 'requested_by'])
+                                    ->where('id', $employee['id'])
+                                    ->get();
+        }
+
+        return response()->json([
+            'result' => 'success',
+            'request' => $req
+        ]);
+    }
+
+    // Update Request Details
+    public function responseDoc(Request $request) {
+
+        // Validation TOOD
+        $request->validate([
+            'employee_id'  => ['required'],
+            'comment'      => ['required'],
+        ]);
+
+        $createArray = array();
+        if($request->ssn == '1' || $request->ssn == '2') {
+            $createArray = [
+                'doc_title_id'      => '0',
+                'employee_id'       =>  $request->employee_id,
+                'no'                => $request->ssn_doc['no'],
+                'attachment'        => $request->ssn_doc['attachment'],
+            ];
+            Document::create($createArray);
+        }
+        
+        if($request->auth == 1 || $request->auth == 2) {
+            $createArray = [
+                'doc_title_id'      => '1',
+                'employee_id'       =>  $request->employee_id,
+                'work_auth_id'      => $request->auth_doc['work_auth_id'],
+                'no'                => $request->auth_doc['no'],
+                'start_date'        => $request->auth_doc['start_date'],
+                'expire_date'       => $request->auth_doc['expire_date'],
+                'attachment'        => $request->auth_doc['attachment'],
+            ];
+            Document::create($createArray);
+        }
+        
+        if($request->state == 1 || $request->state == 2) {
+            $createArray = [
+                'doc_title_id'      => '2',
+                'employee_id'       =>  $request->employee_id,
+                'no'                => $request->state_doc['no'],
+                'exp_date'          => $request->state_doc['exp_date'],
+                'attachment'        => $request->state_doc['attachment'],
+            ];
+            Document::create($createArray);
+        }
+        if($request->passport == 1 || $request->passport == 2) {
+            $createArray = [
+                'doc_title_id'      => '3',
+                'employee_id'       =>  $request->employee_id,
+                'no'                => $request->passport_doc['no'],
+                'exp_date'          => $request->passport_doc['exp_date'],
+                'attachment'        => $request->passport_doc['attachment'],
+            ];
+            Document::create($createArray);
+        }
+        if($request->i94 == 1 || $request->i94 == 2) {
+            $createArray = [
+                'doc_title_id'      => '4',
+                'employee_id'       =>  $request->employee_id,
+                'no'                => $request->i94_doc['no'],
+                'exp_date'          => $request->i94_doc['exp_date'],
+                'i94_type'          => $request->i94_doc['i94_type'],
+                'attachment'        => $request->i94_doc['attachment'],
+            ];
+            Document::create($createArray);
+        }
+        if($request->visa_doc == 1 || $request->visa_doc == 2) {
+            $createArray = [
+                'doc_title_id'      => '5',
+                'employee_id'       =>  $request->employee_id,
+                'no'                => $request->visa_doc['no'],
+                'exp_date'          => $request->visa_doc['exp_date'],
+                'attachment'        => $request->visa_doc['attachment'],
+            ];
+            Document::create($createArray);
+        }
+        if($request->other_doc == 1 || $request->other_doc == 2) {
+            $createArray = [
+                'doc_title_id'      => '6',
+                'employee_id'       =>  $request->employee_id,
+                'comment'           => $request->other_doc['comment'],
+                'no'                => $request->other_doc['no'],
+                'exp_date'          => $request->other_doc['exp_date'],
+                'other_type'        => $request->other_doc['other_type'],
+                'attachment'        => $request->other_doc['attachment'],
+            ];
+            Document::create($createArray);
+        }
+
+        EmployeeRequest::where('employee_id', $request->employee_id)
+                        ->update([
+                            'employee_id'        =>  $request->employee_id,
+                            'ssn'                =>  $request->ssn,
+                            'work_auth'          =>  $request->auth,
+                            'state'              =>  $request->state,
+                            'passport'           =>  $request->passport,
+                            'i94'                =>  $request->i94,
+                            'visa'               =>  $request->visa,
+                            'other_document'     =>  $request->other,
+                            'responsed_on'       =>  date('Y-m-d'),
+                            'status'             =>  config('constants.EMP_RESPONSE'),
+                            'comment'            =>  $request->comment
+                        ]);
+
+        return response()->json([
+            'result' => 'success'
+        ]);
     }
 
     public function genEmailPwd(Request $request)

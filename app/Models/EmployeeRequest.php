@@ -37,4 +37,8 @@ class EmployeeRequest extends Model
     public function requested_by() {
         return $this->belongsTo(Employee::class, 'requested_by_id');
     }
+
+    public function approved_by() {
+        return $this->belongsTo(Employee::class, 'approver_id');
+    }
 }

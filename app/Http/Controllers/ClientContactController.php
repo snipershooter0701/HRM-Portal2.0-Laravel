@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Models\ClientContact;
+use App\Mail\Subscribe;
 
 class ClientContactController extends Controller
 {
@@ -114,8 +116,57 @@ class ClientContactController extends Controller
             'id' => ['required'],
         ]);
 
-        $client = ClientContact::find($this->request['id']);
-        $client->delete();
+        $contact = ClientContact::find($this->request['id']);
+        $contact->delete();
+
+        return response()->json([
+            'result' => 'success'
+        ]);
+    }
+
+    /**
+     * Set Primary contact.
+     */
+    public function setPrimary()
+    {
+        // Check Validation
+        $this->request->validate([
+            'id' => ['required'],
+            'client' => ['required'],
+            'isPrimary' => ['required']
+        ]);
+
+        $contacts = ClientContact::where([
+            ['client_id', '=', $this->request['client']]
+        ])->get();
+        foreach ($contacts as $contact) {
+            $contact->update([
+                'is_primary' => config('constants.STATE_INACTIVE')
+            ]);
+        }
+
+        $contact = ClientContact::find($this->request['id']);
+        $contact->update([
+            'is_primary' => $this->request['isPrimary']
+        ]);
+
+        return response()->json([
+            'result' => 'success'
+        ]);
+    }
+
+    /**
+     * Send notifications to notifiers.
+     */
+    public function sendNotify()
+    {
+        $to = $this->request['toNotifiers'];
+        $ccIds = explode(",", $this->request['ccNotifiers']);
+
+        foreach($ccIds as $ccId) {
+            $contact = ClientContact::find($ccId);
+            Mail::to($contact['email'])->send(new Subscribe("sacreddevking@gmail.com"));
+        }
 
         return response()->json([
             'result' => 'success'
@@ -201,11 +252,11 @@ class ClientContactController extends Controller
                 $finalRecord->last_name,
                 $finalRecord->email,
                 $finalRecord->phone,
-                '<div class="form-group>
-                    <div class="input-group">
-                        <label><input type="checkbox" class="icheck"> Add email to CC list </label>
-                        <label><input type="checkbox" checked class="icheck"> Primary Contact </label>
-                        <label><input type="checkbox" class="icheck"> Primary accounts email </label>
+                '<div class="">
+                    <div class="input-group text-left">
+                        <label><input type="checkbox" class="icheck add-contact-cc" data-id="' . $finalRecord->id . '" data-email="' . $finalRecord->email . '"> Add email to CC list </label>
+                        <label><input type="checkbox" class="icheck add-contact-pri" ' . ($finalRecord->is_primary ? 'checked' : '') . ' data-id="' . $finalRecord->id . '" data-client="' . $finalRecord->client_id . '"> Primary Contact </label>
+                        <label><input type="checkbox" class="icheck add-contact-email" data-id="' . $finalRecord->id . '" data-email="' . $finalRecord->email . '"> Primary accounts email </label>
                     </div>
                 </div>',
                 '<a href="javascript:;" class="btn btn-xs btn-c-primary btn-contactinfo-edit" data-id="' . $finalRecord->id . '"><i class="fa fa-pencil"></i></a>

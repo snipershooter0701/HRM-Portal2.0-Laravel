@@ -1,7 +1,58 @@
 $(document).ready(function () {
-    // Create Button (Business Info)
+    // Update Button (Business Info)
     $('#btn_edit_businfo').click(function () {
         updateBusinessInfo();
+    });
+
+    // When Click "Same as invoice address"
+    $('#edit_bus_cli_sameas').change(function () {
+        var sameAs = document.getElementById('edit_bus_cli_sameas').checked;
+        setEditClientAddressFieldsStatus(sameAs);
+    });
+
+    $('#edit_bus_inv_apt').keyup(function () {
+        // If same as invoice address
+        if (document.getElementById('edit_bus_cli_sameas').checked) {
+            $('#edit_bus_cli_apt').val($(this).val());
+        }
+    });
+
+    $('#edit_bus_inv_street').keyup(function () {
+        // If same as invoice address
+        if (document.getElementById('edit_bus_cli_sameas').checked) {
+            $('#edit_bus_cli_street').val($(this).val());
+        }
+    });
+
+    $('#edit_bus_inv_city').keyup(function () {
+        // If same as invoice address
+        if (document.getElementById('edit_bus_cli_sameas').checked) {
+            $('#edit_bus_cli_city').val($(this).val());
+        }
+    });
+
+    $('#edit_bus_inv_state').change(function () {
+        // If same as invoice address
+        if (document.getElementById('edit_bus_cli_sameas').checked) {
+            $('#edit_bus_cli_state').val($(this).val());
+        }
+    });
+
+    $('#edit_bus_inv_country').change(function () {
+        var country = $(this).val();
+        changeEditBusInvCountry(country);
+    });
+
+    $('#edit_bus_inv_zipcode').keyup(function () {
+        // If same as invoice address
+        if (document.getElementById('edit_bus_cli_sameas').checked) {
+            $('#edit_bus_cli_zipcode').val($(this).val());
+        }
+    });
+
+    $('#create_bus_cli_country').change(function () {
+        var country = $(this).val();
+        changeAddBusCliCountry(country);
     });
 });
 
@@ -166,6 +217,110 @@ function updateBusinessInfo() {
                 ];
                 showServerValidationErrors(validationFields, errors);
 
+                toastr.error(err.message, "Error");
+            }
+        }
+    });
+}
+
+/**
+ * Enable or Disable client address fields by same as invoice address
+ */
+function setEditClientAddressFieldsStatus(isDisable) {
+    if (isDisable) {
+        // Set values as same as invoice location.
+        $('#edit_bus_cli_apt').val($('#edit_bus_inv_apt').val());
+        $('#edit_bus_cli_street').val($('#edit_bus_inv_street').val());
+        $('#edit_bus_cli_city').val($('#edit_bus_inv_city').val());
+        $('#edit_bus_cli_state').val($('#edit_bus_inv_state').val());
+        $('#edit_bus_cli_country').val($('#edit_bus_inv_country').val());
+        $('#edit_bus_cli_zipcode').val($('#edit_bus_inv_zipcode').val());
+
+        // Disable all inputs
+        $('#edit_bus_cli_apt').prop('disabled', true);
+        $('#edit_bus_cli_street').prop('disabled', true);
+        $('#edit_bus_cli_city').prop('disabled', true);
+        $('#edit_bus_cli_state').prop('disabled', true);
+        $('#edit_bus_cli_country').prop('disabled', true);
+        $('#edit_bus_cli_zipcode').prop('disabled', true);
+    } else {
+        $('#edit_bus_cli_apt').prop('disabled', false);
+        $('#edit_bus_cli_street').prop('disabled', false);
+        $('#edit_bus_cli_city').prop('disabled', false);
+        $('#edit_bus_cli_state').prop('disabled', false);
+        $('#edit_bus_cli_country').prop('disabled', false);
+        $('#edit_bus_cli_zipcode').prop('disabled', false);
+    }
+}
+
+/**
+ * Change Business Invoice location's country -> change state
+ */
+function changeEditBusInvCountry(country) {
+    // If same as invoice address
+    if (document.getElementById('edit_bus_cli_sameas').checked) {
+        $('#edit_bus_cli_country').val(country);
+    }
+
+    var formData = {
+        id: country
+    };
+
+    callAjax({
+        url: BASE_URL + '/client/list/get_states',
+        type: "POST",
+        data: formData,
+        success: function (data) {
+            if (data['result'] == 'success') {
+                var states = data['states'];
+
+                $('#edit_bus_inv_state').html("");
+                for (var i in states) {
+                    $('#edit_bus_inv_state').append('<option value="' + states[i]['id'] + '">' + states[i]['state_name'] + '</option>')
+                }
+
+                // If same as invoice address
+                if (document.getElementById('edit_bus_cli_sameas').checked) {
+                    $('#edit_bus_cli_state').html("");
+                    for (var i in states) {
+                        $('#edit_bus_cli_state').append('<option value="' + states[i]['id'] + '">' + states[i]['state_name'] + '</option>')
+                    }
+                }
+            }
+        },
+        error: function (err) {
+            var errors = err.errors;
+            if (errors) {
+                toastr.error(err.message, "Error");
+            }
+        }
+    });
+}
+
+/**
+ * Change Business client address's country -> change state
+ */
+function changeAddBusCliCountry(country) {
+    var formData = {
+        id: country
+    };
+
+    callAjax({
+        url: BASE_URL + '/client/list/get_states',
+        type: "POST",
+        data: formData,
+        success: function (data) {
+            if (data['result'] == 'success') {
+                var states = data['states'];
+                $('#edit_bus_cli_state').html("");
+                for (var i in states) {
+                    $('#edit_bus_cli_state').append('<option value="' + states[i]['id'] + '">' + states[i]['state_name'] + '</option>')
+                }
+            }
+        },
+        error: function (err) {
+            var errors = err.errors;
+            if (errors) {
                 toastr.error(err.message, "Error");
             }
         }

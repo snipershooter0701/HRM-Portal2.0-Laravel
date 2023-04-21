@@ -22,6 +22,7 @@ class ClientContact extends Model
         'last_name',
         'email',
         'phone',
+        'is_primary'
     ];
 
     /**

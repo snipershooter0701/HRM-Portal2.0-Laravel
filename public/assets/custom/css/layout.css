@@ -19,6 +19,14 @@
     padding-top: 7px !important;
 }
 
+.pl-30 {
+    padding-left: 30px !important;
+}
+
+.pr-30 {
+    padding-right: 30px !important;
+}
+
 .mt-0 {
     margin-top: 0px !important;
 }
@@ -119,6 +127,10 @@
     text-align: right !important;
 }
 
+.text-center {
+    text-align: center !important;
+}
+
 .float-right {
     float: right !important;
 }
@@ -140,6 +152,7 @@
 .line-height-none {
     line-height: 0;
 }
+
 /* ============================ END NECESSARY STYLES ============================ */
 
 
@@ -159,7 +172,7 @@
 }
 
 .backcolor-light-grey {
-    background-color: #f9f9f9  !important;
+    background-color: #f9f9f9 !important;
 }
 
 /* ============================== END COLOR STYLES ============================== */
@@ -169,10 +182,19 @@
     border-radius: 5px !important;
 }
 
+.btn-c-success {
+    color: #fff;
+    background-color: #36c6d3;
+}
+
+.btn-c-success:hover {
+    color: #fff;
+    background-color: #27a4b0;
+}
+
 .btn-c-primary {
     color: #FFFFFF;
     background-color: #3699FF;
-    border-radius: 5px !important;
 }
 
 .btn-c-primary:hover {
@@ -188,19 +210,16 @@
 .btn-c-info {
     color: #FFFFFF;
     background-color: #2BC5BD;
-    border-radius: 5px !important;
 }
 
 .btn-c-danger {
     color: #FFFFFF;
     background-color: #BB0000;
-    border-radius: 5px !important;
 }
 
 .btn-c-grey {
     color: #FFFFFF;
     background-color: #7E8C9C;
-    border-radius: 5px !important;
 }
 
 .btn-c-grey:hover {
@@ -322,6 +341,7 @@ h4.section-head {
 .alert i {
     font-size: 18px !important;
 }
+
 /* ================================ END ALERT STYLES =============================== */
 
 /* ============================== BEGIN FILEINPUT STYLES ============================= */
@@ -418,7 +438,7 @@ hr {
     background: #C9D1D5 !important;
 }
 
-.page-header.navbar .top-menu .navbar-nav .dropdown .dropdown-menu i{
+.page-header.navbar .top-menu .navbar-nav .dropdown .dropdown-menu i {
     font-size: 12px !important;
 }
 
@@ -600,27 +620,6 @@ hr {
     height: 24px !important;
     padding: 1px 12px;
 }
-
-.form-group.has-notifier input {
-    border: none !important;
-    border-bottom: 1px solid #c2cad8 !important;
-    border-radius: unset !important;
-}
-
-.form-group.has-notifier .input-group-addon {
-    padding: 0 12px !important;
-    font-size: 14px !important;
-    background: none;
-    border: none;
-    border-bottom: 1px solid #c2cad8 !important;
-}
-
-.form-group.has-notifier textarea {
-    border: none;
-    resize: none;
-    height: 250px;
-}
-
 
 .form-body .form-group input[type=file] {
     margin-top: 4px !important;

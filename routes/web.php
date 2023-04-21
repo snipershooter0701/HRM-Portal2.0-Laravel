@@ -27,6 +27,8 @@ Route::middleware(['auth'])->group(function () {
     // Dashboard
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::post('/home/gen', [App\Http\Controllers\HomeController::class, 'genEmailPwd']);
+    Route::post('/home/req', [App\Http\Controllers\HomeController::class, 'getRequestStatus']);
+    Route::post('/home/response_doc', [App\Http\Controllers\HomeController::class, 'responseDoc']);
 
     // Common
     Route::post('/notifications', [App\Http\Controllers\NotificationController::class, 'getNotifications']);
@@ -43,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/del', [App\Http\Controllers\EmployeeController::class, 'deleteEmployee']);
             Route::post('/act', [App\Http\Controllers\EmployeeController::class, 'getEmpAct']);
             Route::post('/get-add-placements', [App\Http\Controllers\EmployeeController::class, 'getAddPlacements']);
+            Route::post('/do_mult_action', [App\Http\Controllers\EmployeeController::class, 'doMultAction']);
         });
 
         // Employee - All Request Details
@@ -53,6 +56,8 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/add', [App\Http\Controllers\EmployeeRequestController::class, 'addRequestDetails']);
             Route::post('/update', [App\Http\Controllers\EmployeeRequestController::class, 'updateRequestDetails']);
             Route::post('/del', [App\Http\Controllers\EmployeeRequestController::class, 'deleteRequestDetails']);
+            Route::post('/approv', [App\Http\Controllers\EmployeeRequestController::class, 'requestApprov']);
+            Route::post('/reject', [App\Http\Controllers\EmployeeRequestController::class, 'requestReject']);
             Route::post('/act', [App\Http\Controllers\EmployeeRequestController::class, 'getReqAct']);
         });
     });
@@ -65,6 +70,9 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/get_tbl_client_list', [App\Http\Controllers\ClientListController::class, 'getTableClientList']);
             Route::post('/get_tbl_client_acts_list', [App\Http\Controllers\ClientListController::class, 'getTableClientActsList']);
             Route::get('/get_client', [App\Http\Controllers\ClientListController::class, 'getClientById']);
+            Route::get('/get_new', [App\Http\Controllers\ClientListController::class, 'getNewClientInfo']);
+            Route::post('/get_states', [App\Http\Controllers\ClientListController::class, 'getStatesByCountryId']);
+            Route::post('/do_muti_action', [App\Http\Controllers\ClientListController::class, 'doMultiAction']);
 
             // Client (Business Info)
             Route::post('/create_business_info', [App\Http\Controllers\ClientListController::class, 'createBusinessInfo']);
@@ -73,16 +81,18 @@ Route::middleware(['auth'])->group(function () {
         });
 
         // Client (Contact Info)
-        Route::prefix('/contact_info')->middleware(['checkrole:/client/contact_info'])->group(function () {
+        Route::prefix('/contact_info')->group(function () {
             Route::post('/get_tbl_list', [App\Http\Controllers\ClientContactController::class, 'getTableContactInfoList']);
             Route::post('/get_by_id', [App\Http\Controllers\ClientContactController::class, 'getContactById']);
             Route::post('/create', [App\Http\Controllers\ClientContactController::class, 'create']);
             Route::post('/update', [App\Http\Controllers\ClientContactController::class, 'update']);
             Route::post('/delete', [App\Http\Controllers\ClientContactController::class, 'delete']);
+            Route::post('/set_primary', [App\Http\Controllers\ClientContactController::class, 'setPrimary']);
+            Route::post('/send_notify', [App\Http\Controllers\ClientContactController::class, 'sendNotify']);
         });
 
         // Client (Confidential)
-        Route::prefix('confidential')->middleware(['checkrole:/client/confidential'])->group(function () {
+        Route::prefix('confidential')->group(function () {
             Route::post('/get_tbl_list', [App\Http\Controllers\ClientConfidentialController::class, 'getTableConfidentialList']);
             Route::post('/create', [App\Http\Controllers\ClientConfidentialController::class, 'create']);
             Route::post('/update', [App\Http\Controllers\ClientConfidentialController::class, 'update']);
@@ -90,16 +100,18 @@ Route::middleware(['auth'])->group(function () {
         });
 
         // Client (Placement)
-        Route::prefix('placement')->middleware(['checkrole:/client/placement'])->group(function () {
+        Route::prefix('placement')->group(function () {
             Route::post('/get_ones_placement_tbl_list', [App\Http\Controllers\ClientPlacementController::class, 'getTableOnesPlacementList']);
             Route::post('/get_activities_tbl_list', [App\Http\Controllers\ClientPlacementController::class, 'getTableActivitiesList']);
             Route::post('/get_invoices_tbl_list', [App\Http\Controllers\ClientPlacementController::class, 'getTableInvoicesList']);
             Route::post('/create', [App\Http\Controllers\ClientPlacementController::class, 'create']);
             Route::post('/delete', [App\Http\Controllers\ClientPlacementController::class, 'delete']);
+            Route::post('/get_new', [App\Http\Controllers\ClientPlacementController::class, 'getNew']);
+            Route::post('/get_employee', [App\Http\Controllers\ClientPlacementController::class, 'getEmployeeById']);
         });
 
         // Client (Placement Activities)
-        Route::prefix('document')->middleware(['checkrole:/client/document'])->group(function () {
+        Route::prefix('document')->group(function () {
             Route::post('/get_tbl_list', [App\Http\Controllers\ClientDocumentController::class, 'getTableDocumentList']);
             Route::post('/create', [App\Http\Controllers\ClientDocumentController::class, 'create']);
         });
@@ -274,6 +286,11 @@ Route::middleware(['auth'])->group(function () {
         // Settings - (New Company)
         Route::prefix('new_company')->middleware(['checkrole:/settings/new_company'])->group(function () {
             Route::get('/', [App\Http\Controllers\SettingNewCompanyController::class, 'index']);
+            Route::post('/get_tbl_list', [App\Http\Controllers\SettingNewCompanyController::class, 'getCompanyList']);
+            Route::post('/get_company', [App\Http\Controllers\SettingNewCompanyController::class, 'getCompanyById']);
+            Route::post('/create', [App\Http\Controllers\SettingNewCompanyController::class, 'create']);
+            Route::post('/update', [App\Http\Controllers\SettingNewCompanyController::class, 'update']);
+            Route::post('/delete', [App\Http\Controllers\SettingNewCompanyController::class, 'delete']);
         });
 
         // Settings - (Application)
@@ -284,6 +301,8 @@ Route::middleware(['auth'])->group(function () {
         // Settings - (Backup & Download)
         Route::prefix('backup')->middleware(['checkrole:/settings/backup'])->group(function () {
             Route::get('/', [App\Http\Controllers\SettingBackupController::class, 'index']);
+            Route::post('/download_current', [App\Http\Controllers\SettingBackupController::class, 'downloadCurrent']);
+            Route::post('/set_auto', [App\Http\Controllers\SettingBackupController::class, 'changeAutoOption']);
         });
     });
 

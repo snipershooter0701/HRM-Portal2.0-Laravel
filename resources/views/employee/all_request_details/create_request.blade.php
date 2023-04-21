@@ -319,7 +319,7 @@
                                     <label class="control-label"></label>
                                     <div class="radio-list mt-7">
                                         <label class="radio-inline">
-                                            <input type="radio" id="other_n_a_radio" checked=""> N/A
+                                            <input type="radio" id="other_n_a_radio"> N/A
                                         </label>
                                     </div>
                                 </div>

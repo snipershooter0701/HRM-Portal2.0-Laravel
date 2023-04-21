@@ -1,4 +1,14 @@
 var gridContactInfoTable = new Datatable();
+var eltTo = $('#notifier_to');
+var eltCC = $('#notifier_cc');
+eltTo.tagsinput({
+    itemValue: 'value',
+    itemText: 'text',
+});
+eltCC.tagsinput({
+    itemValue: 'value',
+    itemText: 'text',
+});
 
 var TableContactInfo = function () {
     var initPickers = function () {
@@ -22,6 +32,51 @@ var TableContactInfo = function () {
                     var id = $(this).attr('data-id');
                     var email = $(this).attr('data-email');
                     deleteContact(id, email);
+                });
+
+                $('.add-contact-cc').click(function () {
+                    var id = $(this).attr('data-id');
+                    var email = $(this).attr('data-email');
+
+                    if ($(this)[0].checked)
+                        eltCC.tagsinput('add', { "value": id, "text": email });
+                    else
+                        eltCC.tagsinput('remove', { "value": id });
+                });
+
+                $('.add-contact-email').click(function () {
+                    var id = $(this).attr('data-id');
+                    var email = $(this).attr('data-email');
+
+                    eltTo.tagsinput('removeAll');
+                    if ($(this)[0].checked) {
+                        eltTo.tagsinput('add', { "value": id, "text": email });
+                        var contacts = $('.add-contact-email');
+                        for (var i in contacts)
+                            contacts[i].checked = false;
+                        $('.add-contact-email').parent().removeClass('checked');
+
+                        $(this)[0].checked = true;
+                        $(this).parent().addClass('checked');
+                    }
+                });
+
+                $('.add-contact-pri').click(function () {
+                    var id = $(this).attr('data-id');
+                    var email = $(this).attr('data-email');
+                    var client = $(this).attr('data-client');
+
+                    if ($(this)[0].checked) {
+                        var contacts = $('.add-contact-pri');
+                        for (var i in contacts)
+                            contacts[i].checked = false;
+                        $('.add-contact-pri').parent().removeClass('checked');
+
+                        $(this)[0].checked = true;
+                        $(this).parent().addClass('checked');
+                    }
+
+                    setPrimaryContact(id, email, client, ($(this)[0].checked ? 1 : 0));
                 });
             },
             loadingMessage: 'Loading...',
@@ -101,6 +156,10 @@ $(document).ready(function () {
     $('#btn_modal_edit_contact_update').click(function () {
         updateContact();
     });
+
+    $('#btn_edit_contract_send').click(function () {
+        sendContactMail();
+    });
 });
 
 /**
@@ -108,8 +167,9 @@ $(document).ready(function () {
  */
 function refreshContactInfoTable() {
     // gridContactInfoTable.setAjaxParam("customActionType", "group_action");
-    gridContactInfoTable.getDataTable().ajax.reload();
-    gridContactInfoTable.clearAjaxParams();
+    // gridContactInfoTable.getDataTable().ajax.reload();
+    // gridContactInfoTable.clearAjaxParams();
+    $('#btn_tbl_contact_info_reset').trigger("click");
 }
 
 /**
@@ -339,6 +399,64 @@ function deleteContact(id, email) {
                         toastr.error(err.message, "Error");
                 }
             });
+        }
+    });
+}
+
+/**
+ * Send Mail
+ */
+function sendContactMail() {
+    var toNotifiers = $('#notifier_to').val();
+    var ccNotifiers = $('#notifier_cc').val();
+
+    var formData = {
+        toNotifiers: toNotifiers,
+        ccNotifiers: ccNotifiers
+    };
+
+    callAjax({
+        url: BASE_URL + '/client/contact_info/send_notify',
+        type: "POST",
+        data: formData,
+        success: function (data) {
+            if (data['result'] == 'success') {
+                toastr.success("Sent Notifications.", "Success");
+            }
+        },
+        error: function (err) {
+            var errors = err.errors;
+            if (errors)
+                toastr.error(err.message, "Error");
+        }
+    });
+}
+
+/**
+ * Set Primary contact
+ */
+function setPrimaryContact(id, email, client, isPrimary) {
+    var formData = {
+        id: id,
+        client: client,
+        isPrimary: isPrimary
+    };
+
+    callAjax({
+        url: BASE_URL + '/client/contact_info/set_primary',
+        type: "POST",
+        data: formData,
+        success: function (data) {
+            if (data['result'] == 'success') {
+                // Refresh Table.
+                // refreshContactInfoTable();
+                toastr.success("Contact information (" + email + ") is successfully setted as primary.", "Success");
+            }
+        },
+        error: function (err) {
+            var errors = err.errors;
+            if (errors)
+                toastr.error(err.message, "Error");
         }
     });
 }

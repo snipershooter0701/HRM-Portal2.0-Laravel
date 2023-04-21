@@ -135,7 +135,6 @@ var TableEmployee = function () {
         grid_employee_list.init({
             src: $("#tbl_employee_list"),
             onSuccess: function (grid_employee_list, response) {
-
                 // set employee in create request
                 var i;
                 var emp_name = '<option value="">Select</option>';
@@ -155,7 +154,6 @@ var TableEmployee = function () {
 
                 // currently date
                 $('.curr_date').val(response['curr_date']);
-
             },
             onError: function (grid_employee_list) { },
             onDataLoad: function (grid_employee_list) {
@@ -1478,8 +1476,6 @@ function doValidationDoc() {
     else valid_visa = 2;
 
     if (!valid_ssn && !valid_auth && !valid_state && !valid_passport && !valid_i94 && !valid_visa) isValidDoc = false;
-
-    debugger;
 
     var other_doc = [];
     var idx = 0;

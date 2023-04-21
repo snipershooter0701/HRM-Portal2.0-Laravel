@@ -15,7 +15,7 @@
         <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-title">
                 <div class="caption">
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-edit-businfo">Business Info</span>
+                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_businfo">Business Info</span>
                     <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_contactinfo">Contact Info</span>
                     <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_confidential">Add Confidential</span>
                     <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_placement">Placements</span>

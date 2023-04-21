@@ -73,15 +73,22 @@
                         <div class="form-group col-sm-2">
                             <label class="control-label">State <span class="required" aria-required="true">*</span></label>
                             <select id="create_bus_inv_state" class="form-control">
-                                <option value="1">Alabama</option>
-                                <option value="2">Alaska</option>
+                                @php
+                                foreach($states as $state)
+                                echo '<option value="' . $state['id'] . '">' . $state['state_name'] . '</option>';
+                                @endphp
                             </select>
                         </div>
                         <div class="form-group col-sm-2">
                             <label class="control-label">Country <span class="required" aria-required="true">*</span></label>
                             <select id="create_bus_inv_country" class="form-control">
-                                <option value="1">United State</option>
-                                <option value="2">Alaska</option>
+                                @php
+                                foreach($countries as $country)
+                                if ($country['code'] == 'US')
+                                echo '<option value="' . $country['id'] . '" selected>' . $country['name'] . '</option>';
+                                else
+                                echo '<option value="' . $country['id'] . '">' . $country['name'] . '</option>';
+                                @endphp
                             </select>
                         </div>
                         <div class="form-group col-sm-2">
@@ -98,7 +105,7 @@
                         </div>
                         <div class="col-md-6 section-action mt-25 text-right">
                             <label>
-                                <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Same as invoice address
+                                <input id="create_bus_cli_sameas" type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue" checked> Same as invoice address
                             </label>
                         </div>
                     </div>
@@ -119,15 +126,22 @@
                         <div class="form-group col-sm-2">
                             <label class="control-label">State <span class="required" aria-required="true">*</span></label>
                             <select id="create_bus_cli_state" class="form-control">
-                                <option value="1">Alabama</option>
-                                <option value="2">Alaska</option>
+                                @php
+                                foreach($states as $state)
+                                echo '<option value="' . $state['id'] . '">' . $state['state_name'] . '</option>';
+                                @endphp
                             </select>
                         </div>
                         <div class="form-group col-sm-2">
                             <label class="control-label">Country <span class="required" aria-required="true">*</span></label>
                             <select id="create_bus_cli_country" class="form-control">
-                                <option value="1">United State</option>
-                                <option value="2">Alaska</option>
+                                @php
+                                foreach($countries as $country)
+                                if ($country['code'] == 'US')
+                                echo '<option value="' . $country['id'] . '" selected>' . $country['name'] . '</option>';
+                                else
+                                echo '<option value="' . $country['id'] . '">' . $country['name'] . '</option>';
+                                @endphp
                             </select>
                         </div>
                         <div class="form-group col-sm-2">

@@ -28,6 +28,7 @@ class Client extends Model
         'inv_suite_aptno',
         'inv_street',
         'inv_zipcode',
+        'addr_sameas',
         'addr_country_id',
         'addr_state_id',
         'addr_city',
@@ -51,13 +52,14 @@ class Client extends Model
     {
         return $this->hasMany(ClientPlacement::class)->where('job_status', config('constants.STATE_ACTIVE'));
     }
+    
 
     /**
      * Get the client's actived placement count.
      */
     public function activePlacementCnt()
     {
-        return $this->hasMany(ClientPlacement::class)->sum('id');
+        return $this->hasMany(ClientPlacement::class)->count();
     }
 
     /**
@@ -69,5 +71,21 @@ class Client extends Model
         // var_dump($this->hasMany(ClientPlacement::class)->where('job_status', 1)->count());
         // exit;
         // return array($this->hasMany(ClientPlacement::class)->where('job_status', 1)->count());
+    }
+
+    /**
+     * Get the Invoice country
+     */
+    public function invCountry()
+    {
+        return $this->belongsTo(Country::class, 'inv_country_id');
+    }
+
+    /**
+     * Get the Address country
+     */
+    public function addrCountry()
+    {
+        return $this->belongsTo(Country::class, 'addr_country_id');
     }
 }

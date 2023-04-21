@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Employee;
 use App\Models\EmployeeRequest;
 use App\Models\Document;
@@ -15,6 +16,7 @@ class EmployeeRequestController extends Controller
     public function __construct(Request $request)
     {
         $this->request = $request;
+       
     }
 
     public function index()
@@ -291,6 +293,47 @@ class EmployeeRequestController extends Controller
         ]);
     }
 
+    public function requestApprov(Request $request) {
+        $current_user = Auth::user()->employee->role->id;
+
+        // Check Validation
+        $request->validate([
+            'id' => ['required'],
+        ]);
+
+        EmployeeRequest::where('id', $request->id)
+                        ->update([
+                            'approver_id' => $current_user,
+                            'approved_on' => date('Y-m-d'),
+                            'status' => config('constants.EMP_APPROV')
+                        ]);
+
+        return response()->json([
+            'result' => 'success'
+        ]);
+    }
+
+    public function requestReject(Request $request) {
+        // Check Validation
+        $request->validate([
+            'id' => ['required'],
+        ]);
+
+        EmployeeRequest::where('id', $request->id)
+                        ->update([
+                            'approver_id' => Null,
+                            'approved_on' => Null,
+                            'status' => config('constants.EMP_REJECT')
+                        ]);
+
+        Document::where('employee_id', $request->emp_id)
+                ->delete();
+
+        return response()->json([
+            'result' => 'success'
+        ]);
+    }
+
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -328,8 +371,7 @@ class EmployeeRequestController extends Controller
                                     ->where($whereConds)
                                     ->get();
 
-        $filterEmployees = EmployeeRequest::with(['employee'])
-                                        ->with(['requested_by'])
+        $filterEmployees = EmployeeRequest::with(['employee', 'requested_by', 'approved_by'])
                         // ->where($whereConds)
                         // ->whereRelation('employee', 'email', '=', 'pij@outlook.com')
                                         ->get();
@@ -381,9 +423,11 @@ class EmployeeRequestController extends Controller
                 $filterItems[$idx]->requested_on ? $filterItems[$idx]->requested_on : 'ㅡ',
                 $filterItems[$idx]->responsed_on ? $filterItems[$idx]->responsed_on : 'ㅡ',
                 $filterItems[$idx]->requested_by->first_name . $filterItems[$idx]->requested_by->last_name,
-                $filterItems[$idx]->approved_by ? $filterItems[$idx]->approved_by : 'ㅡ',
+                $filterItems[$idx]->approved_by ? $filterItems[$idx]->approved_by->first_name . $filterItems[$idx]->approved_by->last_name : 'ㅡ',
                 $btn_type,
                 '<a href="javascript:;" class="btn btn-xs btn-c-primary btn-req-edit" data-id="'. $filterItems[$idx]->id . '" data-emp-id="'. $filterItems[$idx]->employee_id . '"><i class="fa fa-pencil"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-c-success btn-req-approv" data-id="'. $filterItems[$idx]->id . '" data-emp-id="'. $filterItems[$idx]->employee_id . '"><i class="fa fa-check"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-c-danger btn-req-reject" data-id="'. $filterItems[$idx]->id . '" data-emp-id="'. $filterItems[$idx]->employee_id . '"><i class="fa fa-close"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-c-grey btn-req-delete" data-id="'. $filterItems[$idx]->id . '" data-emp-id="'. $filterItems[$idx]->employee_id . '"><i class="fa fa-trash"></i></a>'
             );
             $idx++;

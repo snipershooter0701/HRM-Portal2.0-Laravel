@@ -13,4 +13,18 @@
     align-items: center;
     justify-content: center;
 }
+
 /* ============================= END MODAL CSS ============================ */
+
+/* ============================ BEGIN NOTIFIER CSS =========================== */
+.form-group.has-notifier textarea {
+    border: none;
+    resize: none;
+    height: 250px;
+}
+
+.form-group.has-notifier .label-info {
+    background-color: #659be0;
+}
+
+/* ============================ END NOTIFIER CSS =========================== */

@@ -1,0 +1,29 @@
+.req-add-section-header {
+    background: #EEECEC;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+}
+
+.req-add-section-header label {
+    margin-bottom: 0px;
+}
+
+.req-add-section-header .req-header-icon {
+    font-size: 20px;
+    color: #D1CECE;
+}
+
+.req-add-section-header .req-header-title {
+    font-weight: bold;
+}
+
+.req-add-section-body {
+    padding-left: 86px;
+    margin-top: 10px;
+}
+
+.star-active {
+    color: rgba(255, 187, 0, 0.918) !important;
+}

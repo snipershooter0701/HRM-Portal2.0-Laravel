@@ -1,15 +1,25 @@
-#modal_edit_permission.modal.fade.in {
-    top: 50% !important;
+/* ================================== BEGIN BACKUP MODULE ================================= */
+#panel_setting_backup .control-label {
+    font-size: 16px !important;
 }
 
-.modal.fade.in {
-    top: 30% !important;
+#panel_setting_backup .backup-icon-avaiable {
+    font-size: 16px !important;
+    color: #3699FF;
 }
 
-
-.form-group {
-    margin-bottom: 0px !important;
+#panel_setting_backup .backup-icon-unavaiable {
+    font-size: 16px !important;
+    color: #BB0000;
 }
 
-                            
-                            
+#panel_setting_backup .backup-info {
+    font-size: 16px !important;
+}
+
+#panel_setting_backup #backup_auto {
+    height: 30px !important;
+    padding: 2px 4px;
+}
+
+/* =================================== END BACKUP MODULE ================================== */

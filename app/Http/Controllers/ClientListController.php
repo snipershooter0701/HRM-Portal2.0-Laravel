@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
+use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Client;
@@ -37,6 +39,8 @@ class ClientListController extends Controller
         $employees = Employee::all();
         $jobTires = JobTire::all();
         $docTypes = ClientPlacementDoctype::all();
+        $countries = Country::all();
+        $states = State::where([['country_code', '=', 'US']])->get();
 
         return view('client.client_list.index')->with([
             'randNum' => rand(),
@@ -44,7 +48,9 @@ class ClientListController extends Controller
             'clientPlacementDoctypes' => $clientPlacementDoctypes,
             'employees' => $employees,
             'jobTires' => $jobTires,
-            'docTypes' => $docTypes
+            'docTypes' => $docTypes,
+            'countries' => $countries,
+            'states' => $states
         ]);
     }
 
@@ -82,16 +88,54 @@ class ClientListController extends Controller
         // Params
         $id = $this->request['id'];
 
-        $client = Client::find($id);
+        $client = Client::with(['invCountry', 'addrCountry'])->where([['id', '=', $id]])->first();
         $confidential = ClientConfidential::where([
             ['client_id', '=', $this->request['id']],
             ['status', '=', config('constants.STATE_ACTIVE')]
         ])->get()->first();
+        $invStates = $client->invCountry->states;
+        $addrStates = $client->addrCountry->states;
 
         return response()->json([
             'result' => 'success',
             'client' => $client,
-            'confidential' => $confidential
+            'confidential' => $confidential,
+            'invStates' => $invStates,
+            'addrStates' => $addrStates
+        ]);
+    }
+
+    /**
+     * Get new client information.
+     */
+    public function getNewClientInfo()
+    {
+        $lastClient = Client::all()->last();
+
+        return response()->json([
+            'result' => 'success',
+            'last' => $lastClient
+        ]);
+    }
+
+    /**
+     * Get states by country code
+     */
+    public function getStatesByCountryId()
+    {
+        // Check Validation
+        $this->request->validate([
+            'id' => ['required'],
+        ]);
+
+        $country = Country::find($this->request['id']);
+        $states = State::where([
+            ['country_code', '=', $country['code']]
+        ])->get();
+
+        return response()->json([
+            'result' => 'success',
+            'states' => $states
         ]);
     }
 
@@ -113,6 +157,7 @@ class ClientListController extends Controller
             'inv_street' => ['required'],
             'inv_suite_aptno' => ['required'],
             'inv_zipcode' => ['required'],
+            'addr_sameas' => ['required'],
             'addr_country_id' => ['required'],
             'addr_state_id' => ['required'],
             'addr_city' => ['required'],
@@ -133,6 +178,7 @@ class ClientListController extends Controller
             'inv_suite_aptno' => $this->request['inv_suite_aptno'],
             'inv_street' => $this->request['inv_street'],
             'inv_zipcode' => $this->request['inv_zipcode'],
+            'addr_sameas' => $this->request['addr_sameas'],
             'addr_country_id' => $this->request['addr_country_id'],
             'addr_state_id' => $this->request['addr_state_id'],
             'addr_city' => $this->request['addr_city'],
@@ -220,6 +266,30 @@ class ClientListController extends Controller
             'result' => 'success'
         ]);
     }
+
+    /**
+     * Do Multi Action.
+     */
+    public function doMultiAction()
+    {
+        $this->request->validate([
+            'action' => ['required'],
+            'ids' => ['required']
+        ]);
+
+        $action = $this->request['action'];
+        $ids = $this->request['ids'];
+        if ($action == "delete") {
+            foreach ($ids as $id) {
+                $client = Client::find($id);
+                $client->delete();
+            }
+        }
+
+        return response()->json([
+            'result' => 'success'
+        ]);
+    }
     // ========================== END PUBLIC FUNCTIONS ==========================
 
     // ========================== BEGIN PRIVATE FUNCTIONS ==========================
@@ -229,7 +299,7 @@ class ClientListController extends Controller
     private function getClientTblRecords()
     {
         // Params
-        $columns = ['', '', 'business_name', 'email', 'contact_number', '', '', ''];
+        $columns = ['', '', 'business_name', 'email', 'contact_number', 'activePlacements', 'activePlacements', ''];
         $sortColumn = $columns[$this->request['order'][0]['column']];
         $sortType = $this->request['order'][0]['dir'];
         $start = $this->request['start'];
@@ -241,7 +311,7 @@ class ClientListController extends Controller
         // Get client records for filter condition.
         $whereConds = array();
         $placementCntFrom = 0;
-        $placementCntTo = 0;
+        $placementCntTo = config('constants.MAX_INTEGER');
         if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
             if ($this->request['filt_business_name'] != NULL)
                 $whereConds[] = ['business_name', 'like', '%' . $this->request['filt_business_name'] . '%'];
@@ -250,16 +320,23 @@ class ClientListController extends Controller
             if ($this->request['filt_contact_number'] != NULL)
                 $whereConds[] = ['contact_number', 'like', '%' . $this->request['filt_contact_number'] . '%'];
             if ($this->request['filt_status'] != NULL) {
-                if ($this->request['filt_status'] == config('constants.STATE_ACTIVE'))
+                if ($this->request['filt_status'] == config('constants.STATE_ACTIVE')) {
                     $placementCntFrom = 1;
-                else
+                    $placementCntTo = config('constants.MAX_INTEGER');
+                } else {
                     $placementCntFrom = 0;
+                    $placementCntTo = 0;
+                }
             }
             if ($this->request['filt_placements_from'] != NULL && $this->request['filt_placements_from'] > $placementCntFrom) {
                 $placementCntFrom = $this->request['filt_placements_from'];
             }
-            if ($this->request['filt_placements_to'] != NULL)
-                $placementCntTo = $this->request['filt_placements_to'];
+            if ($this->request['filt_placements_to'] != NULL) {
+                if ($this->request['filt_status'] != null && $this->request['filt_status'] == config('constants.STATE_INACTIVE'))
+                    $placementCntTo = 0;
+                else
+                    $placementCntTo = $this->request['filt_placements_to'];
+            }
         }
 
         $filteredRecords = Client::with([
@@ -267,14 +344,13 @@ class ClientListController extends Controller
         ])->where($whereConds)
             ->whereHas('activePlacements', function (Builder $query) {
             }, '>=', $placementCntFrom)
+            ->whereHas('activePlacements', function (Builder $query) {
+            }, '<=', $placementCntTo)
             ->get()
             ->sortBy([[$sortColumn, $sortType]])
             ->skip($start)
             ->take($length);
         // ->toArray();
-
-        // var_dump($filteredRecords);
-        // exit;
 
         $filteredCnt = count(Client::where($whereConds)->get());
 

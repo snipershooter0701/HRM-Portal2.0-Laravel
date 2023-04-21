@@ -15,7 +15,7 @@
         <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-title">
                 <div class="caption">
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-edit-businfo">Business Info</span>
+                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_businfo">Business Info</span>
                     <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_contactinfo">Contact Info</span>
                     <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_confidential">Add Confidential</span>
                     <span class="caption-helper mr-10 active-tab btn-move-panel" data-panelname="panel_edit_placement">Placements</span>
@@ -26,7 +26,8 @@
                 {{-- BEGIN PLACEMENT TABLE --}}
                 <div class="table-container">
                     <div class="actions">
-                        <button type="button" class="btn btn-sm btn-c-primary btn-move-panel" data-panelname="panel_create_placement"><i class="fa fa-plus-circle"></i> Add Placement </button>
+                        <button id="btn_show_add_placement_page" type="button" class="btn btn-sm btn-c-primary"><i class="fa fa-plus-circle"></i> Add Placement </button>
+                        <button id="go_to_add_placement_page" type="button" class="display-none btn-move-panel" data-panelname="panel_create_placement"></button>
                         <div id="tbl_placements_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-copy"></i></a>
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-upload"></i></a>
@@ -70,7 +71,13 @@
 
                                 {{-- Job Tire --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_job_tire">
+                                    <select name="filt_job_tire" class="form-control form-filter input-sm">
+                                        <option value="">Select...</option>
+                                        @php
+                                        foreach($jobTires as $jobTire)
+                                        echo '<option value="' . $jobTire->id . '">' . $jobTire->name . '</option>';
+                                        @endphp
+                                    </select>
                                 </td>
 
                                 {{-- Net Terms --}}

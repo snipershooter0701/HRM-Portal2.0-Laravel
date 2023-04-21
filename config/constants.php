@@ -8,9 +8,16 @@ return [
     'STATE_ACTIVE' => 1,
     'STATE_INACTIVE' => 0,
 
+    // Max Integer
+    'MAX_INTEGER' => 1000000000,
+
     'EMP_CATEGORY_W2' => 0,
     'EMP_CATEGORY_C2C' => 1,
     'EMP_CATEGORY_1099' => 2,
+
+    // User Signup watch
+    'USER_SIGNUP_NOT_WATECHED' => 0,
+    'USER_SIGNUP_WATECHED' => 1,
 
     'JOB_TIRE_REGULAR' => 1,
     'JOB_TIRE_2ND' => 2,
@@ -30,11 +37,20 @@ return [
     'DATE_RANGE_LAST_6_MTH' => 6,
     'DATE_RANGE_CUSTOM' => 7,
 
+    // ============================ BEGIN TIMESHEET ==============================
     'TIMESHEET_STATUS_REQESTED' => 0,
     'TIMESHEET_STATUS_APPROVED' => 1,
     'TIMESHEET_STATUS_REJECTED' => 2,
+    // ============================ END TIMESHEET ==============================
+    
+    // ============================ BEGIN TICKETS ==============================
+    'TICKET_STATUS_REQUESTED' => 0,
+    'TICKET_STATUS_ASSIGNED' => 1,
+    'TICKET_STATUS_COMPLETED' => 2,
+    // ============================ END TICKETS ==============================
 
-    // ========================== BEGIN MODULE SECURITY ============================
+    // ========================== BEGIN SETTINGS MOUDLE ============================
+    // Module security
     'ROLE_ACCESS_VIEW_NONE' => 0,
     'ROLE_ACCESS_VIEW_OWN' => 1,
     'ROLE_ACCESS_VIEW_SUBORDINATES' => 2,
@@ -59,7 +75,17 @@ return [
     'ROLE_MODULE_LEVEL_MODULE' => 0,
     'ROLE_MODULE_LEVEL_SUBMODULE' => 1,
     'ROLE_MODULE_LEVEL_ACCESS' => 2,
-    // =========================== END MODULE SECURITY =============================
+    
+    // Company Alignment
+    'COMPANY_ALIGNMENT_LEFTTORIGHT' => 0,
+    'COMPANY_ALIGNMENT_RIGHTTOLEFT' => 1,
+
+    'BACKUP_NONE' => 0,
+    'BACKUP_DAILY' => 1,
+    'BACKUP_WEEKILY' => 2,
+    'BACKUP_BIWEEKLY' => 3,
+    'BACKUP_MONTHLY' => 4,
+    // =========================== END SETTTINGS MODULE =============================
 
     // ============================ BEGIN USER SIGNUPS ==============================
     'USER_SIGNUP_NOT_WATECHED' => 0,
@@ -71,4 +97,10 @@ return [
     'TICKET_STATUS_ASSIGNED' => 1,
     'TICKET_STATUS_COMPLETED' => 2,
     // ============================ END TICKETS ==============================
+
+    // employee request
+    'EMP_REQ' => '0',
+    'EMP_RESPONSE' => '1',
+    'EMP_APPROV' => '2',
+    'EMP_REJECT' => '3',
 ];

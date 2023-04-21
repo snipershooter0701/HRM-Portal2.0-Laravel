@@ -54,6 +54,8 @@ $(document).ready(function () {
             }
         });
     });
+
+
 });
 
 var TableEmployee = function () {
@@ -76,7 +78,7 @@ var TableEmployee = function () {
                 var i;
                 var emp_name = '<option value="">Select</option>';
                 for (i = 0; i < employee.length; i++) {
-                    emp_name += '<option value="' + employee[0]['id'] + '">' + employee[i]['first_name'] + employee[i]['last_name'] + '</option>'
+                    emp_name += '<option value="' + employee[i]['id'] + '">' + employee[i]['first_name'] + employee[i]['last_name'] + '</option>'
                 }
                 $('#req_emp_name').html(emp_name);
             },
@@ -99,6 +101,17 @@ var TableEmployee = function () {
                             deleteRequestDetails(ids);
                         }
                     })
+                });
+
+                $('.btn-req-approv').click(function () {
+                    var id = $(this).attr('data-id');
+                    requestApprov(id);
+                });
+
+                $('.btn-req-reject').click(function () {
+                    var id = $(this).attr('data-id');
+                    var emp_id = $(this).attr('data-emp-id');
+                    requestReject(id, emp_id);
                 });
 
             },
@@ -275,6 +288,106 @@ function initCreatePage() {
 //////                                                    //////////
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
+
+function requestApprov(id) {
+
+    var formData = {
+        id: id
+    }
+    callAjax({
+        url: BASE_URL + '/employee/all_request_details/approv',
+        type: "POST",
+        data: formData,
+        success: function (data) {
+            if (data['result'] == 'success') {
+
+                // Refresh Table.
+                refreshRequestDetailsList();
+                toastr.success("Request is successfully approved.", "Success");
+
+            }
+        },
+        error: function (err) {
+            var errors = err.errors;
+            if (errors) {
+                // Show server validation error.
+                var validationFields = [
+                    'business_name' + CONST_VALIDATE_SPLITER + 'create_bus_name',
+                    'contact_number' + CONST_VALIDATE_SPLITER + 'create_bus_contact_num',
+                    'federal_id' + CONST_VALIDATE_SPLITER + 'create_bus_federal_id',
+                    'email' + CONST_VALIDATE_SPLITER + 'create_bus_email',
+                    'website' + CONST_VALIDATE_SPLITER + 'create_bus_website',
+                    'inv_country_id' + CONST_VALIDATE_SPLITER + 'create_bus_inv_country',
+                    'inv_state_id' + CONST_VALIDATE_SPLITER + 'create_bus_inv_state',
+                    'inv_city' + CONST_VALIDATE_SPLITER + 'create_bus_inv_city',
+                    'inv_street' + CONST_VALIDATE_SPLITER + 'create_bus_inv_street',
+                    'inv_suite_aptno' + CONST_VALIDATE_SPLITER + 'create_bus_inv_apt',
+                    'inv_zipcode' + CONST_VALIDATE_SPLITER + 'create_bus_inv_zipcode',
+                    'addr_country_id' + CONST_VALIDATE_SPLITER + 'create_bus_cli_country',
+                    'addr_state_id' + CONST_VALIDATE_SPLITER + 'create_bus_cli_state',
+                    'addr_city' + CONST_VALIDATE_SPLITER + 'create_bus_cli_city',
+                    'addr_street' + CONST_VALIDATE_SPLITER + 'create_bus_cli_street',
+                    'addr_suite_aptno' + CONST_VALIDATE_SPLITER + 'create_bus_cli_apt',
+                    'addr_zipcode' + CONST_VALIDATE_SPLITER + 'create_bus_cli_zipcode',
+                ];
+                showServerValidationErrors(validationFields, errors);
+
+                // toastr.error(err.message, "Error");
+            }
+        }
+    });
+}
+
+function requestReject(id, emp_id) {
+
+    var formData = {
+        id: id,
+        emp_id: emp_id
+    }
+    callAjax({
+        url: BASE_URL + '/employee/all_request_details/reject',
+        type: "POST",
+        data: formData,
+        success: function (data) {
+            if (data['result'] == 'success') {
+
+                // Refresh Table.
+                refreshRequestDetailsList();
+                toastr.success("Request is successfully rejected.", "Success");
+
+            }
+        },
+        error: function (err) {
+            var errors = err.errors;
+            if (errors) {
+                // Show server validation error.
+                var validationFields = [
+                    'business_name' + CONST_VALIDATE_SPLITER + 'create_bus_name',
+                    'contact_number' + CONST_VALIDATE_SPLITER + 'create_bus_contact_num',
+                    'federal_id' + CONST_VALIDATE_SPLITER + 'create_bus_federal_id',
+                    'email' + CONST_VALIDATE_SPLITER + 'create_bus_email',
+                    'website' + CONST_VALIDATE_SPLITER + 'create_bus_website',
+                    'inv_country_id' + CONST_VALIDATE_SPLITER + 'create_bus_inv_country',
+                    'inv_state_id' + CONST_VALIDATE_SPLITER + 'create_bus_inv_state',
+                    'inv_city' + CONST_VALIDATE_SPLITER + 'create_bus_inv_city',
+                    'inv_street' + CONST_VALIDATE_SPLITER + 'create_bus_inv_street',
+                    'inv_suite_aptno' + CONST_VALIDATE_SPLITER + 'create_bus_inv_apt',
+                    'inv_zipcode' + CONST_VALIDATE_SPLITER + 'create_bus_inv_zipcode',
+                    'addr_country_id' + CONST_VALIDATE_SPLITER + 'create_bus_cli_country',
+                    'addr_state_id' + CONST_VALIDATE_SPLITER + 'create_bus_cli_state',
+                    'addr_city' + CONST_VALIDATE_SPLITER + 'create_bus_cli_city',
+                    'addr_street' + CONST_VALIDATE_SPLITER + 'create_bus_cli_street',
+                    'addr_suite_aptno' + CONST_VALIDATE_SPLITER + 'create_bus_cli_apt',
+                    'addr_zipcode' + CONST_VALIDATE_SPLITER + 'create_bus_cli_zipcode',
+                ];
+                showServerValidationErrors(validationFields, errors);
+
+                // toastr.error(err.message, "Error");
+            }
+        }
+    });
+}
+
 
 function addRequestDetails() {
 

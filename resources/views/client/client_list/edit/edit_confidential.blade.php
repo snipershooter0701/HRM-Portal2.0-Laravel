@@ -15,7 +15,7 @@
         <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-title">
                 <div class="caption">
-                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel-edit-businfo">Business Info</span>
+                    <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_businfo">Business Info</span>
                     <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_contactinfo">Contact Info</span>
                     <span class="caption-helper mr-10 active-tab btn-move-panel" data-panelname="panel_edit_confidential">Add Confidential</span>
                     <span class="caption-helper mr-10 btn-move-panel" data-panelname="panel_edit_placement">Placements</span>
@@ -32,19 +32,19 @@
                     </div>
                     {{-- BEGIN NEW RECORD FORM --}}
                     <div class="row">
-                        <div class="form-group col-sm-3">
+                        <div class="form-group col-sm-2">
                             <label class="control-label">Bank Name <span class="required" aria-required="true">*</span></label>
                             <input id="add_conf_bankname" type="text" class="form-control">
                         </div>
-                        <div class="form-group col-sm-3">
+                        <div class="form-group col-sm-2">
                             <label class="control-label">Account Type <span class="required" aria-required="true">*</span></label>
                             <input id="add_conf_accounttype" type="text" class="form-control">
                         </div>
-                        <div class="form-group col-sm-3">
+                        <div class="form-group col-sm-2">
                             <label class="control-label">Account Number <span class="required" aria-required="true">*</span></label>
                             <input id="add_conf_accountnumber" type="text" class="form-control">
                         </div>
-                        <div class="form-group col-sm-3">
+                        <div class="form-group col-sm-2">
                             <label class="control-label">Routing Number <span class="required" aria-required="true">*</span></label>
                             <input id="add_conf_routingnumber" type="text" class="form-control">
                         </div>
@@ -67,15 +67,22 @@
                         <div class="form-group col-sm-2">
                             <label class="control-label">State <span class="required" aria-required="true">*</span></label>
                             <select id="add_conf_state" class="form-control">
-                                <option value="1">Alabama</option>
-                                <option value="2">Alaska</option>
+                                @php
+                                foreach($states as $state)
+                                echo '<option value="' . $state['id'] . '">' . $state['state_name'] . '</option>';
+                                @endphp
                             </select>
                         </div>
                         <div class="form-group col-sm-2">
                             <label class="control-label">Country <span class="required" aria-required="true">*</span></label>
                             <select id="add_conf_country" class="form-control">
-                                <option value="1">United State</option>
-                                <option value="2">Alaska</option>
+                                @php
+                                foreach($countries as $country)
+                                if ($country['code'] == 'US')
+                                echo '<option value="' . $country['id'] . '" selected>' . $country['name'] . '</option>';
+                                else
+                                echo '<option value="' . $country['id'] . '">' . $country['name'] . '</option>';
+                                @endphp
                             </select>
                         </div>
                         <div class="form-group col-sm-2">

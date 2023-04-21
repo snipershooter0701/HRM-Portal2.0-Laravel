@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
+use App\Mail\Subscribe;
 use App\Models\User;
 use App\Models\Employee;
 use App\Models\EmployeeActivity;
@@ -23,6 +26,8 @@ class EmployeeController extends Controller
 
     public function index()
     {
+        
+
         return view('employee.all_employees.employee_index')->with('randNum', rand());
     }
 
@@ -431,6 +436,35 @@ class EmployeeController extends Controller
                 'updated_by'    =>  '1',               // session
                 'description'   =>  'Delete Employee',
             ]);
+        }
+
+        return response()->json([
+            'result' => 'success'
+        ]);
+    }
+
+
+    // Do Multi action
+    public function doMultAction(Request $request)
+    {
+        // Check Validation
+        $request->validate([
+            'actionOpt' => ['required'],
+            'ids' => ['required']
+        ]);
+
+        $actionOpt = $request->actionOpt;
+        $ids = $request->ids;
+        foreach($ids as $id) {
+            $employee = Employee::find($id);
+            $email = $employee['email'];
+            // $subscriber = Sub::create([
+            //     'email' => $email
+            // ]);
+
+            // if ($subscriber) {
+                Mail::to($email)->send(new Subscribe($email));
+            // }
         }
 
         return response()->json([

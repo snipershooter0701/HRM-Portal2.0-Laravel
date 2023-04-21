@@ -42,11 +42,11 @@
                         </div>
                         <div class="form-group col-sm-3">
                             <label class="control-label">Placement ID <span class="required" aria-required="true">*</span></label>
-                            <input id="add_placement_id" type="text" class="form-control" >
+                            <input id="add_placement_id" type="text" class="form-control" readonly>
                         </div>
                         <div class="form-group col-sm-3">
                             <label class="control-label">Category</label>
-                            <select id="add_placement_category" class="form-control">
+                            <select id="add_placement_category" class="form-control" readonly>
                                 <option value="">Select...</option>
                                 <option value="{{ config('constants.EMP_CATEGORY_W2') }}">W2</option>
                                 <option value="{{ config('constants.EMP_CATEGORY_C2C') }}">C2C</option>
@@ -76,7 +76,7 @@
                         </div>
                         <div class="form-group col-sm-3">
                             <label class="control-label">Client PO ID <span class="required" aria-required="true">*</span></label>
-                            <input id="add_placement_po_id" type="text" class="form-control">
+                            <input id="add_placement_po_id" type="text" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="row">
@@ -86,7 +86,7 @@
                         </div>
                         <div class="form-group col-sm-3">
                             <label class="control-label">Job Status</label>
-                            <select id="add_placement_jobstatus" class="form-control">
+                            <select id="add_placement_jobstatus" class="form-control" readonly>
                                 <option value="">Select...</option>
                                 <option value="{{ config('constants.STATE_ACTIVE') }}">Active</option>
                                 <option value="{{ config('constants.STATE_INACTIVE') }}">Inactive</option>
@@ -265,7 +265,7 @@
                 <div class="form-actions text-right">
                     <button type="button" class="btn btn-sm btn-c-primary pull-left">End Placement</button>
                     <button id="btn_add_placement_create" type="submit" class="btn btn-sm btn-c-primary">Save</button>
-                    <button id="btn_add_placement_cancel" type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-edit-placement">Cancel</button>
+                    <button id="btn_add_placement_cancel" type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel_edit_placement">Cancel</button>
                 </div>
                 <!-- END ACTION -->
             </div>

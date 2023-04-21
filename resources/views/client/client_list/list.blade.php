@@ -8,7 +8,8 @@
     </ul>
     <div class="page-toolbar">
         <div class="btn-group pull-right">
-            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel_create_businfo"><i class="fa fa-plus-circle"></i> Add Client </button>
+            <button id="btn_add_client_page" type="button" class="btn btn-sm btn-c-primary mr-10"><i class="fa fa-plus-circle"></i> Add Client </button>
+            <button id="btn_to_add_client_page" type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10 display-none" data-panelname="panel_create_businfo"><i class="fa fa-plus-circle"></i> Add Client </button>
             <button id="btn_edit_client_page" class="btn-move-panel display-none" data-panelname="panel_edit_businfo"><i class="fa fa-plus-circle"></i> Edit Client </button>
             {{-- <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel_create_placement"><i class="fa fa-plus-circle"></i> Add Placement </button> --}}
             {{-- <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel_create_document"><i class="fa fa-plus-circle"></i> Add Document </button> --}}
@@ -26,16 +27,16 @@
                     <div class="actions">
                         <div id="tbl_client_list_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-copy"></i></a>
-                            <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-upload"></i></a>
-                            <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-download"></i></a>
-                            <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-print"></i></a>
+                            <a href="javascript:;" data-action="2" class="btn-tbl-action tool-action"><i class="fa fa-upload"></i></a>
+                            <a href="javascript:;" data-action="3" class="btn-tbl-action tool-action"><i class="fa fa-download"></i></a>
+                            <a href="javascript:;" data-action="0" class="btn-tbl-action tool-action"><i class="fa fa-print"></i></a>
                         </div>
                     </div>
                     <div class="table-actions-wrapper">
                         <span> </span>
                         <select class="table-group-action-input form-control input-inline input-small input-sm">
                             <option value="">Select...</option>
-                            <option value="Cancel">Delete</option>
+                            <option value="delete">Delete</option>
                         </select>
                         <button class="btn btn-sm table-group-action-submit btn-c-primary">
                             <i class="fa fa-check"></i> Submit</button>
@@ -78,8 +79,8 @@
                                 <td>
                                     <select name="filt_status" class="form-control form-filter input-sm">
                                         <option value="">Select...</option>
-                                        <option value="{{ config('status.STATE_ACTIVE') }}">Active</option>
-                                        <option value="{{ config('status.STATE_INACTIVE') }}">Inactive</option>
+                                        <option value="{{ config('constants.STATE_ACTIVE') }}">Active</option>
+                                        <option value="{{ config('constants.STATE_INACTIVE') }}">Inactive</option>
                                     </select>
                                 </td>
 

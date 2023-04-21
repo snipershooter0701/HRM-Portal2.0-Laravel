@@ -51,7 +51,7 @@ var TableClientList = function () {
                 "columnDefs": [
                     {  // set default column settings
                         'orderable': false,
-                        'targets': [0, 1, 5, 7]
+                        'targets': [0, 1, 7]
                     }
                 ],
                 "order": [
@@ -80,11 +80,9 @@ var TableClientList = function () {
             e.preventDefault();
             var action = $(".table-group-action-input", gridClientListTable.getTableWrapper());
             if (action.val() != "" && gridClientListTable.getSelectedRowsCount() > 0) {
-                gridClientListTable.setAjaxParam("customActionType", "group_action");
-                gridClientListTable.setAjaxParam("customActionName", action.val());
-                gridClientListTable.setAjaxParam("id", gridClientListTable.getSelectedRows());
-                gridClientListTable.getDataTable().ajax.reload();
-                gridClientListTable.clearAjaxParams();
+                var actionVal = action.val();
+                var ids = gridClientListTable.getSelectedRows();
+                doListMultiAction(actionVal, ids);
             } else if (action.val() == "") {
                 App.alert({
                     type: 'danger',
@@ -103,10 +101,6 @@ var TableClientList = function () {
                 });
             }
         });
-
-        // gridClientListTable.setAjaxParam("customActionType", "group_action");
-        // gridClientListTable.getDataTable().ajax.reload();
-        // gridClientListTable.clearAjaxParams();
 
         // handle datatable custom tools
         $('#tbl_client_list_tools > a.tool-action').on('click', function () {
@@ -185,6 +179,10 @@ var TableClientList = function () {
 
 $(document).ready(function () {
     TableClientList.init();
+
+    $('#btn_add_client_page').click(function () {
+        showAddClientPage();
+    });
 });
 
 /**
@@ -230,6 +228,34 @@ function deleteClient(id, email) {
 }
 
 /**
+ * Show new client information to add page.
+ */
+function showAddClientPage() {
+    var formData = {};
+
+    callAjax({
+        url: BASE_URL + '/client/list/get_new',
+        type: "GET",
+        data: formData,
+        success: function (data) {
+            if (data['result'] == 'success') {
+                var last = data['last'];
+
+                // Set business information to form.
+                $('#create_bus_client_id').val(last['id'] + 1);
+
+                $('#btn_to_add_client_page').trigger('click');
+            }
+        },
+        error: function (err) {
+            var errors = err.errors;
+            if (errors)
+                toastr.error(err.message, "Error");
+        }
+    });
+}
+
+/**
  * Show client information to edit page.
  * @param {*} id 
  */
@@ -246,7 +272,19 @@ function showEditClientPage(id) {
             if (data['result'] == 'success') {
                 // Set business information to form.
                 var client = data['client'];
+                var addrStates = data['addrStates'];
+                var invStates = data['invStates'];
+
+                $('#edit_bus_cli_state').html("");
+                for (var i in addrStates)
+                    $('#edit_bus_cli_state').append('<option value="' + addrStates[i]['id'] + '">' + addrStates[i]['state_name'] + '</option>');
+
+                $('#edit_bus_inv_state').html("");
+                for (var i in invStates)
+                    $('#edit_bus_inv_state').append('<option value="' + invStates[i]['id'] + '">' + invStates[i]['state_name'] + '</option>');
+
                 $('#edit_client_id').val(client['id']);
+                $('#edit_bus_client_id').val(client['id']);
                 $('#edit_bus_name').val(client['business_name']);
                 $('#edit_bus_contact_num').val(client['contact_number']);
                 $('#edit_bus_federal_id').val(client['federal_id']);
@@ -258,12 +296,16 @@ function showEditClientPage(id) {
                 $('#edit_bus_inv_street').val(client['inv_street']);
                 $('#edit_bus_inv_apt').val(client['inv_suite_aptno']);
                 $('#edit_bus_inv_zipcode').val(client['inv_zipcode']);
+                document.getElementById('edit_bus_cli_sameas').checked = client['addr_sameas'] ? true : false;
                 $('#edit_bus_cli_country').val(client['addr_country_id']);
                 $('#edit_bus_cli_state').val(client['addr_state_id']);
                 $('#edit_bus_cli_city').val(client['addr_city']);
                 $('#edit_bus_cli_street').val(client['addr_street']);
                 $('#edit_bus_cli_apt').val(client['addr_suite_aptno']);
                 $('#edit_bus_cli_zipcode').val(client['addr_zipcode']);
+
+                // Set Edit Client Address as same as Invoice Location.
+                setEditClientAddressFieldsStatus(client['addr_sameas'] ? true : false);
 
                 // Set Confidential information to form
                 var confidential = data['confidential'];
@@ -303,6 +345,37 @@ function showEditClientPage(id) {
                 // Filter Invoice table
                 $('#filt_tbl_invoice_client_id').val(client['id']);
                 $('#btn_tbl_invoice_search').trigger('click');
+            }
+        },
+        error: function (err) {
+            var errors = err.errors;
+            if (errors)
+                toastr.error(err.message, "Error");
+        }
+    });
+}
+
+/**
+ * Do list's multi action.
+ */
+function doListMultiAction(actionVal, ids) {
+    var formData = {
+        action: actionVal,
+        ids: ids
+    };
+
+    callAjax({
+        url: BASE_URL + '/client/list/do_muti_action',
+        type: "POST",
+        data: formData,
+        success: function (data) {
+            if (data['result'] == 'success') {
+                // Refresh Table.
+                refreshClientList();
+
+                if (actionVal == "delete") {
+                    toastr.success("Successfully deleted.", "Success");
+                }
             }
         },
         error: function (err) {
