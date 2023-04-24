@@ -3,7 +3,7 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb ">
         <li>
-            <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel_all_timesheet_list">Submit Timesheets</a>
+            <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel_due_timesheet_list">Submit Timesheets</a>
         </li>
     </ul>
 </div>
@@ -16,11 +16,12 @@
                 <!-- BEGIN FORM-->
                 <form action="javascript:;">
                     <div class="form-body">
+                        <input id="create_timesheet_due_id" type="hidden" >
                         {{-- BEGIN BASE FORM --}}
                         <div class="row">
                             <div class="form-group col-sm-3">
                                 <label class="control-label">Employee Name<span class="required" aria-required="true">*</span></label>
-                                <select id="create_timesheet_employee" class="form-control">
+                                <select id="create_timesheet_employee" class="form-control" disabled>
                                     <option value="">Select...</option>
                                     @php
                                     foreach($employees as $employee) {
@@ -31,7 +32,7 @@
                             </div>
                             <div class="form-group col-sm-3">
                                 <label class="control-label">Job Tire<span class="required" aria-required="true">*</span></label>
-                                <select id="create_timesheet_jobtire" class="form-control">
+                                <select id="create_timesheet_jobtire" class="form-control" disabled>
                                     <option value="">Select...</option>
                                     @php
                                     foreach($jobTires as $jobTire) {
@@ -43,7 +44,7 @@
                             <div class="form-group col-sm-3">
                                 <label class="control-label">Work Range<span class="required" aria-required="true">*</span></label>
                                 <div class="input-group date date-picker" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
-                                    <input id="create_timesheet_workrange" type="text" class="form-control">
+                                    <input id="create_timesheet_workrange" type="text" class="form-control" disabled>
                                     <span class="input-group-btn">
                                         <button class="btn default" type="button">
                                             <i class="fa fa-calendar"></i>
@@ -230,7 +231,7 @@
                     </div>
                     <div class="form-actions text-right">
                         <button id="btn_submit_timeheet_ok" type="submit" class="btn btn-sm btn-c-primary">Submit</button>
-                        <button id="btn_submit_timeheet_cancel" type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel_all_timesheet_list">Cancel</button>
+                        <button id="btn_submit_timeheet_cancel" type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel_due_timesheet_list">Cancel</button>
                     </div>
                 </form>
                 <!-- END FORM-->

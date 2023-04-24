@@ -20,6 +20,7 @@
                 <div class="table-container">
                     <div class="row">
                         <div class="col-md-8">
+                            <button id="btn_to_submit_page" type="button" class="btn btn-sm btn-c-primary btn-move-panel display-none" data-panelname="panel_due_timesheet_submit"> </button>
                         </div>
                         <div class="col-md-4 actions">
                             <div id="tbl_due_timesheet_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
@@ -29,18 +30,6 @@
                                 <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-print"></i></a>
                             </div>
                         </div>
-                    </div>
-                    <div class="table-actions-wrapper">
-                        <span> </span>
-                        <select class="table-group-action-input form-control input-inline input-small input-sm">
-                            <option value="">Select...</option>
-                            <option value="Cancel">Cancel</option>
-                            <option value="Cancel">Hold</option>
-                            <option value="Cancel">On Hold</option>
-                            <option value="Close">Close</option>
-                        </select>
-                        <button class="btn btn-sm table-group-action-submit btn-c-primary">
-                            <i class="fa fa-check"></i> Submit</button>
                     </div>
                     <table id="tbl_due_timesheet" class="table table-striped table-bordered table-hover table-checkable">
                         <thead>
@@ -66,7 +55,15 @@
                                 {{-- Month/week--}}
                                 <td>
                                     <div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
-                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_monthweek" placeholder="From">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_monthweek_from" placeholder="From">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm default" type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
+                                        <input type="text" class="form-control form-filter input-sm" readonly name="filt_monthweek_to" placeholder="To">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
                                                 <i class="fa fa-calendar"></i>
@@ -82,7 +79,12 @@
 
                                 {{-- Job Tire --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_jobtire">
+                                    <select name="filt_jobtire" class="form-control form-filter input-sm">
+                                        <option value="">Select...</option>
+                                        @foreach($jobTires as $jobTire)
+                                        <option value="{{ $jobTire->id }}">{{ $jobTire->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </td>
 
                                 {{-- Client Name --}}

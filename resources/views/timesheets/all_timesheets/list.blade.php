@@ -3,7 +3,7 @@
 <div class="page-bar c-page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel-all-timesheet-list">All Timesheets</a>
+            <a href="javascript:;" class="btn-move-panel bread-active" data-panelname="panel_all_timesheet_list">All Timesheets</a>
         </li>
     </ul>
     <div class="page-toolbar">
@@ -20,7 +20,8 @@
                 <div class="table-container">
                     <div class="row">
                         <div class="col-md-8">
-                            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel" data-panelname="panel-create-timesheet"> Submit Timesheet </button>
+                            <button type="button" class="btn btn-sm btn-c-primary btn-move-panel" data-panelname="panel_create_timesheet"> Submit Timesheet </button>
+                            <button id="btn_to_edit_page" type="button" class="btn btn-sm btn-c-primary btn-move-panel display-none" data-panelname="panel_edit_timesheet"> </button>
                         </div>
                         <div class="col-md-4 actions">
                             <div id="tbl_all_timesheets_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
@@ -35,7 +36,7 @@
                         <span> </span>
                         <select class="table-group-action-input form-control input-inline input-small input-sm">
                             <option value="">Select...</option>
-                            <option value="Delete">Delete</option>
+                            <option value="delete">Delete</option>
                         </select>
                         <button class="btn btn-sm table-group-action-submit btn-c-primary">
                             <i class="fa fa-check"></i> Submit</button>
@@ -102,7 +103,8 @@
 
                                 {{-- Total Billable Hours --}}
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="filt_bill_hours">
+                                    <input type="text" class="form-control form-filter input-sm margin-bottom-5" name="filt_bill_hours_from" placeholder="From">
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_bill_hours_to" placeholder="To">
                                 </td>
 
                                 {{-- Status --}}

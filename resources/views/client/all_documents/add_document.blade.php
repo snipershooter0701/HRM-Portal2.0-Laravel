@@ -28,7 +28,7 @@
                                 @endphp
                             </select>
                             <div class="icheck-inline mt-10">
-                                <label><input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> General Document </label>
+                                <label><input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue" style="height: 15px !important;"> General Document </label>
                             </div>
                         </div>
                         <div class="form-group col-sm-3">
@@ -88,9 +88,9 @@
                                     </button>
                                 </span>
                             </div>
-                            <div class="icheck-list mt-10">
-                                <label><input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Same as placement Expire date </label>
-                                <label><input type="checkbox" checked class="icheck" data-checkbox="icheckbox_square-blue"> No Expiration date </label>
+                            <div class="mt-10">
+                                <label><input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue" style="height: 15px !important;"> Same as placement Expire date </label>
+                                <label><input type="checkbox" checked class="icheck" data-checkbox="icheckbox_square-blue" style="height: 15px !important;"> No Expiration date </label>
                             </div>
                         </div>
                     </div>
@@ -106,7 +106,7 @@
                 {{-- Vendor/Contractor Bill Rate --}}
                 <div class="form-actions text-right">
                     <button id="btn_add_document_create" type="button" class="btn btn-sm btn-c-primary">Save</button>
-                    <button id="btn_add_document_cancel" type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel-edit-documents">Cancel</button>
+                    <button id="btn_add_document_cancel" type="button" class="btn btn-sm btn-c-grey btn-move-panel" data-panelname="panel_edit_documents">Cancel</button>
                 </div>
                 <!-- END FORM-->
             </div>

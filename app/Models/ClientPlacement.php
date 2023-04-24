@@ -26,7 +26,6 @@ class ClientPlacement extends Model
         'client_bill_rate',
         'client_ot_bill_rate',
         'client_dt_bill_rate',
-        'client_vendor_id',
         'vendor_contractor_id',
         'vendor_contractor_netterms',
         'vendor_contractor_po_attachment',

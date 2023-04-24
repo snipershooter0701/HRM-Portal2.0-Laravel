@@ -68,23 +68,25 @@ class ClientPlacementController extends Controller
             'net_terms' => ['required', 'numeric'],
             'po_attachment' => ['required'],
             'po_id' => ['required'],
-            'client_bill_rate' => ['required'],
-            // 'client_ot_bill_rate' => ['required'],
-            // 'client_dt_bill_rate' => ['required'],
-            // 'client_vendor_id' => ['required', 'numeric'],
-            // 'vendor_contractor_id' => ['required'],
-            // 'vendor_contractor_netterms' => ['required'],
-            // 'vendor_contractor_po_attachment' => ['required'],
-            // 'vendor_contractor_po_id' => ['required'],
-            // 'vendor_contractor_bill_rate' => ['required'],
-            // 'vendor_contractor_at_bill_rate' => ['required'],
-            // 'vendor_contractor_dt_bill_rate' => ['required'],
             'job_title' => ['required'],
             'job_status' => ['required'],
             'job_start_date' => ['required'],
             'job_end_date' => ['required'],
             'invoice_frequency' => ['required'],
             'pay_effect_date' => ['required'],
+
+            'client_bill_rate' => ['required', 'numeric'],
+            // 'client_ot_bill_rate' => ['numeric'],
+            // 'client_dt_bill_rate' => ['numeric'],
+            // 'client_vendor_id' => ['required', 'numeric'],
+            
+            // 'vendor_contractor_id' => ['numeric'],
+            // 'vendor_contractor_netterms' => ['numeric'],
+            // 'vendor_contractor_po_attachment' => ['required'],
+            // 'vendor_contractor_po_id' => ['required'],
+            // 'vendor_contractor_bill_rate' => ['required'],
+            // 'vendor_contractor_at_bill_rate' => ['required'],
+            // 'vendor_contractor_dt_bill_rate' => ['required'],
         ]);
 
         // Create new record
@@ -95,23 +97,25 @@ class ClientPlacementController extends Controller
             'net_terms' => $this->request['net_terms'],
             'po_attachment' => $this->request['po_attachment'],
             'po_id' => $this->request['po_id'],
+            'job_title' => $this->request['job_title'],
+            'job_status' => $this->request['job_status'],
+            'job_start_date' => $this->request['job_start_date'],
+            'job_end_date' => $this->request['job_end_date'],
+            'invoice_frequency' => $this->request['invoice_frequency'],
+            'pay_effect_date' => $this->request['pay_effect_date'],
+
             'client_bill_rate' => $this->request['client_bill_rate'],
             'client_ot_bill_rate' => $this->request['client_ot_bill_rate'],
             'client_dt_bill_rate' => $this->request['client_dt_bill_rate'],
-            'client_vendor_id' => $this->request['client_vendor_id'],
+            // 'client_vendor_id' => $this->request['client_vendor_id'],
+            
             'vendor_contractor_id' => $this->request['vendor_contractor_id'],
             'vendor_contractor_netterms' => $this->request['vendor_contractor_netterms'],
             'vendor_contractor_po_attachment' => $this->request['vendor_contractor_po_attachment'],
             'vendor_contractor_po_id' => $this->request['vendor_contractor_po_id'],
             'vendor_contractor_bill_rate' => $this->request['vendor_contractor_bill_rate'],
             'vendor_contractor_at_bill_rate' => $this->request['vendor_contractor_at_bill_rate'],
-            'vendor_contractor_dt_bill_rate' => $this->request['vendor_contractor_dt_bill_rate'],
-            'job_title' => $this->request['job_title'],
-            'job_status' => $this->request['job_status'],
-            'job_start_date' => $this->request['job_start_date'],
-            'job_end_date' => $this->request['job_end_date'],
-            'invoice_frequency' => $this->request['invoice_frequency'],
-            'pay_effect_date' => $this->request['pay_effect_date']
+            'vendor_contractor_dt_bill_rate' => $this->request['vendor_contractor_dt_bill_rate']
         ]);
 
         // Create new activity.
@@ -181,10 +185,21 @@ class ClientPlacementController extends Controller
         ]);
 
         $employee = Employee::find($this->request['empId']);
+        $vendors = array();
+        $contractors = array();
+        if ($employee['category'] == config('constants.EMP_CATEGORY_C2C')) {
+            // $vendors = Vendor::all();
+        } else if ($employee['category'] == config('constants.EMP_CATEGORY_1099')) {
+            $contractors = Employee::where([
+                ['category', '=', config('constants.EMP_CATEGORY_1099')]
+            ])->get();
+        }
 
         return response()->json([
             'result' => 'success',
-            'employee' => $employee
+            'employee' => $employee,
+            'vendors' => $vendors,
+            'contractors' => $contractors
         ]);
     }
     // =========================== END PUBLIC FUNCTIONS ===========================

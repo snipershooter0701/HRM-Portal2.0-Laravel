@@ -116,9 +116,9 @@
                                 </a>
                             </li> --}}
                             <li class="divider"> </li>
-                            <li>
+                            {{-- <li>
                                 <a href="javascript:;"> <i class="icon-lock"></i> Lock Screen </a>
-                            </li>
+                            </li> --}}
                             <li>
                                 <a id="btn_logout" href="javascript:;"> <i class="icon-key"></i> Log Out </a>
                             </li>
@@ -248,6 +248,8 @@
             <button type="button" data-dismiss="modal" class="btn btn-c-grey" data-name="cancel" id="cancel_btn">Cancel</button>
         </div>
     </div>
+
+    @yield('constants')
 
     <!-- BEGIN JS CONSTANTS -->
     <script type="text/javascript">

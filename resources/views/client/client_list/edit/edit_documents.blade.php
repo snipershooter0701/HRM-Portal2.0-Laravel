@@ -26,7 +26,8 @@
                 {{-- BEGIN DOCUMENT TABLE --}}
                 <div class="table-container">
                     <div class="actions">
-                        <button type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10" data-panelname="panel_create_document"><i class="fa fa-plus-circle"></i> Add Document </button>
+                        <button id="btn_show_add_document" type="button" class="btn btn-sm btn-c-primary mr-10"><i class="fa fa-plus-circle"></i> Add Document </button>
+                        <button id="btn_go_add_document" type="button" class="btn btn-sm btn-c-primary btn-move-panel mr-10 display-none" data-panelname="panel_create_document"><i class="fa fa-plus-circle"></i> Add Document </button>
                         <div id="tbl_document_tools" class="btn-group btn-group-devided clearfix tbl-ajax-tools" data-toggle="buttons">
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-copy"></i></a>
                             <a href="javascript:;" data-action="1" class="btn-tbl-action tool-action"><i class="fa fa-upload"></i></a>

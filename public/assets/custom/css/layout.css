@@ -152,7 +152,6 @@
 .line-height-none {
     line-height: 0;
 }
-
 /* ============================ END NECESSARY STYLES ============================ */
 
 
@@ -172,7 +171,7 @@
 }
 
 .backcolor-light-grey {
-    background-color: #f9f9f9 !important;
+    background-color: #f9f9f9  !important;
 }
 
 /* ============================== END COLOR STYLES ============================== */
@@ -341,7 +340,6 @@ h4.section-head {
 .alert i {
     font-size: 18px !important;
 }
-
 /* ================================ END ALERT STYLES =============================== */
 
 /* ============================== BEGIN FILEINPUT STYLES ============================= */
@@ -438,7 +436,7 @@ hr {
     background: #C9D1D5 !important;
 }
 
-.page-header.navbar .top-menu .navbar-nav .dropdown .dropdown-menu i {
+.page-header.navbar .top-menu .navbar-nav .dropdown .dropdown-menu i{
     font-size: 12px !important;
 }
 

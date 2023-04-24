@@ -42,11 +42,11 @@
                         </div>
                         <div class="form-group col-sm-3">
                             <label class="control-label">Placement ID <span class="required" aria-required="true">*</span></label>
-                            <input id="add_placement_id" type="text" class="form-control" readonly>
+                            <input id="add_placement_id" type="text" class="form-control" disabled>
                         </div>
                         <div class="form-group col-sm-3">
                             <label class="control-label">Category</label>
-                            <select id="add_placement_category" class="form-control" readonly>
+                            <select id="add_placement_category" class="form-control" disabled>
                                 <option value="">Select...</option>
                                 <option value="{{ config('constants.EMP_CATEGORY_W2') }}">W2</option>
                                 <option value="{{ config('constants.EMP_CATEGORY_C2C') }}">C2C</option>
@@ -76,7 +76,7 @@
                         </div>
                         <div class="form-group col-sm-3">
                             <label class="control-label">Client PO ID <span class="required" aria-required="true">*</span></label>
-                            <input id="add_placement_po_id" type="text" class="form-control" readonly>
+                            <input id="add_placement_po_id" type="text" class="form-control" disabled>
                         </div>
                     </div>
                     <div class="row">
@@ -86,8 +86,7 @@
                         </div>
                         <div class="form-group col-sm-3">
                             <label class="control-label">Job Status</label>
-                            <select id="add_placement_jobstatus" class="form-control" readonly>
-                                <option value="">Select...</option>
+                            <select id="add_placement_jobstatus" class="form-control" disabled>
                                 <option value="{{ config('constants.STATE_ACTIVE') }}">Active</option>
                                 <option value="{{ config('constants.STATE_INACTIVE') }}">Inactive</option>
                             </select>
@@ -159,12 +158,9 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-3">
-                            <label class="control-label">Select Vendor/Contractor</label>
+                            <label class="control-label">Select Vendor/Contractor <span class="required" aria-required="true">*</span></label>
                             <select id="add_placement_vendor" class="form-control" disabled>
                                 <option value="">Select...</option>
-                                <option value="1">vendor1</option>
-                                <option value="2">vendor2</option>
-                                <option value="3">vendor3</option>
                             </select>
                         </div>
                         <div class="form-group col-sm-3">
@@ -173,7 +169,7 @@
                         </div>
                         <div class="form-group col-sm-3">
                             <label class="control-label">Vendor / Contractor PO Attachment <span class="required" aria-required="true">*</span></label>
-                            <input id="add_placement_vendor_po_attachment" type="file" class="form-control">
+                            <input id="add_placement_vendor_po_attachment" type="file" class="form-control" disabled>
                         </div>
                         <div class="form-group col-sm-3">
                             <label class="control-label">Vendor / Contractor PO ID <span class="required" aria-required="true">*</span></label>
@@ -212,10 +208,10 @@
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="form-group col-sm-3">
+                        <div class="form-group col-sm-2">
                             <div>
                                 <label class="control-label">Document Type <span class="required" aria-required="true">*</span></label>
-                                <a href="javascript:;" class="btn-c-no-border-primary pull-right line-height-none"><i class="fa fa-plus-circle icon-16"></i></a>
+                                <a href="javascript:;" class="add-placement-doc-types btn-c-no-border-primary pull-right line-height-none"><i class="fa fa-plus-circle icon-16"></i></a>
                             </div>
                             <select id="add_placement_doc_doctype" class="form-control">
                                 <option value="">Select...</option>
@@ -226,11 +222,11 @@
                                 @endphp
                             </select>
                         </div>
-                        <div class="form-group col-sm-3">
+                        <div class="form-group col-sm-2">
                             <label class="control-label">Comments</label>
                             <input id="add_placement_doc_comments" type="text" class="form-control">
                         </div>
-                        <div class="form-group col-sm-3">
+                        <div class="form-group col-sm-2">
                             <label class="control-label">Title <span class="required" aria-required="true">*</span></label>
                             <input id="add_placement_doc_title" type="text" class="form-control">
                         </div>
@@ -244,15 +240,13 @@
                                     </button>
                                 </span>
                             </div>
-                            <div class="icheck-list mt-10">
+                            <div class="mt-10">
                                 <label>
-                                    <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue"> Same as placement Expire date </label>
+                                    <input type="checkbox" class="icheck" data-checkbox="icheckbox_square-blue" style="height: 15px !important;"> Same as placement Expire date </label>
                                 <label>
-                                    <input type="checkbox" checked class="icheck" data-checkbox="icheckbox_square-blue"> No Expiration date </label>
+                                    <input type="checkbox" checked class="icheck" data-checkbox="icheckbox_square-blue" style="height: 15px !important;"> No Expiration date </label>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-3">
                             <label class="control-label">Attachment <span class="required" aria-required="true">*</span></label>
                             <input id="add_placement_doc_file" type="file" class="form-control">

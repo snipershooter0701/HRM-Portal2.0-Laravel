@@ -277,7 +277,7 @@ $(document).ready(function () {
         showAddPlacementPage();
     });
 
-    $('#add_placement_employee').change(function() {
+    $('#add_placement_employee').change(function () {
         var empId = $(this).val();
         changeCategoryByEmp(empId);
     });
@@ -328,8 +328,7 @@ function createPlacement() {
     }, {
         field_id: 'add_placement_id',
         conditions: [
-            // 'required' + CONST_VALIDATE_SPLITER + 'Placement ID is required.',
-            // 'numeric' + CONST_VALIDATE_SPLITER + "Placement ID must be a number."
+            'required' + CONST_VALIDATE_SPLITER + 'Placement ID is required.',
         ]
     }, {
         field_id: 'add_placement_category',
@@ -350,12 +349,12 @@ function createPlacement() {
     }, {
         field_id: 'add_placement_po_attachment',
         conditions: [
-            // 'required' + CONST_VALIDATE_SPLITER + 'Client PO Attachment is required.'
+            'required' + CONST_VALIDATE_SPLITER + 'Client PO Attachment is required.'
         ]
     }, {
         field_id: 'add_placement_po_id',
         conditions: [
-            // 'required' + CONST_VALIDATE_SPLITER + 'Client PO ID is required.'
+            'required' + CONST_VALIDATE_SPLITER + 'Client PO ID is required.'
         ]
     }, {
         field_id: 'add_placement_jobtitle',
@@ -393,54 +392,60 @@ function createPlacement() {
     }, {
         field_id: 'add_placement_billrate',
         conditions: [
-            'required' + CONST_VALIDATE_SPLITER + 'Bill Rate/hr is required.'
+            'required' + CONST_VALIDATE_SPLITER + 'Bill Rate/hr is required.',
+            'numeric' + CONST_VALIDATE_SPLITER + 'Bill Rate/hr must be a number.'
         ]
     }, {
         field_id: 'add_placement_ot_billrate',
         conditions: [
-            // 'required' + CONST_VALIDATE_SPLITER + 'Record Status is required.'
+            'numeric' + CONST_VALIDATE_SPLITER + 'OT Bill Rate/hr must be a number.'
         ]
     }, {
         field_id: 'add_placement_dt_billrate',
         conditions: [
-            // 'required' + CONST_VALIDATE_SPLITER + 'Record Status is required.'
-        ]
-    }, {
-        field_id: 'add_placement_vendor',
-        conditions: [
-            // 'required' + CONST_VALIDATE_SPLITER + 'Record Status is required.'
-        ]
-    }, {
-        field_id: 'add_placement_vendor_netterms',
-        conditions: [
-            // 'required' + CONST_VALIDATE_SPLITER + 'Record Status is required.'
-        ]
-    }, {
-        field_id: 'add_placement_vendor_po_attachment',
-        conditions: [
-            // 'required' + CONST_VALIDATE_SPLITER + 'Record Status is required.'
-        ]
-    }, {
-        field_id: 'add_placement_vendor_po_id',
-        conditions: [
-            // 'required' + CONST_VALIDATE_SPLITER + 'Record Status is required.'
-        ]
-    }, {
-        field_id: 'add_placement_vendor_billrate',
-        conditions: [
-            // 'required' + CONST_VALIDATE_SPLITER + 'Record Status is required.'
-        ]
-    }, {
-        field_id: 'add_placement_vendor_ot_billrate',
-        conditions: [
-            // 'required' + CONST_VALIDATE_SPLITER + 'Record Status is required.'
-        ]
-    }, {
-        field_id: 'add_placement_vendor_dt_billrate',
-        conditions: [
-            // 'required' + CONST_VALIDATE_SPLITER + 'Record Status is required.'
+            'numeric' + CONST_VALIDATE_SPLITER + 'DT Bill Rate/hr must be a number.'
         ]
     }];
+
+    if ($('#add_placement_category').val() == EMP_CATEGORY_C2C || $('#add_placement_category').val() == EMP_CATEGORY_1099) {
+        validateFields.push({
+            field_id: 'add_placement_vendor',
+            conditions: [
+                'required' + CONST_VALIDATE_SPLITER + 'Vendor/Contractor is required.'
+            ]
+        }, {
+            field_id: 'add_placement_vendor_netterms',
+            conditions: [
+                'required' + CONST_VALIDATE_SPLITER + 'Vendor/Contractor Net Terms is required.'
+            ]
+        }, {
+            field_id: 'add_placement_vendor_po_attachment',
+            conditions: [
+                'required' + CONST_VALIDATE_SPLITER + 'Vendor/Contractor PO Attachment is required.'
+            ]
+        }, {
+            field_id: 'add_placement_vendor_po_id',
+            conditions: [
+                'required' + CONST_VALIDATE_SPLITER + 'Vendor/Contractor PO ID is required.'
+            ]
+        }, {
+            field_id: 'add_placement_vendor_billrate',
+            conditions: [
+                'required' + CONST_VALIDATE_SPLITER + 'Bill Rate/hr is required.'
+            ]
+        }, {
+            field_id: 'add_placement_vendor_ot_billrate',
+            conditions: [
+                'required' + CONST_VALIDATE_SPLITER + 'OT Bill Rate/hr is required.'
+            ]
+        }, {
+            field_id: 'add_placement_vendor_dt_billrate',
+            conditions: [
+                'required' + CONST_VALIDATE_SPLITER + 'DT Bill Rate/hr is required.'
+            ]
+        });
+    }
+
     var isValid = doValidationForm(validateFields);
     if (!isValid)
         return;
@@ -452,10 +457,18 @@ function createPlacement() {
         net_terms: $('#add_placement_netterms').val(),
         po_attachment: $('#add_placement_po_attachment').val(),
         po_id: $('#add_placement_po_id').val(),
+        job_title: $('#add_placement_jobtitle').val(),
+        job_status: $('#add_placement_jobstatus').val(),
+        job_start_date: $('#add_placement_startdate').val(),
+        job_end_date: $('#add_placement_enddate').val(),
+        invoice_frequency: $('#add_placement_inv_frequency').val(),
+        pay_effect_date: $('#add_placement_pay_effect_date').val(),
+
         client_bill_rate: $('#add_placement_billrate').val(),
         client_ot_bill_rate: $('#add_placement_ot_billrate').val(),
         client_dt_bill_rate: $('#add_placement_dt_billrate').val(),
-        client_vendor_id: $('#add_placement_vendor').val(),
+        // client_vendor_id: $('#add_placement_vendor').val(),
+        
         vendor_contractor_id: $('#add_placement_vendor').val(),
         vendor_contractor_netterms: $('#add_placement_vendor_netterms').val(),
         vendor_contractor_po_attachment: $('#add_placement_vendor_po_attachment').val(),
@@ -463,12 +476,6 @@ function createPlacement() {
         vendor_contractor_bill_rate: $('#add_placement_vendor_billrate').val(),
         vendor_contractor_at_bill_rate: $('#add_placement_vendor_ot_billrate').val(),
         vendor_contractor_dt_bill_rate: $('#add_placement_vendor_dt_billrate').val(),
-        job_title: $('#add_placement_jobtitle').val(),
-        job_status: $('#add_placement_jobstatus').val(),
-        job_start_date: $('#add_placement_startdate').val(),
-        job_end_date: $('#add_placement_enddate').val(),
-        invoice_frequency: $('#add_placement_inv_frequency').val(),
-        pay_effect_date: $('#add_placement_pay_effect_date').val()
     };
 
     callAjax({
@@ -599,6 +606,8 @@ function showAddPlacementPage() {
                 // Set base values.
                 $('#add_placement_client').val(clientId);
                 $('#add_placement_id').val(last['id'] != null ? last['id'] + 1 : 1);
+                $('#add_placement_po_id').val(last['id'] != null ? last['id'] + 1 : 1);
+                $('#add_placement_vendor_po_id').val(last['id'] != null ? last['id'] + 1 : 1);
 
                 $('#go_to_add_placement_page').trigger('click');
             }
@@ -614,8 +623,7 @@ function showAddPlacementPage() {
 /**
  * Change Category by Employee Id
  */
-function changeCategoryByEmp(empId)
-{
+function changeCategoryByEmp(empId) {
     var formData = {
         empId: empId
     };
@@ -627,9 +635,48 @@ function changeCategoryByEmp(empId)
         success: function (data) {
             if (data['result'] == 'success') {
                 var employee = data['employee'];
+                var vendors = data['vendors'];
+                var contractors = data['contractors'];
 
-                // Set base values.
+                // Set Category field.
                 $('#add_placement_category').val(employee['category']);
+
+                // Init Vendor/Contractor fields.
+                $('#add_placement_vendor').html('<option value="">Select...</option>');
+                $('#add_placement_vendor_netterms').val('');
+                $('#add_placement_vendor_po_attachment').val('');
+                $('#add_placement_vendor_billrate').val('');
+                $('#add_placement_vendor_ot_billrate').val('');
+                $('#add_placement_vendor_dt_billrate').val('');
+
+                if (employee['category'] == EMP_CATEGORY_W2) {
+                    $('#add_placement_vendor').prop('disabled', true);
+                    $('#add_placement_vendor_netterms').prop('disabled', true);
+                    $('#add_placement_vendor_po_attachment').prop('disabled', true);
+                    $('#add_placement_vendor_billrate').prop('disabled', true);
+                    $('#add_placement_vendor_ot_billrate').prop('disabled', true);
+                    $('#add_placement_vendor_dt_billrate').prop('disabled', true);
+                } else if (employee['category'] == EMP_CATEGORY_C2C) {
+                    $('#add_placement_vendor').removeAttr('disabled');
+                    $('#add_placement_vendor_netterms').removeAttr('disabled');
+                    $('#add_placement_vendor_po_attachment').removeAttr('disabled');
+                    $('#add_placement_vendor_billrate').removeAttr('disabled');
+                    $('#add_placement_vendor_ot_billrate').removeAttr('disabled');
+                    $('#add_placement_vendor_dt_billrate').removeAttr('disabled');
+
+                    for (var i in vendors)
+                        $('#add_placement_vendor').append('<option value="' + vendors[i]['id'] + '">' + vendors[i]['business_name'] + '</option>');
+                } else if (employee['category'] == EMP_CATEGORY_1099) {
+                    $('#add_placement_vendor').removeAttr('disabled');
+                    $('#add_placement_vendor_netterms').removeAttr('disabled');
+                    $('#add_placement_vendor_po_attachment').removeAttr('disabled');
+                    $('#add_placement_vendor_billrate').removeAttr('disabled');
+                    $('#add_placement_vendor_ot_billrate').removeAttr('disabled');
+                    $('#add_placement_vendor_dt_billrate').removeAttr('disabled');
+
+                    for (var i in contractors)
+                        $('#add_placement_vendor').append('<option value="' + contractors[i]['id'] + '">' + contractors[i]['first_name'] + ' ' + contractors[i]['last_name'] + '</option>');
+                }
             }
         },
         error: function (err) {

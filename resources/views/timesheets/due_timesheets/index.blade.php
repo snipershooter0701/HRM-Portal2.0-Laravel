@@ -18,8 +18,11 @@
 
 @section('content')
 {{-- BEGIN DUE TIMESHEETS --}}
-<div id="panel-due-timesheet-list" class="move-panel">
+<div id="panel_due_timesheet_list" class="move-panel">
     @include('timesheets.due_timesheets.list')
+</div>
+<div id="panel_due_timesheet_submit" class="move-panel display-none">
+    @include('timesheets.due_timesheets.create')
 </div>
 {{-- END DUE TIMESHEETS --}}
 @endsection

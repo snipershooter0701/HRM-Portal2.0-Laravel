@@ -455,6 +455,30 @@ class EmployeeController extends Controller
         ]);
     }
 
+    /**
+     * Send email to employees
+     */
+    public function sendEmails()
+    {
+        // Check Validation
+        $this->request->validate([
+            'ids' => ['required']
+        ]);
+
+        // Get params
+        $ids = $this->request['ids'];
+
+        foreach ($ids as $id) {
+            $employee = Employee::find($id);
+            $email = $employee['email'];
+            Mail::to($email)->send(new Subscribe($email));
+        }
+
+        return response()->json([
+            'result' => 'success'
+        ]);
+    }
+
     // Employee Activity
     public function getEmpAct()
     {

@@ -17,10 +17,10 @@
 @endsection
 
 @section('content')
-<div id="panel-edit-placement" class="move-panel">
+<div id="panel_edit_placement" class="move-panel">
     @include('client.all_placements.list')
 </div>
-<div id="panel-create-placement" class="move-panel display-none">
+<div id="panel_create_placement" class="move-panel display-none">
     @include('client.all_placements.add_placement')
 </div>
 @endsection
@@ -30,7 +30,7 @@
 
 @section('page_template_js')
 {{-- <script src="{{ url('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js?v=' . $randNum) }}" type="text/javascript"></script> --}}
-<script src="{{ url('assets/global/plugins/icheck/icheck.min.js?v=' . $randNum) }}" type="text/javascript"></script>
+{{-- <script src="{{ url('assets/global/plugins/icheck/icheck.min.js?v=' . $randNum) }}" type="text/javascript"></script> --}}
 {{-- <script src="{{ url('assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js?v=' . $randNum) }}" type="text/javascript"></script> --}}
 {{-- <script src="{{ url('assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js?v=' . $randNum) }}" type="text/javascript"></script> --}}
 {{-- <script src="{{ url('assets/global/plugins/select2/js/select2.full.min.js?v=' . $randNum) }}" type="text/javascript"></script> --}}

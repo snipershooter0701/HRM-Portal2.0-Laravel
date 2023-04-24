@@ -115,6 +115,11 @@ var TableDocument = function () {
 $(document).ready(function () {
     TableDocument.init();
 
+    $('#btn_show_add_document').click(function() {
+        $('#add_document_client').val($('#edit_bus_client_id').val());
+        $('#btn_go_add_document').trigger('click');
+    });
+
     $('#btn_add_document_create').click(function () {
         createDocument();
     });

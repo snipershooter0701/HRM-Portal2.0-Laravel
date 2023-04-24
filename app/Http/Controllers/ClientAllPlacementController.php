@@ -180,7 +180,7 @@ class ClientAllPlacementController extends Controller
     private function getOnesPlacementTblRecords()
     {
         // Params
-        $columns = ['', 'employee_id', 'job_tire_id', 'job_status', 'job_start_date', 'job_end_date', ''];
+        $columns = ['', '', 'employee_id', 'client_id', 'job_tire_id', 'net_terms', 'job_status', 'job_start_date', 'job_end_date', ''];
         $sortColumn = $columns[$this->request['order'][0]['column']];
         $sortType = $this->request['order'][0]['dir'];
         $start = $this->request['start'];
@@ -200,7 +200,7 @@ class ClientAllPlacementController extends Controller
             if ($this->request['filt_netterms_to'] != NULL)
                 $whereConds[] = ['net_terms', '<=', $this->request['filt_netterms_to']];
             if ($this->request['filt_job_status'] != NULL)
-                $whereConds[] = ['job_status', 'like', $this->request['filt_job_status']];
+                $whereConds[] = ['job_status', '=', $this->request['filt_job_status']];
             if ($this->request['filt_start_date_from'] != NULL)
                 $whereConds[] = ['job_start_date', '>=', $this->request['filt_start_date_from']];
             if ($this->request['filt_start_date_to'] != NULL)
@@ -222,7 +222,7 @@ class ClientAllPlacementController extends Controller
         ])->where($whereConds)
             ->whereHas('employee', function (Builder $query) {
                 if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
-                    if ($this->request['filt_client'] != NULL)
+                    if ($this->request['filt_employee'] != NULL)
                         $query->where('email', 'like', '%' . $this->request['filt_employee'] . '%');
                 }
             })

@@ -57,6 +57,14 @@
 @section('modal')
 @endsection
 
+@section('constants')
+<script type="text/javascript">
+var EMP_CATEGORY_W2 = {{config('constants.EMP_CATEGORY_W2')}};
+var EMP_CATEGORY_C2C = {{config('constants.EMP_CATEGORY_C2C')}};
+var EMP_CATEGORY_1099 = {{config('constants.EMP_CATEGORY_1099')}};
+</script>
+@endsection
+
 @section('page_template_js')
 {{-- <script src="{{ url('assets/global/plugins/icheck/icheck.min.js?v=' . $randNum) }}" type="text/javascript"></script> --}}
 <script src="{{ url('assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}" type="text/javascript"></script>

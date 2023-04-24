@@ -246,6 +246,9 @@ var TableEmployee = function () {
                 });
                 deleteEmployeeInfo(val);
 
+            } else if (action.val() == "send_email" && grid_employee_list.getSelectedRowsCount() > 0) {
+                var ids = grid_employee_list.getSelectedRows();
+                sendEmailToEmployees(ids);
             } else if (action.val() == "") {
                 App.alert({
                     type: 'danger',
@@ -1256,7 +1259,6 @@ function setUpdateBeforeInfo(id) {
 // Update Employee Info
 function updateEmployeeInfo(id) {
 
-    debugger;
     if (!$('#allow_emp_later').is(':Checked')) {
         var { isValidDoc, valid_ssn, valid_auth, valid_state, valid_passport, valid_i94, valid_visa, other_doc } = doValidationDoc();
         if (!isValidDoc) {
@@ -1507,8 +1509,27 @@ function doValidationDoc() {
     return { isValidDoc, valid_ssn, valid_auth, valid_state, valid_passport, valid_i94, valid_visa, other_doc };
 }
 
+/**
+ * Send email to selected users.
+ */
+function sendEmailToEmployees(ids) {
+    var formData = {
+        ids: ids
+    };
 
-
-
-
-
+    callAjax({
+        url: BASE_URL + '/employee/all_employees/send_emails',
+        type: "POST",
+        data: formData,
+        success: function (data) {
+            if (data['result'] == 'success') {
+                toastr.success("Email successfully sent.", "Success");
+            }
+        },
+        error: function (err) {
+            var errors = err.errors;
+            if (errors)
+                toastr.error(err.message, "Error");
+        }
+    });
+}

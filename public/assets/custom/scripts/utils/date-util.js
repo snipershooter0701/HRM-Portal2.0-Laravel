@@ -1,7 +1,15 @@
-function getMondayToSundayHMS(date) {
-    const d = new Date(date);
+/**
+ * Get a week's dates.
+ * @param {} date "2021-04-01"
+ * @returns ""
+ */
+function getMondayToSundayHMS(date = null) {
+    var d;
+    if (date == null) d = new Date();
+    else d = new Date(date);
+
     const day = d.getDay();
-    const diff = d.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is Sunday
+    const diff = d.getDate() - day + (day === 0 ? -7 : 0); // adjust when day is Sunday
     const monday = new Date(d.setDate(diff)).toISOString().slice(0, 10);
     const tuesday = new Date(d.setDate(diff + 1)).toISOString().slice(0, 10);
     const wednesday = new Date(d.setDate(diff + 2)).toISOString().slice(0, 10);
@@ -12,8 +20,18 @@ function getMondayToSundayHMS(date) {
     return { monday, tuesday, wednesday, thursday, friday, saturday, sunday };
 }
 
-function getMondayToSundaySM(dateString) {
-    var date = new Date(dateString);
+/**
+ * Get a week's dates.
+ * @param {} date "2021-04-01"
+ * @returns ""
+ */
+function getMondayToSundaySM(dateString = null) {
+    var date;
+    if (dateString == null)
+        date = new Date();
+    else
+        date = new Date(dateString);
+
     var dayOfWeek = date.getDay();
     var monday = new Date(date);
     var tuesday = new Date(date);
@@ -41,4 +59,25 @@ function getMondayToSundaySM(dateString) {
     sunday = sunday.toLocaleDateString('en-US', options);
 
     return { monday, tuesday, wednesday, thursday, friday, saturday, sunday };
+}
+
+/**
+ * Get minutes
+ * @param {*} hr  (08:00)
+ * @return 480
+ */
+function getMinutesFromHour(hr) {
+    var splits = hr.split(":");
+    return parseInt(splits[0]) * 60 + parseInt(splits[1]);
+}
+
+/**
+ * Get Hours
+ * @param {*} min (480)
+ * @return 08:00
+ */
+function getHoursFromMinute(min) {
+    var minute = min % 60;
+    var hour = Math.floor(min / 60);
+    return hour + ":" + (minute < 10 ? "0" + minute : minute);
 }

@@ -11,9 +11,12 @@ return [
     // Max Integer
     'MAX_INTEGER' => 1000000000,
 
+    // ============================ BEGIN EMPLOYEE ==============================
+    // Category
     'EMP_CATEGORY_W2' => 0,
     'EMP_CATEGORY_C2C' => 1,
     'EMP_CATEGORY_1099' => 2,
+    // ============================ END EMPLOYEE ==============================
 
     // User Signup watch
     'USER_SIGNUP_NOT_WATECHED' => 0,
@@ -86,18 +89,6 @@ return [
     'BACKUP_BIWEEKLY' => 3,
     'BACKUP_MONTHLY' => 4,
     // =========================== END SETTTINGS MODULE =============================
-
-    // ============================ BEGIN USER SIGNUPS ==============================
-    'USER_SIGNUP_NOT_WATECHED' => 0,
-    'USER_SIGNUP_WATECHED' => 1,
-    // ============================= END USER SIGNUPS ===============================
-    
-    // ============================ BEGIN TICKETS ==============================
-    'TICKET_STATUS_REQUESTED' => 0,
-    'TICKET_STATUS_ASSIGNED' => 1,
-    'TICKET_STATUS_COMPLETED' => 2,
-    // ============================ END TICKETS ==============================
-
     // employee request
     'EMP_REQ' => '0',
     'EMP_RESPONSE' => '1',

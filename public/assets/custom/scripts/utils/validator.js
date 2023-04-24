@@ -13,7 +13,9 @@ function doValidationForm(validateFields) {
 function checkInputValidation(fieldOption) {
     var isValid = true;
     var value = $('#' + fieldOption.field_id).val();
-    var depth = fieldOption.level == undefined ? false : true;
+    var depth = fieldOption.level == undefined ? false : fieldOption.level;
+    var isFile = fieldOption.file == undefined ? false : fieldOption.file;
+
     var conditions = fieldOption.conditions;
 
     for (var i in conditions) {
@@ -23,8 +25,13 @@ function checkInputValidation(fieldOption) {
         var cond = condArr[0];
         var error = condArr[1];
         if (cond === 'required') {
-            if (value === '' || value == undefined) {
-                isValid = false;
+            if (!isFile) {
+                if (value === '' || value == undefined)
+                    isValid = false;
+            } else {
+                var files = $('#' + fieldOption.field_id)[0].files;
+                if (files.length <= 0)
+                    isValid = false;
             }
         } else if (cond === 'valid_email') {
             var emailExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -43,8 +50,12 @@ function checkInputValidation(fieldOption) {
             if ($('#' + confFieldName).val() !== value)
                 isValid = false;
         } else if (cond === 'numeric') {
+            // if (value === '' || value === undefined) {
+            //     isValid = true;
+            // } else {
             var regExp = new RegExp("^\\d+$");
             isValid = regExp.test(value);
+            // }
         }
 
         if (!isValid) {

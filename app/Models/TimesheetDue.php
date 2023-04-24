@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class AwaitingInvoice extends Model
+class TimesheetDue extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -20,10 +20,9 @@ class AwaitingInvoice extends Model
         'employee_id',
         'client_id',
         'placement_id',
-        'invoice_frequency',
-        'invoice_from',
-        'invoice_to',
-        'total_hours'
+        'job_tire_id',
+        'date_from',
+        'date_to'
     ];
 
     /**
@@ -48,5 +47,21 @@ class AwaitingInvoice extends Model
     public function client()
     {
         return $this->belongsTo(Client::class);
+    }
+
+    /**
+     * Get the jobtire information.
+     */
+    public function jobtire()
+    {
+        return $this->belongsTo(JobTire::class, 'job_tire_id');
+    }
+
+    /**
+     * Get the placement information.
+     */
+    public function placement()
+    {
+        return $this->belongsTo(ClientPlacement::class, 'placement_id');
     }
 }

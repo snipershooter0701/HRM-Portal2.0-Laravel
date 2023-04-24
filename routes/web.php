@@ -46,6 +46,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/act', [App\Http\Controllers\EmployeeController::class, 'getEmpAct']);
             Route::post('/get-add-placements', [App\Http\Controllers\EmployeeController::class, 'getAddPlacements']);
             Route::post('/do_mult_action', [App\Http\Controllers\EmployeeController::class, 'doMultAction']);
+            Route::post('/send_emails', [App\Http\Controllers\EmployeeController::class, 'sendEmails']);
         });
 
         // Employee - All Request Details
@@ -137,13 +138,20 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('timesheets')->middleware(['checkrole:/timesheets'])->group(function () {
         Route::prefix('all')->middleware(['checkrole:/timesheets/all'])->group(function () {
             Route::get('/', [App\Http\Controllers\TimesheetsController::class, 'index']);
+            Route::get('/get_placements', [App\Http\Controllers\TimesheetsController::class, 'getPlacementsByEmpId']);
+            Route::get('/get_timesheet', [App\Http\Controllers\TimesheetsController::class, 'getTimesheetById']);
             Route::post('/get_tbl_list', [App\Http\Controllers\TimesheetsController::class, 'getAllTimesheets']);
             Route::post('/create', [App\Http\Controllers\TimesheetsController::class, 'create']);
+            Route::post('/update', [App\Http\Controllers\TimesheetsController::class, 'update']);
             Route::post('/delete', [App\Http\Controllers\TimesheetsController::class, 'delete']);
+            Route::post('/approve', [App\Http\Controllers\TimesheetsController::class, 'approve']);
+            Route::post('/reject', [App\Http\Controllers\TimesheetsController::class, 'reject']);
+            Route::post('/do_mult_action', [App\Http\Controllers\TimesheetsController::class, 'doMultAction']);
         });
 
         Route::prefix('due')->middleware(['checkrole:/timesheets/due'])->group(function () {
             Route::get('/', [App\Http\Controllers\TimesheetDueController::class, 'index']);
+            Route::get('/get_due_timesheet', [App\Http\Controllers\TimesheetDueController::class, 'getDuetTimesheetById']);
             Route::post('/get_tbl_list', [App\Http\Controllers\TimesheetDueController::class, 'getDueTimesheets']);
         });
 

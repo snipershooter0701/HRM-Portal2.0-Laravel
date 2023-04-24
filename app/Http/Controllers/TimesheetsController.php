@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClientPlacement;
+use App\Models\TimesheetDue;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Timesheet;
@@ -54,7 +56,7 @@ class TimesheetsController extends Controller
     }
 
     /**
-     * Create client's placement.
+     * Create client's timesheet.
      */
     public function create()
     {
@@ -64,46 +66,205 @@ class TimesheetsController extends Controller
             'job_tire_id' => ['required'],
             'date_from' => ['required'],
             'date_to' => ['required'],
-            'attachment' => ['required'],
-            'report' => ['required']
+            'attachment' => ['required', 'mimes:pdf,csv,txt,png,jpg,jpeg,docx', 'max:2048'],
+            'report' => ['required'],
         ]);
+
+        // Upload File
+        $attachment = $this->request->file('attachment')->store('public/timesheets');
+        $attachment = str_replace("public/", "storage/", $attachment);
+
+        // Get Params
+        $dueId = $this->request['due_id'];
+        $employeeId = $this->request['employee_id'];
+        $jobTireId = $this->request['job_tire_id'];
+        $dateFrom = $this->request['date_from'];
+        $dateTo = $this->request['date_to'];
+        $report = $this->request['report'];
+        $standardMon = $this->request['standard_mon'];
+        $standardTue = $this->request['standard_tue'];
+        $standardWed = $this->request['standard_wed'];
+        $standardThu = $this->request['standard_thu'];
+        $standardFri = $this->request['standard_fri'];
+        $standardSat = $this->request['standard_sat'];
+        $standardSun = $this->request['standard_sun'];
+        $overTime = $this->request['over_time'];
+        $overMon = $this->request['over_mon'];
+        $overTue = $this->request['over_tue'];
+        $overWed = $this->request['over_wed'];
+        $overThu = $this->request['over_thu'];
+        $overFri = $this->request['over_fri'];
+        $overSat = $this->request['over_sat'];
+        $overSun = $this->request['over_sun'];
+        $doubleTime = $this->request['double_time'];
+        $doubleMon = $this->request['double_mon'];
+        $doubleTue = $this->request['double_tue'];
+        $doubleWed = $this->request['double_wed'];
+        $doubleThu = $this->request['double_thu'];
+        $doubleFri = $this->request['double_fri'];
+        $doubleSat = $this->request['double_sat'];
+        $doubleSun = $this->request['double_sun'];
+        $totalBillHours = $standardMon + $standardTue + $standardWed + $standardThu + $standardFri + $standardSat + $standardSun +
+            $overMon + $overTue + $overWed + $overThu + $overFri + $overSat + $overSun +
+            $doubleMon + $doubleTue + $doubleWed + $doubleThu + $doubleFri + $doubleSat + $doubleSun;
+
+        $clietPlacement = ClientPlacement::where([
+            ['employee_id', '=', $employeeId],
+            ['job_tire_id', '=', $jobTireId],
+            ['job_status', '=', config('constants.STATE_ACTIVE')]
+        ])->first();
 
         // Create new record
         Timesheet::create([
-            'employee_id' => $this->request['employee_id'],
-            'client_id' => 1,
-            'placement_id' => 1,
-            'job_tire_id' => $this->request['job_tire_id'],
-            'date_from' => $this->request['date_from'],
-            'date_to' => $this->request['date_to'],
-            'attachment' => $this->request['attachment'],
-            'report' => $this->request['report'],
-            'submitted_on' => "2023-03-03",
-            'total_billable_hours' => "120:00",
-            'standard_mon' => $this->request['standard_mon'],
-            'standard_tue' => $this->request['standard_tue'],
-            'standard_wed' => $this->request['standard_wed'],
-            'standard_thu' => $this->request['standard_thu'],
-            'standard_fri' => $this->request['standard_fri'],
-            'standard_sat' => $this->request['standard_sat'],
-            'standard_sun' => $this->request['standard_sun'],
-            'over_time' => $this->request['over_time'],
-            'over_mon' => $this->request['over_mon'],
-            'over_tue' => $this->request['over_tue'],
-            'over_wed' => $this->request['over_wed'],
-            'over_thu' => $this->request['over_thu'],
-            'over_fri' => $this->request['over_fri'],
-            'over_sat' => $this->request['over_sat'],
-            'over_sun' => $this->request['over_sun'],
-            'double_time' => $this->request['double_time'],
-            'double_mon' => $this->request['double_mon'],
-            'double_tue' => $this->request['double_tue'],
-            'double_wed' => $this->request['double_wed'],
-            'double_thu' => $this->request['double_thu'],
-            'double_fri' => $this->request['double_fri'],
-            'double_sat' => $this->request['double_sat'],
-            'double_sun' => $this->request['double_sun']
+            'employee_id' => $employeeId,
+            'client_id' => $clietPlacement->client_id,
+            'placement_id' => $clietPlacement->id,
+            'job_tire_id' => $jobTireId,
+            'date_from' => $dateFrom,
+            'date_to' => $dateTo,
+            'attachment' => $attachment,
+            'report' => $report,
+            'submitted_on' => date('Y-m-d'),
+            'total_billable_hours' => $totalBillHours,
+            'standard_mon' => $standardMon,
+            'standard_tue' => $standardTue,
+            'standard_wed' => $standardWed,
+            'standard_thu' => $standardThu,
+            'standard_fri' => $standardFri,
+            'standard_sat' => $standardSat,
+            'standard_sun' => $standardSun,
+            'over_time' => $overTime,
+            'over_mon' => $overMon,
+            'over_tue' => $overTue,
+            'over_wed' => $overWed,
+            'over_thu' => $overThu,
+            'over_fri' => $overFri,
+            'over_sat' => $overSat,
+            'over_sun' => $overSun,
+            'double_time' => $doubleTime,
+            'double_mon' => $doubleMon,
+            'double_tue' => $doubleTue,
+            'double_wed' => $doubleWed,
+            'double_thu' => $doubleThu,
+            'double_fri' => $doubleFri,
+            'double_sat' => $doubleSat,
+            'double_sun' => $doubleSun
         ]);
+
+        if ($dueId != null) {
+            $dueTimesheet = TimesheetDue::find($dueId);
+            $dueTimesheet->delete();
+        }
+
+        return response()->json([
+            'result' => 'success'
+        ]);
+    }
+
+    /**
+     * Update client's timesheet.
+     */
+    public function update()
+    {
+        // Check Validation
+        $this->request->validate([
+            'id' => ['required'],
+            'employee_id' => ['required'],
+            'job_tire_id' => ['required'],
+            'date_from' => ['required'],
+            'date_to' => ['required'],
+            // 'attachment' => ['required', 'mimes:pdf,csv,txt,png,jpg,jpeg,docx', 'max:2048'],
+            'report' => ['required'],
+        ]);
+
+        // Upload File
+        $isAttachment = $this->request['is_attachment'];
+        if ($isAttachment > 0) {
+            $attachment = $this->request->file('attachment')->store('public/timesheets');
+            $attachment = str_replace("public/", "storage/", $attachment);
+        }
+
+        // // Get Params
+        $id = $this->request['id'];
+        $employeeId = $this->request['employee_id'];
+        $jobTireId = $this->request['job_tire_id'];
+        $dateFrom = $this->request['date_from'];
+        $dateTo = $this->request['date_to'];
+        $report = $this->request['report'];
+        $standardMon = $this->request['standard_mon'];
+        $standardTue = $this->request['standard_tue'];
+        $standardWed = $this->request['standard_wed'];
+        $standardThu = $this->request['standard_thu'];
+        $standardFri = $this->request['standard_fri'];
+        $standardSat = $this->request['standard_sat'];
+        $standardSun = $this->request['standard_sun'];
+        $overTime = $this->request['over_time'];
+        $overMon = $this->request['over_mon'];
+        $overTue = $this->request['over_tue'];
+        $overWed = $this->request['over_wed'];
+        $overThu = $this->request['over_thu'];
+        $overFri = $this->request['over_fri'];
+        $overSat = $this->request['over_sat'];
+        $overSun = $this->request['over_sun'];
+        $doubleTime = $this->request['double_time'];
+        $doubleMon = $this->request['double_mon'];
+        $doubleTue = $this->request['double_tue'];
+        $doubleWed = $this->request['double_wed'];
+        $doubleThu = $this->request['double_thu'];
+        $doubleFri = $this->request['double_fri'];
+        $doubleSat = $this->request['double_sat'];
+        $doubleSun = $this->request['double_sun'];
+        $totalBillHours = $standardMon + $standardTue + $standardWed + $standardThu + $standardFri + $standardSat + $standardSun +
+            $overMon + $overTue + $overWed + $overThu + $overFri + $overSat + $overSun +
+            $doubleMon + $doubleTue + $doubleWed + $doubleThu + $doubleFri + $doubleSat + $doubleSun;
+
+        $clietPlacement = ClientPlacement::where([
+            ['employee_id', '=', $employeeId],
+            ['job_tire_id', '=', $jobTireId],
+            ['job_status', '=', config('constants.STATE_ACTIVE')]
+        ])->first();
+
+        // Update record
+        $timesheet = Timesheet::find($id);
+        $timesheet->update([
+            'employee_id' => $employeeId,
+            'client_id' => $clietPlacement->client_id,
+            'placement_id' => $clietPlacement->id,
+            'job_tire_id' => $jobTireId,
+            'date_from' => $dateFrom,
+            'date_to' => $dateTo,
+            'report' => $report,
+            'submitted_on' => date('Y-m-d'),
+            'total_billable_hours' => $totalBillHours,
+            'standard_mon' => $standardMon,
+            'standard_tue' => $standardTue,
+            'standard_wed' => $standardWed,
+            'standard_thu' => $standardThu,
+            'standard_fri' => $standardFri,
+            'standard_sat' => $standardSat,
+            'standard_sun' => $standardSun,
+            'over_time' => $overTime,
+            'over_mon' => $overMon,
+            'over_tue' => $overTue,
+            'over_wed' => $overWed,
+            'over_thu' => $overThu,
+            'over_fri' => $overFri,
+            'over_sat' => $overSat,
+            'over_sun' => $overSun,
+            'double_time' => $doubleTime,
+            'double_mon' => $doubleMon,
+            'double_tue' => $doubleTue,
+            'double_wed' => $doubleWed,
+            'double_thu' => $doubleThu,
+            'double_fri' => $doubleFri,
+            'double_sat' => $doubleSat,
+            'double_sun' => $doubleSun
+        ]);
+        if ($isAttachment > 0) {
+            $timesheet->update([
+                'attachment' => $attachment
+            ]);
+        }
 
         return response()->json([
             'result' => 'success'
@@ -128,6 +289,129 @@ class TimesheetsController extends Controller
             'result' => 'success'
         ]);
     }
+
+    /**
+     * Approve timesheet.
+     */
+    public function approve()
+    {
+        // Check Validation
+        $this->request->validate([
+            'id' => ['required'],
+        ]);
+
+        // Params
+        $id = $this->request['id'];
+
+        // Delete timesheet.
+        $timesheet = Timesheet::find($id);
+        $timesheet->update([
+            'status' => config('constants.TIMESHEET_STATUS_APPROVED')
+        ]);
+
+        return response()->json([
+            'result' => 'success'
+        ]);
+    }
+
+    /**
+     * Reject timesheet.
+     */
+    public function reject()
+    {
+        // Check Validation
+        $this->request->validate([
+            'id' => ['required'],
+        ]);
+
+        // Params
+        $id = $this->request['id'];
+
+        // Delete timesheet.
+        $timesheet = Timesheet::find($id);
+        $timesheet->update([
+            'status' => config('constants.TIMESHEET_STATUS_REJECTED')
+        ]);
+
+        return response()->json([
+            'result' => 'success'
+        ]);
+    }
+
+    /**
+     * Get placements by employee id
+     */
+    public function getPlacementsByEmpId()
+    {
+        // Check Validation
+        $this->request->validate([
+            'employeeId' => ['required'],
+        ]);
+
+        // Get Params
+        $employeeId = $this->request['employeeId'];
+
+        // 
+        $clientPlacements = ClientPlacement::with([
+            'jobTire'
+        ])->where([
+                ['employee_id', '=', $employeeId],
+                ['job_status', '=', config('constants.STATE_ACTIVE')]
+            ])->get();
+
+        return response()->json([
+            'result' => 'success',
+            'placements' => $clientPlacements
+        ]);
+    }
+
+    /**
+     * Get timesheet
+     */
+    public function getTimesheetById()
+    {
+        // Check Validation
+        $this->request->validate([
+            'id' => ['required'],
+        ]);
+
+        // Get params
+        $id = $this->request['id'];
+
+        $timesheet = Timesheet::find($id);
+
+        return response()->json([
+            'result' => 'success',
+            'timesheet' => $timesheet
+        ]);
+    }
+
+    /**
+     * Do multi action.
+     */
+    public function doMultAction()
+    {
+        // Check Validation
+        $this->request->validate([
+            'action' => ['required'],
+            'ids' => ['required'],
+        ]);
+
+        // Get params
+        $action = $this->request['action'];
+        $ids = $this->request['ids'];
+
+        if ($action == "delete") {
+            foreach ($ids as $id) {
+                $timesheet = Timesheet::find($id);
+                $timesheet->delete();
+            }
+        }
+
+        return response()->json([
+            'result' => 'success'
+        ]);
+    }
     // ========================== END PUBLIC FUNCTIONS ==========================
 
     // ========================== BEGIN PRIVATE FUNCTIONS ==========================
@@ -137,7 +421,7 @@ class TimesheetsController extends Controller
     private function getAllTimesheetRecords()
     {
         // Params
-        $columns = ['', 'employee_id', 'client_id', '', '', 'status', '', 'submitted_on', '', ''];
+        $columns = ['', '', 'employee_id', 'client_id', 'date_from', 'total_billable_hours', 'status', 'submitted_on', '', ''];
         $sortColumn = $columns[$this->request['order'][0]['column']];
         $sortType = $this->request['order'][0]['dir'];
         $start = $this->request['start'];
@@ -164,10 +448,11 @@ class TimesheetsController extends Controller
                 } else if ($this->request['filt_date_range'] == config('constants.DATE_RANGE_CUSTOM')) {
 
                 }
-                $whereConds[] = ['job_tire_id', '=', $this->request['filt_job_tire']];
             }
-            if ($this->request['filt_bill_hours'] != NULL)
-                $whereConds[] = ['net_terms', '=', $this->request['filt_bill_hours']];
+            if ($this->request['filt_bill_hours_from'] != NULL)
+                $whereConds[] = ['total_billable_hours', '>=', ($this->request['filt_bill_hours_from'] * 60)];
+            if ($this->request['filt_bill_hours_to'] != NULL)
+                $whereConds[] = ['total_billable_hours', '<=', ($this->request['filt_bill_hours_to'] * 60)];
             if ($this->request['filt_status'] != NULL)
                 $whereConds[] = ['status', '=', $this->request['filt_status']];
             if ($this->request['filt_submitted_on_from'] != NULL)
@@ -250,29 +535,49 @@ class TimesheetsController extends Controller
 
         $idx = $iDisplayStart + 1;
         foreach ($finalRecords as $finalRecord) {
+            // Employee
             $employeeName = ($finalRecord->employee != null) ? ($finalRecord->employee->email) : '';
+
+            // Client
             $clientName = ($finalRecord->client != null) ? ($finalRecord->client->email) : '';
+
+            // Date Range
+            $dateRange = $finalRecord->date_from . ' ~ ' . $finalRecord->date_to;
+
+            // Total billable hours
+            $totBillHours = $this->parseMinutesToHr($finalRecord->total_billable_hours);
+
+            // Status
             if ($finalRecord->status == config('constants.TIMESHEET_STATUS_REQESTED'))
-                $status = '<span class="label label-sm label-primary">Submitted</span>';
+                $status = '<span class="label label-sm label-primary">Request</span>';
             else if ($finalRecord->status == config('constants.TIMESHEET_STATUS_APPROVED'))
                 $status = '<span class="label label-sm label-info">Approve</span>';
             else
                 $status = '<span class="label label-sm label-grey">Rejected</span>';
+
+            // Attachment
+            $attachBtn = '<a href="' . url($finalRecord['attachment']) . '" class="btn btn-xs btn-c-primary btn-timesheet-view" data-id="' . $finalRecord->id . '"><i class="fa fa-download"></i></a>';
+
+            // Action
+            $actionBtn = '';
+            $actionBtn .= '<a href="javascript:;" class="btn btn-xs btn-c-primary btn-timesheet-edit" data-id="' . $finalRecord->id . '"><i class="fa fa-pencil"></i></a>';
+            if ($finalRecord->status == config('constants.TIMESHEET_STATUS_REQESTED')) {
+                $actionBtn .= '<a href="javascript:;" class="btn btn-xs btn-c-info btn-timesheet-approve" data-id="' . $finalRecord->id . '"><i class="fa fa-thumbs-o-up"></i></a>';
+                $actionBtn .= '<a href="javascript:;" class="btn btn-xs btn-c-grey btn-timesheet-reject" data-id="' . $finalRecord->id . '"*><i class="fa fa-thumbs-o-down"></i></a>';
+            }
+            $actionBtn .= '<a href="javascript:;" class="btn btn-xs btn-c-grey btn-timesheet-delete" data-id="' . $finalRecord->id . '"><i class="fa fa-trash"></i></a>';
 
             $records["data"][] = array(
                 '<input type="checkbox" name="id[]" value="' . $finalRecord->id . '">',
                 $idx,
                 $employeeName,
                 $clientName,
-                $finalRecord->date_from . '~' . $finalRecord->date_to,
-                $finalRecord->total_billable_hours,
+                $dateRange,
+                $totBillHours,
                 $status,
                 $finalRecord->submitted_on,
-                '<a href="javascript:;" class="btn btn-xs btn-c-primary btn-timesheet-view" data-id="' . $finalRecord->id . '"*><i class="fa fa-eye"></i></a>',
-                '<a href="javascript:;" class="btn btn-xs btn-c-primary btn-timesheet-edit" data-id="' . $finalRecord->id . '"*><i class="fa fa-pencil"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-c-info btn-timesheet-active" data-id="' . $finalRecord->id . '"*><i class="fa fa-thumbs-o-up"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-c-danger btn-timesheet-inactive" data-id="' . $finalRecord->id . '"*><i class="fa fa-thumbs-o-down"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-c-grey btn-timesheet-delete" data-id="' . $finalRecord->id . '"*><i class="fa fa-trash"></i></a>'
+                $attachBtn,
+                $actionBtn
             );
             $idx++;
         }
@@ -287,6 +592,17 @@ class TimesheetsController extends Controller
         $records["recordsFiltered"] = $filteredCnt;
 
         return response()->json($records);
+    }
+
+    /**
+     * Parse minutes to hour style (08:00)
+     */
+    private function parseMinutesToHr($minutes)
+    {
+        $hr = floor($minutes / 60);
+        $min = $minutes % 60;
+
+        return $hr . ':' . $min;
     }
 // ========================== END PRIVATE FUNCTIONS ==========================
 }

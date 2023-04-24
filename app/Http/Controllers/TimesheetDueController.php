@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClientPlacement;
+use App\Models\TimesheetDue;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Timesheet;
@@ -29,6 +31,47 @@ class TimesheetDueController extends Controller
      */
     public function index()
     {
+        // Check all placements and timesheets, then create or delete the due timesheets.
+        $placements = ClientPlacement::where([
+            ['job_status', '=', config('constants.STATE_ACTIVE')]
+        ])->get();
+
+        $curDate = date("Y-m-d");
+        if ($this->isWeekend($curDate)) {
+            $dateFrom = date('Y-m-d', $this->lastMonday($curDate));
+            $dateTo = date("Y-m-d", strtotime("+6 day", $this->lastMonday($curDate)));
+
+            foreach ($placements as $placement) {
+                // Check the timesheet for this placement is already committed.
+                $timesheet = Timesheet::where([
+                    ['employee_id', '=', $placement->employee_id],
+                    ['job_tire_id', '=', $placement->job_tire_id],
+                    ['client_id', '=', $placement->client_id],
+                    ['date_from', '=', $dateFrom],
+                    ['date_to', '=', $dateTo]
+                ])->first();
+
+                $dueTimesheet = TimesheetDue::where([
+                    ['employee_id', '=', $placement->employee_id],
+                    ['job_tire_id', '=', $placement->job_tire_id],
+                    ['client_id', '=', $placement->client_id],
+                    ['date_from', '=', $dateFrom],
+                    ['date_to', '=', $dateTo]
+                ])->first();
+
+                if ($timesheet == null && $dueTimesheet == null) {
+                    TimesheetDue::create([
+                        'employee_id' => $placement->employee_id,
+                        'client_id' => $placement->client_id,
+                        'placement_id' => $placement->id,
+                        'job_tire_id' => $placement->job_tire_id,
+                        'date_from' => $dateFrom,
+                        'date_to' => $dateTo
+                    ]);
+                }
+            }
+        }
+
         $employees = Employee::all();
         $jobTires = JobTire::all();
 
@@ -49,6 +92,27 @@ class TimesheetDueController extends Controller
         $result = $this->makeDueTimesheets($recordData['filteredRecords'], $recordData['totalCnt'], $recordData['filteredCnt']);
         return $result;
     }
+
+    /**
+     * Get due timesheet by id.
+     */
+    public function getDuetTimesheetById()
+    {
+        // Check Validation
+        $this->request->validate([
+            'id' => ['required'],
+        ]);
+
+        // Get params
+        $id = $this->request['id'];
+
+        $timesheet = TimesheetDue::find($id);
+
+        return response()->json([
+            'result' => 'success',
+            'timesheet' => $timesheet
+        ]);
+    }
     // ========================== END PUBLIC FUNCTIONS ==========================
 
     // ========================== BEGIN PRIVATE FUNCTIONS ==========================
@@ -68,19 +132,21 @@ class TimesheetDueController extends Controller
         // Get client records for filter condition.
         $whereConds = array();
         if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
-            if ($this->request['filt_monthweek'] != NULL)
-                $whereConds[] = ['date_from', '<=', $this->request['filt_monthweek']];
-            if ($this->request['filt_monthweek'] != NULL)
-                $whereConds[] = ['date_to', '>=', $this->request['filt_monthweek']];
+            if ($this->request['filt_monthweek_from'] != NULL)
+                $whereConds[] = ['date_from', '>=', $this->request['filt_monthweek_from']];
+            if ($this->request['filt_monthweek_to'] != NULL)
+                $whereConds[] = ['date_to', '<=', $this->request['filt_monthweek_to']];
             if ($this->request['filt_placement_id'] != NULL)
-                $whereConds[] = ['status', '=', $this->request['filt_placement_id']];
+                $whereConds[] = ['placement_id', '=', $this->request['filt_placement_id']];
+            if ($this->request['filt_jobtire'] != NULL)
+                $whereConds[] = ['job_tire_id', '=', $this->request['filt_jobtire']];
         }
 
         // All record count
-        $totalRecordCnt = count(Timesheet::all());
+        $totalRecordCnt = count(TimesheetDue::all());
 
         // Filtered records
-        $filteredRecords = Timesheet::with([
+        $filteredRecords = TimesheetDue::with([
             'client',
             'employee',
             'jobtire'
@@ -104,7 +170,7 @@ class TimesheetDueController extends Controller
 
         // Filtered record count
         $filteredCnt = count(
-            Timesheet::with([
+            TimesheetDue::with([
                 'client',
                 'employee',
                 'jobtire'
@@ -182,6 +248,37 @@ class TimesheetDueController extends Controller
         $records["recordsFiltered"] = $filteredCnt;
 
         return response()->json($records);
+    }
+
+    /**
+     * Get the monday
+     */
+    public function lastMonday($date)
+    {
+        if (!is_numeric($date))
+            $date = strtotime($date);
+        if (date('w', $date) == 1)
+            return $date;
+        else
+            return strtotime(
+                'last monday',
+                $date
+            );
+    }
+
+    /**
+     * Check the day is wekend.
+     */
+    public function isWeekend($date)
+    {
+        $date = strtotime($date);
+        $date = date("l", $date);
+        $date = strtolower($date);
+        if ($date == "saturday" || $date == "sunday") {
+            return true;
+        } else {
+            return false;
+        }
     }
 // ========================== END PRIVATE FUNCTIONS ==========================
 }

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClientPlacement;
+use App\Models\Timesheet;
+use App\Models\TimesheetDue;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\AwaitingInvoice;
@@ -29,6 +32,44 @@ class TimesheetAwaitInvController extends Controller
      */
     public function index()
     {
+        // Check all placements and add awaiting invoices.
+        $awaitPlacements = ClientPlacement::where([
+            ['job_status', '=', config('constants.STATE_ACTIVE')],
+            ['job_end_date', '<=', date("Y-m-d")]
+        ])->get();
+        foreach ($awaitPlacements as $awaitPlacement) {
+            $awaitInv = AwaitingInvoice::where([
+                ['placement_id', '=', $awaitPlacement->id]
+            ])->first();
+
+            if ($awaitInv == null) {
+                $dueTimesheets = TimesheetDue::where([
+                    ['placement_id', '=', $awaitPlacement->id]
+                ])->get();
+                if (count($dueTimesheets) == 0) {
+                    $timesheetTotHours = Timesheet::where([
+                        ['placement_id', '=', $awaitPlacement->id],
+                        ['status', '=', config('constants.TIMESHEET_STATUS_APPROVED')]
+                    ])->sum('total_billable_hours');
+                    $timesheets = Timesheet::where([
+                        ['placement_id', '=', $awaitPlacement->id],
+                        ['status', '=', config('constants.TIMESHEET_STATUS_APPROVED')]
+                    ])->orderBy('created_at', 'DESC')->get();
+
+                    AwaitingInvoice::create([
+                        'employee_id' => $awaitPlacement->employee_id,
+                        'client_id' => $awaitPlacement->client_id,
+                        'placement_id' => $awaitPlacement->id,
+                        'invoice_frequency' => $awaitPlacement->invoice_frequency,
+                        'invoice_from' => $timesheets[0]->date_from,
+                        'invoice_to' => $timesheets[count($timesheets) - 1]->date_to,
+                        'total_hours' => round($timesheetTotHours / 60)
+                    ]);
+                }
+            }
+        }
+
+
         $employees = Employee::all();
         $jobTires = JobTire::all();
 
@@ -68,12 +109,16 @@ class TimesheetAwaitInvController extends Controller
         // Get client records for filter condition.
         $whereConds = array();
         if ($this->request['action'] != NULL && $this->request['action'] == "filter") {
-            if ($this->request['filt_monthweek'] != NULL)
-                $whereConds[] = ['date_from', '<=', $this->request['filt_monthweek']];
-            if ($this->request['filt_monthweek'] != NULL)
-                $whereConds[] = ['date_to', '>=', $this->request['filt_monthweek']];
-            if ($this->request['filt_placement_id'] != NULL)
-                $whereConds[] = ['status', '=', $this->request['filt_placement_id']];
+            if ($this->request['filt_inv_period_from'] != NULL)
+                $whereConds[] = ['date_from', '>=', $this->request['filt_inv_period_from']];
+            if ($this->request['filt_inv_period_to'] != NULL)
+                $whereConds[] = ['date_to', '<=', $this->request['filt_inv_period_to']];
+            if ($this->request['filt_inv_frequency'] != NULL)
+                $whereConds[] = ['invoice_frequency', '=', $this->request['filt_inv_frequency']];
+            if ($this->request['filt_total_hours_from'] != NULL)
+                $whereConds[] = ['total_hours', '>=', $this->request['filt_total_hours_from']];
+            if ($this->request['filt_total_hours_to'] != NULL)
+                $whereConds[] = ['total_hours', '<=', $this->request['filt_total_hours_to']];
         }
 
         // All record count
@@ -148,19 +193,32 @@ class TimesheetAwaitInvController extends Controller
 
         $idx = $iDisplayStart + 1;
         foreach ($finalRecords as $finalRecord) {
+            // Employee
             $employeeName = ($finalRecord->employee != null) ? ($finalRecord->employee->email) : '';
+
+            // Client
             $clientName = ($finalRecord->client != null) ? ($finalRecord->client->email) : '';
+
+            // Invoice Frequency
+            $invFrequency = "";
+            if ($finalRecord->invoice_frequency == config('constants.INVOICE_FREQUENCY_WEEKLY')) {
+                $invFrequency = "Weekly";
+            } else if ($finalRecord->invoice_frequency == config('constants.INVOICE_FREQUENCY_BYWEEKLY')) {
+                $invFrequency = "By-Weekly";
+            } else if ($finalRecord->invoice_frequency == config('constants.INVOICE_FREQUENCY_MONTHLY')) {
+                $invFrequency = "Monthly";
+            } else if ($finalRecord->invoice_frequency == config('constants.INVOICE_FREQUENCY_QUARTERLY')) {
+                $invFrequency = "Quarterly";
+            }
 
             $records["data"][] = array(
                 $idx,
                 $employeeName,
                 $clientName,
-                $finalRecord->invoice_frequency,
+                $invFrequency,
                 $finalRecord->invoice_from . ' ~ ' . $finalRecord->invoice_to,
                 $finalRecord->total_hours,
-                '<a href="javascript:;" class="btn btn-xs btn-c-primary btn-placement-show" data-id="' . $finalRecord->id . '"*><i class="fa fa-eye"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-c-primary btn-placement-edit" data-id="' . $finalRecord->id . '"*><i class="fa fa-pencil"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-c-grey btn-placement-delete" data-id="' . $finalRecord->id . '"*><i class="fa fa-trash"></i></a>'
+                '<a href="javascript:;" class="btn btn-xs btn-c-primary btn-await-inv-show" data-id="' . $finalRecord->id . '"*><i class="fa fa-eye"></i></a>'
             );
             $idx++;
         }

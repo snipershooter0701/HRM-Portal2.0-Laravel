@@ -16,9 +16,9 @@ var TableAwaitInvoices = function () {
             onSuccess: function (gridAwaitInvoice, response) { },
             onError: function (gridAwaitInvoice) { },
             onDataLoad: function (gridAwaitInvoice) {
-                $('.btn-timesheet-delete').click(function () {
+                $('.btn-await-inv-show').click(function() {
                     var id = $(this).attr('data-id');
-                    deleteTimesheet(id);
+                    showAwaitInv(id);
                 });
             },
             loadingMessage: 'Loading...',
@@ -39,7 +39,7 @@ var TableAwaitInvoices = function () {
                 "columnDefs": [
                     {  // set default column settings
                         'orderable': false,
-                        'targets': [0, 1, 7]
+                        'targets': [0, 6]
                     }
                 ],
 
@@ -111,4 +111,12 @@ var TableAwaitInvoices = function () {
 
 $(document).ready(function () {
     TableAwaitInvoices.init();
-}); F
+});
+
+/**
+ * Show awaiting invoice
+ */
+function showAwaitInv(id)
+{
+
+}
