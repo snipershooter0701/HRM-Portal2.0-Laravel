@@ -161,7 +161,7 @@ class ModuleSeeder extends Seeder
         DB::table('modules')->insert([
             'name' => 'Expense List',
             'level' => '1',
-            'url' => '/expenses/expense_list',
+            'url' => '/expensess',
             'tagid' => 'page_expense_list'
         ]);
 

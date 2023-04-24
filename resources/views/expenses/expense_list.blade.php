@@ -118,11 +118,20 @@
                                 <th width="25%"> Updated By </th>
                                 <th width="45%"> Description </th>
                             </tr>
-                            <tr role="row" class="filter display-none">
+                            <tr role="row" class="filter">
                                 <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
+
+                                {{-- Date & Time--}}
+                                <td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_act_date_time"> </td>
+
+                                {{-- updated_by --}}
+                                <td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_act_updated_by"> </td>
+
+                                {{-- description --}}
+                                <td>
+                                    <input type="text" class="form-control form-filter input-sm" name="filt_act_description"> </td>
                             </tr>
                         </thead>
                         <tbody> </tbody>

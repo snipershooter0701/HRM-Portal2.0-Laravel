@@ -38,21 +38,25 @@ class HomeController extends Controller
         if(count($status) > 0)
             return view('home.index')->with('randNum', rand())->with('status', $status[0]['status']);
         return view('home.index')->with('randNum', rand())->with('status', 'exist');
-        
     }
 
-    public function getRequestStatus()
+    public function getReqById()
     {
-        $employee = Auth::user()->employee->role;
-        if($employee['name'] == 'Employee') {
+        $id = Auth::user()->employee->id;
+        $role_id = Auth::user()->employee->role->id;
+ 
+        if($role_id == 3) {
             $req = EmployeeRequest::with(['employee', 'requested_by'])
-                                    ->where('id', $employee['id'])
+                                    ->where('employee_id', $id)
                                     ->get();
+
+            $doc = Document::where('employee_id', $id)->get();
         }
 
         return response()->json([
             'result' => 'success',
-            'request' => $req
+            'request' => $req,
+            'doc' => $doc,
         ]);
     }
 
@@ -64,21 +68,28 @@ class HomeController extends Controller
             'employee_id'  => ['required'],
             'comment'      => ['required'],
         ]);
-
+        
         $createArray = array();
         if($request->ssn == '1' || $request->ssn == '2') {
+
             $createArray = [
-                'doc_title_id'      => '0',
+                'doc_title_id'      => config('constants.doc_ssn'),
                 'employee_id'       =>  $request->employee_id,
                 'no'                => $request->ssn_doc['no'],
                 'attachment'        => $request->ssn_doc['attachment'],
             ];
-            Document::create($createArray);
+            if( in_array(config('constants.doc_ssn'), $request->update_types) ) {
+                $id = array_search(config('constants.doc_ssn'), $request->update_types);
+                Document::where('id', $request->update_ids[$id])
+                        ->update($createArray);
+
+            } else
+                Document::create($createArray);
         }
         
         if($request->auth == 1 || $request->auth == 2) {
             $createArray = [
-                'doc_title_id'      => '1',
+                'doc_title_id'      => config('constants.doc_auth'),
                 'employee_id'       =>  $request->employee_id,
                 'work_auth_id'      => $request->auth_doc['work_auth_id'],
                 'no'                => $request->auth_doc['no'],
@@ -86,60 +97,93 @@ class HomeController extends Controller
                 'expire_date'       => $request->auth_doc['expire_date'],
                 'attachment'        => $request->auth_doc['attachment'],
             ];
-            Document::create($createArray);
+            if( in_array(config('constants.doc_auth'), $request->update_types) ) {
+                $id = array_search(config('constants.doc_auth'), $request->update_types);
+                Document::where('id', $request->update_ids[$id])
+                        ->update($createArray);
+            } else
+                Document::create($createArray);
         }
         
         if($request->state == 1 || $request->state == 2) {
             $createArray = [
-                'doc_title_id'      => '2',
+                'doc_title_id'      => config('constants.doc_state'),
                 'employee_id'       =>  $request->employee_id,
                 'no'                => $request->state_doc['no'],
                 'exp_date'          => $request->state_doc['exp_date'],
                 'attachment'        => $request->state_doc['attachment'],
             ];
-            Document::create($createArray);
+            if( in_array(config('constants.doc_state'), $request->update_types) ) {
+                $id = array_search(config('constants.doc_state'), $request->update_types);
+                Document::where('id', $request->update_ids[$id])
+                        ->update($createArray);
+            } else
+                Document::create($createArray);
         }
+
         if($request->passport == 1 || $request->passport == 2) {
             $createArray = [
-                'doc_title_id'      => '3',
+                'doc_title_id'      => config('constants.doc_passport'),
                 'employee_id'       =>  $request->employee_id,
                 'no'                => $request->passport_doc['no'],
                 'exp_date'          => $request->passport_doc['exp_date'],
                 'attachment'        => $request->passport_doc['attachment'],
             ];
-            Document::create($createArray);
+            if( in_array(config('constants.doc_passport'), $request->update_types) ) {
+                $id = array_search(config('constants.doc_passport'), $request->update_types);
+                Document::where('id', $request->update_ids[$id])
+                        ->update($createArray);
+            } else
+                Document::create($createArray);
         }
+
         if($request->i94 == 1 || $request->i94 == 2) {
             $createArray = [
-                'doc_title_id'      => '4',
+                'doc_title_id'      => config('constants.doc_i94'),
                 'employee_id'       =>  $request->employee_id,
                 'no'                => $request->i94_doc['no'],
                 'exp_date'          => $request->i94_doc['exp_date'],
                 'i94_type'          => $request->i94_doc['i94_type'],
                 'attachment'        => $request->i94_doc['attachment'],
             ];
-            Document::create($createArray);
+            if( in_array(config('constants.doc_i94'), $request->update_types) ) {
+                $id = array_search(config('constants.doc_i94'), $request->update_types);
+                Document::where('id', $request->update_ids[$id])
+                        ->update($createArray);
+            } else
+                Document::create($createArray);
         }
-        if($request->visa_doc == 1 || $request->visa_doc == 2) {
+
+        if($request->visa == 1 || $request->visa == 2) {
             $createArray = [
-                'doc_title_id'      => '5',
+                'doc_title_id'      => config('constants.doc_visa'),
                 'employee_id'       =>  $request->employee_id,
                 'no'                => $request->visa_doc['no'],
                 'exp_date'          => $request->visa_doc['exp_date'],
                 'attachment'        => $request->visa_doc['attachment'],
             ];
-            Document::create($createArray);
+            
+            if( in_array(config('constants.doc_visa'), $request->update_types) ) {
+                $id = array_search(config('constants.doc_visa'), $request->update_types);
+                Document::where('id', $request->update_ids[$id])
+                        ->update($createArray);
+            } else
+                Document::create($createArray);
         }
-        if($request->other_doc == 1 || $request->other_doc == 2) {
+
+        if($request->other == 1 || $request->other == 2) {
             $createArray = [
-                'doc_title_id'      => '6',
-                'employee_id'       =>  $request->employee_id,
+                'doc_title_id'      => config('constants.doc_other'),
+                'employee_id'       => $request->employee_id,
                 'comment'           => $request->other_doc['comment'],
                 'no'                => $request->other_doc['no'],
                 'exp_date'          => $request->other_doc['exp_date'],
                 'other_type'        => $request->other_doc['other_type'],
                 'attachment'        => $request->other_doc['attachment'],
             ];
+            Document::where('employee_id', $request->employee_id)
+                    ->where('doc_title_id', config('constants.doc_other'))
+                    ->delete();
             Document::create($createArray);
         }
 

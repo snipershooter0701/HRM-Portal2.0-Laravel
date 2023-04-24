@@ -78,12 +78,6 @@ class EmployeeController extends Controller
             'role'              => ['required'],
             'poc'               => ['required'],
             'classification'    => ['required'],
-            'per_pay'           => ['required'],
-            'per_change_hrs'    => ['required'],
-            'per_change_pay'    => ['required'],
-            'rate_pay'          => ['required'],
-            'rate_change_hrs'   => ['required'],
-            'rate_change_pay'   => ['required'],
             'addr_street'       => ['required'],
             'addr_apt'          => ['required'],
             'addr_city'         => ['required'],
@@ -94,7 +88,7 @@ class EmployeeController extends Controller
 
         $employee = Employee::create([
             'first_name'        =>  $request->first_name,
-            'middle_name'       =>  $request->middle_name,
+            'middle_name'       =>  $request->middle_name ? $request->middle_name : NULL,
             'last_name'         =>  $request->last_name,
             'title'             =>  $request->title,
             'email'             =>  $request->email_address,
@@ -125,8 +119,8 @@ class EmployeeController extends Controller
             'pay_standard_time' =>  $request->pay_standard_time,
             'pay_over_time'     =>  $request->pay_over_time,
             'pay_double_time'   =>  $request->pay_double_time,
-            'status_end_date'   =>  $request->employee_status_date,
-            'department_id'     =>  $request->deparment,
+            'status_end_date'   =>  $request->employee_status_date ? $request->employee_status_date : NuLL,
+            'department_id'     =>  $request->deparment ? $request->deparment : NULL,
         ]);
 
         EmployeeActivity::create([
@@ -182,8 +176,7 @@ class EmployeeController extends Controller
                 'employee_id'       =>  $employee->id,
                 'doc_title_id'      => '4',
                 'no'                => $request->i94_doc['no'],
-                'exp_date'          => $request->i94_doc['exp_date'],
-                'i94_type'          => $request->i94_doc['i94_type'],
+                'i94_type'          => $request->i94_doc['i94_type'] == 0 ? config('constants.i94_DS') : config('constants.i94_other'),
                 'attachment'        => $request->i94_doc['attachment'],
             ];
             Document::create($createArray);
@@ -253,22 +246,12 @@ class EmployeeController extends Controller
             'role'              => ['required'],
             'poc'               => ['required'],
             'classification'    => ['required'],
-            'per_pay'           => ['required'],
-            'per_change_hrs'    => ['required'],
-            'per_change_pay'    => ['required'],
-            'rate_pay'          => ['required'],
-            'rate_change_hrs'   => ['required'],
-            'rate_change_pay'   => ['required'],
             'addr_street'       => ['required'],
             'addr_apt'          => ['required'],
             'addr_city'         => ['required'],
             'addr_state'        => ['required'],
             'addr_country'      => ['required'],
             'addr_zipcode'      => ['required'],
-            'pay_standard_time' => ['required'],
-            'pay_over_time'     => ['required'],
-            'pay_double_time'   => ['required'],
-            'pay_scale'         => ['required']
         ]);
 
         Employee::where('id', $request->id)
@@ -321,7 +304,7 @@ class EmployeeController extends Controller
                         ->update($createArray);
             }
             if($request->auth == '1') {
-                $createArray = array(); 
+                $createArray = array();
 
                 $createArray = [
                     'employee_id'       =>  $request->id,
@@ -365,7 +348,6 @@ class EmployeeController extends Controller
                     'employee_id'       =>  $request->id,
                     'doc_title_id'      => '4',
                     'no'                => $request->i94_doc['no'],
-                    'exp_date'          => $request->i94_doc['exp_date'],
                     'i94_type'          => $request->i94_doc['i94_type'],
                     'attachment'        => $request->i94_doc['attachment'],
                 ];
@@ -384,6 +366,7 @@ class EmployeeController extends Controller
                 Document::where('id', $request->visa_id)
                         ->update($createArray);
             }
+            
             if( count( $request->other_array) ) {
                 for($i = 0; $i < count( $request->other_array); $i ++) {
                     $createArray = array();

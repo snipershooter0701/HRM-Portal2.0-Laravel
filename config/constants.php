@@ -103,4 +103,19 @@ return [
     'EMP_RESPONSE' => '1',
     'EMP_APPROV' => '2',
     'EMP_REJECT' => '3',
+
+
+    // i94-type
+    'i94_DS' => '0',
+    'i94_other' => '1',
+
+
+    // Documentation
+    'doc_ssn' => '0',
+    'doc_auth' => '1',
+    'doc_state' => '2',
+    'doc_passport' => '3',
+    'doc_i94' => '4',
+    'doc_visa' => '5',
+    'doc_other' => '6',
 ];

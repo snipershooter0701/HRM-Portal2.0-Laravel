@@ -59,6 +59,7 @@ $(document).ready(function () {
         }
     });
 
+    // add other doc
     $('#btn_add_other_doc').unbind('click').bind('click', function () {
         var id = $(this).attr('data-id');
         if (!$('#allow_emp_later').is(':Checked')) {
@@ -98,6 +99,7 @@ $(document).ready(function () {
             id++;
             $('#btn_add_other_doc').attr('data-id', id);
 
+            // remove other doc
             $('.remove-other').unbind('click').bind('click', function () {
                 var id = $(this).attr('data-id');
                 if (!$('#allow_emp_later').is(':Checked')) {
@@ -560,6 +562,7 @@ var TableEmployee = function () {
 }();
 
 
+// TODO: payscale
 function payscale_validate(pay_scale) {
     if (pay_scale == '1') {
         $('#pay_classification').html(
@@ -596,18 +599,17 @@ function payscale_validate(pay_scale) {
 
 // Refresh Employee List Table
 function refreshEmployeeList() {
-    // gridClientListTable.setAjaxParam("customActionType", "group_action");
     grid_employee_list.getDataTable().ajax.reload();
     grid_employee_list.clearAjaxParams();
 }
 
-// Refresh Employee List Table
+// Refresh Employee Activity Table
 function refreshEmployeeActivity() {
-    // gridClientListTable.setAjaxParam("customActionType", "group_action");
     grid_emp_activity.getDataTable().ajax.reload();
     grid_emp_activity.clearAjaxParams();
 }
 
+// init employee fields
 function initCreatePage() {
     $('div').removeClass('has-error');
     $('div').find('.help-block').remove();
@@ -827,50 +829,52 @@ function addEmployee() {
         ]
     }];
 
-    var payScaleFlag = $('#create_pay_scale').val();
+    if (!$('#allow_pay_later').is(':Checked')) {
+        var payScaleFlag = $('#create_pay_scale').val();
 
-    if (payScaleFlag == '0') {
-        validateFields.push(
-            {
-                field_id: 'create_pay_percent_val',
-                conditions: [
-                    'required' + CONST_VALIDATE_SPLITER + 'Pay % field is required.'
-                ]
-            },
-            {
-                field_id: 'create_pay_percent_hrs',
-                conditions: [
-                    'required' + CONST_VALIDATE_SPLITER + 'Change After Hrs field is required.'
-                ]
-            },
-            {
-                field_id: 'create_pay_percent_to',
-                conditions: [
-                    'required' + CONST_VALIDATE_SPLITER + 'Change Pay % field is required.'
-                ]
-            }
-        );
-    } else {
-        validateFields.push(
-            {
-                field_id: 'create_pay_rate_val',
-                conditions: [
-                    'required' + CONST_VALIDATE_SPLITER + 'Pay Rate/hr field is required.'
-                ]
-            },
-            {
-                field_id: 'create_pay_rate_hrs',
-                conditions: [
-                    'required' + CONST_VALIDATE_SPLITER + 'Change After Hrs field is required.'
-                ]
-            },
-            {
-                field_id: 'create_pay_rate_to',
-                conditions: [
-                    'required' + CONST_VALIDATE_SPLITER + 'Change Pay Rate to field is required.'
-                ]
-            }
-        );
+        if (payScaleFlag == '0') {
+            validateFields.push(
+                {
+                    field_id: 'create_pay_percent_val',
+                    conditions: [
+                        'required' + CONST_VALIDATE_SPLITER + 'Pay % field is required.'
+                    ]
+                },
+                {
+                    field_id: 'create_pay_percent_hrs',
+                    conditions: [
+                        'required' + CONST_VALIDATE_SPLITER + 'Change After Hrs field is required.'
+                    ]
+                },
+                {
+                    field_id: 'create_pay_percent_to',
+                    conditions: [
+                        'required' + CONST_VALIDATE_SPLITER + 'Change Pay % field is required.'
+                    ]
+                }
+            );
+        } else {
+            validateFields.push(
+                {
+                    field_id: 'create_pay_rate_val',
+                    conditions: [
+                        'required' + CONST_VALIDATE_SPLITER + 'Pay Rate/hr field is required.'
+                    ]
+                },
+                {
+                    field_id: 'create_pay_rate_hrs',
+                    conditions: [
+                        'required' + CONST_VALIDATE_SPLITER + 'Change After Hrs field is required.'
+                    ]
+                },
+                {
+                    field_id: 'create_pay_rate_to',
+                    conditions: [
+                        'required' + CONST_VALIDATE_SPLITER + 'Change Pay Rate to field is required.'
+                    ]
+                }
+            );
+        }
     }
 
     var isValid = doValidationForm(validateFields);
@@ -878,87 +882,48 @@ function addEmployee() {
         var { isValidDoc, valid_ssn, valid_auth, valid_state, valid_passport, valid_i94, valid_visa, other_doc } = doValidationDoc();
         if (!isValidDoc) {
             toastr.error("Document is required", "Error");
+            return;
         }
     }
 
-    // if (!isValid && !isValidDoc)
-    //     return;
-
-    var formData = {
-        first_name: 'sniper',
-        last_name: 'shooter',
-        title: 'hgfhgfh',
-        email_address: 'snipershooteaaaar000@gmail.com',
-        phone_num: '456489',
-        birth: '2024-02-05',
-        join_date: '2023-05-08',
-        gender: '0',
-        employment_type: '0',
-        category: '0',
-        employee_type: '0',
-        employee_status: '1',
-        role: '0',
-        poc: '0',
-        classification: '0',
-        per_pay: '56',
-        per_change_hrs: '456',
-        per_change_pay: '56',
-        rate_pay: '565',
-        rate_change_hrs: '565',
-        rate_change_pay: '565',
-        addr_street: 'dsfds',
-        addr_apt: 'tyty',
-        addr_city: 'sfdf',
-        addr_state: '0',
-        addr_country: '0',
-        addr_zipcode: '5656',
-        pay_standard_time: '0',
-        pay_over_time: '0',
-        pay_double_time: '0',
-        pay_scale: '0',
-        middle_name: 'aaaaaa',
-        employee_status_date: '2023-05-08',
-        deparment: '0',
-        emp_id: $('#create_employee_id').val(),
-
-        ssn: valid_ssn,
-        auth: valid_auth,
-        state: valid_state,
-        passport: valid_passport,
-        i94: valid_i94,
-        visa: valid_visa,
-        other_array: other_doc
-    };
+    if (!isValid)
+        return;
 
     // var formData = {
-    //     first_name: $('#create_first_name').val(),
-    //     last_name: $('#create_last_name').val(),
-    //     title: $('#create_title').val(),
-    //     email_address: $('#create_email_address').val(),
-    //     phone_num: $('#create_phone_num').val(),
-    //     birth: $('#create_birth').val(),
-    //     join_date: $('#create_join').val(),
-    //     gender: $('#create_gender').val(),
-    //     employment_type: $('#create_employment_type').val(),
-    //     category: $('#create_category').val(),
-    //     employee_type: $('#create_employee_type').val(),
-    //     employee_status: $('#create_employee_status').val(),
-    //     role: $('#create_role').val(),
-    //     poc: $('#create_poc').val(),
-    //     classification: $('#create_classification').val(),
-    //     addr_street: $('#create_emp_street').val(),
-    //     addr_apt: $('#create_emp_apt').val(),
-    //     addr_city: $('#create_emp_city').val(),
-    //     addr_state: $('#create_emp_state').val(),
-    //     addr_country: $('#create_emp_country').val(),
-    //     addr_zipcode: $('#create_emp_zipcode').val(),
-    //     pay_standard_time: $('#create_pay_standard_time').is(":checked") ? 1 : 0,
-    //     pay_over_time: $('#create_pay_over_time').is(":checked") ? 1 : 0,
-    //     pay_double_time: $('#create_pay_double_time').is(":checked") ? 1 : 0,
-    //     pay_scale: $('#create_pay_scale').val(),
-    //     middle_name: $('#create_middle_name').val(),
-    //     employee_status_date: $('#create_employee_status_date').val(),
-    //     deparment: $('#create_deparment').val(),
+    //     first_name: 'sniper',
+    //     last_name: 'shooter',
+    //     title: 'hgfhgfh',
+    //     email_address: 'snipershooteaaaar000@gmail.com',
+    //     phone_num: '456489',
+    //     birth: '2024-02-05',
+    //     join_date: '2023-05-08',
+    //     gender: '0',
+    //     employment_type: '0',
+    //     category: '0',
+    //     employee_type: '0',
+    //     employee_status: '1',
+    //     role: '0',
+    //     poc: '0',
+    //     classification: '0',
+    //     per_pay: '56',
+    //     per_change_hrs: '456',
+    //     per_change_pay: '56',
+    //     rate_pay: '565',
+    //     rate_change_hrs: '565',
+    //     rate_change_pay: '565',
+    //     addr_street: 'dsfds',
+    //     addr_apt: 'tyty',
+    //     addr_city: 'sfdf',
+    //     addr_state: '0',
+    //     addr_country: '0',
+    //     addr_zipcode: '5656',
+    //     pay_standard_time: '0',
+    //     pay_over_time: '0',
+    //     pay_double_time: '0',
+    //     pay_scale: '0',
+    //     middle_name: 'aaaaaa',
+    //     employee_status_date: '2023-05-08',
+    //     deparment: '0',
     //     emp_id: $('#create_employee_id').val(),
 
     //     ssn: valid_ssn,
@@ -969,6 +934,46 @@ function addEmployee() {
     //     visa: valid_visa,
     //     other_array: other_doc
     // };
+
+    var formData = {
+        first_name: $('#create_first_name').val(),
+        last_name: $('#create_last_name').val(),
+        title: $('#create_title').val(),
+        email_address: $('#create_email_address').val(),
+        phone_num: $('#create_phone_num').val(),
+        birth: $('#create_birth').val(),
+        join_date: $('#create_join').val(),
+        gender: $('#create_gender').val(),
+        employment_type: $('#create_employment_type').val(),
+        category: $('#create_category').val(),
+        employee_type: $('#create_employee_type').val(),
+        employee_status: $('#create_employee_status').val(),
+        role: $('#create_role').val(),
+        poc: $('#create_poc').val(),
+        classification: $('#create_classification').val(),
+        addr_street: $('#create_emp_street').val(),
+        addr_apt: $('#create_emp_apt').val(),
+        addr_city: $('#create_emp_city').val(),
+        addr_state: $('#create_emp_state').val(),
+        addr_country: $('#create_emp_country').val(),
+        addr_zipcode: $('#create_emp_zipcode').val(),
+        pay_standard_time: $('#create_pay_standard_time').is(":checked") ? 1 : 0,
+        pay_over_time: $('#create_pay_over_time').is(":checked") ? 1 : 0,
+        pay_double_time: $('#create_pay_double_time').is(":checked") ? 1 : 0,
+        pay_scale: $('#create_pay_scale').val(),
+        middle_name: $('#create_middle_name').val(),
+        employee_status_date: $('#create_employee_status_date').val(),
+        deparment: $('#create_deparment').val(),
+        emp_id: $('#create_employee_id').val(),
+
+        ssn: valid_ssn,
+        auth: valid_auth,
+        state: valid_state,
+        passport: valid_passport,
+        i94: valid_i94,
+        visa: valid_visa,
+        other_array: other_doc
+    };
 
     if (!$('#allow_emp_later').is(':Checked')) {
         formData.ssn_doc = {
@@ -1129,83 +1134,82 @@ function getEmployeeByID(id) {
                 var idx = 0;
                 for (var i = 0; i < doc.length; i++) {
                     if (doc[i]['doc_title_id'] == 0) {
-                        $('#ssn_no').attr('data-id', doc[i]['id']);
                         $('#ssn_no').val(doc[i]['no']);
                         // $('#ssn_file').val(doc[i]['attachment']);
                     } else if (doc[i]['doc_title_id'] == 1) {
-                        $('#auth_list').attr('data-id', doc[i]['id']);
                         $('#auth_list').val(doc[i]['work_auth_id']);
                         $('#auth_no').val(doc[i]['no']);
                         $('#auth_start_date').val(doc[i]['start_date']);
-                        $('#auth_end_date').val(doc[i]['exp_date']);
+                        $('#auth_end_date').val(doc[i]['expire_date']);
                         // $('#auth_file').val(doc[i]['attachment']);
                     } else if (doc[i]['doc_title_id'] == 2) {
-                        $('#state_no').attr('data-id', doc[i]['id']);
                         $('#state_no').val(doc[i]['no']);
                         $('#state_exp_date').val(doc[i]['exp_date']);
                         // $('#state_file').val(doc[i]['attachment']);
                     } else if (doc[i]['doc_title_id'] == 3) {
-                        $('#passport_no').attr('data-id', doc[i]['id']);
+                        $('#passport_no').val(doc[i]['no']);
                         $('#passport_exp_date').val(doc[i]['exp_date']);
                         // $('#passport_file').val(doc[i]['attachment']);
                     } else if (doc[i]['doc_title_id'] == 4) {
-                        $('#i94_no').attr('data-`id', doc[i]['id']);
                         $('#i94_no').val(doc[i]['no']);
-                        doc[i]['i94_type'] == 0 ? $('#uniform-i94_ds_radio').prop('checked', true) : $('#uniform-i94_other_radio').prop('checked', true);
+                        doc[i]['i94_type'] == '0' ? $('#uniform-i94_ds_radio').prop('checked', true) : $('#i94_other_radio').prop('checked', true);
                         // $('#i94_file').val(doc[i]['attachment']);
                     } else if (doc[i]['doc_title_id'] == 5) {
-                        $('#visa_no').attr('data-id', doc[i]['id']);
                         $('#visa_no').val(doc[i]['no']);
                         $('#visa_exp_date').val(doc[i]['exp_date']);
                         // $('#visa_file').val(doc[i]['attachment']);
                     } else if (doc[i]['doc_title_id'] == 6) {
-                        $('.other-title-' + idx).attr('data-id', doc[i]['id']);
+                        if (idx != 0) {
+                            $('.other-doc').append(
+                                '<div class="row row-' + idx + '" data-id="' + idx + '" data-doc-id="' + doc[i]['id'] + '">' +
+                                '<div class="form-group col-md-2">' +
+                                '<label class="control-label doc-label"></label>' +
+                                '</div>' +
+                                '<div class="form-group col-md-2">' +
+                                '<label class="control-label">Comment</label>' +
+                                '<input type="text" class="form-control other-title-' + idx + '">' +
+                                '</div>' +
+                                '<div class="form-group col-md-2">' +
+                                '<label class="control-label">Document No</label>' +
+                                '<input type="text" class="form-control other-no-' + idx + '">' +
+                                '</div>' +
+                                '<div class="form-group col-md-2">' +
+                                '<label class="control-label">Exp Date</label>' +
+                                '<div class="input-group date date-picker" data-date-format="yyyy-mm-dd" data-date-viewmode="years">' +
+                                '<input type="text" class="form-control other-exp-date-' + idx + '">' +
+                                '<span class="input-group-btn">' +
+                                '<button class="btn default" type="button">' +
+                                '<i class="fa fa-calendar"></i>' +
+                                '</button>' +
+                                '</span>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group col-md-2">' +
+                                '<label class="control-label"></label>' +
+                                '<input type="file" class="form-control other-file-' + idx + '">' +
+                                '</div>' +
+                                '<div class="form-group col-md-2" style="padding-top: 15px;">' +
+                                '<a href="javascript:;" class="btn-c-no-border-primary remove-other remove-other-' + idx + '" data-id="' + idx + '"><i class="fa fa-minus-circle icon-16"></i></a>' +
+                                '</div>' +
+                                '</div>'
+                            );
+                        }
                         $('.other-title-' + idx).val(doc[i]['comment']);
                         $('.other-no-' + idx).val(doc[i]['no']);
                         $('.other-exp-date-' + idx).val(doc[i]['exp_date']);
                         // $('.other-file-' + idx).val(doc[i]['attachment']);
-                        $('#btn_add_other_doc').attr('data-id', (idx + 1));
+                        $('.row-' + idx).attr('data-doc-id', doc[i]['id']);
 
                         idx++;
-                        $('.other-doc').append(
-                            '<div class="row row-' + idx + '" data-id="' + idx + '">' +
-                            '<div class="form-group col-md-2">' +
-                            '<label class="control-label doc-label"></label>' +
-                            '</div>' +
-                            '<div class="form-group col-md-2">' +
-                            '<label class="control-label">Comment</label>' +
-                            '<input type="text" class="form-control other-title-' + idx + '">' +
-                            '</div>' +
-                            '<div class="form-group col-md-2">' +
-                            '<label class="control-label">Document No</label>' +
-                            '<input type="text" class="form-control other-no-' + idx + '">' +
-                            '</div>' +
-                            '<div class="form-group col-md-2">' +
-                            '<label class="control-label">Exp Date</label>' +
-                            '<div class="input-group date date-picker" data-date-format="yyyy-mm-dd" data-date-viewmode="years">' +
-                            '<input type="text" class="form-control other-exp-date-' + idx + '">' +
-                            '<span class="input-group-btn">' +
-                            '<button class="btn default" type="button">' +
-                            '<i class="fa fa-calendar"></i>' +
-                            '</button>' +
-                            '</span>' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="form-group col-md-2">' +
-                            '<label class="control-label"></label>' +
-                            '<input type="file" class="form-control other-file-' + idx + '">' +
-                            '</div>' +
-                            '<div class="form-group col-md-2" style="padding-top: 15px;">' +
-                            '<a href="javascript:;" class="btn-c-no-border-primary remove-other remove-other-' + idx + '" data-id="' + idx + '"><i class="fa fa-minus-circle icon-16"></i></a>' +
-                            '</div>' +
-                            '</div>'
-                        );
+
                         $('.date-picker').datepicker({
                             rtl: App.isRTL(),
                             autoclose: true
                         });
                     }
                 }
+
+                $('#btn_add_other_doc').attr('data-id', idx);
 
 
                 // move add Employee page
@@ -1252,6 +1256,7 @@ function setUpdateBeforeInfo(id) {
 // Update Employee Info
 function updateEmployeeInfo(id) {
 
+    debugger;
     if (!$('#allow_emp_later').is(':Checked')) {
         var { isValidDoc, valid_ssn, valid_auth, valid_state, valid_passport, valid_i94, valid_visa, other_doc } = doValidationDoc();
         if (!isValidDoc) {
@@ -1261,7 +1266,7 @@ function updateEmployeeInfo(id) {
 
     var other_ids = [];
     for (var i = 0; i < other_doc.length; i++) {
-        var other_id = $('.other-title-' + i).attr('data-id');
+        var other_id = $('.row-' + i).attr('data-doc-id');
         other_ids[i] = other_id;
     }
 
@@ -1430,7 +1435,6 @@ function doValidationDoc() {
     var valid_passport = true;
     var valid_i94 = true;
     var valid_visa = true;
-    var valid_other = true;
 
     var ssn_no = $('#ssn_no').val() == '' ? false : true;
     var ssn_file = $('#ssn_file').val() == '' ? false : true;

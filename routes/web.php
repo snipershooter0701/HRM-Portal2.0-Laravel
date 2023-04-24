@@ -27,7 +27,7 @@ Route::middleware(['auth'])->group(function () {
     // Dashboard
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::post('/home/gen', [App\Http\Controllers\HomeController::class, 'genEmailPwd']);
-    Route::post('/home/req', [App\Http\Controllers\HomeController::class, 'getRequestStatus']);
+    Route::post('/home/by_id', [App\Http\Controllers\HomeController::class, 'getReqById']);
     Route::post('/home/response_doc', [App\Http\Controllers\HomeController::class, 'responseDoc']);
 
     // Common

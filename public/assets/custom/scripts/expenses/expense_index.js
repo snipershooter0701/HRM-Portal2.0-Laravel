@@ -1,6 +1,5 @@
 var gridExpenseTbl = new Datatable();
 var gridExpensesActTbl = new Datatable();
-var gridAddExpenseTbl = new Datatable();
 
 $(document).ready(function () {
     TableExpense.init();
@@ -183,6 +182,7 @@ var TableExpense = function () {
 
     // Expense Activity List Table
     var handleExpenseActListTable = function () {
+
         gridExpensesActTbl.init({
             src: $("#tbl_expense_activities"),
             onSuccess: function (gridExpensesActTbl, response) { },
@@ -205,7 +205,7 @@ var TableExpense = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": BASE_URL + "/expenses/get-expenses-activities", // ajax source
+                    "url": BASE_URL + "/expenses/act", // ajax source
                 },
 
                 "order": [
@@ -240,52 +240,12 @@ var TableExpense = function () {
         });
     }
 
-    // Expense Add Table
-    var handleExpenseAddListTable = function () {
-        gridAddExpenseTbl.init({
-            src: $("#tbl_add_expenses"),
-            onSuccess: function (gridAddExpenseTbl, response) { },
-            onError: function (gridAddExpenseTbl) { },
-            onDataLoad: function (gridAddExpenseTbl) {
-            },
-            loadingMessage: 'Loading...',
-            dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
-
-                // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
-                // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
-                // So when dropdowns used the scrollable div should be removed. 
-                "dom": "<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'><'col-md-4 col-sm-12'>>",
-
-                "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
-
-                "lengthMenu": [
-                    [10, 20, 50, 100, 150, -1],
-                    [10, 20, 50, 100, 150, "All"] // change per page values here
-                ],
-                "pageLength": 10, // default record count per page
-                "ajax": {
-                    "url": BASE_URL + "/expenses/get-add-expenses", // ajax source
-                },
-                "columnDefs": [
-                    {  // set default column settings
-                        'orderable': false,
-                        'targets': [0, 2, 4, 5]
-                    }
-                ],
-                "order": [
-                    [1, "asc"]
-                ],// set first column as a default sort by asc
-            }
-        });
-    }
-
     return {
         //main function to initiate the module
         init: function () {
             initPickers();
             handleExpenseListTable();
-            // handleExpenseActListTable();
-            // handleExpenseAddListTable();
+            handleExpenseActListTable();
         }
     };
 }();

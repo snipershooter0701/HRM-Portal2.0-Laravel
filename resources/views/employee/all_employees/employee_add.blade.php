@@ -346,7 +346,7 @@
                                                 <input type="radio" name="optionsRadios" id="i94_ds_radio" value="option1" checked> D/S
                                             </label>
                                             <label class="radio-inline">
-                                                <input type="radio" name="optionsRadios" id="i94_other_radio" value="option2" > Other
+                                                <input type="radio" name="optionsRadios" id="i94_other_radio" value="option1" > Other
                                             </label>
                                         </div>
                                     </div>
@@ -549,6 +549,7 @@
                                                         {{-- description --}}
                                                         <td>
                                                             <input type="text" class="form-control form-filter input-sm" name="filt_act_description"> </td>
+                                                    </tr>
                                                 </thead>
                                                 <tbody> </tbody>
                                             </table>
