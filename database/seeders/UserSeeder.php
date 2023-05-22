@@ -15,16 +15,10 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        //
-        DB::table('users')->insert([
-            'name' => 'SacredDevKing',
-            'email' => 'sacreddevking@gmail.com',
-            'password' => '$2y$10$4XxgRb8pS/.qM8Ce2qV4N.k7VINYvKqwiHiUEnWNvgSn0VUx1SvRi',
-            'employee_id' => '1'
-        ]);
+        // super admin
     	DB::table('users')->insert([
-            'name' => 'snipershooter',
-            'email' => 'snipershooter@gmail.com',
+            'name' => 'Revanth',
+            'email' => 'revanthx@gmail.com',
             'password' => '$2y$10$PpeLP4p6ODvDm.RZi8hDAOth/fQhEUAcyHh5UQYxVxanpfgj517B6',   //123456789
             'employee_id' => '1'
         ]);
